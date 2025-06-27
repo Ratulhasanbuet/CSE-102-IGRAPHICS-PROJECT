@@ -1,3 +1,3 @@
 # CSE-102-IGRAPHICS-PROJECT
-<p><b>Author :  Md. Ratul Hasan , BUET CSE24</b></p>
-<p><b>Author :  Hasibul Islam , BUET CSE24</b></p>
+<p><b><l>Author :  Md. Ratul Hasan , BUET CSE24</l></b></p>
+<p><b><l>Author :  Hasibul Islam , BUET CSE24</l></b></p>
