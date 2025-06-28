@@ -2,13 +2,15 @@
 #include<stdio.h>
 
 
-
+void pacinitialcord();
 
 
 int mazeHeight1 =25;
 int mazeWidth1=25;
-int startx=5;
-int starty=520;
+int startx=80;
+int starty=515;
+int startX12=175;
+int startY12=560;
 int map1CoordinateX[21][19];
 int map1CoordinateY[21][19];
 int map2CoordinateX[21][19];
@@ -18,6 +20,8 @@ int map3CoordinateY[17][36];
 int map4CoordinateX[19][40];
 int map4CoordinateY[19][40];
 
+int cellX;
+int cellY;
 int menuc=0;
 int playgamec=0;
 int difficultyc=0;
@@ -42,6 +46,13 @@ char namestr[100];
 int nameIndex = 0;
 bool typingName = false;
 
+int pacmanlife=3;
+bool pacdead=false;
+int pacspeed=25;
+int deadSceneCount=0;
+bool deadsound=false;
+
+bool blueGhost;
 
 bool soundOn=true;
 bool startintro=true;
@@ -59,8 +70,48 @@ bool playingstart;
 bool levelselect;
 bool pause ;
 bool backgroundselector;
+bool deadscene;
 
-char introimage[142][50]={"introimage/introimage (1).jpg", "introimage/introimage (2).jpg", "introimage/introimage (3).jpg", "introimage/introimage (4).jpg", "introimage/introimage (5).jpg", "introimage/introimage (6).jpg", "introimage/introimage (7).jpg", "introimage/introimage (8).jpg", "introimage/introimage (9).jpg", "introimage/introimage (10).jpg", "introimage/introimage (11).jpg", "introimage/introimage (12).jpg", "introimage/introimage (13).jpg", "introimage/introimage (14).jpg", "introimage/introimage (15).jpg", "introimage/introimage (16).jpg", "introimage/introimage (17).jpg", "introimage/introimage (18).jpg", "introimage/introimage (19).jpg", "introimage/introimage (20).jpg", "introimage/introimage (21).jpg", "introimage/introimage (22).jpg", "introimage/introimage (23).jpg", "introimage/introimage (24).jpg", "introimage/introimage (25).jpg", "introimage/introimage (26).jpg", "introimage/introimage (27).jpg", "introimage/introimage (28).jpg", "introimage/introimage (29).jpg", "introimage/introimage (30).jpg", "introimage/introimage (31).jpg", "introimage/introimage (32).jpg", "introimage/introimage (33).jpg", "introimage/introimage (34).jpg", "introimage/introimage (35).jpg", "introimage/introimage (36).jpg", "introimage/introimage (37).jpg", "introimage/introimage (38).jpg", "introimage/introimage (39).jpg", "introimage/introimage (40).jpg", "introimage/introimage (41).jpg", "introimage/introimage (42).jpg", "introimage/introimage (43).jpg", "introimage/introimage (44).jpg", "introimage/introimage (45).jpg", "introimage/introimage (46).jpg", "introimage/introimage (47).jpg", "introimage/introimage (48).jpg", "introimage/introimage (49).jpg", "introimage/introimage (50).jpg", "introimage/introimage (51).jpg", "introimage/introimage (52).jpg", "introimage/introimage (53).jpg", "introimage/introimage (54).jpg", "introimage/introimage (55).jpg", "introimage/introimage (56).jpg", "introimage/introimage (57).jpg", "introimage/introimage (58).jpg", "introimage/introimage (59).jpg", "introimage/introimage (60).jpg", "introimage/introimage (61).jpg", "introimage/introimage (62).jpg", "introimage/introimage (63).jpg", "introimage/introimage (64).jpg", "introimage/introimage (65).jpg", "introimage/introimage (66).jpg", "introimage/introimage (67).jpg", "introimage/introimage (68).jpg", "introimage/introimage (69).jpg", "introimage/introimage (70).jpg", "introimage/introimage (71).jpg", "introimage/introimage (72).jpg", "introimage/introimage (73).jpg", "introimage/introimage (74).jpg", "introimage/introimage (75).jpg", "introimage/introimage (76).jpg", "introimage/introimage (77).jpg", "introimage/introimage (78).jpg", "introimage/introimage (79).jpg", "introimage/introimage (80).jpg", "introimage/introimage (81).jpg", "introimage/introimage (82).jpg", "introimage/introimage (83).jpg", "introimage/introimage (84).jpg", "introimage/introimage (85).jpg", "introimage/introimage (86).jpg", "introimage/introimage (87).jpg", "introimage/introimage (88).jpg", "introimage/introimage (89).jpg", "introimage/introimage (90).jpg", "introimage/introimage (91).jpg", "introimage/introimage (92).jpg", "introimage/introimage (93).jpg", "introimage/introimage (94).jpg", "introimage/introimage (95).jpg", "introimage/introimage (96).jpg", "introimage/introimage (97).jpg", "introimage/introimage (98).jpg", "introimage/introimage (99).jpg", "introimage/introimage (100).jpg", "introimage/introimage (101).jpg", "introimage/introimage (102).jpg", "introimage/introimage (103).jpg", "introimage/introimage (104).jpg", "introimage/introimage (105).jpg", "introimage/introimage (106).jpg", "introimage/introimage (107).jpg", "introimage/introimage (108).jpg", "introimage/introimage (109).jpg", "introimage/introimage (110).jpg", "introimage/introimage (111).jpg", "introimage/introimage (112).jpg", "introimage/introimage (113).jpg", "introimage/introimage (114).jpg", "introimage/introimage (115).jpg", "introimage/introimage (116).jpg", "introimage/introimage (117).jpg", "introimage/introimage (118).jpg", "introimage/introimage (119).jpg", "introimage/introimage (120).jpg", "introimage/introimage (121).jpg", "introimage/introimage (122).jpg", "introimage/introimage (123).jpg", "introimage/introimage (124).jpg", "introimage/introimage (125).jpg", "introimage/introimage (126).jpg", "introimage/introimage (127).jpg", "introimage/introimage (128).jpg", "introimage/introimage (129).jpg", "introimage/introimage (130).jpg", "introimage/introimage (131).jpg", "introimage/introimage (132).jpg", "introimage/introimage (133).jpg", "introimage/introimage (134).jpg", "introimage/introimage (135).jpg", "introimage/introimage (136).jpg", "introimage/introimage (137).jpg", "introimage/introimage (138).jpg", "introimage/introimage (139).jpg", "introimage/introimage (140).jpg", "introimage/introimage (141).jpg", "introimage/introimage (142).jpg"};
+
+
+
+typedef struct{
+	int upInd, downInd, leftInd, rightInd;
+	int x;
+	int y;
+	bool upCount, downCount, leftCount, rightCount;
+	bool trigRight, trigLeft, trigUp, trigDown;
+	int right, left, up, down;
+}move;
+
+typedef struct{
+	int upInd, downInd, leftInd, rightInd;
+	int x;
+	int y;
+	int cellX, cellY;
+	bool flagRight, flagLeft, flagUp, flagDown;
+	int left, right, up, down;
+	int speed;
+	bool blueOn;
+	int dist1, dist2;
+}ghost;
+
+ghost pookie[4];
+move pac;
+
+char introimage[142][50]={"introimage/introimage (1).jpg", "introimage/introimage (2).jpg", "introimage/introimage (3).jpg", "introimage/introimage (4).jpg", "introimage/introimage (5).jpg", "introimage/introimage (6).jpg", "introimage/introimage (7).jpg", "introimage/introimage (8).jpg", "introimage/introimage (9).jpg", "introimage/introimage (10).jpg",
+     "introimage/introimage (11).jpg", "introimage/introimage (12).jpg", "introimage/introimage (13).jpg", "introimage/introimage (14).jpg", "introimage/introimage (15).jpg", "introimage/introimage (16).jpg", "introimage/introimage (17).jpg", "introimage/introimage (18).jpg", "introimage/introimage (19).jpg", "introimage/introimage (20).jpg", "introimage/introimage (21).jpg"
+     , "introimage/introimage (22).jpg", "introimage/introimage (23).jpg", "introimage/introimage (24).jpg", "introimage/introimage (25).jpg", "introimage/introimage (26).jpg", "introimage/introimage (27).jpg", "introimage/introimage (28).jpg", "introimage/introimage (29).jpg", "introimage/introimage (30).jpg", "introimage/introimage (31).jpg", "introimage/introimage (32).jpg"
+     , "introimage/introimage (33).jpg", "introimage/introimage (34).jpg", "introimage/introimage (35).jpg", "introimage/introimage (36).jpg", "introimage/introimage (37).jpg", "introimage/introimage (38).jpg", "introimage/introimage (39).jpg", "introimage/introimage (40).jpg", "introimage/introimage (41).jpg", "introimage/introimage (42).jpg", "introimage/introimage (43).jpg",
+      "introimage/introimage (44).jpg", "introimage/introimage (45).jpg", "introimage/introimage (46).jpg", "introimage/introimage (47).jpg", "introimage/introimage (48).jpg", "introimage/introimage (49).jpg", "introimage/introimage (50).jpg", "introimage/introimage (51).jpg", "introimage/introimage (52).jpg", "introimage/introimage (53).jpg", "introimage/introimage (54).jpg",
+      "introimage/introimage (55).jpg", "introimage/introimage (56).jpg", "introimage/introimage (57).jpg", "introimage/introimage (58).jpg", "introimage/introimage (59).jpg", "introimage/introimage (60).jpg", "introimage/introimage (61).jpg", "introimage/introimage (62).jpg", "introimage/introimage (63).jpg", "introimage/introimage (64).jpg", "introimage/introimage (65).jpg",
+      "introimage/introimage (66).jpg", "introimage/introimage (67).jpg", "introimage/introimage (68).jpg", "introimage/introimage (69).jpg", "introimage/introimage (70).jpg", "introimage/introimage (71).jpg", "introimage/introimage (72).jpg", "introimage/introimage (73).jpg", "introimage/introimage (74).jpg", "introimage/introimage (75).jpg", "introimage/introimage (76).jpg",
+       "introimage/introimage (77).jpg", "introimage/introimage (78).jpg", "introimage/introimage (79).jpg", "introimage/introimage (80).jpg", "introimage/introimage (81).jpg", "introimage/introimage (82).jpg", "introimage/introimage (83).jpg", "introimage/introimage (84).jpg", "introimage/introimage (85).jpg", "introimage/introimage (86).jpg", "introimage/introimage (87).jpg",
+       "introimage/introimage (88).jpg", "introimage/introimage (89).jpg", "introimage/introimage (90).jpg", "introimage/introimage (91).jpg", "introimage/introimage (92).jpg", "introimage/introimage (93).jpg", "introimage/introimage (94).jpg", "introimage/introimage (95).jpg", "introimage/introimage (96).jpg", "introimage/introimage (97).jpg", "introimage/introimage (98).jpg",
+        "introimage/introimage (99).jpg", "introimage/introimage (100).jpg", "introimage/introimage (101).jpg", "introimage/introimage (102).jpg", "introimage/introimage (103).jpg", "introimage/introimage (104).jpg", "introimage/introimage (105).jpg", "introimage/introimage (106).jpg", "introimage/introimage (107).jpg", "introimage/introimage (108).jpg", "introimage/introimage (109).jpg",
+         "introimage/introimage (110).jpg", "introimage/introimage (111).jpg", "introimage/introimage (112).jpg", "introimage/introimage (113).jpg", "introimage/introimage (114).jpg", "introimage/introimage (115).jpg", "introimage/introimage (116).jpg", "introimage/introimage (117).jpg", "introimage/introimage (118).jpg", "introimage/introimage (119).jpg", "introimage/introimage (120).jpg",
+          "introimage/introimage (121).jpg", "introimage/introimage (122).jpg", "introimage/introimage (123).jpg", "introimage/introimage (124).jpg", "introimage/introimage (125).jpg", "introimage/introimage (126).jpg", "introimage/introimage (127).jpg", "introimage/introimage (128).jpg", "introimage/introimage (129).jpg", "introimage/introimage (130).jpg", "introimage/introimage (131).jpg",
+         "introimage/introimage (132).jpg", "introimage/introimage (133).jpg", "introimage/introimage (134).jpg", "introimage/introimage (135).jpg", "introimage/introimage (136).jpg", "introimage/introimage (137).jpg", "introimage/introimage (138).jpg", "introimage/introimage (139).jpg", "introimage/introimage (140).jpg", "introimage/introimage (141).jpg", "introimage/introimage (142).jpg"};
 char mazeselectorimage[8][60]={"mazeSelectorImage/SELECT MAZE.PNG","mazeSelectorImage/SELECT MAZE (7).PNG","mazeSelectorImage/SELECT MAZE (1).PNG","mazeSelectorImage/SELECT MAZE (2).PNG","mazeSelectorImage/SELECT MAZE (3).PNG","mazeSelectorImage/SELECT MAZE (4).PNG","mazeSelectorImage/SELECT MAZE (5).PNG","mazeSelectorImage/SELECT MAZE (6).PNG"};
 char menuimage[8][50]={ "menu image/PACMAN.png","menu image/pacman1.png","menu image/pacman2.png","menu image/pacman3.bmp","menu image/pacman4.png","menu image/pacman5.png",
                         "menu image/pacman6.png","menu image/pacman7.png"};
@@ -69,22 +120,42 @@ char menuimage[8][50]={ "menu image/PACMAN.png","menu image/pacman1.png","menu i
  char highscoreimage[2][50]={"highscoreimage/highscore (2).png","highscoreimage/highscore (1).png"};
  char creditimage[2][50]={"creditsimage/CREDITS.png","creditsimage/credits1.png"};
  char rulesimage[2][50]={"rules/RULES.png","rules/rules1.png"};
- char levelselectimage[100][50]={"level/level (1).jpg", "level/level (2).jpg", "level/level (3).jpg", "level/level (4).jpg", "level/level (5).jpg", "level/level (6).jpg", "level/level (7).jpg", "level/level (8).jpg", "level/level (9).jpg", "level/level (10).jpg", "level/level (11).jpg", "level/level (12).jpg", "level/level (13).jpg", "level/level (14).jpg", "level/level (15).jpg", "level/level (16).jpg", "level/level (17).jpg", "level/level (18).jpg", "level/level (19).jpg", "level/level (20).jpg", "level/level (21).jpg", "level/level (22).jpg", "level/level (23).jpg", "level/level (24).jpg", "level/level (25).jpg", "level/level (26).jpg", "level/level (27).jpg", "level/level (28).jpg", "level/level (29).jpg", "level/level (30).jpg", "level/level (31).jpg", "level/level (32).jpg", "level/level (33).jpg", "level/level (34).jpg", "level/level (35).jpg", "level/level (36).jpg", "level/level (37).jpg", "level/level (38).jpg", "level/level (39).jpg", "level/level (40).jpg", "level/level (41).jpg", "level/level (42).jpg", "level/level (43).jpg", "level/level (44).jpg", "level/level (45).jpg", "level/level (46).jpg", "level/level (47).jpg", "level/level (48).jpg", "level/level (49).jpg", "level/level (50).jpg", "level/level (51).jpg", "level/level (52).jpg", "level/level (53).jpg", "level/level (54).jpg", "level/level (55).jpg", "level/level (56).jpg", "level/level (57).jpg", "level/level (58).jpg", "level/level (59).jpg", "level/level (60).jpg", "level/level (61).jpg", "level/level (62).jpg", "level/level (63).jpg", "level/level (64).jpg", "level/level (65).jpg", "level/level (66).jpg", "level/level (67).jpg", "level/level (68).jpg", "level/level (69).jpg", "level/level (70).jpg", "level/level (71).jpg", "level/level (72).jpg", "level/level (73).jpg", "level/level (74).jpg", "level/level (75).jpg", "level/level (76).jpg", "level/level (77).jpg", "level/level (78).jpg", "level/level (79).jpg", "level/level (80).jpg", "level/level (81).jpg", "level/level (82).jpg", "level/level (83).jpg", "level/level (84).jpg", "level/level (85).jpg", "level/level (86).jpg", "level/level (87).jpg", "level/level (88).jpg", "level/level (89).jpg", "level/level (90).jpg", "level/level (91).jpg", "level/level (92).jpg", "level/level (93).jpg", "level/level (94).jpg", "level/level (95).jpg", "level/level (96).jpg", "level/level (97).jpg", "level/level (98).jpg", "level/level (99).jpg", "level/level (100).jpg",};
+ char levelselectimage[100][50]={"level/level (1).jpg", "level/level (2).jpg", "level/level (3).jpg", "level/level (4).jpg", "level/level (5).jpg", "level/level (6).jpg", "level/level (7).jpg", "level/level (8).jpg", "level/level (9).jpg", "level/level (10).jpg", "level/level (11).jpg", "level/level (12).jpg", "level/level (13).jpg", "level/level (14).jpg", "level/level (15).jpg", "level/level (16).jpg",
+     "level/level (17).jpg", "level/level (18).jpg", "level/level (19).jpg", "level/level (20).jpg", "level/level (21).jpg", "level/level (22).jpg", "level/level (23).jpg", "level/level (24).jpg", "level/level (25).jpg", "level/level (26).jpg", "level/level (27).jpg", "level/level (28).jpg", "level/level (29).jpg", "level/level (30).jpg", "level/level (31).jpg", "level/level (32).jpg", "level/level (33).jpg",
+     "level/level (34).jpg", "level/level (35).jpg", "level/level (36).jpg", "level/level (37).jpg", "level/level (38).jpg", "level/level (39).jpg", "level/level (40).jpg", "level/level (41).jpg", "level/level (42).jpg", "level/level (43).jpg", "level/level (44).jpg", "level/level (45).jpg", "level/level (46).jpg", "level/level (47).jpg", "level/level (48).jpg", "level/level (49).jpg", "level/level (50).jpg",
+     "level/level (51).jpg", "level/level (52).jpg", "level/level (53).jpg", "level/level (54).jpg", "level/level (55).jpg", "level/level (56).jpg", "level/level (57).jpg", "level/level (58).jpg", "level/level (59).jpg", "level/level (60).jpg", "level/level (61).jpg", "level/level (62).jpg", "level/level (63).jpg", "level/level (64).jpg", "level/level (65).jpg", "level/level (66).jpg", "level/level (67).jpg",
+      "level/level (68).jpg", "level/level (69).jpg", "level/level (70).jpg", "level/level (71).jpg", "level/level (72).jpg", "level/level (73).jpg", "level/level (74).jpg", "level/level (75).jpg", "level/level (76).jpg", "level/level (77).jpg", "level/level (78).jpg", "level/level (79).jpg", "level/level (80).jpg", "level/level (81).jpg", "level/level (82).jpg", "level/level (83).jpg", "level/level (84).jpg",
+      "level/level (85).jpg", "level/level (86).jpg", "level/level (87).jpg", "level/level (88).jpg", "level/level (89).jpg", "level/level (90).jpg", "level/level (91).jpg", "level/level (92).jpg", "level/level (93).jpg", "level/level (94).jpg", "level/level (95).jpg", "level/level (96).jpg", "level/level (97).jpg", "level/level (98).jpg", "level/level (99).jpg", "level/level (100).jpg",};
  char quitimage[3][50]={"exitimage/exitimage.png","exitimage/exitimage1.png","exitimage/exitimage2.png"};
  char difficultyimage[6][50]={"difficultyimage/Difficulty.png","difficultyimage/Difficulty1.png","difficultyimage/Difficulty2.png","difficultyimage/Difficulty3.png",
                              "difficultyimage/Difficulty4.png","difficultyimage/Difficulty5.png",};
  char mazeimage[6][50]={"mazeDesignImage/mazeDesign1.png","mazeDesignImage/mazeDesign2.png","mazeDesignImage/mazeDesign3.png","mazeDesignImage/mazeDesign4.png","mazeDesignImage/mazeDesign5.png","mazeDesignImage/mazeDesign6.png"};
  char playgameintroimage[1][50]={"playgameintro/intro.png"};
- char exitimage[100][100]={"thanksimage/thanks (1).jpg", "thanksimage/thanks (2).jpg", "thanksimage/thanks (3).jpg", "thanksimage/thanks (4).jpg", "thanksimage/thanks (5).jpg", "thanksimage/thanks (6).jpg", "thanksimage/thanks (7).jpg", "thanksimage/thanks (8).jpg", "thanksimage/thanks (9).jpg", "thanksimage/thanks (10).jpg", "thanksimage/thanks (11).jpg", "thanksimage/thanks (12).jpg", "thanksimage/thanks (13).jpg", "thanksimage/thanks (14).jpg", "thanksimage/thanks (15).jpg", "thanksimage/thanks (16).jpg", "thanksimage/thanks (17).jpg", "thanksimage/thanks (18).jpg", "thanksimage/thanks (19).jpg", "thanksimage/thanks (20).jpg", "thanksimage/thanks (21).jpg", "thanksimage/thanks (22).jpg", "thanksimage/thanks (23).jpg", "thanksimage/thanks (24).jpg", "thanksimage/thanks (25).jpg", "thanksimage/thanks (26).jpg", "thanksimage/thanks (27).jpg", "thanksimage/thanks (28).jpg", "thanksimage/thanks (29).jpg", "thanksimage/thanks (30).jpg", "thanksimage/thanks (31).jpg", "thanksimage/thanks (32).jpg", "thanksimage/thanks (33).jpg", "thanksimage/thanks (34).jpg", "thanksimage/thanks (35).jpg", "thanksimage/thanks (36).jpg", "thanksimage/thanks (37).jpg", "thanksimage/thanks (38).jpg", "thanksimage/thanks (39).jpg", "thanksimage/thanks (40).jpg", "thanksimage/thanks (41).jpg", "thanksimage/thanks (42).jpg", "thanksimage/thanks (43).jpg", "thanksimage/thanks (44).jpg", "thanksimage/thanks (45).jpg", "thanksimage/thanks (46).jpg", "thanksimage/thanks (47).jpg", "thanksimage/thanks (48).jpg", "thanksimage/thanks (49).jpg", "thanksimage/thanks (50).jpg", "thanksimage/thanks (51).jpg", "thanksimage/thanks (52).jpg", "thanksimage/thanks (53).jpg", "thanksimage/thanks (54).jpg", "thanksimage/thanks (55).jpg", "thanksimage/thanks (56).jpg", "thanksimage/thanks (57).jpg", "thanksimage/thanks (58).jpg", "thanksimage/thanks (59).jpg", "thanksimage/thanks (60).jpg", "thanksimage/thanks (61).jpg", "thanksimage/thanks (62).jpg", "thanksimage/thanks (63).jpg", "thanksimage/thanks (64).jpg", "thanksimage/thanks (65).jpg", "thanksimage/thanks (66).jpg", "thanksimage/thanks (67).jpg", "thanksimage/thanks (68).jpg", "thanksimage/thanks (69).jpg", "thanksimage/thanks (70).jpg", "thanksimage/thanks (71).jpg", "thanksimage/thanks (72).jpg", "thanksimage/thanks (73).jpg", "thanksimage/thanks (74).jpg", "thanksimage/thanks (75).jpg", "thanksimage/thanks (76).jpg", "thanksimage/thanks (77).jpg", "thanksimage/thanks (78).jpg", "thanksimage/thanks (79).jpg", "thanksimage/thanks (80).jpg", "thanksimage/thanks (81).jpg", "thanksimage/thanks (82).jpg", "thanksimage/thanks (83).jpg", "thanksimage/thanks (84).jpg", "thanksimage/thanks (85).jpg", "thanksimage/thanks (86).jpg", "thanksimage/thanks (87).jpg", "thanksimage/thanks (88).jpg", "thanksimage/thanks (89).jpg", "thanksimage/thanks (90).jpg", "thanksimage/thanks (91).jpg", "thanksimage/thanks (92).jpg", "thanksimage/thanks (93).jpg", "thanksimage/thanks (94).jpg", "thanksimage/thanks (95).jpg", "thanksimage/thanks (96).jpg", "thanksimage/thanks (97).jpg", "thanksimage/thanks (98).jpg", "thanksimage/thanks (99).jpg", "thanksimage/thanks (100).jpg",};
+ char exitimage[100][100]={"thanksimage/thanks (1).jpg", "thanksimage/thanks (2).jpg", "thanksimage/thanks (3).jpg", "thanksimage/thanks (4).jpg", "thanksimage/thanks (5).jpg", "thanksimage/thanks (6).jpg", "thanksimage/thanks (7).jpg", "thanksimage/thanks (8).jpg", "thanksimage/thanks (9).jpg", "thanksimage/thanks (10).jpg", "thanksimage/thanks (11).jpg", "thanksimage/thanks (12).jpg", "thanksimage/thanks (13).jpg",
+     "thanksimage/thanks (14).jpg", "thanksimage/thanks (15).jpg", "thanksimage/thanks (16).jpg", "thanksimage/thanks (17).jpg", "thanksimage/thanks (18).jpg", "thanksimage/thanks (19).jpg", "thanksimage/thanks (20).jpg", "thanksimage/thanks (21).jpg", "thanksimage/thanks (22).jpg", "thanksimage/thanks (23).jpg", "thanksimage/thanks (24).jpg", "thanksimage/thanks (25).jpg", "thanksimage/thanks (26).jpg",
+      "thanksimage/thanks (27).jpg", "thanksimage/thanks (28).jpg", "thanksimage/thanks (29).jpg", "thanksimage/thanks (30).jpg", "thanksimage/thanks (31).jpg", "thanksimage/thanks (32).jpg", "thanksimage/thanks (33).jpg", "thanksimage/thanks (34).jpg", "thanksimage/thanks (35).jpg", "thanksimage/thanks (36).jpg", "thanksimage/thanks (37).jpg", "thanksimage/thanks (38).jpg", "thanksimage/thanks (39).jpg",
+       "thanksimage/thanks (40).jpg", "thanksimage/thanks (41).jpg", "thanksimage/thanks (42).jpg", "thanksimage/thanks (43).jpg", "thanksimage/thanks (44).jpg", "thanksimage/thanks (45).jpg", "thanksimage/thanks (46).jpg", "thanksimage/thanks (47).jpg", "thanksimage/thanks (48).jpg", "thanksimage/thanks (49).jpg", "thanksimage/thanks (50).jpg", "thanksimage/thanks (51).jpg", "thanksimage/thanks (52).jpg",
+        "thanksimage/thanks (53).jpg", "thanksimage/thanks (54).jpg", "thanksimage/thanks (55).jpg", "thanksimage/thanks (56).jpg", "thanksimage/thanks (57).jpg", "thanksimage/thanks (58).jpg", "thanksimage/thanks (59).jpg", "thanksimage/thanks (60).jpg", "thanksimage/thanks (61).jpg", "thanksimage/thanks (62).jpg", "thanksimage/thanks (63).jpg", "thanksimage/thanks (64).jpg", "thanksimage/thanks (65).jpg",
+         "thanksimage/thanks (66).jpg", "thanksimage/thanks (67).jpg", "thanksimage/thanks (68).jpg", "thanksimage/thanks (69).jpg", "thanksimage/thanks (70).jpg", "thanksimage/thanks (71).jpg", "thanksimage/thanks (72).jpg", "thanksimage/thanks (73).jpg", "thanksimage/thanks (74).jpg", "thanksimage/thanks (75).jpg", "thanksimage/thanks (76).jpg", "thanksimage/thanks (77).jpg", "thanksimage/thanks (78).jpg",
+          "thanksimage/thanks (79).jpg", "thanksimage/thanks (80).jpg", "thanksimage/thanks (81).jpg", "thanksimage/thanks (82).jpg", "thanksimage/thanks (83).jpg", "thanksimage/thanks (84).jpg", "thanksimage/thanks (85).jpg", "thanksimage/thanks (86).jpg", "thanksimage/thanks (87).jpg", "thanksimage/thanks (88).jpg", "thanksimage/thanks (89).jpg", "thanksimage/thanks (90).jpg", "thanksimage/thanks (91).jpg",
+           "thanksimage/thanks (92).jpg", "thanksimage/thanks (93).jpg", "thanksimage/thanks (94).jpg", "thanksimage/thanks (95).jpg", "thanksimage/thanks (96).jpg", "thanksimage/thanks (97).jpg", "thanksimage/thanks (98).jpg", "thanksimage/thanks (99).jpg", "thanksimage/thanks (100).jpg",};
  char pauseimage[4][40]={"pauseimage/pause (1).png","pauseimage/pause (2).png","pauseimage/pause (3).png","pauseimage/pause (4).png",};
  char backgroundimage[5][50]={"bg/bg (1).png","bg/bg (2).png","bg/bg (3).png","bg/bg (4).png","bg/bg (5).png"};
  char backgroundselectorimage[5][50]={"slbg/slbg (5).png","slbg/slbg (3).png","slbg/slbg (4).png","slbg/slbg (2).png","slbg/slbg (1).png"};
- char scoreshowimage[100][50]={"congrats/congrats (1).jpg", "congrats/congrats (2).jpg", "congrats/congrats (3).jpg", "congrats/congrats (4).jpg", "congrats/congrats (5).jpg", "congrats/congrats (6).jpg", "congrats/congrats (7).jpg", "congrats/congrats (8).jpg", "congrats/congrats (9).jpg", "congrats/congrats (10).jpg", "congrats/congrats (11).jpg", "congrats/congrats (12).jpg", "congrats/congrats (13).jpg", "congrats/congrats (14).jpg", "congrats/congrats (15).jpg", "congrats/congrats (16).jpg", "congrats/congrats (17).jpg", "congrats/congrats (18).jpg", "congrats/congrats (19).jpg", "congrats/congrats (20).jpg", "congrats/congrats (21).jpg", "congrats/congrats (22).jpg", "congrats/congrats (23).jpg", "congrats/congrats (24).jpg", "congrats/congrats (25).jpg", "congrats/congrats (26).jpg", "congrats/congrats (27).jpg", "congrats/congrats (28).jpg", "congrats/congrats (29).jpg", "congrats/congrats (30).jpg", "congrats/congrats (31).jpg", "congrats/congrats (32).jpg", "congrats/congrats (33).jpg", "congrats/congrats (34).jpg", "congrats/congrats (35).jpg", "congrats/congrats (36).jpg", "congrats/congrats (37).jpg", "congrats/congrats (38).jpg", "congrats/congrats (39).jpg", "congrats/congrats (40).jpg", "congrats/congrats (41).jpg", "congrats/congrats (42).jpg", "congrats/congrats (43).jpg", "congrats/congrats (44).jpg", "congrats/congrats (45).jpg", "congrats/congrats (46).jpg", "congrats/congrats (47).jpg", "congrats/congrats (48).jpg", "congrats/congrats (49).jpg", "congrats/congrats (50).jpg", "congrats/congrats (51).jpg", "congrats/congrats (52).jpg", "congrats/congrats (53).jpg", "congrats/congrats (54).jpg", "congrats/congrats (55).jpg", "congrats/congrats (56).jpg", "congrats/congrats (57).jpg", "congrats/congrats (58).jpg", "congrats/congrats (59).jpg", "congrats/congrats (60).jpg", "congrats/congrats (61).jpg", "congrats/congrats (62).jpg", "congrats/congrats (63).jpg", "congrats/congrats (64).jpg", "congrats/congrats (65).jpg", "congrats/congrats (66).jpg", "congrats/congrats (67).jpg", "congrats/congrats (68).jpg", "congrats/congrats (69).jpg", "congrats/congrats (70).jpg", "congrats/congrats (71).jpg", "congrats/congrats (72).jpg", "congrats/congrats (73).jpg", "congrats/congrats (74).jpg", "congrats/congrats (75).jpg", "congrats/congrats (76).jpg", "congrats/congrats (77).jpg", "congrats/congrats (78).jpg", "congrats/congrats (79).jpg", "congrats/congrats (80).jpg", "congrats/congrats (81).jpg", "congrats/congrats (82).jpg", "congrats/congrats (83).jpg", "congrats/congrats (84).jpg", "congrats/congrats (85).jpg", "congrats/congrats (86).jpg", "congrats/congrats (87).jpg", "congrats/congrats (88).jpg", "congrats/congrats (89).jpg", "congrats/congrats (90).jpg", "congrats/congrats (91).jpg", "congrats/congrats (92).jpg", "congrats/congrats (93).jpg", "congrats/congrats (94).jpg", "congrats/congrats (95).jpg", "congrats/congrats (96).jpg", "congrats/congrats (97).jpg", "congrats/congrats (98).jpg", "congrats/congrats (99).jpg", "congrats/congrats (100).jpg"} ;
+ char scoreshowimage[100][50]={"congrats/congrats (1).jpg", "congrats/congrats (2).jpg", "congrats/congrats (3).jpg", "congrats/congrats (4).jpg", "congrats/congrats (5).jpg", "congrats/congrats (6).jpg", "congrats/congrats (7).jpg", "congrats/congrats (8).jpg", "congrats/congrats (9).jpg", "congrats/congrats (10).jpg", "congrats/congrats (11).jpg", "congrats/congrats (12).jpg", "congrats/congrats (13).jpg",
+     "congrats/congrats (14).jpg", "congrats/congrats (15).jpg", "congrats/congrats (16).jpg", "congrats/congrats (17).jpg", "congrats/congrats (18).jpg", "congrats/congrats (19).jpg", "congrats/congrats (20).jpg", "congrats/congrats (21).jpg", "congrats/congrats (22).jpg", "congrats/congrats (23).jpg", "congrats/congrats (24).jpg", "congrats/congrats (25).jpg", "congrats/congrats (26).jpg", "congrats/congrats (27).jpg",
+     "congrats/congrats (28).jpg", "congrats/congrats (29).jpg", "congrats/congrats (30).jpg", "congrats/congrats (31).jpg", "congrats/congrats (32).jpg", "congrats/congrats (33).jpg", "congrats/congrats (34).jpg", "congrats/congrats (35).jpg", "congrats/congrats (36).jpg", "congrats/congrats (37).jpg", "congrats/congrats (38).jpg", "congrats/congrats (39).jpg", "congrats/congrats (40).jpg", "congrats/congrats (41).jpg",
+     "congrats/congrats (42).jpg", "congrats/congrats (43).jpg", "congrats/congrats (44).jpg", "congrats/congrats (45).jpg", "congrats/congrats (46).jpg", "congrats/congrats (47).jpg", "congrats/congrats (48).jpg", "congrats/congrats (49).jpg", "congrats/congrats (50).jpg", "congrats/congrats (51).jpg", "congrats/congrats (52).jpg", "congrats/congrats (53).jpg", "congrats/congrats (54).jpg", "congrats/congrats (55).jpg",
+      "congrats/congrats (56).jpg", "congrats/congrats (57).jpg", "congrats/congrats (58).jpg", "congrats/congrats (59).jpg", "congrats/congrats (60).jpg", "congrats/congrats (61).jpg", "congrats/congrats (62).jpg", "congrats/congrats (63).jpg", "congrats/congrats (64).jpg", "congrats/congrats (65).jpg", "congrats/congrats (66).jpg", "congrats/congrats (67).jpg", "congrats/congrats (68).jpg", "congrats/congrats (69).jpg",
+       "congrats/congrats (70).jpg", "congrats/congrats (71).jpg", "congrats/congrats (72).jpg", "congrats/congrats (73).jpg", "congrats/congrats (74).jpg", "congrats/congrats (75).jpg", "congrats/congrats (76).jpg", "congrats/congrats (77).jpg", "congrats/congrats (78).jpg", "congrats/congrats (79).jpg", "congrats/congrats (80).jpg", "congrats/congrats (81).jpg", "congrats/congrats (82).jpg", "congrats/congrats (83).jpg",
+        "congrats/congrats (84).jpg", "congrats/congrats (85).jpg", "congrats/congrats (86).jpg", "congrats/congrats (87).jpg", "congrats/congrats (88).jpg", "congrats/congrats (89).jpg", "congrats/congrats (90).jpg", "congrats/congrats (91).jpg", "congrats/congrats (92).jpg", "congrats/congrats (93).jpg", "congrats/congrats (94).jpg", "congrats/congrats (95).jpg", "congrats/congrats (96).jpg", "congrats/congrats (97).jpg",
+        "congrats/congrats (98).jpg", "congrats/congrats (99).jpg", "congrats/congrats (100).jpg"} ;
 
 char pacmanRight[2][30] = {"pacman/pacman (1).png","pacman/pacman (2).png"};
 char pacmanLeft[2][30] ={"pacman/pacman (5).png","pacman/pacman (6).png"};
 char pacmanUp[2][30] ={"pacman/pacman (7).png","pacman/pacman (8).png"};
 char pacmanDown[2][30] ={"pacman/pacman (3).png","pacman/pacman (4).png"};
+char pacdeadscene[11][30]={"pacdead/pacdead0.png","pacdead/pacdead1.png","pacdead/pacdead2.png","pacdead/pacdead3.png","pacdead/pacdead4.png","pacdead/pacdead5.png","pacdead/pacdead6.png","pacdead/pacdead7.png","pacdead/pacdead8.png","pacdead/pacdead9.png","pacdead/pacdead10.png"};
 char *fruit[7];
 
 char inkyUp[2][30] = {"inky/inky (2).png","inky/inky (3).png"};
@@ -105,7 +176,7 @@ char pinkyRight[2][30] = {"pinky/pinky (1).png","pinky/pinky (4).png"};
 char clydeUp[2][30] ={"clyde/clyde (1).png","clyde/clyde (2).png"};
 char clydeDown[2][30] ={"clyde/clyde (5).png","clyde/clyde (6).png"} ;
 char clydeLeft[2][30] ={"clyde/clyde (7).png","clyde/clyde (8).png"};
-char clydeRight[2][30] ={"clyde/clyde (3).png","clyde/clyde (4).png"}; 
+char clydeRight[2][30] ={"clyde/clyde (3).png","clyde/clyde (4).png"};
 
 char frozenGhost[2][40] ={"frozen/frozen (1).png","frozen/frozen (2).png"} ;
 char frozenGhostEnd[2][40] ={"frozen/frozen (2).png","frozen/frozen (3).png"} ;
@@ -113,45 +184,6 @@ char frozenGhostEnd[2][40] ={"frozen/frozen (2).png","frozen/frozen (3).png"} ;
 int maze1[21][19] =
 	{
         1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-		1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1,
-		1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1,
-		1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1,
-		1, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1,
-		1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1,
-		1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1,
-		1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1,
-		1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1,
-		0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0,
-		1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1,
-		1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1,
-		1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1,
-		1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1,
-		1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1,
-		1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1,
-		1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1,
-		1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1,
-		1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1,
-		1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1,
-		1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
-
-	};
-void  corrdinatestore1()
-{
-	int i, j;
-	int dx = startx, dy =starty;
-	for (i = 0; i < 21; i++){
-		for (j = 0; j < 19; j++){
-			map1CoordinateX[i][j] = dx;
-			map1CoordinateY[i][j] = dy;
-			dx += mazeWidth1;
-		}
-		dx = startx;
-		dy -= mazeHeight1;
-	}
-}
-int maze2[21][19]=
-{
-	    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 		1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
 		1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1,
 		1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
@@ -172,18 +204,57 @@ int maze2[21][19]=
 		1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1,
 		1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
 		1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+
+	};
+void  corrdinatestore1()
+{
+	int i, j;
+	int dx = startX12, dy =startY12;
+	for (i = 0; i < 21; i++){
+		for (j = 0; j < 19; j++){
+			map1CoordinateX[i][j] = dx;
+			map1CoordinateY[i][j] = dy;
+			dx += mazeWidth1;
+		}
+		dx = startX12;
+		dy -= mazeHeight1;
+	}
+}
+int maze2[21][19]=
+{
+	    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1,
+		1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1,
+		1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1,
+		1, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1,
+		1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1,
+		1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1,
+		1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1,
+		1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1,
+		0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0,
+		1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1,
+		1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1,
+		1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1,
+		1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1,
+		1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1,
+		1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1,
+		1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1,
+		1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1,
+		1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1,
+		1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1,
+		1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
 };
 void corrdinatestore2()
 {
 	int i, j;
-	int dx = startx, dy =starty;
+	int dx = startX12, dy = startY12;
 	for (i = 0; i < 21; i++){
 		for (j = 0; j < 19; j++){
 			map2CoordinateX[i][j] = dx;
 			map2CoordinateY[i][j] = dy;
 			dx += mazeWidth1;
 		}
-		dx = startx;
+		dx =startX12;
 		dy -= mazeHeight1;
 	}
 }
@@ -264,6 +335,18 @@ void drawMaze1(){
 			if ( maze1[counter][newCounter] == 1){
 				iShowImage(map1CoordinateX[counter][newCounter], map1CoordinateY[counter][newCounter], mazeimage[maze]);
 			}
+            else
+            {   if(maze1[counter][newCounter] == 2)
+                {
+                  iSetColor(5, 37, 247);
+                  iFilledCircle(map1CoordinateX[counter][newCounter]+(25.0/2), map1CoordinateY[counter][newCounter]+(25.0/2),4.5);
+                }
+                else
+                {
+                  iSetColor(0,0,0);
+                  iFilledCircle(map1CoordinateX[counter][newCounter]+(25.0/2), map1CoordinateY[counter][newCounter]+(25.0/2),2.5);
+                }
+            }
 		}
 	}
 }
@@ -274,6 +357,19 @@ void drawMaze2(){
 			if ( maze2[counter][newCounter] == 1){
 				iShowImage(map2CoordinateX[counter][newCounter], map2CoordinateY[counter][newCounter], mazeimage[maze]);
 			}
+            else
+            {
+                if(maze2[counter][newCounter] == 2)
+                {
+                  iSetColor(5, 37, 247);
+                  iFilledCircle(map2CoordinateX[counter][newCounter]+(25.0/2), map2CoordinateY[counter][newCounter]+(25.0/2),4.5);
+                }
+                else
+                {
+                  iSetColor(0,0,0);
+                  iFilledCircle(map2CoordinateX[counter][newCounter]+(25.0/2), map2CoordinateY[counter][newCounter]+(25.0/2),2.5);
+                }
+            }
 		}
 	}
 }
@@ -284,6 +380,19 @@ void drawMaze3(){
 			if (maze3[counter][newCounter] == 1){
 				iShowImage(map3CoordinateX[counter][newCounter], map3CoordinateY[counter][newCounter], mazeimage[maze]);
 			}
+            else
+            {
+                if(maze3[counter][newCounter] == 2)
+                {
+                  iSetColor(5, 37, 247);
+                  iFilledCircle(map3CoordinateX[counter][newCounter]+(25.0/2), map3CoordinateY[counter][newCounter]+(25.0/2),4.5);
+                }
+                else
+                {
+                  iSetColor(0,0,0);
+                  iFilledCircle(map3CoordinateX[counter][newCounter]+(25.0/2), map3CoordinateY[counter][newCounter]+(25.0/2),2.5);
+                }
+            }
 		}
 	}
 }
@@ -294,6 +403,19 @@ void drawMaze4(){
 			if (maze4[counter][newCounter] == 1){
 				iShowImage(map4CoordinateX[counter][newCounter], map4CoordinateY[counter][newCounter], mazeimage[maze]);
 			}
+            else
+            {
+                 if(maze4[counter][newCounter] == 2)
+                {
+                  iSetColor(5, 37, 247);
+                  iFilledCircle(map4CoordinateX[counter][newCounter]+(25.0/2), map4CoordinateY[counter][newCounter]+(25.0/2),4.5);
+                }
+                else
+                {
+                  iSetColor(0,0,0);
+                  iFilledCircle(map4CoordinateX[counter][newCounter]+(25.0/2), map4CoordinateY[counter][newCounter]+(25.0/2),2.5);
+                }
+            }
 		}
 	}
 }
@@ -366,6 +488,25 @@ void iDraw()
         else if(selected==4){
             drawMaze4();
         }
+
+        pacinitialcord();
+        if (!pacdead && pacmanlife)
+		{
+			if (pac.rightCount)
+				iShowImage(pac.x, pac.y, pacmanRight[pac.rightInd]);
+			else if (pac.leftCount)
+				iShowImage(pac.x, pac.y, pacmanLeft[pac.leftInd]);
+			else if (pac.upCount)
+				iShowImage(pac.x, pac.y, pacmanUp[pac.upInd]);
+			else if (pac.downCount)
+				iShowImage(pac.x, pac.y, pacmanDown[pac.downInd]);
+			else
+				iShowImage(pac.x, pac.y, pacmanRight[pac.rightInd]);
+		}
+		else if (pacdead)
+		{
+			iShowImage(pac.x, pac.y,  pacdeadscene[deadSceneCount], 0);
+		}
     }
 
     else if(exitintro)
@@ -462,7 +603,7 @@ void iMouseMove(int mx, int my)
             settingsc=0;
         }
       }
-      if(soundOn==false)
+      else if(soundOn==false)
       {
         if((mx>=408&&mx<=783)&&( my>=388&& my<=439)){
             settingsc=5;
@@ -504,7 +645,7 @@ void iMouseMove(int mx, int my)
     }*/
      else if(pause)
     {
-       if(mx>=257&& my>=420&&mx<=698 &&my<=494) 
+       if(mx>=257&& my>=420&&mx<=698 &&my<=494)
        {
          pausec=1;
        }
@@ -789,7 +930,7 @@ if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
     }
     else if(pause)
     {
-       if(mx>=257&& my>=420&&mx<=698 &&my<=494) 
+       if(mx>=257&& my>=420&&mx<=698 &&my<=494)
        {
           pause=false;
           mainmenu=true;
@@ -816,7 +957,7 @@ if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
         }
     }
     else if(backgroundselector)
-    {  
+    {
       if(mx>=429 &&my>=489&&mx<=689&& my<=536)
       {
         backgroundselectorc=0;
@@ -861,7 +1002,7 @@ if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
     {
         // place your codes here
     }
-  
+
 };
 
 /*
@@ -917,6 +1058,34 @@ void iSpecialKeyboard(unsigned char key)
         break;
     }
 }
+void pacinitialcord()
+{
+    if(selected==1||selected==2)
+    {
+        cellX = 9;
+	    cellY = 19;
+        pac.x =399;
+	    pac.y = 86;
+
+	    pac.downCount = false;
+	    pac.rightCount = false;
+	    pac.upCount = false;
+	    pac.leftCount = false;
+
+    }
+    else if(selected==3||selected==4)
+    {
+        cellX = 1;
+	    cellY = 1;
+        pac.x = 105;
+	    pac.y = 490;
+
+	    pac.downCount = false;
+	    pac.rightCount = false;
+	    pac.upCount = false;
+	    pac.leftCount = false;
+    }
+}
 void introchange()
 {
 	if (startintro)
@@ -928,6 +1097,42 @@ void introchange()
 			startintro = false;
             mainmenu=true;
 			iPauseTimer(0);
+		}
+	}
+}
+void deathScene()
+{
+	if (pacdead)
+	{
+		deadSceneCount++;
+		if (deadSceneCount > 11)
+		{
+			deadSceneCount = 0;
+			pacdead = false;
+            pacinitialcord();
+			pacmanlife--;
+			deadsound = true;
+			//ghostIniCords();
+			blueGhost = false;
+			pookie[0].blueOn = false;
+			pookie[1].blueOn = false;
+			pookie[2].blueOn = false;
+			pookie[3].blueOn = false;
+			Sleep(800);
+			if (pacmanlife == 0)
+			{
+				//totalFool = 188;
+				//chase = false;
+				//scatter = true;
+				//readData();
+
+			}
+			/*else
+			{
+				PlaySound("Music\\all\\ghosts_laugh1.wav", NULL, SND_ASYNC);
+			}
+			iResumeTimer(2);
+			iResumeTimer(3);*/
 		}
 	}
 }
@@ -945,6 +1150,7 @@ void exit()
 		}
 	}
 }
+
 void level()
 {
 	if (levelselect)
@@ -968,6 +1174,7 @@ int main(int argc, char *argv[])
     iSetTimer(30, introchange);
     iSetTimer(30, exit);
     iSetTimer(30, level);
+    iSetTimer(120, deathScene);
     iInitialize(1200, 675, "PACMAN");
     return 0;
 }
