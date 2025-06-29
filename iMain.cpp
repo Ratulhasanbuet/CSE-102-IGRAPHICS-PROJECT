@@ -1048,15 +1048,89 @@ GLUT_KEY_PAGE_UP, GLUT_KEY_PAGE_DOWN, GLUT_KEY_HOME, GLUT_KEY_END,
 GLUT_KEY_INSERT */
 void iSpecialKeyboard(unsigned char key)
 {
-    switch (key)
-    {
-    case GLUT_KEY_END:
-        // do something
-        break;
-    // place your codes for other keys here
-    default:
-        break;
-    }
+
+	if (key == GLUT_KEY_RIGHT)
+	{
+		if (playingstart)
+		{
+			if (!(pac.x % mazeHeight1) && !(pac.y % mazeHeight1))
+			{
+				pac.downCount = false;
+				pac.upCount = false;
+				pac.leftCount = false;
+				pac.rightCount = true;
+			}
+			else
+			{
+				pac.trigRight = true;
+				pac.trigLeft = false;
+				pac.trigDown = false;
+				pac.trigUp = false;
+			}
+		}
+	}
+	if (key == GLUT_KEY_LEFT)
+	{
+		if (playingstart)
+		{
+			if (!(pac.x % mazeHeight1) && !(pac.y % mazeHeight1))
+			{
+				pac.downCount = false;
+				pac.rightCount = false;
+				pac.upCount = false;
+				pac.leftCount = true;
+			}
+			else
+			{
+				pac.trigRight = false;
+				pac.trigLeft = true;
+				pac.trigDown = false;
+				pac.trigUp = false;
+			}
+		}
+	}
+	if (key == GLUT_KEY_UP)
+	{
+		
+		 if (playGame)
+		{
+			if (!(pac.y % mazeHeight1) && !(pac.x % mazeHeight1))
+			{
+				pac.downCount = false;
+				pac.rightCount = false;
+				pac.leftCount = false;
+				pac.upCount = true;
+			}
+			else
+			{
+				pac.trigRight = false;
+				pac.trigLeft = false;
+				pac.trigDown = false;
+				pac.trigUp = true;
+			}
+		}
+	}
+	if (key == GLUT_KEY_DOWN)
+	{
+		 if (playingstart)
+		{
+			if (!(pac.y % mazeHeight1) && !(pac.x % mazeHeight1)) //mazecellwidth and height are same 25 pixel.... so nothing wrong here
+			{
+				pac.rightCount = false;
+				pac.leftCount = false;
+				pac.upCount = false;
+				pac.downCount = true;
+			}
+			else
+			{
+				pac.trigRight = false;
+				pac.trigLeft = false;
+				pac.trigDown = true;
+				pac.trigUp = false;
+			}
+		}
+	}
+
 }
 void pacinitialcord()
 {
