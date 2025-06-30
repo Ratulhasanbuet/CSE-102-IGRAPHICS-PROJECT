@@ -1,16 +1,14 @@
 #include "iGraphics.h"
-#include<stdio.h>
-
+#include <stdio.h>
 
 void pacinitialcord();
 
-
-int mazeHeight1 =25;
-int mazeWidth1=25;
-int startx=80;
-int starty=515;
-int startX12=175;
-int startY12=560;
+int mazeHeight1 = 25;
+int mazeWidth1 = 25;
+int startx = 80;
+int starty = 515;
+int startX12 = 175;
+int startY12 = 560;
 int map1CoordinateX[21][19];
 int map1CoordinateY[21][19];
 int map2CoordinateX[21][19];
@@ -22,41 +20,41 @@ int map4CoordinateY[19][40];
 
 int cellX;
 int cellY;
-int menuc=0;
-int playgamec=0;
-int difficultyc=0;
-int highscorec=0;
-int mazeselectorc=2;
-int settingsc=0;
-int creditsc=0;
-int rulesc=0;
-int quitc=0;
+int menuc = 0;
+int playgamec = 0;
+int difficultyc = 0;
+int highscorec = 0;
+int mazeselectorc = 2;
+int settingsc = 0;
+int creditsc = 0;
+int rulesc = 0;
+int quitc = 0;
+int congratsc=0;
 int selected;
-int levelintro=0;
-int pausec=0;
-int backgroundselectorc=3;
-int bgimage=3;
+int levelintro = 0;
+int pausec = 0;
+int backgroundselectorc = 3;
+int bgimage = 3;
 
-int maze=0;
-int intro=0;
-int exitintroimage=0;
-int ratul=0;
+int maze = 0;
+int intro = 0;
+int exitintroimage = 0;
+int ratul = 0;
 char playerName[100] = "";
 char namestr[100];
 int nameIndex = 0;
 bool typingName = false;
 
-int pacmanlife=3;
-bool pacdead=false;
-int pacspeed=25;
-int deadSceneCount=0;
-bool deadsound=false;
+int pacmanlife = 3;
+bool pacdead = false;
+int pacspeed = 25;
+int deadSceneCount = 0;
+bool deadsound = false;
+int blueGhost;
 
-bool blueGhost;
-
-bool soundOn=true;
-bool startintro=true;
-bool exitintro ;
+bool soundOn = true;
+bool startintro = true;
+bool exitintro;
 bool mainmenu;
 bool difficulty;
 bool playgameintro;
@@ -68,33 +66,33 @@ bool quit;
 bool mazeselector;
 bool playingstart;
 bool levelselect;
-bool pause ;
+bool pause;
 bool backgroundselector;
 bool deadscene;
+bool congrats;
 
+typedef struct
+{
+    int upInd, downInd, leftInd, rightInd;
+    int x;
+    int y;
+    bool upCount, downCount, leftCount, rightCount;
+    bool trigRight, trigLeft, trigUp, trigDown;
+    int right, left, up, down;
+} move;
 
-
-
-typedef struct{
-	int upInd, downInd, leftInd, rightInd;
-	int x;
-	int y;
-	bool upCount, downCount, leftCount, rightCount;
-	bool trigRight, trigLeft, trigUp, trigDown;
-	int right, left, up, down;
-}move;
-
-typedef struct{
-	int upInd, downInd, leftInd, rightInd;
-	int x;
-	int y;
-	int cellX, cellY;
-	bool flagRight, flagLeft, flagUp, flagDown;
-	int left, right, up, down;
-	int speed;
-	bool blueOn;
-	int dist1, dist2;
-}ghost;
+typedef struct
+{
+    int upInd, downInd, leftInd, rightInd;
+    int x;
+    int y;
+    int cellX, cellY;
+    bool flagRight, flagLeft, flagUp, flagDown;
+    int left, right, up, down;
+    int speed;
+    bool blueOn;
+    int dist1, dist2;
+} ghost;
 
 ghost pookie[4];
 move pac;
@@ -180,9 +178,9 @@ char clydeRight[2][30] ={"clyde/clyde (3).png","clyde/clyde (4).png"};
 
 char frozenGhost[2][40] ={"frozen/frozen (1).png","frozen/frozen (2).png"} ;
 char frozenGhostEnd[2][40] ={"frozen/frozen (2).png","frozen/frozen (3).png"} ;
-
+// 1 formaze wall 0 for fool 2 for blueghost start and 3 for fruit(give aextra life)  and 0,2 and 3 is walking path
 int maze1[21][19] =
-	{
+    {
         1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 		1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
 		1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1,
@@ -205,221 +203,242 @@ int maze1[21][19] =
 		1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
 		1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 
-	};
-void  corrdinatestore1()
-{
-	int i, j;
-	int dx = startX12, dy =startY12;
-	for (i = 0; i < 21; i++){
-		for (j = 0; j < 19; j++){
-			map1CoordinateX[i][j] = dx;
-			map1CoordinateY[i][j] = dy;
-			dx += mazeWidth1;
-		}
-		dx = startX12;
-		dy -= mazeHeight1;
-	}
-}
-int maze2[21][19]=
-{
-	    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-		1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1,
-		1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1,
-		1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1,
-		1, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1,
-		1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1,
-		1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1,
-		1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1,
-		1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1,
-		0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0,
-		1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1,
-		1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1,
-		1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1,
-		1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1,
-		1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1,
-		1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1,
-		1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1,
-		1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1,
-		1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1,
-		1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1,
-		1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
 };
+void corrdinatestore1()
+{
+    int i, j;
+    int dx = startX12, dy = startY12;
+    for (i = 0; i < 21; i++)
+    {
+        for (j = 0; j < 19; j++)
+        {
+            map1CoordinateX[i][j] = dx;
+            map1CoordinateY[i][j] = dy;
+            dx += mazeWidth1;
+        }
+        dx = startX12;
+        dy -= mazeHeight1;
+    }
+}
+int maze2[21][19] =
+    {
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1,
+        1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1,
+        1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1,
+        1, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1,
+        1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1,
+        1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1,
+        1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1,
+        1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1,
+        0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0,
+        1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1,
+        1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1,
+        1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1,
+        1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1,
+        1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1,
+        1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1,
+        1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1,
+        1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1,
+        1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1,
+        1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+    };
 void corrdinatestore2()
 {
-	int i, j;
-	int dx = startX12, dy = startY12;
-	for (i = 0; i < 21; i++){
-		for (j = 0; j < 19; j++){
-			map2CoordinateX[i][j] = dx;
-			map2CoordinateY[i][j] = dy;
-			dx += mazeWidth1;
-		}
-		dx =startX12;
-		dy -= mazeHeight1;
-	}
+    int i, j;
+    int dx = startX12, dy = startY12;
+    for (i = 0; i < 21; i++)
+    {
+        for (j = 0; j < 19; j++)
+        {
+            map2CoordinateX[i][j] = dx;
+            map2CoordinateY[i][j] = dy;
+            dx += mazeWidth1;
+        }
+        dx = startX12;
+        dy -= mazeHeight1;
+    }
 }
 int maze3[17][36] = {
-  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-  {1,0,0,0,1,0,0,0,0,1,0,1,0,0,0,0,1,0,1,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,1},
-  {1,0,1,0,1,0,1,1,0,1,0,1,1,1,1,0,1,0,1,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,0,1},
-  {1,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,1,0,1},
-  {1,0,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,0,1,1,1,1,0,1,0,1,0,1,1,1,1,1,0,1,0,1},
-  {1,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,1,0,1},
-  {1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,0,1,1,1,0,1},
-  {1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,1,0,0,0,1,0,1},
-  {1,0,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1,1,1,0,1,1,1,0,1,0,1},
-  {1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,0,1},
-  {1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1},
-  {1,0,1,1,1,0,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,0,1,0,1},
-  {1,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,1,0,1},
-  {1,1,1,0,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,0,1,0,1,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
-};
-void  corrdinatestore3()
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+    {1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1},
+    {1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
+    {1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1},
+    {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1},
+    {1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1},
+    {1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1},
+    {1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
+    {1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1},
+    {1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1},
+    {1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
+void corrdinatestore3()
 {
-	int i, j;
-	int dx = startx, dy =starty;
-	for (i = 0; i < 17; i++){
-		for (j = 0; j < 36; j++){
-			map3CoordinateX[i][j] = dx;
-			map3CoordinateY[i][j] = dy;
-			dx += mazeWidth1;
-		}
-		dx = startx;
-		dy -= mazeHeight1;
-	}
+    int i, j;
+    int dx = startx, dy = starty;
+    for (i = 0; i < 17; i++)
+    {
+        for (j = 0; j < 36; j++)
+        {
+            map3CoordinateX[i][j] = dx;
+            map3CoordinateY[i][j] = dy;
+            dx += mazeWidth1;
+        }
+        dx = startx;
+        dy -= mazeHeight1;
+    }
 }
 int maze4[19][40] = {
-  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-  {1,0,0,0,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1},
-  {1,0,1,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0,1},
-  {1,0,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,1,0,0,1},
-  {1,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,1,1,1,1,0,1,1,1,0,1,1,1,1,1,1,1,1,1,0,1},
-  {1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1},
-  {1,0,1,1,1,1,0,1,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0,1},
-  {1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1},
-  {1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1},
-  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
-};
-void  corrdinatestore4()
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+    {1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1},
+    {1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
+    {1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1},
+    {1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
+    {1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
+void corrdinatestore4()
 {
-	int i, j;
-	int dx = startx, dy =starty;
-	for (i = 0; i < 19; i++){
-		for (j = 0; j < 40; j++){
-			map4CoordinateX[i][j] = dx;
-			map4CoordinateY[i][j] = dy;
-			dx += mazeWidth1;
-		}
-		dx = startx;
-		dy -= mazeHeight1;
-	}
+    int i, j;
+    int dx = startx, dy = starty;
+    for (i = 0; i < 19; i++)
+    {
+        for (j = 0; j < 40; j++)
+        {
+            map4CoordinateX[i][j] = dx;
+            map4CoordinateY[i][j] = dy;
+            dx += mazeWidth1;
+        }
+        dx = startx;
+        dy -= mazeHeight1;
+    }
 }
 
-
-void drawMaze1(){
-	int counter, newCounter;
-	for (counter = 0; counter < 21; counter++){
-		for (newCounter = 0; newCounter < 19; newCounter++){
-			if ( maze1[counter][newCounter] == 1){
-				iShowImage(map1CoordinateX[counter][newCounter], map1CoordinateY[counter][newCounter], mazeimage[maze]);
-			}
-            else
-            {   if(maze1[counter][newCounter] == 2)
-                {
-                  iSetColor(5, 37, 247);
-                  iFilledCircle(map1CoordinateX[counter][newCounter]+(25.0/2), map1CoordinateY[counter][newCounter]+(25.0/2),4.5);
-                }
-                else
-                {
-                  iSetColor(0,0,0);
-                  iFilledCircle(map1CoordinateX[counter][newCounter]+(25.0/2), map1CoordinateY[counter][newCounter]+(25.0/2),2.5);
-                }
+void drawMaze1()
+{
+    int counter, newCounter;
+    for (counter = 0; counter < 21; counter++)
+    {
+        for (newCounter = 0; newCounter < 19; newCounter++)
+        {
+            if (maze1[counter][newCounter] == 1)
+            {
+                iShowImage(map1CoordinateX[counter][newCounter], map1CoordinateY[counter][newCounter], mazeimage[maze]);
             }
-		}
-	}
-}
-void drawMaze2(){
-	int counter, newCounter;
-	for (counter = 0; counter < 21; counter++){
-		for (newCounter = 0; newCounter < 19; newCounter++){
-			if ( maze2[counter][newCounter] == 1){
-				iShowImage(map2CoordinateX[counter][newCounter], map2CoordinateY[counter][newCounter], mazeimage[maze]);
-			}
             else
             {
-                if(maze2[counter][newCounter] == 2)
+                if (maze1[counter][newCounter] == 2)
                 {
-                  iSetColor(5, 37, 247);
-                  iFilledCircle(map2CoordinateX[counter][newCounter]+(25.0/2), map2CoordinateY[counter][newCounter]+(25.0/2),4.5);
+                    iSetColor(5, 37, 247);
+                    iFilledCircle(map1CoordinateX[counter][newCounter] + (25.0 / 2), map1CoordinateY[counter][newCounter] + (25.0 / 2), 4.5);
                 }
                 else
                 {
-                  iSetColor(0,0,0);
-                  iFilledCircle(map2CoordinateX[counter][newCounter]+(25.0/2), map2CoordinateY[counter][newCounter]+(25.0/2),2.5);
+                    iSetColor(0, 0, 0);
+                    iFilledCircle(map1CoordinateX[counter][newCounter] + (25.0 / 2), map1CoordinateY[counter][newCounter] + (25.0 / 2), 2.5);
                 }
             }
-		}
-	}
+        }
+    }
 }
-void drawMaze3(){
-	int counter, newCounter;
-	for (counter = 0; counter < 17; counter++){
-		for (newCounter = 0; newCounter < 36; newCounter++){
-			if (maze3[counter][newCounter] == 1){
-				iShowImage(map3CoordinateX[counter][newCounter], map3CoordinateY[counter][newCounter], mazeimage[maze]);
-			}
+void drawMaze2()
+{
+    int counter, newCounter;
+    for (counter = 0; counter < 21; counter++)
+    {
+        for (newCounter = 0; newCounter < 19; newCounter++)
+        {
+            if (maze2[counter][newCounter] == 1)
+            {
+                iShowImage(map2CoordinateX[counter][newCounter], map2CoordinateY[counter][newCounter], mazeimage[maze]);
+            }
             else
             {
-                if(maze3[counter][newCounter] == 2)
+                if (maze2[counter][newCounter] == 2)
                 {
-                  iSetColor(5, 37, 247);
-                  iFilledCircle(map3CoordinateX[counter][newCounter]+(25.0/2), map3CoordinateY[counter][newCounter]+(25.0/2),4.5);
+                    iSetColor(5, 37, 247);
+                    iFilledCircle(map2CoordinateX[counter][newCounter] + (25.0 / 2), map2CoordinateY[counter][newCounter] + (25.0 / 2), 4.5);
                 }
                 else
                 {
-                  iSetColor(0,0,0);
-                  iFilledCircle(map3CoordinateX[counter][newCounter]+(25.0/2), map3CoordinateY[counter][newCounter]+(25.0/2),2.5);
+                    iSetColor(0, 0, 0);
+                    iFilledCircle(map2CoordinateX[counter][newCounter] + (25.0 / 2), map2CoordinateY[counter][newCounter] + (25.0 / 2), 2.5);
                 }
             }
-		}
-	}
+        }
+    }
 }
-void drawMaze4(){
-	int counter, newCounter;
-	for (counter = 0; counter < 19; counter++){
-		for (newCounter = 0; newCounter < 40; newCounter++){
-			if (maze4[counter][newCounter] == 1){
-				iShowImage(map4CoordinateX[counter][newCounter], map4CoordinateY[counter][newCounter], mazeimage[maze]);
-			}
+void drawMaze3()
+{
+    int counter, newCounter;
+    for (counter = 0; counter < 17; counter++)
+    {
+        for (newCounter = 0; newCounter < 36; newCounter++)
+        {
+            if (maze3[counter][newCounter] == 1)
+            {
+                iShowImage(map3CoordinateX[counter][newCounter], map3CoordinateY[counter][newCounter], mazeimage[maze]);
+            }
             else
             {
-                 if(maze4[counter][newCounter] == 2)
+                if (maze3[counter][newCounter] == 2)
                 {
-                  iSetColor(5, 37, 247);
-                  iFilledCircle(map4CoordinateX[counter][newCounter]+(25.0/2), map4CoordinateY[counter][newCounter]+(25.0/2),4.5);
+                    iSetColor(5, 37, 247);
+                    iFilledCircle(map3CoordinateX[counter][newCounter] + (25.0 / 2), map3CoordinateY[counter][newCounter] + (25.0 / 2), 4.5);
                 }
                 else
                 {
-                  iSetColor(0,0,0);
-                  iFilledCircle(map4CoordinateX[counter][newCounter]+(25.0/2), map4CoordinateY[counter][newCounter]+(25.0/2),2.5);
+                    iSetColor(0, 0, 0);
+                    iFilledCircle(map3CoordinateX[counter][newCounter] + (25.0 / 2), map3CoordinateY[counter][newCounter] + (25.0 / 2), 2.5);
                 }
             }
-		}
-	}
+        }
+    }
 }
-
+void drawMaze4()
+{
+    int counter, newCounter;
+    for (counter = 0; counter < 19; counter++)
+    {
+        for (newCounter = 0; newCounter < 40; newCounter++)
+        {
+            if (maze4[counter][newCounter] == 1)
+            {
+                iShowImage(map4CoordinateX[counter][newCounter], map4CoordinateY[counter][newCounter], mazeimage[maze]);
+            }
+            else
+            {
+                if (maze4[counter][newCounter] == 2)
+                {
+                    iSetColor(5, 37, 247);
+                    iFilledCircle(map4CoordinateX[counter][newCounter] + (25.0 / 2), map4CoordinateY[counter][newCounter] + (25.0 / 2), 4.5);
+                }
+                else
+                {
+                    iSetColor(0, 0, 0);
+                    iFilledCircle(map4CoordinateX[counter][newCounter] + (25.0 / 2), map4CoordinateY[counter][newCounter] + (25.0 / 2), 2.5);
+                }
+            }
+        }
+    }
+}
 
 /*
 function iDraw() is called again and again by the system.
@@ -428,105 +447,289 @@ void iDraw()
 {
     // place your drawing codes here
     iClear();
-    if(startintro)
+    if (startintro)
     {
-        iShowImage(0,0,introimage[intro]);
+        iShowImage(0, 0, introimage[intro]);
     }
-    else if(mainmenu)
-        {
-           iShowImage(0,0,menuimage[menuc]);
-        }
-    else if(difficulty)
-        {
-          iShowImage(0,0,difficultyimage[difficultyc]);
-        }
-    else if(highscore)
+    else if (mainmenu)
     {
-        iShowImage(0,0,highscoreimage[highscorec]);
+        iShowImage(0, 0, menuimage[menuc]);
     }
-    else if(playgameintro)
+    else if (difficulty)
     {
-        iShowImage(0,0,playgameintroimage[playgamec]);
-
+        iShowImage(0, 0, difficultyimage[difficultyc]);
     }
-    else if(settings)
-        {
-          iShowImage(0,0, settingsimage[settingsc]);
-        }
-    else if(mazeselector)
+    else if (highscore)
     {
-        iShowImage(0,0, mazeselectorimage[mazeselectorc]);
+        iShowImage(0, 0, highscoreimage[highscorec]);
     }
-    else if(highscore)
-        {
-          //iShowImage();
-        }
-    else if(credits)
-       {
+    else if (playgameintro)
+    {
+        iShowImage(0, 0, playgameintroimage[playgamec]);
+    }
+    else if (settings)
+    {
+        iShowImage(0, 0, settingsimage[settingsc]);
+    }
+    else if (mazeselector)
+    {
+        iShowImage(0, 0, mazeselectorimage[mazeselectorc]);
+    }
+    else if (highscore)
+    {
+        // iShowImage();
+    }
+    else if (credits)
+    {
         iShowImage(0, 0, creditimage[creditsc]);
-       }
-    else if(rules)
-       {
-        iShowImage(0, 0, rulesimage[rulesc]);
-       }
-    else if(quit)
-       {
-        iShowImage(0, 0, quitimage[quitc]);
-       }
-    else if(playingstart)
+    }
+    else if (rules)
     {
-        iShowImage(0,0,backgroundimage[bgimage]);
-        if(selected==1){
+        iShowImage(0, 0, rulesimage[rulesc]);
+    }
+    else if (quit)
+    {
+        iShowImage(0, 0, quitimage[quitc]);
+    }
+    else if (playingstart)
+    {
+        iShowImage(0, 0, backgroundimage[bgimage]);
+        if (selected == 1)
+        {
             drawMaze1();
         }
-        else if(selected==2){
+        else if (selected == 2)
+        {
             drawMaze2();
         }
-        else if(selected==3){
+        else if (selected == 3)
+        {
             drawMaze3();
         }
-        else if(selected==4){
+        else if (selected == 4)
+        {
             drawMaze4();
         }
 
         pacinitialcord();
         if (!pacdead && pacmanlife)
-		{
-			if (pac.rightCount)
-				iShowImage(pac.x, pac.y, pacmanRight[pac.rightInd]);
-			else if (pac.leftCount)
-				iShowImage(pac.x, pac.y, pacmanLeft[pac.leftInd]);
-			else if (pac.upCount)
-				iShowImage(pac.x, pac.y, pacmanUp[pac.upInd]);
-			else if (pac.downCount)
-				iShowImage(pac.x, pac.y, pacmanDown[pac.downInd]);
-			else
-				iShowImage(pac.x, pac.y, pacmanRight[pac.rightInd]);
-		}
-		else if (pacdead)
-		{
-			iShowImage(pac.x, pac.y,  pacdeadscene[deadSceneCount], 0);
-		}
+        {
+            if (pac.rightCount)
+                iShowImage(pac.x, pac.y, pacmanRight[pac.rightInd]);
+            else if (pac.leftCount)
+                iShowImage(pac.x, pac.y, pacmanLeft[pac.leftInd]);
+            else if (pac.upCount)
+                iShowImage(pac.x, pac.y, pacmanUp[pac.upInd]);
+            else if (pac.downCount)
+                iShowImage(pac.x, pac.y, pacmanDown[pac.downInd]);
+            else
+                iShowImage(pac.x, pac.y, pacmanRight[pac.rightInd]);
+        }
+        else if (pacdead)
+        {
+            iShowImage(pac.x, pac.y, pacdeadscene[deadSceneCount], 0);
+        }
+        else
+        {
+            playingstart = false;
+            // congrats = true;
+        }
+
+        if (!blueGhost)
+        {
+            if (pookie[0].flagRight)
+                iShowImage(pookie[0].x, pookie[0].y, inkyRight[pookie[0].rightInd], 0);
+            else if (pookie[0].flagLeft)
+                iShowImage(pookie[0].x, pookie[0].y, inkyLeft[pookie[0].leftInd], 0);
+            else if (pookie[0].flagUp)
+                iShowImage(pookie[0].x, pookie[0].y, inkyUp[pookie[0].upInd], 0);
+            else if (pookie[0].flagDown)
+                iShowImage(pookie[0].x, pookie[0].y, inkyDown[pookie[0].downInd], 0);
+
+            if (pookie[1].flagRight)
+                iShowImage(pookie[1].x, pookie[1].y, blinkyRight[pookie[1].rightInd], 0);
+            else if (pookie[1].flagLeft)
+                iShowImage(pookie[1].x, pookie[1].y, blinkyLeft[pookie[1].leftInd], 0);
+            else if (pookie[1].flagUp)
+                iShowImage(pookie[1].x, pookie[1].y, blinkyUp[pookie[1].upInd], 0);
+            else if (pookie[1].flagDown)
+                iShowImage(pookie[1].x, pookie[1].y, blinkyDown[pookie[1].downInd], 0);
+
+            if (pookie[2].flagRight)
+                iShowImage(pookie[2].x, pookie[2].y, clydeRight[pookie[2].rightInd], 0);
+            else if (pookie[2].flagLeft)
+                iShowImage(pookie[2].x, pookie[2].y, clydeLeft[pookie[2].leftInd], 0);
+            else if (pookie[2].flagUp)
+                iShowImage(pookie[2].x, pookie[2].y, clydeUp[pookie[2].upInd], 0);
+            else if (pookie[2].flagDown)
+                iShowImage(pookie[2].x, pookie[2].y, clydeDown[pookie[2].downInd], 0);
+
+            if (pookie[3].flagRight)
+                iShowImage(pookie[3].x, pookie[3].y, pinkyRight[pookie[3].rightInd], 0);
+            else if (pookie[3].flagLeft)
+                iShowImage(pookie[3].x, pookie[3].y, pinkyLeft[pookie[3].leftInd], 0);
+            else if (pookie[3].flagUp)
+                iShowImage(pookie[3].x, pookie[3].y, pinkyUp[pookie[3].upInd], 0);
+            else if (pookie[3].flagDown)
+                iShowImage(pookie[3].x, pookie[3].y, pinkyDown[pookie[3].downInd], 0);
+        }
+
+        else
+        {
+            /*  if (blueScore >= 0)
+              {
+                  iShowImage(scoreX, scoreY, eatScore[blueScore], 0);
+              }*/
+            if (blueGhost > 3)
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    if (pookie[i].blueOn)
+                    {
+                        if (pookie[i].flagRight)
+                            iShowImage(pookie[i].x, pookie[i].y, frozenGhost[pookie[i].rightInd], 0);
+                        else if (pookie[i].flagLeft)
+                            iShowImage(pookie[i].x, pookie[i].y, frozenGhost[pookie[i].leftInd], 0);
+                        else if (pookie[i].flagUp)
+                            iShowImage(pookie[i].x, pookie[i].y, frozenGhost[pookie[i].upInd], 0);
+                        else if (pookie[i].flagDown)
+                            iShowImage(pookie[i].x, pookie[i].y, frozenGhost[pookie[i].downInd], 0);
+                    }
+                    else
+                    {
+                        if (i == 0)
+                        {
+                            if (pookie[0].flagRight)
+                                iShowImage(pookie[0].x, pookie[0].y, inkyRight[pookie[0].rightInd], 0);
+                            else if (pookie[0].flagLeft)
+                                iShowImage(pookie[0].x, pookie[0].y, inkyLeft[pookie[0].leftInd], 0);
+                            else if (pookie[0].flagUp)
+                                iShowImage(pookie[0].x, pookie[0].y, inkyUp[pookie[0].upInd], 0);
+                            else if (pookie[0].flagDown)
+                                iShowImage(pookie[0].x, pookie[0].y, inkyDown[pookie[0].downInd], 0);
+                        }
+                        else if (i == 1)
+                        {
+                            if (pookie[1].flagRight)
+                                iShowImage(pookie[1].x, pookie[1].y, blinkyRight[pookie[1].rightInd], 0);
+                            else if (pookie[1].flagLeft)
+                                iShowImage(pookie[1].x, pookie[1].y, blinkyLeft[pookie[1].leftInd], 0);
+                            else if (pookie[1].flagUp)
+                                iShowImage(pookie[1].x, pookie[1].y, blinkyUp[pookie[1].upInd], 0);
+                            else if (pookie[1].flagDown)
+                                iShowImage(pookie[1].x, pookie[1].y, blinkyDown[pookie[1].downInd], 0);
+                        }
+                        else if (i == 2)
+                        {
+                            if (pookie[2].flagRight)
+                                iShowImage(pookie[2].x, pookie[2].y, clydeRight[pookie[2].rightInd], 0);
+                            else if (pookie[2].flagLeft)
+                                iShowImage(pookie[2].x, pookie[2].y, clydeLeft[pookie[2].leftInd], 0);
+                            else if (pookie[2].flagUp)
+                                iShowImage(pookie[2].x, pookie[2].y, clydeUp[pookie[2].upInd], 0);
+                            else if (pookie[2].flagDown)
+                                iShowImage(pookie[2].x, pookie[2].y, clydeDown[pookie[2].downInd], 0);
+                        }
+                        else if (i == 3)
+                        {
+                            if (pookie[3].flagRight)
+                                iShowImage(pookie[3].x, pookie[3].y, pinkyRight[pookie[3].rightInd], 0);
+                            else if (pookie[3].flagLeft)
+                                iShowImage(pookie[3].x, pookie[3].y, pinkyLeft[pookie[3].leftInd], 0);
+                            else if (pookie[3].flagUp)
+                                iShowImage(pookie[3].x, pookie[3].y, pinkyUp[pookie[3].upInd], 0);
+                            else if (pookie[3].flagDown)
+                                iShowImage(pookie[3].x, pookie[3].y, pinkyDown[pookie[3].downInd], 0);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    if (pookie[i].blueOn)
+                    {
+                        if (pookie[i].flagRight)
+                            iShowImage(pookie[i].x, pookie[i].y, frozenGhostEnd[pookie[i].rightInd], 0);
+                        else if (pookie[i].flagLeft)
+                            iShowImage(pookie[i].x, pookie[i].y, frozenGhostEnd[pookie[i].leftInd], 0);
+                        else if (pookie[i].flagUp)
+                            iShowImage(pookie[i].x, pookie[i].y, frozenGhostEnd[pookie[i].upInd], 0);
+                        else if (pookie[i].flagDown)
+                            iShowImage(pookie[i].x, pookie[i].y, frozenGhostEnd[pookie[i].downInd], 0);
+                    }
+                    else
+                    {
+                        if (i == 0)
+                        {
+                            if (pookie[0].flagRight)
+                                iShowImage(pookie[0].x, pookie[0].y, inkyRight[pookie[0].rightInd], 0);
+                            else if (pookie[0].flagLeft)
+                                iShowImage(pookie[0].x, pookie[0].y, inkyLeft[pookie[0].leftInd], 0);
+                            else if (pookie[0].flagUp)
+                                iShowImage(pookie[0].x, pookie[0].y, inkyUp[pookie[0].upInd], 0);
+                            else if (pookie[0].flagDown)
+                                iShowImage(pookie[0].x, pookie[0].y, inkyDown[pookie[0].downInd], 0);
+                        }
+                        else if (i == 1)
+                        {
+                            if (pookie[1].flagRight)
+                                iShowImage(pookie[1].x, pookie[1].y, blinkyRight[pookie[1].rightInd], 0);
+                            else if (pookie[1].flagLeft)
+                                iShowImage(pookie[1].x, pookie[1].y, blinkyLeft[pookie[1].leftInd], 0);
+                            else if (pookie[1].flagUp)
+                                iShowImage(pookie[1].x, pookie[1].y, blinkyUp[pookie[1].upInd], 0);
+                            else if (pookie[1].flagDown)
+                                iShowImage(pookie[1].x, pookie[1].y, blinkyDown[pookie[1].downInd], 0);
+                        }
+                        else if (i == 2)
+                        {
+                            if (pookie[2].flagRight)
+                                iShowImage(pookie[2].x, pookie[2].y, clydeRight[pookie[2].rightInd], 0);
+                            else if (pookie[2].flagLeft)
+                                iShowImage(pookie[2].x, pookie[2].y, clydeLeft[pookie[2].leftInd], 0);
+                            else if (pookie[2].flagUp)
+                                iShowImage(pookie[2].x, pookie[2].y, clydeUp[pookie[2].upInd], 0);
+                            else if (pookie[2].flagDown)
+                                iShowImage(pookie[2].x, pookie[2].y, clydeDown[pookie[2].downInd], 0);
+                        }
+                        else if (i == 3)
+                        {
+                            if (pookie[3].flagRight)
+                                iShowImage(pookie[3].x, pookie[3].y, pinkyRight[pookie[3].rightInd], 0);
+                            else if (pookie[3].flagLeft)
+                                iShowImage(pookie[3].x, pookie[3].y, pinkyLeft[pookie[3].leftInd], 0);
+                            else if (pookie[3].flagUp)
+                                iShowImage(pookie[3].x, pookie[3].y, pinkyUp[pookie[3].upInd], 0);
+                            else if (pookie[3].flagDown)
+                                iShowImage(pookie[3].x, pookie[3].y, pinkyDown[pookie[3].downInd], 0);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    else if(congrats){
+        iShowImage(0,0,scoreshowimage[congratsc]);
     }
 
-    else if(exitintro)
+    else if (exitintro)
     {
-        iShowImage(0,0,exitimage[exitintroimage]);
+        iShowImage(0, 0, exitimage[exitintroimage]);
     }
-    else if(levelselect)
+    else if (levelselect)
     {
-        iShowImage(0,0,levelselectimage[levelintro]);
+        iShowImage(0, 0, levelselectimage[levelintro]);
     }
-    else if(pause)
+    else if (pause)
     {
-         iShowImage(0,0,pauseimage[pausec]);
+        iShowImage(0, 0, pauseimage[pausec]);
     }
-    else if(backgroundselector)
+    else if (backgroundselector)
     {
-        iShowImage(0,0,backgroundselectorimage[backgroundselectorc]);
+        iShowImage(0, 0, backgroundselectorimage[backgroundselectorc]);
     }
-
-
 };
 /*
 function iMouseMove() is called when the user moves the mouse.
@@ -534,89 +737,111 @@ function iMouseMove() is called when the user moves the mouse.
 */
 void iMouseMove(int mx, int my)
 {
-    if(mainmenu)
+    if (mainmenu)
     {
-        if((mx>=335&&mx<=825) &&(my>=553&& my<=652)){
-            menuc=1;
+        if ((mx >= 335 && mx <= 825) && (my >= 553 && my <= 652))
+        {
+            menuc = 1;
         }
-       else if((mx>=442&&mx<=695) &&(my>=469&& my<=495)){
-            menuc=2;
+        else if ((mx >= 442 && mx <= 695) && (my >= 469 && my <= 495))
+        {
+            menuc = 2;
         }
-       else if((mx>=439&&mx<=697)&& (my>=400&& my<=422)){
-            menuc=3;
+        else if ((mx >= 439 && mx <= 697) && (my >= 400 && my <= 422))
+        {
+            menuc = 3;
         }
-        else if((mx>=432&&mx<=632) && (my>=324&& my<=348)){
-            menuc=4;
+        else if ((mx >= 432 && mx <= 632) && (my >= 324 && my <= 348))
+        {
+            menuc = 4;
         }
-        else if((mx>=434&&mx<=611)&& (my>=256 &&my<=276)){
-            menuc=5;
+        else if ((mx >= 434 && mx <= 611) && (my >= 256 && my <= 276))
+        {
+            menuc = 5;
         }
-        else if((mx>=435 &&mx<=570)&&(my>=183&& my<=205)){
-            menuc=6;
+        else if ((mx >= 435 && mx <= 570) && (my >= 183 && my <= 205))
+        {
+            menuc = 6;
         }
-        else if((mx>=435&&mx<=542)&& (my>=103&& my<=134)){
-            menuc=7;
+        else if ((mx >= 435 && mx <= 542) && (my >= 103 && my <= 134))
+        {
+            menuc = 7;
         }
-        else menuc=0;
-
+        else
+            menuc = 0;
     }
-    else if(highscore)
+    else if (highscore)
     {
-        if((mx>=1040&&mx<=1150)&&( my>=42&& my<=88)){
-            highscorec=1;
+        if ((mx >= 1040 && mx <= 1150) && (my >= 42 && my <= 88))
+        {
+            highscorec = 1;
         }
-        else highscorec=0;
+        else
+            highscorec = 0;
     }
-    else if(difficulty)
+    else if (difficulty)
     {
-        if((mx>=468&&mx<=697)&& (my>=397&& my<=448)){
-            difficultyc=1;
+        if ((mx >= 468 && mx <= 697) && (my >= 397 && my <= 448))
+        {
+            difficultyc = 1;
         }
-        else if((mx>=460&&mx<=805)&& (my>=306&&my<=364)){
-            difficultyc=2;
+        else if ((mx >= 460 && mx <= 805) && (my >= 306 && my <= 364))
+        {
+            difficultyc = 2;
         }
-        else if((mx>=454&&mx<=720)&& (my>=229&&my<=280)){
-            difficultyc=3;
+        else if ((mx >= 454 && mx <= 720) && (my >= 229 && my <= 280))
+        {
+            difficultyc = 3;
         }
-        else if((mx>=456 &&mx<=817)&&(my>=137&& my<=200)){
-            difficultyc=4;
+        else if ((mx >= 456 && mx <= 817) && (my >= 137 && my <= 200))
+        {
+            difficultyc = 4;
         }
-        else if((mx>=46&&mx<=233)&& (my>=82&& my<=140)){
-            difficultyc=5;
+        else if ((mx >= 46 && mx <= 233) && (my >= 82 && my <= 140))
+        {
+            difficultyc = 5;
         }
-        else difficultyc=0;
+        else
+            difficultyc = 0;
     }
-    else if(settings)
+    else if (settings)
     {
-     if(soundOn)
-      {
-        if((mx>=408&&mx<=783)&&( my>=388&& my<=439)){
-            settingsc=1;
+        if (soundOn)
+        {
+            if ((mx >= 408 && mx <= 783) && (my >= 388 && my <= 439))
+            {
+                settingsc = 1;
+            }
+            else if ((mx >= 380 && mx <= 828) && (my >= 277 && my <= 320))
+            {
+                settingsc = 2;
+            }
+            else if ((mx >= 964 && mx <= 1172) && (my >= 59 && my <= 115))
+            {
+                settingsc = 3;
+            }
+            else
+            {
+                settingsc = 0;
+            }
         }
-        else if((mx>=380&&mx<=828)&& (my>=277&& my<=320)){
-             settingsc=2;
+        else if (soundOn == false)
+        {
+            if ((mx >= 408 && mx <= 783) && (my >= 388 && my <= 439))
+            {
+                settingsc = 5;
+            }
+            else if ((mx >= 380 && mx <= 828) && (my >= 277 && my <= 320))
+            {
+                settingsc = 6;
+            }
+            else if ((mx >= 964 && mx <= 1172) && (my >= 59 && my <= 115))
+            {
+                settingsc = 7;
+            }
+            else
+                settingsc = 4;
         }
-        else if((mx>=964&&mx<=1172)&& (my>=59 &&my<=115)){
-            settingsc=3;
-        }
-        else{
-            settingsc=0;
-        }
-      }
-      else if(soundOn==false)
-      {
-        if((mx>=408&&mx<=783)&&( my>=388&& my<=439)){
-            settingsc=5;
-        }
-        else if((mx>=380&&mx<=828)&& (my>=277&& my<=320)){
-             settingsc=6;
-        }
-        else if((mx>=964&&mx<=1172)&& (my>=59 &&my<=115)){
-            settingsc=7;
-        }
-        else settingsc=4;
-      }
-
     }
     /*else if(mazeselector)
     {
@@ -643,50 +868,54 @@ void iMouseMove(int mx, int my)
         }
         else mazeselectorc=0;
     }*/
-     else if(pause)
+    else if (pause)
     {
-       if(mx>=257&& my>=420&&mx<=698 &&my<=494)
-       {
-         pausec=1;
-       }
-       else if(mx>=261 &&my>=299&&mx<=534 && my<=372)
-       {
-          pausec=2;
-       }
-       else if(mx>=260&& my>=179&&mx<=697&& my<=245)
-       {
-          pausec=3;
-       }
-       else  pausec=0;
+        if (mx >= 257 && my >= 420 && mx <= 698 && my <= 494)
+        {
+            pausec = 1;
+        }
+        else if (mx >= 261 && my >= 299 && mx <= 534 && my <= 372)
+        {
+            pausec = 2;
+        }
+        else if (mx >= 260 && my >= 179 && mx <= 697 && my <= 245)
+        {
+            pausec = 3;
+        }
+        else
+            pausec = 0;
     }
 
-    else if(rules)
+    else if (rules)
     {
-        if((mx>=973&&mx<=1174)&& (my>=71 &&my<=127))
+        if ((mx >= 973 && mx <= 1174) && (my >= 71 && my <= 127))
         {
-            rulesc=1;
+            rulesc = 1;
         }
-        else rulesc=0;
+        else
+            rulesc = 0;
     }
-    else if(credits)
+    else if (credits)
     {
-         if((mx>=957&& mx<=1182)&&(my>=36&& my<=104))
-         {
-             creditsc=1;
-         }
-         else creditsc=0;
+        if ((mx >= 957 && mx <= 1182) && (my >= 36 && my <= 104))
+        {
+            creditsc = 1;
+        }
+        else
+            creditsc = 0;
     }
-    else if(quit)
+    else if (quit)
     {
-        if((mx>=289&&mx<=415)&& (my>=245&& my<=299))
+        if ((mx >= 289 && mx <= 415) && (my >= 245 && my <= 299))
         {
-            quitc=1;
+            quitc = 1;
         }
-        else if((mx>=741&&mx<=858)&& (my>=252&& my<=302))
+        else if ((mx >= 741 && mx <= 858) && (my >= 252 && my <= 302))
         {
-            quitc=2;
+            quitc = 2;
         }
-        else  quitc=0;
+        else
+            quitc = 0;
     }
 }
 
@@ -705,304 +934,316 @@ function iMouse() is called when the user presses/releases the mouse.
 */
 void iMouse(int button, int state, int mx, int my)
 {
-if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
-{
-  printf("mx=%d my=%d",mx,my);
-   if(mainmenu){
-
-        if((mx>=335&&mx<=825) &&(my>=553&& my<=652)){
-
-        }
-       else if((mx>=442&&mx<=695) &&(my>=469&& my<=495)){
-            difficulty=true;
-            mainmenu=false;
-        }
-       else if((mx>=439&&mx<=697)&& (my>=400&& my<=422)){
-            mainmenu=false;
-            highscore=true;
-        }
-        else if((mx>=432&&mx<=632) && (my>=324&& my<=348)){
-            mainmenu=false;
-            settings=true;
-        }
-        else if((mx>=434&&mx<=611)&& (my>=256 &&my<=276)){
-            mainmenu=false;
-            credits=true;
-        }
-        else if((mx>=435 &&mx<=570)&&(my>=183&& my<=205)){
-           mainmenu=false;
-           rules=true;
-        }
-        else if((mx>=435&&mx<=542)&& (my>=103&& my<=134)){
-           mainmenu=false;
-           quit=true;
-        }
-     }
-    else if(highscore)
+    if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
     {
-        if((mx>=1040&&mx<=1150)&&( my>=42&& my<=88)){
-           highscore=false;
-           mainmenu=true;
-        }
-
-    }
-     else if(difficulty)
-     {
-        if((mx>=46&&mx<=233)&& (my>=82&& my<=140)){
-            difficulty=false;
-            mainmenu=true ;
-        }
-        else if((mx>=468&&mx<=697)&& (my>=397&& my<=448)){
-            playgameintro=true;
-            difficulty=false;
-
-        }
-        else if((mx>=460&&mx<=805)&& (my>=306&&my<=364)){
-            playgameintro=true;
-            difficulty=false;
-
-        }
-        else if((mx>=454&&mx<=720)&& (my>=229&&my<=280)){
-            playgameintro=true;
-            difficulty=false;
-
-        }
-        else if((mx>=456 &&mx<=817)&&(my>=137&& my<=200)){
-            playgameintro=true;
-            difficulty=false;
-
-        }
-     }
-      if(playgameintro)
-      {
-         if (mx >= 300 && mx <= 600 && my >= 200 && my <= 240)
+        printf("mx=%d my=%d", mx, my);
+        if (mainmenu)
         {
-            typingName = true;
+
+            if ((mx >= 335 && mx <= 825) && (my >= 553 && my <= 652))
+            {
+            }
+            else if ((mx >= 442 && mx <= 695) && (my >= 469 && my <= 495))
+            {
+                difficulty = true;
+                mainmenu = false;
+            }
+            else if ((mx >= 439 && mx <= 697) && (my >= 400 && my <= 422))
+            {
+                mainmenu = false;
+                highscore = true;
+            }
+            else if ((mx >= 432 && mx <= 632) && (my >= 324 && my <= 348))
+            {
+                mainmenu = false;
+                settings = true;
+            }
+            else if ((mx >= 434 && mx <= 611) && (my >= 256 && my <= 276))
+            {
+                mainmenu = false;
+                credits = true;
+            }
+            else if ((mx >= 435 && mx <= 570) && (my >= 183 && my <= 205))
+            {
+                mainmenu = false;
+                rules = true;
+            }
+            else if ((mx >= 435 && mx <= 542) && (my >= 103 && my <= 134))
+            {
+                mainmenu = false;
+                quit = true;
+            }
         }
-        else if((mx>=18 && mx<=161)&&(my>=36&& my<=87))
+        else if (highscore)
         {
-            playgameintro=false;
-            difficulty=true;
+            if ((mx >= 1040 && mx <= 1150) && (my >= 42 && my <= 88))
+            {
+                highscore = false;
+                mainmenu = true;
+            }
         }
-      }
-     else if(settings)
-     {
-         if(soundOn)
-         {
-          if((mx>=408&&mx<=783)&&( my>=388&& my<=439)){
-            soundOn=false;
-          }
-          else if((mx>=380&&mx<=828)&& (my>=277&& my<=320)){
-              mazeselector=true;
-              settings=false;
-          }
-          else if((mx>=964&&mx<=1172)&& (my>=59 &&my<=115)){
-           settings=false;
-            mainmenu=true;
-          }
-
-        }
-        else
+        else if (difficulty)
         {
-          if((mx>=408&&mx<=783)&&( my>=388&& my<=439)){
-            soundOn=true;
-          }
-          else if((mx>=380&&mx<=828)&& (my>=277&& my<=320)){
-              mazeselector=true;
-              settings=false;
-          }
-          else if((mx>=964&&mx<=1172)&& (my>=59 &&my<=115)){
-           settings=false;
-           mainmenu=true;
-          }
-
+            if ((mx >= 46 && mx <= 233) && (my >= 82 && my <= 140))
+            {
+                difficulty = false;
+                mainmenu = true;
+            }
+            else if ((mx >= 468 && mx <= 697) && (my >= 397 && my <= 448))
+            {
+                playgameintro = true;
+                difficulty = false;
+            }
+            else if ((mx >= 460 && mx <= 805) && (my >= 306 && my <= 364))
+            {
+                playgameintro = true;
+                difficulty = false;
+            }
+            else if ((mx >= 454 && mx <= 720) && (my >= 229 && my <= 280))
+            {
+                playgameintro = true;
+                difficulty = false;
+            }
+            else if ((mx >= 456 && mx <= 817) && (my >= 137 && my <= 200))
+            {
+                playgameintro = true;
+                difficulty = false;
+            }
         }
-
-     }
-
-
-    else if(mazeselector)
-    {
-        if((mx>=242&&mx<=911)&& (my>=576&& my<=659)){
-            mazeselectorc=1;
-            maze=0;
-            mazeselector=false;
-            settings=true;
-        }
-        else if((mx>=50&&mx<=485)&&( my>=399&& my<=509)){
-            mazeselectorc=2;
-            maze=1;
-            mazeselector=false;
-            settings=true;
-        }
-        else if((mx>=45&&mx<=375)&&( my>=251&&my<=374)){
-            mazeselectorc=3;
-            mazeselector=false;
-            maze=2;
-            settings=true;
-        }
-        else if((mx>=52&&mx<=570)&& ( my>=97&&my<=197)){
-            mazeselectorc=4;
-            mazeselector=false;
-            settings=true;
-            maze=3;
-        }
-        else if((mx>625 &&mx<=1068)&&( my>=396&&my<=512)){
-            mazeselectorc=5;
-            mazeselector=false;
-            settings=true;
-            maze=4;
-        }
-        else if((mx>=619&&mx<=918)&&( my>=262&& my<=374)){
-            mazeselectorc=6;
-           mazeselector=false;
-            settings=true;
-            maze=5;
-        }
-        else if((mx>=633&&mx<=980 )&&( my>=101 &&my<=209)){
-            mazeselectorc=7;
-            mazeselector=false;
-            settings=true;
-        }
-
-
-    }
-    else if(rules)
-    {
-        if((mx>=973&&mx<=1174)&& (my>=71 &&my<=127))
+        if (playgameintro)
         {
-            rules=false;
-            mainmenu=true;
+            if (mx >= 300 && mx <= 600 && my >= 200 && my <= 240)
+            {
+                typingName = true;
+            }
+            else if ((mx >= 18 && mx <= 161) && (my >= 36 && my <= 87))
+            {
+                playgameintro = false;
+                difficulty = true;
+            }
         }
-    }
-    else if(credits)
-    {
-
-         if((mx>=957&& mx<=1182)&&(my>=36&& my<=104))
-         {
-             credits=false;
-             mainmenu=true;
-         }
-    }
-    else if(levelselect)
-    {
-         if((mx>=455&&mx<=659)&&( my>=425 &&my<=492))
-         {
-             selected=1;
-             levelselect=false;
-             playingstart=true;
-         }
-         else if((mx<=653&&mx>=454 )&&( my<=388&& my>=331))
-         {
-             selected=2;
-             levelselect=false;
-             playingstart=true;
-
-         }
-         else if((mx>=453 &&my>=229&&mx<=655 &&my<=280))
-         {
-             selected=3;
-             levelselect=false;
-             playingstart=true;
-
-         }
-         else if(mx<=664&& my<=180&&mx>=444&& my>=126)
-         {
-             selected=3;
-             levelselect=false;
-             playingstart=true;
-         }
-
-    }
-    else if(quit)
-    {
-         if((mx>=289&&mx<=415)&& (my>=245&& my<=299))
+        else if (settings)
         {
-            exitintro=true;
-            quit=false;
+            if (soundOn)
+            {
+                if ((mx >= 408 && mx <= 783) && (my >= 388 && my <= 439))
+                {
+                    soundOn = false;
+                }
+                else if ((mx >= 380 && mx <= 828) && (my >= 277 && my <= 320))
+                {
+                    mazeselector = true;
+                    settings = false;
+                }
+                else if ((mx >= 964 && mx <= 1172) && (my >= 59 && my <= 115))
+                {
+                    settings = false;
+                    mainmenu = true;
+                }
+            }
+            else
+            {
+                if ((mx >= 408 && mx <= 783) && (my >= 388 && my <= 439))
+                {
+                    soundOn = true;
+                }
+                else if ((mx >= 380 && mx <= 828) && (my >= 277 && my <= 320))
+                {
+                    mazeselector = true;
+                    settings = false;
+                }
+                else if ((mx >= 964 && mx <= 1172) && (my >= 59 && my <= 115))
+                {
+                    settings = false;
+                    mainmenu = true;
+                }
+            }
         }
-        else if((mx>=741&&mx<=858)&& (my>=252&& my<=302))
+
+        else if (mazeselector)
         {
-            quitc=0;
-            quit=false;
-            mainmenu=true;
+            if ((mx >= 242 && mx <= 911) && (my >= 576 && my <= 659))
+            {
+                mazeselectorc = 1;
+                maze = 0;
+                mazeselector = false;
+                settings = true;
+            }
+            else if ((mx >= 50 && mx <= 485) && (my >= 399 && my <= 509))
+            {
+                mazeselectorc = 2;
+                maze = 1;
+                mazeselector = false;
+                settings = true;
+            }
+            else if ((mx >= 45 && mx <= 375) && (my >= 251 && my <= 374))
+            {
+                mazeselectorc = 3;
+                mazeselector = false;
+                maze = 2;
+                settings = true;
+            }
+            else if ((mx >= 52 && mx <= 570) && (my >= 97 && my <= 197))
+            {
+                mazeselectorc = 4;
+                mazeselector = false;
+                settings = true;
+                maze = 3;
+            }
+            else if ((mx > 625 && mx <= 1068) && (my >= 396 && my <= 512))
+            {
+                mazeselectorc = 5;
+                mazeselector = false;
+                settings = true;
+                maze = 4;
+            }
+            else if ((mx >= 619 && mx <= 918) && (my >= 262 && my <= 374))
+            {
+                mazeselectorc = 6;
+                mazeselector = false;
+                settings = true;
+                maze = 5;
+            }
+            else if ((mx >= 633 && mx <= 980) && (my >= 101 && my <= 209))
+            {
+                mazeselectorc = 7;
+                mazeselector = false;
+                settings = true;
+            }
         }
-    }
-    else if(pause)
-    {
-       if(mx>=257&& my>=420&&mx<=698 &&my<=494)
-       {
-          pause=false;
-          mainmenu=true;
-       }
-       else if(mx>=261 &&my>=299&&mx<=534 && my<=372)
-       {
-           playingstart=true;
-           pause=false;
-       }
-       else if(mx>=260&& my>=179&&mx<=697&& my<=245)
-       {
-          backgroundselector=true;
-          pause= false;
-
-        }
-    }
-    else if(playingstart)
-    {
-        if(mx>=26&& my>=586&&mx<=182 &&my<=634)
+        else if (rules)
         {
-            iPauseTimer(0);
-            pause=true;
-            playingstart=false;
+            if ((mx >= 973 && mx <= 1174) && (my >= 71 && my <= 127))
+            {
+                rules = false;
+                mainmenu = true;
+            }
+        }
+        else if (credits)
+        {
+
+            if ((mx >= 957 && mx <= 1182) && (my >= 36 && my <= 104))
+            {
+                credits = false;
+                mainmenu = true;
+            }
+        }
+        else if (levelselect)
+        {
+            if ((mx >= 455 && mx <= 659) && (my >= 425 && my <= 492))
+            {
+                selected = 1;
+                levelselect = false;
+                playingstart = true;
+                levelintro = 0;
+            }
+            else if ((mx <= 653 && mx >= 454) && (my <= 388 && my >= 331))
+            {
+                selected = 2;
+                levelselect = false;
+                playingstart = true;
+                levelintro = 0;
+            }
+            else if ((mx >= 453 && my >= 229 && mx <= 655 && my <= 280))
+            {
+                selected = 3;
+                levelselect = false;
+                playingstart = true;
+                levelintro = 0;
+            }
+            else if (mx <= 664 && my <= 180 && mx >= 444 && my >= 126)
+            {
+                selected = 3;
+                levelselect = false;
+                playingstart = true;
+                levelintro = 0;
+            }
+        }
+        else if (quit)
+        {
+            if ((mx >= 289 && mx <= 415) && (my >= 245 && my <= 299))
+            {
+                exitintro = true;
+                quit = false;
+            }
+            else if ((mx >= 741 && mx <= 858) && (my >= 252 && my <= 302))
+            {
+                quitc = 0;
+                quit = false;
+                mainmenu = true;
+            }
+        }
+        else if (pause)
+        {
+            if (mx >= 257 && my >= 420 && mx <= 698 && my <= 494)
+            {
+                pause = false;
+                mainmenu = true;
+            }
+            else if (mx >= 261 && my >= 299 && mx <= 534 && my <= 372)
+            {
+                playingstart = true;
+                pause = false;
+            }
+            else if (mx >= 260 && my >= 179 && mx <= 697 && my <= 245)
+            {
+                backgroundselector = true;
+                pause = false;
+            }
+        }
+        else if (playingstart)
+        {
+            if (mx >= 26 && my >= 586 && mx <= 182 && my <= 634)
+            {
+                iPauseTimer(0);
+                pause = true;
+                playingstart = false;
+            }
+        }
+        else if (backgroundselector)
+        {
+            if (mx >= 429 && my >= 489 && mx <= 689 && my <= 536)
+            {
+                backgroundselectorc = 0;
+                bgimage = 0;
+                backgroundselector = false;
+                pause = true;
+            }
+            else if (mx >= 434 && my >= 398 && mx <= 680 && my <= 450)
+            {
+                backgroundselectorc = 1;
+                bgimage = 1;
+                backgroundselector = false;
+                pause = true;
+            }
+            else if (mx >= 434 && my >= 318 && mx <= 612 && my <= 363)
+            {
+                backgroundselectorc = 2;
+                bgimage = 2;
+                backgroundselector = false;
+                pause = true;
+            }
+            else if (mx >= 440 && my >= 235 && mx <= 636 && my <= 277)
+            {
+                backgroundselectorc = 3;
+                bgimage = 3;
+                backgroundselector = false;
+                pause = true;
+            }
+            else if (mx >= 432 && my >= 142 && mx <= 655 && my <= 193)
+            {
+                backgroundselectorc = 4;
+                bgimage = 4;
+                backgroundselector = false;
+                pause = true;
+            }
         }
     }
-    else if(backgroundselector)
-    {
-      if(mx>=429 &&my>=489&&mx<=689&& my<=536)
-      {
-        backgroundselectorc=0;
-        bgimage=0;
-        backgroundselector=false;
-        pause=true;
-      }
-      else if(mx>=434 &&my>=398&&mx<=680 &&my<=450)
-      {
-        backgroundselectorc=1;
-        bgimage=1;
-        backgroundselector=false;
-        pause=true;
-      }
-      else if(mx>=434 &&my>=318&&mx<=612&& my<=363)
-      {
-        backgroundselectorc=2;
-        bgimage=2;
-        backgroundselector=false;
-        pause=true;
-      }
-      else if(mx>=440&& my>=235&&mx<=636 &&my<=277)
-      {
-        backgroundselectorc=3;
-        bgimage=3;
-        backgroundselector=false;
-        pause=true;
-      }
-      else if(mx>=432 &&my>=142&&mx<=655 &&my<=193)
-      {
-        backgroundselectorc=4;
-        bgimage=4;
-        backgroundselector=false;
-        pause=true;
-      }
-    }
-
- }
-
 
     if (button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
     {
         // place your codes here
     }
-
 };
 
 /*
@@ -1020,19 +1261,20 @@ key- holds the ASCII value of the key pressed.
 */
 void iKeyboard(unsigned char key)
 {
-    if(startintro){
-        if(key== 13)
+    if (startintro)
+    {
+        if (key == 13)
         {
-            startintro=false;
-            mainmenu=true;
+            startintro = false;
+            mainmenu = true;
         }
     }
-    else if(playgameintro)
+    else if (playgameintro)
     {
-        if(key== 13)
+        if (key == 13)
         {
-           levelselect=true;
-            playgameintro=false;
+            levelselect = true;
+            playgameintro = false;
         }
     }
 }
@@ -1049,202 +1291,197 @@ GLUT_KEY_INSERT */
 void iSpecialKeyboard(unsigned char key)
 {
 
-	if (key == GLUT_KEY_RIGHT)
-	{
-		if (playingstart)
-		{
-			if (!(pac.x % mazeHeight1) && !(pac.y % mazeHeight1))
-			{
-				pac.downCount = false;
-				pac.upCount = false;
-				pac.leftCount = false;
-				pac.rightCount = true;
-			}
-			else
-			{
-				pac.trigRight = true;
-				pac.trigLeft = false;
-				pac.trigDown = false;
-				pac.trigUp = false;
-			}
-		}
-	}
-	if (key == GLUT_KEY_LEFT)
-	{
-		if (playingstart)
-		{
-			if (!(pac.x % mazeHeight1) && !(pac.y % mazeHeight1))
-			{
-				pac.downCount = false;
-				pac.rightCount = false;
-				pac.upCount = false;
-				pac.leftCount = true;
-			}
-			else
-			{
-				pac.trigRight = false;
-				pac.trigLeft = true;
-				pac.trigDown = false;
-				pac.trigUp = false;
-			}
-		}
-	}
-	if (key == GLUT_KEY_UP)
-	{
-		
-		 if (playGame)
-		{
-			if (!(pac.y % mazeHeight1) && !(pac.x % mazeHeight1))
-			{
-				pac.downCount = false;
-				pac.rightCount = false;
-				pac.leftCount = false;
-				pac.upCount = true;
-			}
-			else
-			{
-				pac.trigRight = false;
-				pac.trigLeft = false;
-				pac.trigDown = false;
-				pac.trigUp = true;
-			}
-		}
-	}
-	if (key == GLUT_KEY_DOWN)
-	{
-		 if (playingstart)
-		{
-			if (!(pac.y % mazeHeight1) && !(pac.x % mazeHeight1)) //mazecellwidth and height are same 25 pixel.... so nothing wrong here
-			{
-				pac.rightCount = false;
-				pac.leftCount = false;
-				pac.upCount = false;
-				pac.downCount = true;
-			}
-			else
-			{
-				pac.trigRight = false;
-				pac.trigLeft = false;
-				pac.trigDown = true;
-				pac.trigUp = false;
-			}
-		}
-	}
+    if (key == GLUT_KEY_RIGHT)
+    {
+        if (playingstart)
+        {
+            if (!(pac.x % mazeHeight1) && !(pac.y % mazeHeight1))
+            {
+                pac.downCount = false;
+                pac.upCount = false;
+                pac.leftCount = false;
+                pac.rightCount = true;
+            }
+            else
+            {
+                pac.trigRight = true;
+                pac.trigLeft = false;
+                pac.trigDown = false;
+                pac.trigUp = false;
+            }
+        }
+    }
+    if (key == GLUT_KEY_LEFT)
+    {
+        if (playingstart)
+        {
+            if (!(pac.x % mazeHeight1) && !(pac.y % mazeHeight1))
+            {
+                pac.downCount = false;
+                pac.rightCount = false;
+                pac.upCount = false;
+                pac.leftCount = true;
+            }
+            else
+            {
+                pac.trigRight = false;
+                pac.trigLeft = true;
+                pac.trigDown = false;
+                pac.trigUp = false;
+            }
+        }
+    }
+    if (key == GLUT_KEY_UP)
+    {
 
+        if (playingstart)
+        {
+            if (!(pac.y % mazeHeight1) && !(pac.x % mazeHeight1))
+            {
+                pac.downCount = false;
+                pac.rightCount = false;
+                pac.leftCount = false;
+                pac.upCount = true;
+            }
+            else
+            {
+                pac.trigRight = false;
+                pac.trigLeft = false;
+                pac.trigDown = false;
+                pac.trigUp = true;
+            }
+        }
+    }
+    if (key == GLUT_KEY_DOWN)
+    {
+        if (playingstart)
+        {
+            if (!(pac.y % mazeHeight1) && !(pac.x % mazeHeight1)) // mazecellwidth and height are same 25 pixel.... so nothing wrong here
+            {
+                pac.rightCount = false;
+                pac.leftCount = false;
+                pac.upCount = false;
+                pac.downCount = true;
+            }
+            else
+            {
+                pac.trigRight = false;
+                pac.trigLeft = false;
+                pac.trigDown = true;
+                pac.trigUp = false;
+            }
+        }
+    }
 }
 void pacinitialcord()
 {
-    if(selected==1||selected==2)
+    if (selected == 1 || selected == 2)
     {
         cellX = 9;
-	    cellY = 19;
-        pac.x =399;
-	    pac.y = 86;
+        cellY = 19;
+        pac.x = 399;
+        pac.y = 86;
 
-	    pac.downCount = false;
-	    pac.rightCount = false;
-	    pac.upCount = false;
-	    pac.leftCount = false;
-
+        pac.downCount = false;
+        pac.rightCount = false;
+        pac.upCount = false;
+        pac.leftCount = false;
     }
-    else if(selected==3||selected==4)
+    else if (selected == 3 || selected == 4)
     {
         cellX = 1;
-	    cellY = 1;
+        cellY = 1;
         pac.x = 105;
-	    pac.y = 490;
+        pac.y = 490;
 
-	    pac.downCount = false;
-	    pac.rightCount = false;
-	    pac.upCount = false;
-	    pac.leftCount = false;
+        pac.downCount = false;
+        pac.rightCount = false;
+        pac.upCount = false;
+        pac.leftCount = false;
     }
 }
 void introchange()
 {
-	if (startintro)
-	{
-		intro++;
-		if (intro > 141)
-		{
-			intro = 0;
-			startintro = false;
-            mainmenu=true;
-			iPauseTimer(0);
-		}
-	}
+    if (startintro)
+    {
+        intro++;
+        if (intro > 141)
+        {
+            intro = 0;
+            startintro = false;
+            mainmenu = true;
+            iPauseTimer(0);
+        }
+    }
 }
 void deathScene()
 {
-	if (pacdead)
-	{
-		deadSceneCount++;
-		if (deadSceneCount > 11)
-		{
-			deadSceneCount = 0;
-			pacdead = false;
+    if (pacdead)
+    {
+        deadSceneCount++;
+        if (deadSceneCount > 11)
+        {
+            deadSceneCount = 0;
+            pacdead = false;
             pacinitialcord();
-			pacmanlife--;
-			deadsound = true;
-			//ghostIniCords();
-			blueGhost = false;
-			pookie[0].blueOn = false;
-			pookie[1].blueOn = false;
-			pookie[2].blueOn = false;
-			pookie[3].blueOn = false;
-			Sleep(800);
-			if (pacmanlife == 0)
-			{
-				//totalFool = 188;
-				//chase = false;
-				//scatter = true;
-				//readData();
-
-			}
-			/*else
-			{
-				PlaySound("Music\\all\\ghosts_laugh1.wav", NULL, SND_ASYNC);
-			}
-			iResumeTimer(2);
-			iResumeTimer(3);*/
-		}
-	}
+            pacmanlife--;
+            deadsound = true;
+            // ghostIniCords();
+            blueGhost = false;
+            pookie[0].blueOn = false;
+            pookie[1].blueOn = false;
+            pookie[2].blueOn = false;
+            pookie[3].blueOn = false;
+            Sleep(800);
+            if (pacmanlife == 0)
+            {
+                // totalFool = 188;
+                // chase = false;
+                // scatter = true;
+                // readData();
+            }
+            /*else
+            {
+                PlaySound("Music\\all\\ghosts_laugh1.wav", NULL, SND_ASYNC);
+            }
+            iResumeTimer(2);
+            iResumeTimer(3);*/
+        }
+    }
 }
 
 void exit()
 {
-	if (exitintro)
-	{
-		exitintroimage++;
-		if (exitintroimage > 99)
-		{
-			exitintroimage = 0;
-			exit(0);
-
-		}
-	}
+    if (exitintro)
+    {
+        exitintroimage++;
+        if (exitintroimage > 99)
+        {
+            exitintroimage = 0;
+            exit(0);
+        }
+    }
 }
 
 void level()
 {
-	if (levelselect)
-	{
-		levelintro++;
-		if (levelintro > 99)
-		{
-			levelintro = 0;
-			iPauseTimer(0);
-
-		}
-	}
+    if (levelselect)
+    {
+        levelintro++;
+        if (levelintro > 99)
+        {
+            levelintro = 0;
+            iPauseTimer(0);
+        }
+    }
 }
 int main(int argc, char *argv[])
 {
-     glutInit(&argc, argv);
-     corrdinatestore1();
-	 corrdinatestore2();
-	 corrdinatestore3();
-	 corrdinatestore4();
+    glutInit(&argc, argv);
+    corrdinatestore1();
+    corrdinatestore2();
+    corrdinatestore3();
+    corrdinatestore4();
     iSetTimer(30, introchange);
     iSetTimer(30, exit);
     iSetTimer(30, level);
