@@ -14,7 +14,7 @@ void iResumeAll();
 void iPauseAll();
 void bluetimecheck();
 
-int mazeCellWidth= 24;
+int mazeCellWidth = 24;
 int mazeCellHeight = 24;
 int startx3 = 72;
 int starty3 = 480;
@@ -79,7 +79,7 @@ int pacspeed = 4;
 int deadSceneCount = 0;
 bool deadsound = false;
 int blueGhost;
-int diffSpeed =2;
+int diffSpeed = 2;
 int foodNum = 5;
 bool scatter = true;
 bool chase;
@@ -132,15 +132,15 @@ move pac;
 
 char introimage[115][50] = {"introimage/introimage (1).jpg", "introimage/introimage (2).jpg", "introimage/introimage (3).jpg", "introimage/introimage (4).jpg", "introimage/introimage (5).jpg", "introimage/introimage (6).jpg", "introimage/introimage (7).jpg", "introimage/introimage (8).jpg", "introimage/introimage (9).jpg", "introimage/introimage (10).jpg", "introimage/introimage (11).jpg", "introimage/introimage (12).jpg", "introimage/introimage (13).jpg", "introimage/introimage (14).jpg", "introimage/introimage (15).jpg", "introimage/introimage (16).jpg", "introimage/introimage (17).jpg", "introimage/introimage (18).jpg", "introimage/introimage (19).jpg", "introimage/introimage (20).jpg", "introimage/introimage (21).jpg", "introimage/introimage (22).jpg", "introimage/introimage (23).jpg", "introimage/introimage (24).jpg", "introimage/introimage (25).jpg", "introimage/introimage (26).jpg", "introimage/introimage (27).jpg", "introimage/introimage (28).jpg", "introimage/introimage (29).jpg", "introimage/introimage (30).jpg", "introimage/introimage (31).jpg", "introimage/introimage (32).jpg", "introimage/introimage (33).jpg", "introimage/introimage (34).jpg", "introimage/introimage (35).jpg", "introimage/introimage (36).jpg", "introimage/introimage (37).jpg", "introimage/introimage (38).jpg", "introimage/introimage (39).jpg", "introimage/introimage (40).jpg", "introimage/introimage (41).jpg", "introimage/introimage (42).jpg", "introimage/introimage (43).jpg", "introimage/introimage (44).jpg", "introimage/introimage (45).jpg", "introimage/introimage (46).jpg", "introimage/introimage (47).jpg", "introimage/introimage (48).jpg", "introimage/introimage (49).jpg", "introimage/introimage (50).jpg", "introimage/introimage (51).jpg", "introimage/introimage (52).jpg", "introimage/introimage (53).jpg", "introimage/introimage (54).jpg", "introimage/introimage (55).jpg", "introimage/introimage (56).jpg", "introimage/introimage (57).jpg", "introimage/introimage (58).jpg", "introimage/introimage (59).jpg", "introimage/introimage (60).jpg", "introimage/introimage (61).jpg", "introimage/introimage (62).jpg", "introimage/introimage (63).jpg", "introimage/introimage (64).jpg", "introimage/introimage (65).jpg", "introimage/introimage (66).jpg", "introimage/introimage (67).jpg", "introimage/introimage (68).jpg", "introimage/introimage (69).jpg", "introimage/introimage (70).jpg", "introimage/introimage (71).jpg", "introimage/introimage (72).jpg", "introimage/introimage (73).jpg", "introimage/introimage (74).jpg", "introimage/introimage (75).jpg", "introimage/introimage (76).jpg", "introimage/introimage (77).jpg", "introimage/introimage (78).jpg", "introimage/introimage (79).jpg", "introimage/introimage (80).jpg", "introimage/introimage (81).jpg", "introimage/introimage (82).jpg", "introimage/introimage (83).jpg", "introimage/introimage (84).jpg", "introimage/introimage (85).jpg", "introimage/introimage (86).jpg", "introimage/introimage (87).jpg", "introimage/introimage (88).jpg", "introimage/introimage (89).jpg", "introimage/introimage (90).jpg", "introimage/introimage (91).jpg", "introimage/introimage (92).jpg", "introimage/introimage (93).jpg", "introimage/introimage (94).jpg", "introimage/introimage (95).jpg", "introimage/introimage (96).jpg", "introimage/introimage (97).jpg", "introimage/introimage (98).jpg", "introimage/introimage (99).jpg", "introimage/introimage (100).jpg", "introimage/introimage (101).jpg", "introimage/introimage (102).jpg", "introimage/introimage (103).jpg", "introimage/introimage (104).jpg", "introimage/introimage (105).jpg", "introimage/introimage (106).jpg", "introimage/introimage (107).jpg", "introimage/introimage (108).jpg", "introimage/introimage (109).jpg", "introimage/introimage (110).jpg", "introimage/introimage (111).jpg", "introimage/introimage (112).jpg", "introimage/introimage (113).jpg", "introimage/introimage (114).jpg", "introimage/introimage (115).jpg"};
 char mazeselectorimage[8][60] = {"mazeSelectorImage/pixel.PNG", "mazeSelectorImage/nebula.PNG", "mazeSelectorImage/spectral.PNG", "mazeSelectorImage/psi.PNG", "mazeSelectorImage/crack.PNG", "mazeSelectorImage/echo.PNG", "mazeSelectorImage/phantom.PNG", "mazeSelectorImage/spiral.PNG"};
-char menuimage[9][50] = { "menu image/PACMAN.png", "menu image/pacman1.png", "menu image/pacman2.png", "menu image/pacman3.png", "menu image/pacman4.png", "menu image/pacman5.png", "menu image/pacman6.png", "menu image/pacman7.png", "menu image/pacman8.png"};
+char menuimage[9][50] = {"menu image/PACMAN.png", "menu image/pacman1.png", "menu image/pacman2.png", "menu image/pacman3.png", "menu image/pacman4.png", "menu image/pacman5.png", "menu image/pacman6.png", "menu image/pacman7.png", "menu image/pacman8.png"};
 char settingsimage[8][50] = {"settingsimage/settings.png", "settingsimage/settings1.png", "settingsimage/settings2.png", "settingsimage/settings3.png", "settingsimage/settings4.png", "settingsimage/settings5.png", "settingsimage/settings6.png", "settingsimage/settings7.png"};
 char highscoreimage[2][50] = {"highscoreimage/highscore (2).png", "highscoreimage/highscore (1).png"};
 char creditimage[2][50] = {"creditsimage/CREDITS.png", "creditsimage/credits1.png"};
 char rulesimage[2][50] = {"rules/RULES.png", "rules/rules1.png"};
 char levelselectimage[100][50] = {"level/level (1).jpg", "level/level (2).jpg", "level/level (3).jpg", "level/level (4).jpg", "level/level (5).jpg", "level/level (6).jpg", "level/level (7).jpg", "level/level (8).jpg", "level/level (9).jpg", "level/level (10).jpg", "level/level (11).jpg", "level/level (12).jpg", "level/level (13).jpg", "level/level (14).jpg", "level/level (15).jpg", "level/level (16).jpg", "level/level (17).jpg", "level/level (18).jpg", "level/level (19).jpg", "level/level (20).jpg", "level/level (21).jpg", "level/level (22).jpg", "level/level (23).jpg", "level/level (24).jpg", "level/level (25).jpg", "level/level (26).jpg", "level/level (27).jpg", "level/level (28).jpg", "level/level (29).jpg", "level/level (30).jpg", "level/level (31).jpg", "level/level (32).jpg", "level/level (33).jpg", "level/level (34).jpg", "level/level (35).jpg", "level/level (36).jpg", "level/level (37).jpg", "level/level (38).jpg", "level/level (39).jpg", "level/level (40).jpg", "level/level (41).jpg", "level/level (42).jpg", "level/level (43).jpg", "level/level (44).jpg", "level/level (45).jpg", "level/level (46).jpg", "level/level (47).jpg", "level/level (48).jpg", "level/level (49).jpg", "level/level (50).jpg", "level/level (51).jpg", "level/level (52).jpg", "level/level (53).jpg", "level/level (54).jpg", "level/level (55).jpg", "level/level (56).jpg", "level/level (57).jpg", "level/level (58).jpg", "level/level (59).jpg", "level/level (60).jpg", "level/level (61).jpg", "level/level (62).jpg", "level/level (63).jpg", "level/level (64).jpg", "level/level (65).jpg", "level/level (66).jpg", "level/level (67).jpg", "level/level (68).jpg", "level/level (69).jpg", "level/level (70).jpg", "level/level (71).jpg", "level/level (72).jpg", "level/level (73).jpg", "level/level (74).jpg", "level/level (75).jpg", "level/level (76).jpg", "level/level (77).jpg", "level/level (78).jpg", "level/level (79).jpg", "level/level (80).jpg", "level/level (81).jpg", "level/level (82).jpg", "level/level (83).jpg", "level/level (84).jpg", "level/level (85).jpg", "level/level (86).jpg", "level/level (87).jpg", "level/level (88).jpg", "level/level (89).jpg", "level/level (90).jpg", "level/level (91).jpg", "level/level (92).jpg", "level/level (93).jpg", "level/level (94).jpg", "level/level (95).jpg", "level/level (96).jpg", "level/level (97).jpg", "level/level (98).jpg", "level/level (99).jpg", "level/level (100).jpg"};
 char quitimage[3][50] = {"exitimage/exitimage.png", "exitimage/exitimage1.png", "exitimage/exitimage2.png"};
-char difficultyimage[5][50] = { "difficultyimage/Difficulty1.png", "difficultyimage/Difficulty2.png", "difficultyimage/Difficulty3.png", "difficultyimage/Difficulty4.png", "difficultyimage/Difficulty5.png"};
-char mazeimage[8][50] = {"mazeDesignImage/pixel.png", "mazeDesignImage/nebula.png", "mazeDesignImage/spectral.png", "mazeDesignImage/psi.png", "mazeDesignImage/crack.png", "mazeDesignImage/echo.png",  "mazeDesignImage/phantom.png", "mazeDesignImage/spiral.png"};
+char difficultyimage[5][50] = {"difficultyimage/Difficulty1.png", "difficultyimage/Difficulty2.png", "difficultyimage/Difficulty3.png", "difficultyimage/Difficulty4.png", "difficultyimage/Difficulty5.png"};
+char mazeimage[8][50] = {"mazeDesignImage/pixel.png", "mazeDesignImage/nebula.png", "mazeDesignImage/spectral.png", "mazeDesignImage/psi.png", "mazeDesignImage/crack.png", "mazeDesignImage/echo.png", "mazeDesignImage/phantom.png", "mazeDesignImage/spiral.png"};
 char playgameintroimage[2][50] = {"playgameintro/intro.png", "playgameintro/intro2.png"};
 char exitimage[100][100] = {"thanksimage/thanks (1).jpg", "thanksimage/thanks (2).jpg", "thanksimage/thanks (3).jpg", "thanksimage/thanks (4).jpg", "thanksimage/thanks (5).jpg", "thanksimage/thanks (6).jpg", "thanksimage/thanks (7).jpg", "thanksimage/thanks (8).jpg", "thanksimage/thanks (9).jpg", "thanksimage/thanks (10).jpg", "thanksimage/thanks (11).jpg", "thanksimage/thanks (12).jpg", "thanksimage/thanks (13).jpg", "thanksimage/thanks (14).jpg", "thanksimage/thanks (15).jpg", "thanksimage/thanks (16).jpg", "thanksimage/thanks (17).jpg", "thanksimage/thanks (18).jpg", "thanksimage/thanks (19).jpg", "thanksimage/thanks (20).jpg", "thanksimage/thanks (21).jpg", "thanksimage/thanks (22).jpg", "thanksimage/thanks (23).jpg", "thanksimage/thanks (24).jpg", "thanksimage/thanks (25).jpg", "thanksimage/thanks (26).jpg", "thanksimage/thanks (27).jpg", "thanksimage/thanks (28).jpg", "thanksimage/thanks (29).jpg", "thanksimage/thanks (30).jpg", "thanksimage/thanks (31).jpg", "thanksimage/thanks (32).jpg", "thanksimage/thanks (33).jpg", "thanksimage/thanks (34).jpg", "thanksimage/thanks (35).jpg", "thanksimage/thanks (36).jpg", "thanksimage/thanks (37).jpg", "thanksimage/thanks (38).jpg", "thanksimage/thanks (39).jpg", "thanksimage/thanks (40).jpg", "thanksimage/thanks (41).jpg", "thanksimage/thanks (42).jpg", "thanksimage/thanks (43).jpg", "thanksimage/thanks (44).jpg", "thanksimage/thanks (45).jpg", "thanksimage/thanks (46).jpg", "thanksimage/thanks (47).jpg", "thanksimage/thanks (48).jpg", "thanksimage/thanks (49).jpg", "thanksimage/thanks (50).jpg", "thanksimage/thanks (51).jpg", "thanksimage/thanks (52).jpg", "thanksimage/thanks (53).jpg", "thanksimage/thanks (54).jpg", "thanksimage/thanks (55).jpg", "thanksimage/thanks (56).jpg", "thanksimage/thanks (57).jpg", "thanksimage/thanks (58).jpg", "thanksimage/thanks (59).jpg", "thanksimage/thanks (60).jpg", "thanksimage/thanks (61).jpg", "thanksimage/thanks (62).jpg", "thanksimage/thanks (63).jpg", "thanksimage/thanks (64).jpg", "thanksimage/thanks (65).jpg", "thanksimage/thanks (66).jpg", "thanksimage/thanks (67).jpg", "thanksimage/thanks (68).jpg", "thanksimage/thanks (69).jpg", "thanksimage/thanks (70).jpg", "thanksimage/thanks (71).jpg", "thanksimage/thanks (72).jpg", "thanksimage/thanks (73).jpg", "thanksimage/thanks (74).jpg", "thanksimage/thanks (75).jpg", "thanksimage/thanks (76).jpg", "thanksimage/thanks (77).jpg", "thanksimage/thanks (78).jpg", "thanksimage/thanks (79).jpg", "thanksimage/thanks (80).jpg", "thanksimage/thanks (81).jpg", "thanksimage/thanks (82).jpg", "thanksimage/thanks (83).jpg", "thanksimage/thanks (84).jpg", "thanksimage/thanks (85).jpg", "thanksimage/thanks (86).jpg", "thanksimage/thanks (87).jpg", "thanksimage/thanks (88).jpg", "thanksimage/thanks (89).jpg", "thanksimage/thanks (90).jpg", "thanksimage/thanks (91).jpg", "thanksimage/thanks (92).jpg", "thanksimage/thanks (93).jpg", "thanksimage/thanks (94).jpg", "thanksimage/thanks (95).jpg", "thanksimage/thanks (96).jpg", "thanksimage/thanks (97).jpg", "thanksimage/thanks (98).jpg", "thanksimage/thanks (99).jpg", "thanksimage/thanks (100).jpg"};
 char pauseimage[4][40] = {"pauseimage/pause (1).png", "pauseimage/pause (2).png", "pauseimage/pause (3).png", "pauseimage/pause (4).png"};
@@ -153,7 +153,7 @@ char pacmanLeft[2][30] = {"pacman/pacman (5).png", "pacman/pacman (6).png"};
 char pacmanUp[2][30] = {"pacman/pacman (7).png", "pacman/pacman (8).png"};
 char pacmanDown[2][30] = {"pacman/pacman (3).png", "pacman/pacman (4).png"};
 char pacdeadscene[11][30] = {"pacdead/pacdead0.png", "pacdead/pacdead1.png", "pacdead/pacdead2.png", "pacdead/pacdead3.png", "pacdead/pacdead4.png", "pacdead/pacdead5.png", "pacdead/pacdead6.png", "pacdead/pacdead7.png", "pacdead/pacdead8.png", "pacdead/pacdead9.png", "pacdead/pacdead10.png"};
-//char *fruit[7]={"fruit/fruit (1).png","fruit/fruit (2).png","fruit/fruit (3).png","fruit/fruit (4).png","fruit/fruit (5).png","fruit/fruit (6).png","fruit/fruit (7).png"};
+// char *fruit[7]={"fruit/fruit (1).png","fruit/fruit (2).png","fruit/fruit (3).png","fruit/fruit (4).png","fruit/fruit (5).png","fruit/fruit (6).png","fruit/fruit (7).png"};
 char inkyUp[2][30] = {"inky/inky (2).png", "inky/inky (3).png"};
 char inkyLeft[2][30] = {"inky/inky (7).png", "inky/inky (8).png"};
 char inkyDown[2][30] = {"inky/inky (5).png", "inky/inky (6).png"};
@@ -390,11 +390,11 @@ void drawFoodAndPowerPellet()
             continue; // Skip eaten food
 
         // Draw fruit (bonus item)
-      /*  if (foodXcor[i][1] == -2) {
-            iShowImage(x, y, fruit[randGen]);
-            continue;
-        }
-            */
+        /*  if (foodXcor[i][1] == -2) {
+              iShowImage(x, y, fruit[randGen]);
+              continue;
+          }
+              */
 
         //  Draw power pellets by maze level
         bool isPowerPellet = false;
@@ -1312,7 +1312,7 @@ void pookiemovement()
             }
             if (selected == 2)
             {
-                if (pookie[pookietype].flagRight) 
+                if (pookie[pookietype].flagRight)
                 {
                     if (!maze2[pookie[pookietype].cellY][pookie[pookietype].cellX + 1])
                     {
@@ -2297,7 +2297,7 @@ void iMouse(int button, int state, int mx, int my)
             {
                 diffSpeed = 6;
                 difficultyc = 3;
-                chase=true;
+                chase = true;
             }
             else
             {
@@ -2357,62 +2357,62 @@ void iMouse(int button, int state, int mx, int my)
 
         else if (mazeselector)
         {
-            if (mx>=146 &&my>=516 &&mx<=378 &&my<=627)//pixel
+            if (mx >= 146 && my >= 516 && mx <= 378 && my <= 627) // pixel
             {
                 mazeselectorc = 0;
                 maze = 0;
                 mazeselector = false;
                 settings = true;
             }
-            else if (mx>=79&& my>=310 &&mx<=323&& my<=428)//nebula
+            else if (mx >= 79 && my >= 310 && mx <= 323 && my <= 428) // nebula
             {
                 mazeselectorc = 1;
                 maze = 1;
                 mazeselector = false;
                 settings = true;
             }
-            else if (mx>=126 &&my>=95 &&mx<=395&& my<=217)//spectral
+            else if (mx >= 126 && my >= 95 && mx <= 395 && my <= 217) // spectral
             {
                 mazeselectorc = 2;
                 mazeselector = false;
                 maze = 2;
                 settings = true;
             }
-            else if (mx>=530 &&my>=51 &&mx<=745 &&my<=174)//psi
+            else if (mx >= 530 && my >= 51 && mx <= 745 && my <= 174) // psi
             {
                 mazeselectorc = 3;
                 mazeselector = false;
                 settings = true;
                 maze = 3;
             }
-            else if (mx>=854&& my>=66 &&mx<=1108 &&my<=189)//crack
+            else if (mx >= 854 && my >= 66 && mx <= 1108 && my <= 189) // crack
             {
                 mazeselectorc = 4;
                 mazeselector = false;
                 settings = true;
                 maze = 4;
             }
-            else if (mx>=887 &&my>=254 &&mx<=1126 &&my<=383)//echo
+            else if (mx >= 887 && my >= 254 && mx <= 1126 && my <= 383) // echo
             {
                 mazeselectorc = 5;
                 mazeselector = false;
                 settings = true;
                 maze = 5;
             }
-            else if (mx>=853 &&my>=460 &&mx<=1087 &&my<=591)//phantom
+            else if (mx >= 853 && my >= 460 && mx <= 1087 && my <= 591) // phantom
             {
                 mazeselectorc = 6;
                 mazeselector = false;
                 settings = true;
                 maze = 6;
             }
-            else if(mx>=493 &&my>=527 &&mx<=735 &&my<=664)
+            else if (mx >= 493 && my >= 527 && mx <= 735 && my <= 664)
             {
                 mazeselectorc = 7;
                 mazeselector = false;
                 settings = true;
                 maze = 7;
-            }//spiral
+            } // spiral
         }
         else if (rules)
         {
@@ -3182,7 +3182,7 @@ void pacinitialcord()
     {
         cellX = 9;
         cellY = 19;
-        pac.x = 168 + (cellX) * mazeCellWidth;
+        pac.x = 168 + (cellX)*mazeCellWidth;
         pac.y = 48 + (20 - cellY) * mazeCellWidth;
 
         pac.downCount = false;
@@ -3194,7 +3194,7 @@ void pacinitialcord()
     {
         cellX = 1;
         cellY = 1;
-        pac.x = 72 + (cellX) * mazeCellWidth;
+        pac.x = 72 + (cellX)*mazeCellWidth;
         pac.y = 96 + (16 - cellY) * mazeCellWidth;
 
         pac.downCount = false;
@@ -3206,7 +3206,7 @@ void pacinitialcord()
     {
         cellX = 1;
         cellY = 1;
-        pac.x = 72 + (cellX) * mazeCellWidth;
+        pac.x = 72 + (cellX)*mazeCellWidth;
         pac.y = 48 + (18 - cellY) * mazeCellWidth;
 
         pac.downCount = false;
