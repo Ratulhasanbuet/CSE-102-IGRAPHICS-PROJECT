@@ -480,8 +480,10 @@ void iDraw()
     else if (highscore)
     {
         iShowImage(0, 0, highscoreimage[highscorec]);
+
         for (int i = 0; i < 5; i++)
         {
+            iSetColor(0, 0, 0);
             iText(215, 384 - (i * 84), name[i], GLUT_BITMAP_TIMES_ROMAN_24);
             iText(867, 390 - (i * 84), converter(point[i], temp), GLUT_BITMAP_TIMES_ROMAN_24);
         }
@@ -489,7 +491,7 @@ void iDraw()
 
     else if (playgameintro)
     {
-        iShowImage(0, 0, playgameintroimage[1]);
+        iShowImage(0, 0, playgameintroimage[0]);
         iSetColor(255, 255, 255);
         iText(430, 282, namestr, GLUT_BITMAP_TIMES_ROMAN_24);
     }
@@ -2920,7 +2922,6 @@ void collisioncheck()
         {
             congrats = true;
             playingstart = false;
-            DataAnalysis();
         }
 
         for (int i = 0; i <= foodNum; i++)
@@ -3507,12 +3508,12 @@ void DataAnalysis()
 
 int main(int argc, char *argv[])
 {
+    DataAnalysis();
     glutInit(&argc, argv);
     corrdinatestore1();
     corrdinatestore2();
     corrdinatestore3();
     corrdinatestore4();
-    DataAnalysis();
 
     iSetTimer(10, collisioncheck);
     iSetTimer(1300, bluetimecheck);
