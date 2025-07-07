@@ -413,9 +413,9 @@ void drawFoodAndPowerPellet()
         //  Draw power pellets by maze level
         bool isPowerPellet = false;
 
-        if (selected == 1 && (i == 0 || i == 14 || i == 57 || i == 73))
+        if (selected == 1 && (i == 0 || i == 18 || i == 149 || i == 104))
             isPowerPellet = true;
-        else if (selected == 2 && (i == 0 || i == 12 || i == 165 || i == 156))
+        else if (selected == 2 && (i == 0 || i == 18 || i == 165 || i == 156))
             isPowerPellet = true;
         else if (selected == 3 && (i == 84 || i == 292 || i == 100 || i == 200))
             isPowerPellet = true;
@@ -439,11 +439,11 @@ void foodcount()
 {
     if (selected == 1)
     {
-        totalfood = 186;
+        totalfood = 226;
     }
     else if (selected == 2)
     {
-        totalfood = 187;
+        totalfood = 236;
     }
     else if (selected == 3)
     {
@@ -1085,7 +1085,7 @@ int calcDist(int x1, int y1, int x2, int y2)
     int dy = y1 - y2;
     return dx * dx + dy * dy;
 }
-void pookiemovement()
+void  pookiemovement()
 {
     int mazeWidth;
     int mazeHeight;
@@ -1095,7 +1095,7 @@ void pookiemovement()
         {
             mazeX = 168;
             mazeY = 48;
-            mazeWidth = 456;
+            mazeWidth = 504;
             mazeHeight = 504;
         }
         else if (selected == 3)
@@ -2559,7 +2559,7 @@ void iMouse(int button, int state, int mx, int my)
         }
         else if (playingstart)
         {
-            if (mx >= 26 && my >= 586 && mx <= 182 && my <= 634)
+            if (mx>=26 && my>=599  && mx<=177 && my<=644)
             {
                 pause = true;
                 playingstart = false;
@@ -2958,7 +2958,7 @@ void collisioncheck()
                         scatter = false;
                     }
                 }
-                if ((i == 0 || i == 14 || i == 57 || i == 73) && selected == 1)
+                if ((i == 0 || i == 18 || i == 149 || i == 104) && selected == 1)
                 {
 
                     blueScore = -1;
@@ -2967,7 +2967,7 @@ void collisioncheck()
                     for (int i = 0; i < 4; i++)
                         pookie[i].blueOn = true;
                 }
-                else if ((i == 0 || i == 12 || i == 165 || i == 156) && selected == 2)
+                else if ( (i == 0 || i == 18 || i == 165 || i == 156) && selected == 2)
                 {
 
                     blueScore = -1;
@@ -3021,7 +3021,7 @@ void collisioncheck()
         }
         for (int i = 0; i < 4; i++)
         {
-            if (abs(pac.x - pookie[i].x) <= 15 && abs(pac.y - pookie[i].y) <= 15)
+            if (abs(pac.x - pookie[i].x) <= 20 && abs(pac.y - pookie[i].y) <= 20)
             {
                 if (!blueGhost || !pookie[i].blueOn)
                 {
