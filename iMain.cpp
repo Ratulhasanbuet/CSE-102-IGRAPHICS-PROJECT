@@ -3279,16 +3279,16 @@ void pacinitialcord()
 }
 void pookieinitialcoordinate()
 {
-    if (selected == 1 || selected == 2)
+    if (selected == 1 )
     {
         pookie[0].cellX = 9; // Inky
-        pookie[0].cellY = 7;
+        pookie[0].cellY = 9;
         pookie[0].x = 168 + (pookie[0].cellX) * mazeCellWidth;
         pookie[0].y = 48 + (20 - pookie[0].cellY) * mazeCellWidth;
         pookie[0].flagRight = true;
         pookie[0].speed = diffSpeed;
 
-        pookie[1].cellX = 9; // Blinky
+        pookie[1].cellX = 10; // Blinky
         pookie[1].cellY = 9;
         pookie[1].x = 168 + (pookie[1].cellX) * mazeCellWidth;
         pookie[1].y = 48 + (20 - pookie[1].cellY) * mazeCellWidth;
@@ -3302,8 +3302,38 @@ void pookieinitialcoordinate()
         pookie[2].flagRight = true;
         pookie[2].speed = diffSpeed;
 
-        pookie[3].cellX = 8; // Clyde
+        pookie[3].cellX = 11; // Clyde
         pookie[3].cellY = 9;
+        pookie[3].x = 168 + (pookie[3].cellX) * mazeCellWidth;
+        pookie[3].y = 48 + (20 - pookie[3].cellY) * mazeCellWidth;
+        pookie[3].flagRight = true;
+        pookie[3].speed = diffSpeed;
+    }
+   else  if ( selected == 2)
+    {
+        pookie[0].cellX = 9; // Inky
+        pookie[0].cellY = 8;
+        pookie[0].x = 168 + (pookie[0].cellX) * mazeCellWidth;
+        pookie[0].y = 48 + (20 - pookie[0].cellY) * mazeCellWidth;
+        pookie[0].flagRight = true;
+        pookie[0].speed = diffSpeed;
+
+        pookie[1].cellX = 10; // Blinky
+        pookie[1].cellY = 8;
+        pookie[1].x = 168 + (pookie[1].cellX) * mazeCellWidth;
+        pookie[1].y = 48 + (20 - pookie[1].cellY) * mazeCellWidth;
+        pookie[1].flagUp = true;
+        pookie[1].speed = diffSpeed;
+
+        pookie[2].cellX = 10; // Pinky
+        pookie[2].cellY = 8;
+        pookie[2].x = 168 + (pookie[2].cellX) * mazeCellWidth;
+        pookie[2].y = 48 + (20 - pookie[2].cellY) * mazeCellWidth;
+        pookie[2].flagRight = true;
+        pookie[2].speed = diffSpeed;
+
+        pookie[3].cellX = 11; // Clyde
+        pookie[3].cellY = 8;
         pookie[3].x = 168 + (pookie[3].cellX) * mazeCellWidth;
         pookie[3].y = 48 + (20 - pookie[3].cellY) * mazeCellWidth;
         pookie[3].flagRight = true;

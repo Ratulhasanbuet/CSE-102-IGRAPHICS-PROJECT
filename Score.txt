@@ -7,3 +7,5 @@ ratul 8620
 ratul 8070
 ratul 2710
 ratul 4760
+tsef 10
+ratul 9800
