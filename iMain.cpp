@@ -173,8 +173,8 @@ char inkyRight[2][30] = {"inky/inky (1).png", "inky/inky (4).png"};
 
 char blinkyUp[2][30] = {"blinky/blinky (2).png", "blinky/blinky (3).png"};
 char blinkyDown[2][30] = {"blinky/blinky (5).png", "blinky/blinky (6).png"};
-char blinkyLeft[2][30] = {"blinky/blinky (1).png", "blinky/blinky (1).png"};
-char blinkyRight[2][30] = {"blinky/blinky (7).png", "blinky/blinky (8).png"};
+char blinkyRight[2][30] = {"blinky/blinky (1).png", "blinky/blinky (4).png"};
+char blinkyLeft[2][30] = {"blinky/blinky (7).png", "blinky/blinky (8).png"};
 
 char pinkyUp[2][30] = {"pinky/pinky (2).png", "pinky/pinky (3).png"};
 char pinkyDown[2][30] = {"pinky/pinky (5).png", "pinky/pinky (6).png"};
@@ -1131,23 +1131,23 @@ void pookiemovement()
             {
                 if (pookietype == 0)
                 {
-                    px = mazeX;
+                    px = mazeX+px;
                     py = mazeY;
                 }
                 else if (pookietype == 1)
                 {
-                    px = mazeX + mazeWidth;
-                    py = mazeY;
+                    px = mazeX ;
+                    py = mazeY +py;
                 }
                 else if (pookietype == 2)
                 {
                     px = mazeX;
-                    py = mazeY + mazeHeight;
+                    py = mazeY+py/2; 
                 }
                 else if (pookietype == 3)
                 {
-                    px = mazeX + mazeWidth;
-                    py = mazeY + mazeHeight;
+                    px = mazeX+px/3;
+                    py = mazeY ;
                 }
             }
             if (chase)
@@ -2338,23 +2338,24 @@ void iMouse(int button, int state, int mx, int my)
             }
             else if ((mx >= 468 && mx <= 697) && (my >= 397 && my <= 448))
             {
-                diffSpeed = 1;
+                diffSpeed = 2;
                 difficultyc = 0;
             }
             else if ((mx >= 460 && mx <= 805) && (my >= 306 && my <= 364))
             {
-                diffSpeed = 2;
+                diffSpeed = 3;
                 difficultyc = 1;
             }
             else if ((mx >= 454 && mx <= 720) && (my >= 229 && my <= 280))
             {
-                diffSpeed = 3;
+                diffSpeed = 4;
                 difficultyc = 2;
             }
             else if ((mx >= 456 && mx <= 817) && (my >= 137 && my <= 200))
             {
                 diffSpeed = 4;
                 difficultyc = 3;
+                pacspeed = 4;
                 chase = true;
             }
             else
