@@ -543,7 +543,7 @@ void iDraw()
 
         iText(1056, 625, pacScore, GLUT_BITMAP_TIMES_ROMAN_24);
         for (int i = 0; i < pacmanlife; i++)
-            iShowImage(1033 + 40 * i, 550, life[i]);
+            iShowImage(1041 + 40 * i, 557, life[i]);
         if (selected == 1)
         {
             drawMaze1();
