@@ -37,6 +37,8 @@ int map4CoordinateX[21][40];
 int map4CoordinateY[21][40];
 int foodXcor[1000][2];
 int foodYcor[1000];
+int mazeWidth;
+int mazeHeight;
 
 int timeToGenerateFood = 500;
 int t;
@@ -1097,8 +1099,7 @@ int calcDist(int x1, int y1, int x2, int y2)
 }
 void pookiemovement()
 {
-    int mazeWidth;
-    int mazeHeight;
+
     if (playingstart)
     {
         if (selected == 1 || selected == 2)
@@ -1131,23 +1132,23 @@ void pookiemovement()
             {
                 if (pookietype == 0)
                 {
-                    px = mazeX+px;
+                    px = mazeX + px;
                     py = mazeY;
                 }
                 else if (pookietype == 1)
                 {
-                    px = mazeX ;
-                    py = mazeY +py;
+                    px = mazeX;
+                    py = mazeY + py;
                 }
                 else if (pookietype == 2)
                 {
                     px = mazeX;
-                    py = mazeY+py/2; 
+                    py = mazeY + py / 2;
                 }
                 else if (pookietype == 3)
                 {
-                    px = mazeX+px/3;
-                    py = mazeY ;
+                    px = mazeX + px / 3;
+                    py = mazeY;
                 }
             }
             if (chase)
@@ -1217,21 +1218,13 @@ void pookiemovement()
 
                             if (!maze1[pookie[pookietype].cellY - 1][pookie[pookietype].cellX])
                             {
-                                if (pookie[pookietype].cellX == 9 && pookie[pookietype].cellY == 9)
-                                    directionGenarator(2, pookietype); // Forced up
-                                else if (distUp < currentDist)
+
+                                if (distUp < currentDist)
                                     directionGenarator(2, pookietype);
                             }
                             else if (!maze1[pookie[pookietype].cellY + 1][pookie[pookietype].cellX])
                             {
-                                if (pookie[pookietype].cellX == 9 && pookie[pookietype].cellY == 7)
-                                {
-                                    if (rand() % 2)
-                                        directionGenarator(0, pookietype);
-                                    else
-                                        directionGenarator(1, pookietype);
-                                }
-                                else if (distDown < currentDist)
+                                if (distDown < currentDist)
                                     directionGenarator(3, pookietype);
                             }
                         }
@@ -1301,21 +1294,13 @@ void pookiemovement()
 
                             if (!maze1[pookie[pookietype].cellY - 1][pookie[pookietype].cellX])
                             {
-                                if (pookie[pookietype].cellX == 9 && pookie[pookietype].cellY == 9)
-                                    directionGenarator(2, pookietype);
+
                                 if (distUp < currentDist)
                                     directionGenarator(2, pookietype);
                             }
                             else if (!maze1[pookie[pookietype].cellY + 1][pookie[pookietype].cellX])
                             {
-                                if (pookie[pookietype].cellX == 9 && pookie[pookietype].cellY == 7)
-                                {
-                                    if (rand() % 2)
-                                        directionGenarator(0, pookietype);
-                                    else
-                                        directionGenarator(1, pookietype);
-                                }
-                                else if (distDown < currentDist)
+                                if (distDown < currentDist)
                                     directionGenarator(3, pookietype);
                             }
                         }
@@ -1347,14 +1332,7 @@ void pookiemovement()
 
                             if (!maze1[pookie[pookietype].cellY][pookie[pookietype].cellX + 1])
                             {
-                                if (pookie[pookietype].cellX == 9 && pookie[pookietype].cellY == 7)
-                                {
-                                    if (rand() % 2)
-                                        directionGenarator(0, pookietype);
-                                    else
-                                        directionGenarator(1, pookietype);
-                                }
-                                else if (distRight < currentDist)
+                                if (distRight < currentDist)
                                     directionGenarator(1, pookietype);
                             }
                             else if (!maze1[pookie[pookietype].cellY][pookie[pookietype].cellX - 1])
@@ -1392,21 +1370,12 @@ void pookiemovement()
 
                             if (!maze2[pookie[pookietype].cellY - 1][pookie[pookietype].cellX])
                             {
-                                if (pookie[pookietype].cellX == 9 && pookie[pookietype].cellY == 9)
-                                    directionGenarator(2, pookietype);
-                                else if (distUp < currentDist)
+                                if (distUp < currentDist)
                                     directionGenarator(2, pookietype);
                             }
                             else if (!maze2[pookie[pookietype].cellY + 1][pookie[pookietype].cellX])
                             {
-                                if (pookie[pookietype].cellX == 9 && pookie[pookietype].cellY == 7)
-                                {
-                                    if (rand() % 2)
-                                        directionGenarator(0, pookietype);
-                                    else
-                                        directionGenarator(1, pookietype);
-                                }
-                                else if (distDown < currentDist)
+                                if (distDown < currentDist)
                                     directionGenarator(3, pookietype);
                             }
                         }
@@ -1473,21 +1442,13 @@ void pookiemovement()
 
                             if (!maze2[pookie[pookietype].cellY - 1][pookie[pookietype].cellX])
                             {
-                                if (pookie[pookietype].cellX == 9 && pookie[pookietype].cellY == 9)
-                                    directionGenarator(2, pookietype);
+
                                 if (distUp < currentDist)
                                     directionGenarator(2, pookietype);
                             }
                             else if (!maze2[pookie[pookietype].cellY + 1][pookie[pookietype].cellX])
                             {
-                                if (pookie[pookietype].cellX == 9 && pookie[pookietype].cellY == 7)
-                                {
-                                    if (rand() % 2)
-                                        directionGenarator(0, pookietype);
-                                    else
-                                        directionGenarator(1, pookietype);
-                                }
-                                else if (distDown < currentDist)
+                                if (distDown < currentDist)
                                     directionGenarator(3, pookietype);
                             }
                         }
@@ -1518,14 +1479,7 @@ void pookiemovement()
 
                             if (!maze2[pookie[pookietype].cellY][pookie[pookietype].cellX + 1])
                             {
-                                if (pookie[pookietype].cellX == 9 && pookie[pookietype].cellY == 7)
-                                {
-                                    if (rand() % 2)
-                                        directionGenarator(0, pookietype);
-                                    else
-                                        directionGenarator(1, pookietype);
-                                }
-                                else if (distRight < currentDist)
+                                if (distRight < currentDist)
                                     directionGenarator(1, pookietype);
                             }
                             else if (!maze2[pookie[pookietype].cellY][pookie[pookietype].cellX - 1])
@@ -1561,21 +1515,12 @@ void pookiemovement()
                             pookie[pookietype].cellX++;
                             if (!maze3[pookie[pookietype].cellY - 1][pookie[pookietype].cellX])
                             {
-                                if (pookie[pookietype].cellX == 9 && pookie[pookietype].cellY == 9)
-                                    directionGenarator(2, pookietype);
-                                else if (distUp < currentDist)
+                                if (distUp < currentDist)
                                     directionGenarator(2, pookietype);
                             }
                             else if (!maze3[pookie[pookietype].cellY + 1][pookie[pookietype].cellX])
                             {
-                                if (pookie[pookietype].cellX == 9 && pookie[pookietype].cellY == 7)
-                                {
-                                    if (rand() % 2)
-                                        directionGenarator(0, pookietype);
-                                    else
-                                        directionGenarator(1, pookietype);
-                                }
-                                else if (distDown < currentDist)
+                                if (distDown < currentDist)
                                     directionGenarator(3, pookietype);
                             }
                         }
@@ -1636,21 +1581,12 @@ void pookiemovement()
                             pookie[pookietype].cellX--;
                             if (!maze3[pookie[pookietype].cellY - 1][pookie[pookietype].cellX])
                             {
-                                if (pookie[pookietype].cellX == 9 && pookie[pookietype].cellY == 9)
-                                    directionGenarator(2, pookietype);
                                 if (distUp < currentDist)
                                     directionGenarator(2, pookietype);
                             }
                             else if (!maze3[pookie[pookietype].cellY + 1][pookie[pookietype].cellX])
                             {
-                                if (pookie[pookietype].cellX == 9 && pookie[pookietype].cellY == 7)
-                                {
-                                    if (rand() % 2)
-                                        directionGenarator(0, pookietype);
-                                    else
-                                        directionGenarator(1, pookietype);
-                                }
-                                else if (distDown < currentDist)
+                                if (distDown < currentDist)
                                     directionGenarator(3, pookietype);
                             }
                         }
@@ -1678,14 +1614,7 @@ void pookiemovement()
                             pookie[pookietype].cellY--;
                             if (!maze3[pookie[pookietype].cellY][pookie[pookietype].cellX + 1])
                             {
-                                if (pookie[pookietype].cellX == 9 && pookie[pookietype].cellY == 7)
-                                {
-                                    if (rand() % 2)
-                                        directionGenarator(0, pookietype);
-                                    else
-                                        directionGenarator(1, pookietype);
-                                }
-                                else if (distRight < currentDist)
+                                if (distRight < currentDist)
                                     directionGenarator(1, pookietype);
                             }
                             else if (!maze3[pookie[pookietype].cellY][pookie[pookietype].cellX - 1])
@@ -1721,21 +1650,12 @@ void pookiemovement()
                             pookie[pookietype].cellX++;
                             if (!maze4[pookie[pookietype].cellY - 1][pookie[pookietype].cellX])
                             {
-                                if (pookie[pookietype].cellX == 9 && pookie[pookietype].cellY == 9)
-                                    directionGenarator(2, pookietype);
-                                else if (distUp < currentDist)
+                                if (distUp < currentDist)
                                     directionGenarator(2, pookietype);
                             }
                             else if (!maze4[pookie[pookietype].cellY + 1][pookie[pookietype].cellX])
                             {
-                                if (pookie[pookietype].cellX == 9 && pookie[pookietype].cellY == 7)
-                                {
-                                    if (rand() % 2)
-                                        directionGenarator(0, pookietype);
-                                    else
-                                        directionGenarator(1, pookietype);
-                                }
-                                else if (distDown < currentDist)
+                                if (distDown < currentDist)
                                     directionGenarator(3, pookietype);
                             }
                         }
@@ -1796,21 +1716,13 @@ void pookiemovement()
                             pookie[pookietype].cellX--;
                             if (!maze4[pookie[pookietype].cellY - 1][pookie[pookietype].cellX])
                             {
-                                if (pookie[pookietype].cellX == 9 && pookie[pookietype].cellY == 9)
-                                    directionGenarator(2, pookietype);
+
                                 if (distUp < currentDist)
                                     directionGenarator(2, pookietype);
                             }
                             else if (!maze4[pookie[pookietype].cellY + 1][pookie[pookietype].cellX])
                             {
-                                if (pookie[pookietype].cellX == 9 && pookie[pookietype].cellY == 7)
-                                {
-                                    if (rand() % 2)
-                                        directionGenarator(0, pookietype);
-                                    else
-                                        directionGenarator(1, pookietype);
-                                }
-                                else if (distDown < currentDist)
+                                if (distDown < currentDist)
                                     directionGenarator(3, pookietype);
                             }
                         }
@@ -1838,14 +1750,7 @@ void pookiemovement()
                             pookie[pookietype].cellY--;
                             if (!maze4[pookie[pookietype].cellY][pookie[pookietype].cellX + 1])
                             {
-                                if (pookie[pookietype].cellX == 9 && pookie[pookietype].cellY == 7)
-                                {
-                                    if (rand() % 2)
-                                        directionGenarator(0, pookietype);
-                                    else
-                                        directionGenarator(1, pookietype);
-                                }
-                                else if (distRight < currentDist)
+                                if (distRight < currentDist)
                                     directionGenarator(1, pookietype);
                             }
                             else if (!maze4[pookie[pookietype].cellY][pookie[pookietype].cellX - 1])
