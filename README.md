@@ -1,228 +1,151 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>PACMAN EXTREME - Complete Guide</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #0d0d0d;
-      color: #f2f2f2;
-      line-height: 1.6;
-      padding: 40px;
-      max-width: 1000px;
-      margin: auto;
-    }
-    h1, h2, h3 {
-      color: #ffdd00;
-      text-align: center;
-    }
-    h2 {
-      border-bottom: 2px solid #ffdd00;
-      padding-bottom: 5px;
-      margin-top: 40px;
-    }
-    h3 {
-      margin-top: 30px;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 20px 0;
-      background-color: #1a1a1a;
-    }
-    th, td {
-      border: 1px solid #444;
-      padding: 10px;
-      text-align: left;
-    }
-    th {
-      background-color: #333;
-    }
-    tr:nth-child(even) {
-      background-color: #222;
-    }
-    code {
-      background-color: #222;
-      padding: 3px 6px;
-      border-radius: 4px;
-      color: #00ffcc;
-    }
-    ul {
-      margin-left: 20px;
-    }
-    details {
-      margin: 10px 0;
-      padding: 10px;
-      background: #1a1a1a;
-      border: 1px solid #333;
-      border-radius: 6px;
-    }
-    summary {
-      cursor: pointer;
-      font-weight: bold;
-      color: #ffdd00;
-    }
-    .mindmap ul {
-      list-style-type: none;
-      padding-left: 20px;
-      border-left: 2px dashed #555;
-    }
-    .mindmap li {
-      margin: 6px 0;
-      position: relative;
-    }
-    .mindmap li::before {
-      content: '✦';
-      position: absolute;
-      left: -15px;
-      color: #ffdd00;
-      font-size: 0.9em;
-    }
-    footer {
-      margin-top: 40px;
-      text-align: center;
-      font-size: 0.9em;
-      color: #888;
-    }
-    nav ul {
-      list-style: none;
-      text-align: center;
-      margin-bottom: 30px;
-      padding: 0;
-    }
-    nav li {
-      display: inline-block;
-      margin: 0 12px;
-    }
-    nav a {
-      color: #00ffff;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    nav a:hover {
-      text-decoration: underline;
-    }
-  </style>
-</head>
-<body>
+<div align="center">
+  <img src="https://img.icons8.com/emoji/96/pac-man-emoji.png" alt="Pac-Man Icon" style="margin-bottom: 10px;">
+  <h1 style="font-family: 'Segoe UI', sans-serif; font-size: 48px; color: #ffcc00; text-shadow: 2px 2px #333;">PAC-MAN: RETRO REIMAGINED</h1>
+  <p style="font-size: 18px; color: #777; font-style: italic;">A tribute to the timeless classic, built from scratch in C with <code>iGraphics.h</code></p>
+  <br>
+  <img src="https://img.icons8.com/ios-filled/50/ghost.png" alt="Ghost Icon" style="margin: 0 10px;"><img src="https://img.icons8.com/ios-filled/50/ghost.png" alt="Ghost Icon" style="margin: 0 10px;">
+</div>
 
-  <h1>PACMAN EXTREME</h1>
-  <h2>🎮 Game Rules, Mechanics & Developer Guide</h2>
+<hr>
 
-  <nav>
-    <ul>
-      <li><a href="#objective">Objective</a></li>
-      <li><a href="#controls">Controls</a></li>
-      <li><a href="#scoring">Scoring</a></li>
-      <li><a href="#ghosts">Ghosts</a></li>
-      <li><a href="#fruits">Fruits</a></li>
-      <li><a href="#lives">Lives</a></li>
-      <li><a href="#mazes">Mazes</a></li>
-      <li><a href="#menu">Menu</a></li>
-      <li><a href="#code">Code Structure</a></li>
-      <li><a href="#mindmap">Mind Map</a></li>
-      <li><a href="#tips">Tips</a></li>
-    </ul>
-  </nav>
+<h2 style="font-family: 'Segoe UI', sans-serif; color: #333;">🎮 Authors</h2>
+<ul style="font-size: 16px;">
+  <li><strong>Md Ratul Hasan</strong> — CSE'24</li>
+  <li><strong>Hasibul Islam</strong> — CSE'24</li>
+</ul>
 
-  <section id="objective">
-    <h3>🎯 Objective</h3>
-    <ul>
-      <li>Eat all dots and power-pellets to clear the maze</li>
-      <li>Outmaneuver ghosts using tactics and timing</li>
-      <li>Collect fruits for score boosts and extra lives</li>
-      <li>Advance through increasingly difficult mazes</li>
-    </ul>
-  </section>
+<h3 style="color: #555;">🧭 Guided by</h3>
+<p style="font-size: 16px;">Abdur Rafi</p>
 
-  <section id="controls">
-    <h3>🧠 Controls</h3>
-    <ul>
-      <li><code>Arrow Keys</code> – Move Pac-Man</li>
-      <li><code>P</code> – Pause/Resume</li>
-      <li><code>ENTER</code> – Confirm selections</li>
-      <li><code>ESC / Q</code> – Quit to Menu</li>
-    </ul>
-  </section>
+<hr>
 
-  <section id="scoring">
-    <h3>💯 Scoring System</h3>
-    <table>
-      <tr><th>Action</th><th>Points</th></tr>
-      <tr><td>Eat Regular Dot</td><td>+10</td></tr>
-      <tr><td>Eat Power Pellet</td><td>+50</td></tr>
-      <tr><td>Eat Fruit</td><td>+1000 or Extra Life</td></tr>
-      <tr><td>Eat Blue Ghosts</td><td>+100 → +300 → +900 → +2700</td></tr>
-      <tr><td>Complete Maze</td><td>+2000 Bonus</td></tr>
-    </table>
-  </section>
+<h2 style="font-family: 'Segoe UI', sans-serif; color: #333;">⚙️ Settings Menu</h2>
+<p style="font-size: 16px; color: #555;">
+  The game includes a dedicated <strong>Settings</strong> screen where players can personalize their experience before diving into the maze. Designed with clarity and style, this menu offers:
+</p>
 
-  <section id="ghosts">
-    <h3>👻 Ghost Behavior</h3>
-    <table>
-      <tr><th>Mode</th><th>Description</th></tr>
-      <tr><td>Scatter</td><td>Ghosts retreat to preset corners</td></tr>
-      <tr><td>Chase</td><td>Smart tracking with individual logic</td></tr>
-      <tr><td>Blast</td><td>Maximum aggression (level-triggered)</td></tr>
-      <tr><td>Blue (Frightened)</td><td>Slow vulnerable mode after power-pellet</td></tr>
-    </table>
-    <ul>
-      <li><strong>Blinky</strong> – Direct hunter</li>
-      <li><strong>Pinky</strong> – Predicts forward movement</li>
-      <li><strong>Clyde</strong> – Alternates movement logic</li>
-      <li><strong>Inky</strong> – Trails behind and cuts off</li>
-      <li><strong>Rinky & Donky</strong> – Appear in Maze 3 & 4 with advanced unpredictable behavior</li>
-    </ul>
-  </section>
+<ul style="font-size: 16px; color: #444;">
+  <li><strong>🔊 Sound Toggle:</strong> Switch between <em>ON</em> and <em>OFF</em> to suit your vibe.</li>
+  <li><strong>🧩 Maze Selection:</strong> Choose from multiple maze layouts for varied gameplay.</li>
+  <li><strong>🔙 Back Button:</strong> Seamlessly return to the main menu with a single click.</li>
+</ul>
 
-  <section id="fruits">
-    <h3>🍓 Fruit Mechanics</h3>
-    <ul>
-      <li>Spawn at random positions every 60 seconds</li>
-      <li>Provide <code>+1000</code> points or an extra life</li>
-      <li>Vanish if not collected quickly</li>
-      <li>Drawn using sprites and flagged in pellet array</li>
-    </ul>
-  </section>
+<hr>
 
-  <section id="lives">
-    <h3>❤️ Lives</h3>
-    <ul>
-      <li>Start with 3 lives</li>
-      <li>Gain extra lives by catching rare fruits</li>
-      <li>Lose a life if hit by ghost (unless ghost is blue)</li>
-      <li>Game over when lives reach zero</li>
-    </ul>
-  </section>
+<h2 style="font-family: 'Segoe UI', sans-serif; color: #333;">🧱 Maze Brick Designs</h2>
+<p style="font-size: 16px; color: #555;">
+  Choose your battlefield! The game features <strong>eight uniquely crafted mazes</strong>, each with its own brick pattern and gameplay twist.
+</p>
 
-  <section id="mazes">
-    <h3>🌌 Maze Progression</h3>
-    <table>
-      <tr><th>Maze</th><th>Size</th><th>Dots</th><th>Ghosts</th><th>Notes</th></tr>
-      <tr><td>Maze 1</td><td>21×21</td><td>226</td><td>4</td><td>Beginner Level</td></tr>
-      <tr><td>Maze 2</td><td>21×21</td><td>236</td><td>4</td><td>Intermediate</td></tr>
-      <tr><td>Maze 3</td><td>19×36</td><td>362</td><td>6</td><td>Donky & Rinky appear</td></tr>
-      <tr><td>Maze 4</td><td>21×40</td><td>454</td><td>6</td><td>Expert difficulty</td></tr>
-    </table>
-  </section>
+<ul style="font-size: 16px; color: #444;">
+  <li><strong>🌀 Spiral</strong></li>
+  <li><strong>👻 Phantom</strong></li>
+  <li><strong>🔮 Nebula</strong></li>
+  <li><strong>💥 Pixel Pulse</strong></li>
+  <li><strong>🧠 Psi</strong></li>
+  <li><strong>🌊 Echo</strong></li>
+  <li><strong>⚡ Crack</strong></li>
+  <li><strong>👁️ Spectral</strong></li>
+</ul>
 
-  <section id="menu">
-    <h3>🕹️ Menu Options</h3>
-   <table> <tr><th>Option</th><th>Function</th></tr> <tr><td>Play</td><td>Starts the game instantly</td></tr> <tr><td>High Score</td><td>Shows leaderboard saved in <code>highScore.txt</code></td></tr> <tr><td>Settings</td><td>Adjust sound, backgrounds, and maze layout</td></tr> <tr><td>Difficulty</td><td>Controls ghost speed and Pac-Man animation rate</td></tr> <tr><td>Credits & Rules</td><td>Slideshow of developer info and gameplay mechanics</td></tr> <tr><td>Quit</td><td>Exits with a farewell animation</td></tr> </table> </section>
+<hr>
 
-<section id="code"> <h3>🧬 Code Structure & Key Files</h3> <details> <summary>🔧 Game Engine Components</summary> <ul> <li><strong>iGraphics.h</strong> – Framework for graphics, sound, sprite, and input</li> <li><strong>pacman.c / iMain.cpp</strong> – Core logic for movement, rendering, collisions</li> <li><strong>foodXcor[][]</strong> – Stores pellets, power-pellets, fruits</li> <li><strong>pookie[6]</strong> – Ghost movement logic structs</li> <li><strong>corrdinatestoreX()</strong> – Translates grid cells to pixel coordinates</li> <li><strong>collisioncheck()</strong> – Pellet eating, ghost–player interaction</li> </ul> </details>
+<h2 style="font-family: 'Segoe UI', sans-serif; color: #333;">🔥 Difficulty Levels</h2>
+<p style="font-size: 16px; color: #555;">
+  Four challenge tiers to suit every player:
+</p>
+<ul style="font-size: 16px; color: #444;">
+  <li><strong>🟢 Easy</strong></li>
+  <li><strong>🟡 Medium</strong></li>
+  <li><strong>🔵 Hard</strong></li>
+  <li><strong>🔴 Extreme</strong></li>
+</ul>
 
-<details> <summary>🧪 Timers & Animation</summary> <ul> <li>Set via <code>iSetTimer()</code> — ghost animation, mouth opening, score updates</li> <li><code>iAnimateSprite()</code> used to cycle through Pac-Man frames</li> <li>Ghost flashing is triggered during final seconds of “blue” mode</li> </ul> </details>
+<hr>
 
-<details> <summary>💾 High Score System</summary> <pre><code> void DataAnalysis() { // Read scores from highScore.txt // Sort descending // Save top 5 players & scores } </code></pre> </details>
+<h2 style="font-family: 'Segoe UI', sans-serif; color: #333;">📜 Game Rules</h2>
+<ul style="font-size: 16px; color: #444;">
+  <li>🎯 Eat all pellets, avoid ghosts, survive</li>
+  <li>🍒 Power pellets make ghosts vulnerable</li>
+  <li>🧠 Ghost behaviors evolve with score</li>
+  <li>💾 High scores are saved locally</li>
+</ul>
 
-<details> <summary>🌍 Map Drawing</summary> <ul> <li>Four distinct mazes, rendered by <code>drawMazeX()</code></li> <li>Pellets drawn conditionally using flags in food array</li> </ul> </details> </section>
+<hr>
 
-<section id="mindmap"> <h3>🧠 Game Mind Map</h3> <div class="mindmap"> <ul> <li>PACMAN EXTREME <ul> <li>Gameplay <ul> <li>Controls</li> <li>Pellet & Power Logic</li> <li>Ghost Modes</li> </ul> </li> <li>Characters <ul> <li>Pac-Man</li> <li>Ghosts: Blinky, Pinky, Inky, Clyde, Donky, Rinky</li> </ul> </li> <li>Assets <ul> <li>Fruit Sprites</li> <li>Ghost Frames</li> <li>Sound: MP3 / OGG support</li> </ul> </li> <li>Game Engine <ul> <li>Movement</li> <li>Collision</li> <li>Animation</li> </ul> </li> <li>Features <ul> <li>Difficulty Modes</li> <li>Maze Selection</li> <li>High Scores</li> <li>Pause/Resume</li> </ul> </li> </ul> </li> </ul> </div> </section>
+<h2 style="font-family: 'Segoe UI', sans-serif; color: #333;">🏆 High Score Board</h2>
+<ul style="font-size: 16px; color: #444;">
+  <li>📋 Displays top 6 players</li>
+  <li>💾 Saved with file I/O</li>
+  <li>🔄 Sorted automatically</li>
+</ul>
 
-<section id="tips"> <h3>🧠 Pro Tips</h3> <ul> <li>Chain ghost captures in blue mode for exponential score boosts</li> <li>Use corners and tunnels to bait ghost paths during scatter mode</li> <li>Learn ghost personalities — Blinky always hunts directly, Pinky tries to ambush</li> <li>Always grab fruits before they vanish — they’re timed!</li> <li>Pause the game smartly to plan your next move</li> <li>Rotate mazes by difficulty and memorize fruit spawn zones</li> </ul> </section>
+<hr>
 
-<footer> <p>© 2025 PACMAN EXTREME • Developed with Modern-iGraphics • All gameplay and AI logic documented.</p> </footer>
+<h2 style="font-family: 'Segoe UI', sans-serif; color: #333;">✍️ Name Entry Screen</h2>
+<p style="font-size: 16px; color: #555;">
+  Your name defines your legacy:
+</p>
+<ul style="font-size: 16px; color: #444;">
+  <li>⌨️ Keyboard input support</li>
+  <li>💾 Stored with your score</li>
+  <li>🧼 Validated in real-time</li>
+</ul>
 
-</body> </html>
+<hr>
+
+<h2 style="font-family: 'Segoe UI', sans-serif; color: #333;">🏗️ Maze Progression Levels</h2>
+<ul style="font-size: 16px; color: #444;">
+  <li>🔰 Level 1 — Initiation</li>
+  <li>⚙️ Level 2 — Escalation</li>
+  <li>🧠 Level 3 — Strategy</li>
+  <li>💀 Level 4 — Survival</li>
+</ul>
+
+<hr>
+
+<h2 style="font-family: 'Segoe UI', sans-serif; color: #333;">🟢 Power Pellet System</h2>
+<ul style="font-size: 16px; color: #444;">
+  <li><strong>Quantity:</strong> 4 per maze</li>
+  <li><strong>Size:</strong> 8 pixels radius</li>
+  <li><strong>Variant:</strong> Green pellets trigger extended ghost vulnerability</li>
+  <li><strong>Effect:</strong> Ghosts become edible for ~10 seconds</li>
+</ul>
+
+<hr>
+
+<h2 style="font-family: 'Segoe UI', sans-serif; color: #333;">🌌 Background Themes</h2>
+<p style="font-size: 16px; color: #555;">
+  Six vivid backgrounds enhance immersion:
+</p>
+<ul style="font-size: 16px; color: #444;">
+  <li>🎮 Classic Grid</li>
+  <li>🌠 Neon Pulse</li>
+  <li>🧊 Ice Circuit</li>
+  <li>🔥 Inferno Zone</li>
+  <li>🌿 Retro Forest</li>
+  <li>🪐 Cosmic Drift</li>
+</ul>
+
+<hr>
+
+<h2 style="font-family: 'Segoe UI', sans-serif; color: #333;">🍓 Fruit Bonus System</h2>
+<ul style="font-size: 16px; color: #444;">
+  <li>🕒 Fruits spawn every 600 ticks</li>
+  <li>🍇 16 fruit types</li>
+  <li>💎 Bonus effects: +1000 points or +1 life for rare fruits</li>
+</ul>
+
+<hr>
+
+<h2 style="font-family: 'Segoe UI', sans-serif; color: #333;">👻 Ghost Modes</h2>
+<ul style="font-size: 16px; color: #444;">
+  <li>😴 Scatter — passive patrol</li>
+  <li>🎯 Chase — score-based aggression</li>
+  <li>💥 Blast — coordinated final pursuit</li>
+</ul>
+
+<div align="center" style="margin-top: 20px;">
+  <img src="https://img.icons8.com/emoji/48/video-game.png" alt="Gamepad Icon" style="margin-bottom: 10px;">
+  <p style="font-size: 14px; color: #999;"><em>This isn’t just Pac-Man. It’s your version of arcade perfection.</em></p>
+</div>
