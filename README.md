@@ -1,108 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pacman Game Documentation</title>
+  <meta charset="UTF-8">
+  <title>Pac-Man — iGraphics Project</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      margin: 40px;
-      line-height: 1.7;
-      background-color: #f4f4f4;
-      color: #333;
+      background-color: #0d0d0d;
+      color: #f5f5f5;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 20px;
     }
     h1, h2 {
-      color: #111;
+      color: #ffe100;
+      border-bottom: 2px solid #333;
+      padding-bottom: 5px;
     }
-    code {
-      background: #eee;
-      padding: 2px 4px;
-      border-radius: 4px;
+    .image-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
     }
-    pre {
-      background: #eee;
-      padding: 10px;
-      border-radius: 6px;
+    .image-grid img {
+      width: 180px;
+      border: 2px solid #444;
+    }
+    .code-block {
+      background: #1a1a1a;
+      color: #ccc;
+      padding: 15px;
+      font-family: monospace;
+      border-left: 5px solid #ffe100;
+      margin: 20px 0;
       overflow-x: auto;
     }
-    ul {
-      list-style: disc;
-      margin-left: 20px;
+    table {
+      border-collapse: collapse;
+      margin-top: 10px;
+      width: 100%;
+    }
+    table td, table th {
+      border: 1px solid #444;
+      padding: 8px;
+    }
+    table th {
+      background-color: #222;
+      color: #ffe100;
     }
   </style>
 </head>
 <body>
 
-  <h1>Pacman Game – Documentation</h1>
+  <h1>🟡 Pac-Man (iGraphics Edition)</h1>
+  <p>A full-featured Pac-Man game coded in C using the <code>iGraphics.h</code> library. Includes customizable mazes, fruit spawning, dynamic ghost AI (including Donky & Rinky), scoring mechanics, and menu transitions.</p>
 
-  <p>This is a custom-built version of the classic Pacman game, created using C with the iGraphics library. The game contains multiple mazes, ghost AIs, scoring system, power-ups, and sprite animations.</p>
+  <h2>🎮 Maze Previews</h2>
+  <div class="image-grid">
+    <img src="mazeDesignImage/pixel.png" alt="Pixel Maze">
+    <img src="mazeDesignImage/nebula.png" alt="Nebula Maze">
+    <img src="mazeDesignImage/spectral.png" alt="Spectral Maze">
+    <img src="mazeDesignImage/psi.png" alt="Psi Maze">
+    <img src="mazeDesignImage/crack.png" alt="Crack Maze">
+    <img src="mazeDesignImage/echo.png" alt="Echo Maze">
+    <img src="mazeDesignImage/phantom.png" alt="Phantom Maze">
+    <img src="mazeDesignImage/spiral.png" alt="Spiral Maze">
+  </div>
 
-  <h2>🎮 Game Features</h2>
+  <h2>🧱 Maze Logic Example (Maze 1)</h2>
+  <div class="code-block">
+<pre>
+int maze1[21][21] = {
+  {1, 1, 1, 1, ..., 1},
+  {1, 0, 0, 0, ..., 1},
+  ...
+};
+</pre>
+  </div>
+
+  <h2>👾 Ghost AI Behavior</h2>
+  <table>
+    <tr>
+      <th>Ghost</th>
+      <th>Image</th>
+      <th>Behavior</th>
+    </tr>
+    <tr>
+      <td>Inky</td>
+      <td><img src="inky/inky (1).png" width="40"/></td>
+      <td>Chases behind Pac-Man</td>
+    </tr>
+    <tr>
+      <td>Blinky</td>
+      <td><img src="blinky/blinky (1).png" width="40"/></td>
+      <td>Direct pursuit</td>
+    </tr>
+    <tr>
+      <td>Pinky</td>
+      <td><img src="pinky/pinky (1).png" width="40"/></td>
+      <td>Predictive chase</td>
+    </tr>
+    <tr>
+      <td>Clyde</td>
+      <td><img src="clyde/clyde (1).png" width="40"/></td>
+      <td>Ambush from above</td>
+    </tr>
+    <tr>
+      <td>Donky</td>
+      <td><img src="donky/donky1.png" width="40"/></td>
+      <td>Wall-hugging, dynamic AI</td>
+    </tr>
+    <tr>
+      <td>Rinky</td>
+      <td><img src="rinky/rinky1.png" width="40"/></td>
+      <td>Predictive pathfinding</td>
+    </tr>
+  </table>
+
+  <h2>📦 Game Features</h2>
   <ul>
-    <li>Multiple playable mazes (21x21, 19x36, 21x40 formats)</li>
-    <li>Custom-designed maze layouts stored in 2D arrays</li>
-    <li>Pacman movement logic with smooth transitions and direction controls</li>
-    <li>6 Ghost characters with movement logic and AI behaviors</li>
-    <li>Food pellets, power-ups, and fruit items for score boosts</li>
-    <li>Score tracking, life system, and death animation</li>
-    <li>Fully animated character sprites (Pacman + Ghosts)</li>
-    <li>Background customization & intro/outro scenes</li>
-    <li>Menu system: Main Menu, Difficulty Selector, Maze Selector, Highscore, Credits, Rules, Pause, etc.</li>
-    <li>Sound effects & visual effects (optional via <code>soundOn</code>)</li>
+    <li>🍒 Fruit with bonuses — <code>fruit/fruit (1).png</code></li>
+    <li>🌀 Dynamic maze rendering via <code>drawMaze1/2/3/4()</code></li>
+    <li>⏱ Power pellets toggle <code>blueGhost</code> mode</li>
+    <li>📈 Scoring system using <code>score.txt</code> and highscore tracking</li>
+    <li>📃 Menu with credits, rules, difficulty selector</li>
   </ul>
 
-  <h2>🧱 Game Architecture</h2>
+  <h2>⚙️ How to Run</h2>
+  <ol>
+    <li>Ensure <code>iGraphics.h</code> and OpenGL libraries are linked in your compiler.</li>
+    <li>Compile the project (`pacman.txt`) and run the main executable.</li>
+    <li>Use arrow keys for movement and mouse for menu interaction.</li>
+  </ol>
 
-  <ul>
-    <li><strong>Pacman:</strong> Position and movement handled via a <code>pacmove</code> struct</li>
-    <li><strong>Ghosts:</strong> Each ghost has its own <code>ghost</code> struct instance with cell position and direction flags</li>
-    <li><strong>Mazes:</strong> Defined in 2D integer arrays like <code>maze1</code>, <code>maze2</code>, <code>maze3</code>, etc.</li>
-    <li><strong>Coordinate Maps:</strong> Maze cell coordinates are mapped via <code>mapXCoordinate[][]</code> arrays</li>
-    <li><strong>Images:</strong> Stored in arrays such as <code>introimage[][]</code>, <code>pacmanRight[][]</code>, etc.</li>
-    <li><strong>Game States:</strong> Controlled by many Boolean flags like <code>mainmenu</code>, <code>pause</code>, <code>highscore</code>, etc.</li>
-    <li><strong>Player Info:</strong> Stored in <code>playername[]</code>, <code>score</code>, <code>pacmanlife</code></li>
-  </ul>
-
-  <h2>🕹️ Controls</h2>
-  <ul>
-    <li><strong>Arrow keys</strong> – Move Pacman</li>
-    <li><strong>P</strong> – Pause Game</li>
-    <li><strong>ENTER</strong> – Start Game or Resume</li>
-    <li><strong>ESC</strong> – Exit game or go back</li>
-  </ul>
-
-  <h2>📦 Resources Required</h2>
-
-  <p>Ensure you have these folders in the same directory as the binary:</p>
-
-  <ul>
-    <li><code>introimage/</code>, <code>creditsimage/</code>, <code>rules/</code>, <code>mazeDesignImage/</code></li>
-    <li><code>pacman/</code>, <code>ghost/</code>, <code>fruit/</code>, <code>slbg/</code>, <code>bg/</code></li>
-    <li><code>playgameintro/</code>, <code>thanksimage/</code>, <code>congrats/</code></li>
-  </ul>
-
-  <h2>🔧 Compilation & Run</h2>
-
-  <p>Use a C compiler that supports <code>iGraphics</code> library (e.g., GCC with Windows multimedia).</p>
-
-  <pre>
-gcc iMain.cpp -o pacman -liGraphics -lwinmm
-./pacman
-  </pre>
-
-  <h2>📑 Notes</h2>
-
-  <ul>
-    <li>The game uses over 500 images for animation, backgrounds, and UI</li>
-    <li>Each level can be customized through the maze arrays</li>
-    <li>Ghost behaviors can be extended using <code>blueOn</code>, <code>dist</code>, <code>scatter</code> flags</li>
-    <li>Game logic is controlled through timing, random generators, and structured movement</li>
-  </ul>
-
-  <h2>👨‍💻 Developed By</h2>
-  <p>Ratul Hasan<br>
-  [Your GitHub or Email]</p>
+  <h2>🎉 Credit</h2>
+  <p><strong>Designed and Developed by Ratul</strong> — with intricate gameplay refinement, creative ghost logic, and sprite mapping brilliance.</p>
 
 </body>
 </html>
