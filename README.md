@@ -1,196 +1,244 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Pac-Man — iGraphics Edition</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>PACMAN EXTREME - Game Manual</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #121212;
+      color: #f0f0f0;
+      padding: 20px;
+      max-width: 960px;
+      margin: auto;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #ffcb00;
+    }
+    h2 {
+      border-bottom: 2px solid #ffcb00;
+      padding-bottom: 5px;
+      margin-top: 40px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+      background-color: #1e1e1e;
+    }
+    th, td {
+      border: 1px solid #444;
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background-color: #2a2a2a;
+      color: #00ffff;
+    }
+    tr:nth-child(even) {
+      background-color: #202020;
+    }
+    summary {
+      cursor: pointer;
+      font-weight: bold;
+      color: #00ffff;
+      margin: 10px 0;
+    }
+    details {
+      background-color: #181818;
+      border: 1px solid #333;
+      border-radius: 4px;
+      margin-bottom: 15px;
+      padding: 10px;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    code {
+      background-color: #292929;
+      color: #ffcb00;
+      padding: 3px 6px;
+      border-radius: 3px;
+    }
+  </style>
 </head>
 <body>
 
-  <h1>🟡 Pac-Man (iGraphics Edition)</h1>
-  <p>A classic Pac-Man remake using C and <code>iGraphics.h</code>. Features multiple maze themes, ghost AI modes, scoring, fruits, and dynamic UI transitions.</p>
+  <h1>🎮 PACMAN EXTREME</h1>
+  <h2>Game Rules & Mechanics</h2>
 
-  <section id="author">
-    <h2>✍️ Author Credits</h2>
-    <p><strong>Designed & Programmed by:</strong> Md Ratul Hasan, CSE'24 & Hasibul Islam, CSE'24</p>
-    <p><strong>Instructed by:</strong> Abdur Rafi</p>
-  </section>
-
-  <section id="menu">
-    <h2>📋 Main Menu Overview</h2>
-    <img src="menu image/PACMAN.png" alt="Main Menu Screenshot" />
+  <details open>
+    <summary>🟡 Objective</summary>
     <ul>
-      <li><strong>Play Game</strong> — Start and choose levels</li>
-      <li><strong>High Score</strong> — View player stats from <code>highScore.txt</code></li>
-      <li><strong>Settings</strong> — Sound toggle and maze selection</li>
-      <li><strong>Difficulty</strong> — Set ghost speed and AI behavior</li>
-      <li><strong>Credits</strong> — Developer and mentor names</li>
-      <li><strong>Rules</strong> — Gameplay mechanics overview</li>
-      <li><strong>Quit</strong> — Trigger animated game exit</li>
-      <li><strong>Special Thanks</strong> — Acknowledgments page</li>
+      <li>Eat all dots to complete each maze</li>
+      <li>Avoid ghosts — unless they turn vulnerable (blue)</li>
+      <li>Collect fruits for bonus score and life</li>
+      <li>Advance through four increasingly difficult levels</li>
     </ul>
-  </section>
+  </details>
 
-  <section id="maze-gallery">
-    <h2>🎮 Maze Gallery</h2>
-    <div class="maze-grid">
-      <img src="mazeDesignImage/pixel.png" alt="Pixel Maze" />
-      <img src="mazeDesignImage/nebula.png" alt="Nebula Maze" />
-      <img src="mazeDesignImage/spectral.png" alt="Spectral Maze" />
-      <img src="mazeDesignImage/psi.png" alt="Psi Maze" />
-      <img src="mazeDesignImage/crack.png" alt="Crack Maze" />
-      <img src="mazeDesignImage/echo.png" alt="Echo Maze" />
-      <img src="mazeDesignImage/phantom.png" alt="Phantom Maze" />
-      <img src="mazeDesignImage/spiral.png" alt="Spiral Maze" />
-    </div>
-  </section>
+  <details>
+    <summary>🧠 Controls</summary>
+    <ul>
+      <li><code>Arrow Keys</code> → Move Pac-Man</li>
+      <li><code>ENTER</code> → Confirm menu selections</li>
+      <li><code>ESC</code> → Exit to main menu</li>
+      <li><code>Mouse</code> → Navigate menus & hover for UI highlights</li>
+    </ul>
+  </details>
 
-  <section id="maze-logic">
-    <h2>🧱 Maze Logic Snippet</h2>
-    <pre><code>int maze1[21][21] = {
-  {1, 1, 1, 1, ..., 1},
-  {1, 0, 0, 0, ..., 1},
-  ...
-};</code></pre>
-  </section>
-
-  <section id="ghost-ai">
-    <h2>👾 Ghost AI</h2>
+  <details>
+    <summary>💯 Scoring System</summary>
     <table>
-      <thead>
-        <tr><th>Ghost</th><th>Preview</th><th>Behavior</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Inky</td><td><img src="inky/inky (1).png" width="40" /></td><td>Back-track chase</td></tr>
-        <tr><td>Blinky</td><td><img src="blinky/blinky (1).png" width="40" /></td><td>Direct pursuit</td></tr>
-        <tr><td>Pinky</td><td><img src="pinky/pinky (1).png" width="40" /></td><td>Predictive chase</td></tr>
-        <tr><td>Clyde</td><td><img src="clyde/clyde (1).png" width="40" /></td><td>Ambush from side</td></tr>
-        <tr><td>Donky</td><td><img src="donky/donky1.png" width="40" /></td><td>Wall-hugging AI</td></tr>
-        <tr><td>Rinky</td><td><img src="rinky/rinky1.png" width="40" /></td><td>Smart predictive AI</td></tr>
-      </tbody>
+      <tr><th>Action</th><th>Points</th></tr>
+      <tr><td>Regular Dot</td><td>+10</td></tr>
+      <tr><td>Power Pellet</td><td>+40</td></tr>
+      <tr><td>Fruit Bonus</td><td>+1000</td></tr>
+      <tr><td>Blue Ghosts (Combo)</td><td>+100 → +300 → +900 → +2700</td></tr>
+      <tr><td>Maze Completion</td><td>+2000 Bonus</td></tr>
+      <tr><td>Fruit Chain</td><td>~5000 (timed)</td></tr>
     </table>
-  </section>
+  </details>
 
-  <section id="features">
-    <h2>📦 Game Features</h2>
+  <details>
+    <summary>👻 Ghost Behavior</summary>
+    <table>
+      <tr><th>Mode</th><th>Description</th></tr>
+      <tr><td>Scatter</td><td>Retreat to fixed corners</td></tr>
+      <tr><td>Chase</td><td>Predict Pac-Man’s movements</td></tr>
+      <tr><td>Blast</td><td>High aggression & speed</td></tr>
+      <tr><td>Blue</td><td>Vulnerable & flee from Pac-Man</td></tr>
+    </table>
     <ul>
-      <li>Fruit collection bonus (e.g., <code>fruit/fruit (1).png</code>)</li>
-      <li>Dynamic maze rendering (<code>drawMazeX()</code> calls)</li>
-      <li>Power pellet system with <code>blueGhost</code> mode</li>
-      <li>Score tracking via <code>score.txt</code> and high score logic</li>
-      <li>Customizable UI for rules, credits, and difficulty</li>
+      <li><b>Blinky</b> → Direct pursuit</li>
+      <li><b>Pinky</b> → Predicts 4 cells ahead</li>
+      <li><b>Clyde</b> → Ambushes vertically</li>
+      <li><b>Inky</b> → Stalks behind you</li>
+      <li><b>Rinky & Donky</b> → Advanced levels; unpredictable logic</li>
     </ul>
-  </section>
-  <h2>🧩 Level Breakdown</h2>
-<table>
-  <thead>
-    <tr>
-      <th>Level</th>
-      <th>Maze Size</th>
-      <th>Total Food Pellets</th>
-      <th>Power Pellet Indices</th>
-      <th>Maze Type</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Level 1</td>
-      <td>21 × 21</td>
-      <td>226 pellets</td>
-      <td>0, 18, 104, 149</td>
-      <td>Classic boxy corridors</td>
-    </tr>
-    <tr>
-      <td>Level 2</td>
-      <td>21 × 21</td>
-      <td>236 pellets</td>
-      <td>0, 18, 156, 165</td>
-      <td>Symmetrical lattice structure</td>
-    </tr>
-    <tr>
-      <td>Level 3</td>
-      <td>19 × 36</td>
-      <td>362 pellets</td>
-      <td>84, 100, 200, 292</td>
-      <td>Long horizontal maze with corridor dynamics</td>
-    </tr>
-    <tr>
-      <td>Level 4</td>
-      <td>21 × 40</td>
-      <td>454 pellets</td>
-      <td>15, 50, 87, 135, 172, 244, 327</td>
-      <td>Spiral paths and mixed turns</td>
-    </tr>
-  </tbody>
-</table>
-<h2>🍒 Food & Scoring System</h2>
+  </details>
 
-<p>In Pac-Man, food items are central to gameplay — they increase score, trigger ghost vulnerability, and may grant extra lives. Here's how they work:</p>
-
-<h3>🍽️ Food Types</h3>
-<ul>
-  <li><strong>Small Pellets</strong> — Common dots throughout the maze. Each pellet adds <code>+10</code> points.</li>
-  <li><strong>Power Pellets</strong> — Larger dots that activate <code>blueGhost</code> mode. Worth <code>+50</code> points.</li>
-  <li><strong>Fruits</strong> — Spawn periodically for bonus score. Some rare fruits can trigger special events.</li>
-  <li><strong>Golden Apple</strong> — Grants <span style="color:gold;"><strong>+1 Extra Life</strong></span> when collected (appears only in Level 4).</li>
-</ul>
-
-<h3>📈 Scoring Breakdown</h3>
-<ul>
-  <li>🟡 Small Pellet: <code>+10</code></li>
-  <li>🔵 Power Pellet: <code>+50</code> and enables ghost hunting</li>
-  <li>👻 Ghost (while blue): <code>+200</code> per ghost</li>
-  <li>🍓 Fruit Bonus:
+  <details>
+    <summary>🍓 Fruit Mechanics</summary>
     <ul>
-      <li>Cherry — <code>+100</code></li>
-      <li>Strawberry — <code>+300</code></li>
-      <li>Orange — <code>+500</code></li>
-      <li>Apple — <code>+700</code></li>
-      <li>Melon — <code>+1000</code></li>
-      <li>Galaxian — <code>+2000</code></li>
-      <li>Bell — <code>+3000</code></li>
-      <li>Key — <code>+5000</code></li>
+      <li>Spawn at fixed time intervals</li>
+      <li>Appear at random dot positions</li>
+      <li>Grant <code>+1000</code> points</li>
+      <li>Fruit 12 or 15 may restore 1 life</li>
+      <li>Disappear after ~600 frames</li>
     </ul>
-  </li>
-</ul>
+  </details>
 
-<h3>🖼️ Fruit Gallery</h3>
-<div style="display: flex; flex-wrap: wrap; gap: 8px;">
-  <img src="fruit/fruit (1).png" alt="Cherry" width="50" height="50" />
-  <img src="fruit/fruit (2).png" alt="Strawberry" width="50" height="50" />
-  <img src="fruit/fruit (3).png" alt="Orange" width="50" height="50" />
-  <img src="fruit/fruit (4).png" alt="Apple" width="50" height="50" />
-  <img src="fruit/fruit (5).png" alt="Melon" width="50" height="50" />
-  <img src="fruit/fruit (6).png" alt="Galaxian" width="50" height="50" />
-  <img src="fruit/fruit (7).png" alt="Bell" width="50" height="50" />
-  <img src="fruit/fruit (8).png" alt="Key" width="50" height="50" />
-  <img src="fruit/fruit (9).png" alt="Golden Apple" width="50" height="50" />
-</div>
+  <details>
+    <summary>❤️ Lives & Blue Mode</summary>
+    <ul>
+      <li>Start with 3 lives</li>
+      <li>Gain extra life via special fruit</li>
+      <li>Lose life on ghost collision</li>
+      <li>Game Over at 0 lives → score submission screen</li>
+      <li><b>Blue Mode:</b> Ghosts become vulnerable for ~10 seconds</li>
+      <li>Speed reduces, animation shifts, combo scoring enabled</li>
+    </ul>
+  </details>
 
-<h3>❤️ Extra Life System</h3>
-<p>Collecting the <strong>Golden Apple</strong> adds an extra life, represented by:</p>
-<img src="life/love (1).png" alt="Life Icon" width="30" height="30" />
+  <details>
+    <summary>🌌 Maze Progression</summary>
+    <table>
+      <tr><th>Maze</th><th>Size</th><th>Dots</th><th>Ghosts</th><th>Highlights</th></tr>
+      <tr><td>Maze 1</td><td>21×21</td><td>226</td><td>4</td><td>Classic style</td></tr>
+      <tr><td>Maze 2</td><td>21×21</td><td>236</td><td>4</td><td>Challenging layout</td></tr>
+      <tr><td>Maze 3</td><td>19×36</td><td>362</td><td>6</td><td>Includes Rinky & Donky</td></tr>
+      <tr><td>Maze 4</td><td>21×40</td><td>454</td><td>6</td><td>Blast mode ghosts</td></tr>
+    </table>
+  </details>
 
-<p>Maximum lives: <strong>3</strong> by default. This can be modified depending on gameplay or debug settings. Lives are shown in-game on the top HUD.</p>
-<img src="life/love (1).png" alt="Life Icon" width="40" />
+  <details>
+    <summary>🕹️ Menu Functions</summary>
+    <table>
+      <tr><th>Option</th><th>Function</th></tr>
+      <tr><td>Play</td><td>Start gameplay session</td></tr>
+      <tr><td>High Score</td><td>Display leaderboard (Top 5)</td></tr>
+      <tr><td>Settings</td><td>Toggle sound, background & maze themes</td></tr>
+      <tr><td>Difficulty</td><td>Adjust ghost speed & behavior</td></tr>
+      <tr><td>Credits / Rules</td><td>View developer info & mechanics</td></tr>
+      <tr><td>Quit</td><td>Exit game with animation</td></tr>
+    </table>
+  </details>
 
-<p>Lives are capped at 3 unless modified in settings. Losing all lives triggers the game over screen.</p>
+  <details>
+    <summary>🧠 Game Logic Features</summary>
+    <ul>
+      <li>Animated intro, score submission, and exit sequence</li>
+      <li>All movement uses smooth pixel alignment logic</li>
+      <li>AI ghosts use predictive pathfinding with distance heuristics</li>
+      <li>Dynamic sprite rendering per direction & ghost type</li>
+      <li>Food states: uneaten (0), eaten (-1), fruit (-2)</li>
+      <li>Timers manage score updates, ghost logic, and fruit spawning</li>
+      <li>File I/O for top scores (<code>score.txt</code>) and sorting</li>
+    </ul>
+  </details>
 
+  <details>
+    <summary>📊 Difficulty Modes</summary>
+    <table>
+      <tr><th>Mode</th><th>Ghost Speed</th><th>Pac Speed</th><th>Behavior</th></tr>
+      <tr><td>Easy</td><td>2</td><td>3</td><td>Simple chase</td></tr>
+      <tr><td>Medium</td><td>3</td><td>3</td><td>Chase</td></tr>
+            <tr><td>Hard</td><td>4</td><td>3</td><td>Advanced AI prediction</td></tr>
+      <tr><td>Extreme</td><td>4</td><td>4</td><td>Blast mode + ghost chaining</td></tr>
+    </table>
+  </details>
 
+  <details>
+    <summary>🧩 Advanced Features</summary>
+    <ul>
+      <li>Animated intro sequence (<code>introimage[]</code>)</li>
+      <li>Dynamic backgrounds & sprite sets</li>
+      <li>Custom maze selector with 8 visual designs</li>
+      <li>Fruit spawns managed by frame logic (<code>fruitTimeInterval</code>)</li>
+      <li>Sprite animation index flips per movement tick</li>
+      <li>Timer-based ghost vulnerability fadeout</li>
+      <li>Food status flags:
+        <ul>
+          <li><code>0</code> → uneaten</li>
+          <li><code>-1</code> → eaten</li>
+          <li><code>-2</code> → fruit</li>
+        </ul>
+      </li>
+      <li>Ghost behavior shifts based on score milestones:
+        <ul>
+          <li><code>> 1000</code> → Chase mode</li>
+          <li><code>> 6000</code> → Blast mode</li>
+        </ul>
+      </li>
+    </ul>
+  </details>
 
-  <section id="instructions">
-    <h2>⚙️ How to Run</h2>
-    <ol>
-      <li>Ensure <code>iGraphics.h</code> and GLUT are linked in your compiler</li>
-      <li>Compile <code>pacman.txt</code></li>
-      <li>Use arrow keys and mouse for gameplay</li>
-    </ol>
-  </section>
+  <details>
+    <summary>📁 Save & Score System</summary>
+    <ul>
+      <li><code>Score.txt</code> stores all submitted scores</li>
+      <li>Top 5 scores sorted and displayed via UI</li>
+      <li>Scoring uses <code>converter()</code> for text conversion</li>
+      <li>File I/O: data is read/written with <code>fprintf()</code> and <code>fscanf()</code></li>
+    </ul>
+  </details>
 
-  <section id="footer">
-    <h2>🎉 Summary</h2>
-    <p><strong>Created by Ratul & Hasibul</strong> — a full arcade journey powered by precision C graphics and creativity. Enjoy strategic gameplay, responsive controls, and unpredictable ghost AI!</p>
-  </section>
+  <details>
+    <summary>🛠️ Developer Insights</summary>
+    <ul>
+      <li>Built using <code>iGraphics.h</code> with pixel-based logic</li>
+      <li>Ghost AI uses Euclidean distance heuristics + smooth directional handling</li>
+      <li>Player controls are responsive to both animation states and cell alignment</li>
+      <li>Highly modular codebase with separate draw, movement, and collision functions</li>
+      <li>Special thanks and animated outro sequences enhance UX</li>
+    </ul>
+  </details>
+
+  <footer style="text-align:center; margin-top:40px; font-size:14px; color:#888;">
+    Made by Ratul 🎯 | Powered by precision, obsession, and iGraphics ❤️
+  </footer>
 
 </body>
 </html>
