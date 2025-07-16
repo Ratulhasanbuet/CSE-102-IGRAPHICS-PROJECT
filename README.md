@@ -54,6 +54,15 @@
 
   <h1>🟡 Pac-Man (iGraphics Edition)</h1>
   <p>A full-featured Pac-Man game coded in C using the <code>iGraphics.h</code> library. Includes customizable mazes, fruit spawning, dynamic ghost AI (including Donky & Rinky), scoring mechanics, and menu transitions.</p>
+  <section style="background-color: #1b1b1b; color: #ffe100; padding: 20px; font-family: 'Segoe UI', sans-serif;">
+  <h2 style="border-bottom: 2px solid #ffe100;">✍️ Author Credits</h2>
+  <p><strong>Designed & Programmed by:</strong><br>
+     Md Ratul Hasan, CSE'24<br>
+     Hasibul Islam, CSE'24</p>
+  <p><strong>Instructed by:</strong><br>
+     Abdur Rafi</p>
+</section>
+
 
   <h2>🎮 Maze Previews</h2>
   <div class="image-grid">
