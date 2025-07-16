@@ -125,50 +125,53 @@
 </table>
 <h2>🍒 Food & Scoring System</h2>
 
-<p>In Pac-Man, food items are central to gameplay — they increase score, trigger ghost vulnerability, and in special cases, grant extra lives. Here's how they work:</p>
+<p>In Pac-Man, food items are central to gameplay — they increase score, trigger ghost vulnerability, and may grant extra lives. Here's how they work:</p>
 
 <h3>🍽️ Food Types</h3>
 <ul>
-  <li><strong>Small Pellets</strong> — Basic dots scattered throughout the maze. Each pellet adds <code>+10 points</code>.</li>
-  <li><strong>Power Pellets</strong> — Larger glowing dots placed at key corners. Eating one triggers <code>blueGhost</code> mode and adds <code>+50 points</code>.</li>
-  <li><strong>Bonus Fruits</strong> — Appear occasionally in the maze center. Each fruit has a unique score value and may trigger special effects.</li>
-  <li><strong>Golden Apple</strong> — Grants <span style="color:gold;"><strong>+1 Extra Life</strong></span> when collected. Rare and appears only in Level 4.</li>
+  <li><strong>Small Pellets</strong> — Common dots throughout the maze. Each pellet adds <code>+10</code> points.</li>
+  <li><strong>Power Pellets</strong> — Larger dots that activate <code>blueGhost</code> mode. Worth <code>+50</code> points.</li>
+  <li><strong>Fruits</strong> — Spawn periodically for bonus score. Some rare fruits can trigger special events.</li>
+  <li><strong>Golden Apple</strong> — Grants <span style="color:gold;"><strong>+1 Extra Life</strong></span> when collected (appears only in Level 4).</li>
 </ul>
 
 <h3>📈 Scoring Breakdown</h3>
 <ul>
-  <li>Small Pellet: <code>+10</code></li>
-  <li>Power Pellet: <code>+50</code></li>
-  <li>Ghost (Blue Mode): <code>+200</code> per ghost eaten</li>
-  <li>Fruit Bonus:
+  <li>🟡 Small Pellet: <code>+10</code></li>
+  <li>🔵 Power Pellet: <code>+50</code> and enables ghost hunting</li>
+  <li>👻 Ghost (while blue): <code>+200</code> per ghost</li>
+  <li>🍓 Fruit Bonus:
     <ul>
-      <li>Cherry: <code>+100</code></li>
-      <li>Strawberry: <code>+300</code></li>
-      <li>Orange: <code>+500</code></li>
-      <li>Apple: <code>+700</code></li>
-      <li>Melon: <code>+1000</code></li>
-      <li>Galaxian: <code>+2000</code></li>
-      <li>Bell: <code>+3000</code></li>
-      <li>Key: <code>+5000</code></li>
+      <li>Cherry — <code>+100</code></li>
+      <li>Strawberry — <code>+300</code></li>
+      <li>Orange — <code>+500</code></li>
+      <li>Apple — <code>+700</code></li>
+      <li>Melon — <code>+1000</code></li>
+      <li>Galaxian — <code>+2000</code></li>
+      <li>Bell — <code>+3000</code></li>
+      <li>Key — <code>+5000</code></li>
     </ul>
   </li>
 </ul>
 
-<h3>🖼️ Food Gallery</h3>
-<div style="display: flex; flex-wrap: wrap; gap: 10px;">
-  <img src="fruit/fruit (1).png" alt="Cherry" width="100" />
-  <img src="fruit/fruit (2).png" alt="Strawberry" width="100" />
-  <img src="fruit/fruit (3).png" alt="Orange" width="100" />
-  <img src="fruit/fruit (4).png" alt="Apple" width="100" />
-  <img src="fruit/fruit (5).png" alt="Melon" width="100" />
-  <img src="fruit/fruit (6).png" alt="Galaxian" width="100" />
-  <img src="fruit/fruit (7).png" alt="Bell" width="100" />
-  <img src="fruit/fruit (8).png" alt="Key" width="100" />
-  <img src="fruit/fruit (9).png" alt="Golden Apple" width="100" />
+<h3>🖼️ Fruit Gallery</h3>
+<div style="display: flex; flex-wrap: wrap; gap: 8px;">
+  <img src="fruit/fruit (1).png" alt="Cherry" width="50" height="50" />
+  <img src="fruit/fruit (2).png" alt="Strawberry" width="50" height="50" />
+  <img src="fruit/fruit (3).png" alt="Orange" width="50" height="50" />
+  <img src="fruit/fruit (4).png" alt="Apple" width="50" height="50" />
+  <img src="fruit/fruit (5).png" alt="Melon" width="50" height="50" />
+  <img src="fruit/fruit (6).png" alt="Galaxian" width="50" height="50" />
+  <img src="fruit/fruit (7).png" alt="Bell" width="50" height="50" />
+  <img src="fruit/fruit (8).png" alt="Key" width="50" height="50" />
+  <img src="fruit/fruit (9).png" alt="Golden Apple" width="50" height="50" />
 </div>
 
-<h3>❤️ Extra Life Mechanic</h3>
-<p>Collecting the <strong>Golden Apple</strong> (Level 4 only) instantly adds <strong>+1 life</strong> to the player. Lives are tracked visually using:</p>
+<h3>❤️ Extra Life System</h3>
+<p>Collecting the <strong>Golden Apple</strong> adds an extra life, represented by:</p>
+<img src="life/love (1).png" alt="Life Icon" width="30" height="30" />
+
+<p>Maximum lives: <strong>3</strong> by default. This can be modified depending on gameplay or debug settings. Lives are shown in-game on the top HUD.</p>
 <img src="life/love (1).png" alt="Life Icon" width="40" />
 
 <p>Lives are capped at 3 unless modified in settings. Losing all lives triggers the game over screen.</p>
