@@ -1,166 +1,112 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>PACMAN EXTREME - Rules</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #0d0d0d;
-      color: #f2f2f2;
-      line-height: 1.6;
-      padding: 40px;
-      max-width: 900px;
-      margin: auto;
-    }
-    h1, h2 {
-      color: #ffdd00;
-      text-align: center;
-    }
-    h2 {
-      border-bottom: 2px solid #ffdd00;
-      padding-bottom: 5px;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 20px 0;
-      background-color: #1a1a1a;
-    }
-    th, td {
-      border: 1px solid #444;
-      padding: 10px;
-      text-align: left;
-    }
-    th {
-      background-color: #333;
-    }
-    tr:nth-child(even) {
-      background-color: #222;
-    }
-    code {
-      background-color: #222;
-      padding: 3px 6px;
-      border-radius: 4px;
-      color: #00ffcc;
-    }
-    ul {
-      margin-left: 20px;
-    }
-    .section {
-      margin-top: 40px;
-    }
-  </style>
-</head>
-<body>
+Filename: README.txt
 
-  <h1>PACMAN EXTREME</h1>
-  <h2>🎮 GAME RULES & GUIDE</h2>
+Pac-Man Game Documentation
+===========================
 
-  <div class="section">
-    <h3>🎯 Objective</h3>
-    <ul>
-      <li>Eat all dots to clear the maze</li>
-      <li>Avoid ghosts unless they’re vulnerable (blue)</li>
-      <li>Collect fruits for score boosts</li>
-      <li>Advance through increasingly difficult mazes</li>
-    </ul>
-  </div>
+1. Overview
+-----------
+This is a full-featured Pac-Man clone built in C using iGraphics.h. It includes:
+- Intro animation and menus
+- Level selection (4 maze layouts)
+- Difficulty settings influencing ghost speed and AI modes
+- In-game pause, background selector, high-score, settings, credits, rules
+- Scoring, lives, fruits, power-pellets, ghost AI modes (scatter, chase, frightened)
 
-  <div class="section">
-    <h3>🧠 Controls</h3>
-    <ul>
-      <li><code>Arrow Keys</code> – Move Pac-Man</li>
-      <li><code>ESC</code> – Quit to Menu</li>
-      <li><code>ENTER</code> – Confirm selections</li>
-    </ul>
-  </div>
+2. How to Play
+--------------
+1. Run the game executable.
+2. Watch the intro slideshow, then press Enter to enter the main menu.
+3. Navigate menus with mouse:
+   - Play: enter name, select level.
+   - Difficulty: choose ghost speed & AI behavior.
+   - Settings: toggle sound, pick maze skin.
+   - High Score, Credits, Rules, Quit.
+4. Controls in game:
+   - Arrow keys to move Pac-Man.
+   - Click pause icon or press ESC to pause.
+   - Mouse: resume, change background, return to menu.
+5. Objective:
+   - Eat all pellets and fruits to clear the level.
+   - Collect power-pellets to turn ghosts blue and earn bonus points.
+   - Avoid ghosts unless they are frightened.
+   - Survive with 3 lives; extra lives can appear as fruits.
 
-  <div class="section">
-    <h3>💯 Scoring System</h3>
-    <table>
-      <tr><th>Action</th><th>Points</th></tr>
-      <tr><td>Eat Regular Dot</td><td>+10</td></tr>
-      <tr><td>Eat Power Pellet</td><td>+40</td></tr>
-      <tr><td>Eat Fruit</td><td>+1000</td></tr>
-      <tr><td>Eat Blue Ghosts</td><td>+100 → +300 → +900 → +2700</td></tr>
-      <tr><td>Complete Maze</td><td>+2000 Bonus</td></tr>
-    </table>
-  </div>
+3. Main Features
+----------------
+- **Menus & Intro**: Animated slideshow, mouse-driven buttons.
+- **Levels**: Four distinct map arrays (21×21, 21×21, 19×36, 21×40).
+- **Ghost AI**:
+  - Scatter: ghosts roam fixed corners.
+  - Chase: predictive targeting per ghost type.
+  - Frightened: slow ghosts turn blue; can be eaten.
+- **Scoring**:
+  - Dots: 10 points.
+  - Fruits: up to 1000 points.
+  - Ghosts: 200, 600, 1800… escalating per successive eat.
+- **File I/O**:
+  - Records and sorts high scores in “highScore.txt”.
+  - Reads/writes player names and scores.
+- **Timers**: Uses iSetTimer for game loop, animations, ghost AI, intro, etc.
 
-  <div class="section">
-    <h3>👻 Ghost Behavior</h3>
-    <table>
-      <tr><th>Mode</th><th>Description</th></tr>
-      <tr><td>Scatter</td><td>Ghosts retreat to preset corners</td></tr>
-      <tr><td>Chase</td><td>Predictive movement targeting Pac-Man</td></tr>
-      <tr><td>Blast</td><td>Maximum speed and aggression</td></tr>
-      <tr><td>Blue</td><td>Ghosts slow down and become vulnerable</td></tr>
-    </table>
-    <ul>
-      <li><strong>Blinky</strong> – Direct hunter</li>
-      <li><strong>Pinky</strong> – Predictive logic</li>
-      <li><strong>Clyde</strong> – Vertical ambusher</li>
-      <li><strong>Inky</strong> – Trails behind</li>
-      <li><strong>Rinky & Donky</strong> – Appear in Maze 3 & 4, unpredictable behavior</li>
-    </ul>
-  </div>
+4. Code Structure
+-----------------
 
-  <div class="section">
-    <h3>🍓 Fruit Mechanics</h3>
-    <ul>
-      <li>Spawn at intervals, random positions</li>
-      <li>Provide <code>+1000</code> points</li>
-      <li>May grant extra life on rare occasion</li>
-      <li>Vanishes if not collected within time limit</li>
-    </ul>
-  </div>
+4.1 Data Structures
+   - `struct move` for Pac-Man: position, direction flags, animation indices.
+   - `struct ghost` for each enemy: position, speed, direction flags, AI distances.
+   - Arrays for maze layouts: `maze1[][]`, `maze2[][]`, `maze3[][]`, `maze4[][]`.
+   - Coordinate lookup: `mapX[][]`, `mapY[][]` for pixel positions.
+   - Food arrays: `foodXcor[][2]`, `foodYcor[]`, status flags.
 
-  <div class="section">
-    <h3>❤️ Lives</h3>
-    <ul>
-      <li>Start with 3 lives</li>
-      <li>Extra life from special fruits</li>
-      <li>Lose one life on contact with ghosts (unless blue)</li>
-      <li>Game over when lives reach zero</li>
-    </ul>
-  </div>
+4.2 Core Functions
+   - `main()`: initialization, timers, event loop.
+   - `iDraw()`: draws everything based on current state flags.
+   - `pacmanmovement()`: updates Pac-Man position & collision.
+   - `pookiemovement()`: updates ghost positions with AI logic.
+   - `collisioncheck()`: pellet consumption, fruit spawn, life/ghost collisions.
+   - `DataAnalysis()`: reads, sorts, and writes high-score data.
 
-  <div class="section">
-    <h3>🌌 Maze Progression</h3>
-    <table>
-      <tr>
-        <th>Maze</th><th>Size</th><th>Dots</th><th>Ghosts</th><th>Notes</th>
-      </tr>
-      <tr><td>Maze 1</td><td>21×21</td><td>226</td><td>4</td><td>Beginner Level</td></tr>
-      <tr><td>Maze 2</td><td>21×21</td><td>236</td><td>4</td><td>Intermediate</td></tr>
-      <tr><td>Maze 3</td><td>19×36</td><td>362</td><td>6</td><td>Rinky & Donky appear</td></tr>
-      <tr><td>Maze 4</td><td>21×40</td><td>454</td><td>6</td><td>High difficulty</td></tr>
-    </table>
-  </div>
+4.3 Rendering
+   - `drawMazeN()`: renders walls via `iShowImage` for each cell.
+   - `drawFoodAndPowerPellet()`: draws dots, power-pellets, fruits.
+   - Image arrays hold file paths for all sprites and backgrounds.
 
-  <div class="section">
-    <h3>🕹️ Menu Options</h3>
-    <table>
-      <tr><th>Option</th><th>Function</th></tr>
-      <tr><td>Play</td><td>Starts the game</td></tr>
-      <tr><td>High Score</td><td>Displays top 5 entries</td></tr>
-      <tr><td>Settings</td><td>Background, sound toggle, maze design</td></tr>
-      <tr><td>Difficulty</td><td>Adjust game speed and AI logic</td></tr>
-      <tr><td>Credits & Rules</td><td>Info and game mechanics</td></tr>
-      <tr><td>Quit</td><td>Exits with farewell animation</td></tr>
-    </table>
-  </div>
+4.4 Input Handling
+   - `iKeyboard()`: text entry for player name, menu shortcuts.
+   - `iSpecialKeyboard()`: arrow keys for movement.
+   - `iMouse()`, `iMouseMove()`: menu button hover and clicks.
 
-  <div class="section">
-    <h3>🧠 Pro Tips</h3>
-    <ul>
-      <li>Chain ghost eats in blue mode for insane scores</li>
-      <li>Grab fruit quickly before it vanishes</li>
-      <li>Use pellet timing for ghost crowd control</li>
-      <li>Track ghost paths and predict corners</li>
-    </ul>
-  </div>
+4.5 Timers & Flow Control
+   - Intro slideshow timer (`introchange`).
+   - Ghost/animation timers: movement loops, frightened mode.
+   - Pause/resume functions to stop all timers when paused.
 
-</body>
-</html>
+4.6 File I/O & High Score
+   - Appends new scores to “score.txt” on level end.
+   - Reads back, sorts descending, writes top entries to “highScore.txt”.
+
+4.7 Asset Organization
+   - Separate folders for each sprite set:
+     - `pacman/`, `inky/`, `blinky/`, `pinky/`, `clyde/`, `donky/`, `rinky/`
+   - UI images: `introimage/`, `menu image/`, `settingsimage/`, etc.
+   - Backgrounds: `bg/`, `slbg/`.
+   - All file paths stored in C arrays for easy theme switching.
+
+5. Configuration
+----------------
+- `mazeCellWidth` and `mazeCellHeight` define grid cell size in pixels.
+- `diffSpeed` sets ghost movement speed per difficulty.
+- `fruitTimeInterval` controls interval between fruit spawns.
+- Sound toggled via a boolean `soundOn`.
+
+6. Controls Summary
+-------------------
+- Arrow keys: move Pac-Man.
+- Mouse:
+  - Click menu options.
+  - Click pause icon.
+  - In pause screen: resume, change background, return to menu.
+- Enter: confirm in text input and intro screen.
+- ESC: cancel name entry.
+
+Enjoy customizing, extending, and playing your Pac-Man clone!
