@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>PACMAN EXTREME - Game Manual</title>
- 
-</head>
+
 <body>
 
   <h1>🎮 PACMAN EXTREME</h1>
