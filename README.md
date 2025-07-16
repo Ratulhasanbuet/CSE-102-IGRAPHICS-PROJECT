@@ -1,167 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Pac-Man — iGraphics Project</title>
-  <style>
-    body {
-      background-color: #0d0d0d;
-      color: #f5f5f5;
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      padding: 20px;
-    }
-    h1, h2 {
-      color: #ffe100;
-      border-bottom: 2px solid #333;
-      padding-bottom: 5px;
-    }
-    .image-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-    .image-grid img {
-      width: 180px;
-      border: 2px solid #444;
-    }
-    .code-block {
-      background: #1a1a1a;
-      color: #ccc;
-      padding: 15px;
-      font-family: monospace;
-      border-left: 5px solid #ffe100;
-      margin: 20px 0;
-      overflow-x: auto;
-    }
-    table {
-      border-collapse: collapse;
-      margin-top: 10px;
-      width: 100%;
-    }
-    table td, table th {
-      border: 1px solid #444;
-      padding: 8px;
-    }
-    table th {
-      background-color: #222;
-      color: #ffe100;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <title>Pac-Man — iGraphics Edition</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
   <h1>🟡 Pac-Man (iGraphics Edition)</h1>
-  <p>A full-featured Pac-Man game coded in C using the <code>iGraphics.h</code> library. Includes customizable mazes, fruit spawning, dynamic ghost AI (including Donky & Rinky), scoring mechanics, and menu transitions.</p>
-  <section style="background-color: #1b1b1b; color: #ffe100; padding: 20px; font-family: 'Segoe UI', sans-serif;">
-  <h2 style="border-bottom: 2px solid #ffe100;">✍️ Author Credits</h2>
-  <p><strong>Designed & Programmed by:</strong><br>
-     Md Ratul Hasan, CSE'24<br>
-     Hasibul Islam, CSE'24</p>
-  <p><strong>Instructed by:</strong><br>
-     Abdur Rafi</p>
+  <p>A classic Pac-Man remake using C and <code>iGraphics.h</code>. Features multiple maze themes, ghost AI modes, scoring, fruits, and dynamic UI transitions.</p>
 
-     <h2>📋 Main Menu Overview</h2>
+  <section id="author">
+    <h2>✍️ Author Credits</h2>
+    <p><strong>Designed & Programmed by:</strong> Md Ratul Hasan, CSE'24 & Hasibul Islam, CSE'24</p>
+    <p><strong>Instructed by:</strong> Abdur Rafi</p>
+  </section>
 
-<div style="text-align: center; margin-bottom: 20px;">
-  <img src="menu image/PACMAN.png" alt="Main Menu Screenshot" style="max-width: 100%; border: 2px solid #444; box-shadow: 0 0 12px #000;">
-</div>
+  <section id="menu">
+    <h2>📋 Main Menu Overview</h2>
+    <img src="menu image/PACMAN.png" alt="Main Menu Screenshot" />
+    <ul>
+      <li><strong>Play Game</strong> — Start and choose levels</li>
+      <li><strong>High Score</strong> — View player stats from <code>highScore.txt</code></li>
+      <li><strong>Settings</strong> — Sound toggle and maze selection</li>
+      <li><strong>Difficulty</strong> — Set ghost speed and AI behavior</li>
+      <li><strong>Credits</strong> — Developer and mentor names</li>
+      <li><strong>Rules</strong> — Gameplay mechanics overview</li>
+      <li><strong>Quit</strong> — Trigger animated game exit</li>
+      <li><strong>Special Thanks</strong> — Acknowledgments page</li>
+    </ul>
+  </section>
 
-<ul style="line-height: 1.8;">
-  <li><strong>🎮 Play Game</strong> — Start the game and enter level selection.</li>
-  <li><strong>🏆 High Score</strong> — View top player scores from <code>highScore.txt</code>.</li>
-  <li><strong>⚙️ Settings</strong> — Toggle sound and choose background or maze theme.</li>
-  <li><strong>🔥 Difficulty</strong> — Select ghost speed and AI style.</li>
-  <li><strong>🧑‍💻 Credits</strong> — Show developer and instructor names.</li>
-  <li><strong>📖 Rules</strong> — Display gameplay instructions and ghost logic.</li>
-  <li><strong>❌ Quit</strong> — Exit with animated visual outro.</li>
-  <li><strong>🙏 Special Thanks</strong> — Personal acknowledgments section.</li>
-</ul>
+  <section id="maze-gallery">
+    <h2>🎮 Maze Gallery</h2>
+    <div class="maze-grid">
+      <img src="mazeDesignImage/pixel.png" alt="Pixel Maze" />
+      <img src="mazeDesignImage/nebula.png" alt="Nebula Maze" />
+      <img src="mazeDesignImage/spectral.png" alt="Spectral Maze" />
+      <img src="mazeDesignImage/psi.png" alt="Psi Maze" />
+      <img src="mazeDesignImage/crack.png" alt="Crack Maze" />
+      <img src="mazeDesignImage/echo.png" alt="Echo Maze" />
+      <img src="mazeDesignImage/phantom.png" alt="Phantom Maze" />
+      <img src="mazeDesignImage/spiral.png" alt="Spiral Maze" />
+    </div>
+  </section>
 
-</section>
-
-
-  <h2>🎮 Maze Previews</h2>
-  <div class="image-grid">
-    <img src="mazeDesignImage/pixel.png" alt="Pixel Maze">
-    <img src="mazeDesignImage/nebula.png" alt="Nebula Maze">
-    <img src="mazeDesignImage/spectral.png" alt="Spectral Maze">
-    <img src="mazeDesignImage/psi.png" alt="Psi Maze">
-    <img src="mazeDesignImage/crack.png" alt="Crack Maze">
-    <img src="mazeDesignImage/echo.png" alt="Echo Maze">
-    <img src="mazeDesignImage/phantom.png" alt="Phantom Maze">
-    <img src="mazeDesignImage/spiral.png" alt="Spiral Maze">
-  </div>
-
-  <h2>🧱 Maze Logic Example (Maze 1)</h2>
-  <div class="code-block">
-<pre>
-int maze1[21][21] = {
+  <section id="maze-logic">
+    <h2>🧱 Maze Logic Snippet</h2>
+    <pre><code>int maze1[21][21] = {
   {1, 1, 1, 1, ..., 1},
   {1, 0, 0, 0, ..., 1},
   ...
-};
-</pre>
-  </div>
+};</code></pre>
+  </section>
 
-  <h2>👾 Ghost AI Behavior</h2>
-  <table>
-    <tr>
-      <th>Ghost</th>
-      <th>Image</th>
-      <th>Behavior</th>
-    </tr>
-    <tr>
-      <td>Inky</td>
-      <td><img src="inky/inky (1).png" width="40"/></td>
-      <td>Chases behind Pac-Man</td>
-    </tr>
-    <tr>
-      <td>Blinky</td>
-      <td><img src="blinky/blinky (1).png" width="40"/></td>
-      <td>Direct pursuit</td>
-    </tr>
-    <tr>
-      <td>Pinky</td>
-      <td><img src="pinky/pinky (1).png" width="40"/></td>
-      <td>Predictive chase</td>
-    </tr>
-    <tr>
-      <td>Clyde</td>
-      <td><img src="clyde/clyde (1).png" width="40"/></td>
-      <td>Ambush from above</td>
-    </tr>
-    <tr>
-      <td>Donky</td>
-      <td><img src="donky/donky1.png" width="40"/></td>
-      <td>Wall-hugging, dynamic AI</td>
-    </tr>
-    <tr>
-      <td>Rinky</td>
-      <td><img src="rinky/rinky1.png" width="40"/></td>
-      <td>Predictive pathfinding</td>
-    </tr>
-  </table>
+  <section id="ghost-ai">
+    <h2>👾 Ghost AI</h2>
+    <table>
+      <thead>
+        <tr><th>Ghost</th><th>Preview</th><th>Behavior</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Inky</td><td><img src="inky/inky (1).png" width="40" /></td><td>Back-track chase</td></tr>
+        <tr><td>Blinky</td><td><img src="blinky/blinky (1).png" width="40" /></td><td>Direct pursuit</td></tr>
+        <tr><td>Pinky</td><td><img src="pinky/pinky (1).png" width="40" /></td><td>Predictive chase</td></tr>
+        <tr><td>Clyde</td><td><img src="clyde/clyde (1).png" width="40" /></td><td>Ambush from side</td></tr>
+        <tr><td>Donky</td><td><img src="donky/donky1.png" width="40" /></td><td>Wall-hugging AI</td></tr>
+        <tr><td>Rinky</td><td><img src="rinky/rinky1.png" width="40" /></td><td>Smart predictive AI</td></tr>
+      </tbody>
+    </table>
+  </section>
 
-  <h2>📦 Game Features</h2>
-  <ul>
-    <li>🍒 Fruit with bonuses — <code>fruit/fruit (1).png</code></li>
-    <li>🌀 Dynamic maze rendering via <code>drawMaze1/2/3/4()</code></li>
-    <li>⏱ Power pellets toggle <code>blueGhost</code> mode</li>
-    <li>📈 Scoring system using <code>score.txt</code> and highscore tracking</li>
-    <li>📃 Menu with credits, rules, difficulty selector</li>
-  </ul>
+  <section id="features">
+    <h2>📦 Game Features</h2>
+    <ul>
+      <li>Fruit collection bonus (e.g., <code>fruit/fruit (1).png</code>)</li>
+      <li>Dynamic maze rendering (<code>drawMazeX()</code> calls)</li>
+      <li>Power pellet system with <code>blueGhost</code> mode</li>
+      <li>Score tracking via <code>score.txt</code> and high score logic</li>
+      <li>Customizable UI for rules, credits, and difficulty</li>
+    </ul>
+  </section>
 
-  <h2>⚙️ How to Run</h2>
-  <ol>
-    <li>Ensure <code>iGraphics.h</code> and OpenGL libraries are linked in your compiler.</li>
-    <li>Compile the project (`pacman.txt`) and run the main executable.</li>
-    <li>Use arrow keys for movement and mouse for menu interaction.</li>
-  </ol>
+  <section id="instructions">
+    <h2>⚙️ How to Run</h2>
+    <ol>
+      <li>Ensure <code>iGraphics.h</code> and GLUT are linked in your compiler</li>
+      <li>Compile <code>pacman.txt</code></li>
+      <li>Use arrow keys and mouse for gameplay</li>
+    </ol>
+  </section>
 
-  <h2>🎉 Credit</h2>
-  <p><strong>Designed and Developed by Ratul</strong> — with intricate gameplay refinement, creative ghost logic, and sprite mapping brilliance.</p>
+  <section id="footer">
+    <h2>🎉 Summary</h2>
+    <p><strong>Created by Ratul & Hasibul</strong> — a full arcade journey powered by precision C graphics and creativity. Enjoy strategic gameplay, responsive controls, and unpredictable ghost AI!</p>
+  </section>
 
 </body>
 </html>
