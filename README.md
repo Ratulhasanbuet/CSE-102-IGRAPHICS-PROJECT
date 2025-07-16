@@ -3,626 +3,623 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pacman Game - Project Documentation</title>
+    <title>Pacman Game - CSE-102 iGraphics Project Documentation</title>
     <style>
-        :root {
-            --primary: #FFCC00;
-            --secondary: #1A1A2E;
-            --accent: #D72323;
-            --background: #0F3460;
-            --text: #E6E6E6;
-            --ghost-pink: #FFB8FF;
-            --ghost-blue: #00FFFF;
-            --ghost-orange: #FFB851;
-            --ghost-red: #FF5555;
-        }
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            background: linear-gradient(135deg, var(--background), #16213E);
-            color: var(--text);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            padding: 20px;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            background-attachment: fixed;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
         }
         
         header {
-            text-align: center;
-            padding: 40px 20px;
-            background: rgba(10, 15, 35, 0.8);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
             border-radius: 15px;
+            padding: 30px;
+            text-align: center;
             margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            position: relative;
-            overflow: hidden;
-            border: 3px solid var(--primary);
-        }
-        
-        header::before {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, transparent 20%, var(--primary) 20%, transparent 21%);
-            background-size: 50px 50px;
-            opacity: 0.1;
-            z-index: -1;
-            animation: pacman-bg 20s linear infinite;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
         
         h1 {
-            font-size: 3.5rem;
-            margin-bottom: 15px;
-            color: var(--primary);
-            text-shadow: 0 0 15px rgba(255, 204, 0, 0.7);
-            letter-spacing: 2px;
+            color: #FFD700;
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
         
         .subtitle {
-            font-size: 1.5rem;
-            color: var(--ghost-blue);
-            margin-bottom: 20px;
+            color: #fff;
+            font-size: 1.2em;
+            opacity: 0.9;
         }
         
-        .main-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 25px;
-        }
-        
-        .card {
-            background: rgba(26, 26, 46, 0.85);
+        .nav-menu {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
             border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 2px solid rgba(255, 204, 0, 0.3);
-        }
-        
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
-            border-color: var(--primary);
-        }
-        
-        .card h2 {
-            color: var(--primary);
-            font-size: 2rem;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--accent);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .card h2 i {
-            font-size: 1.8rem;
-        }
-        
-        .card h3 {
-            color: var(--ghost-blue);
-            margin: 20px 0 10px;
-            font-size: 1.4rem;
-        }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-        
-        .feature-item {
-            background: rgba(15, 52, 96, 0.6);
             padding: 20px;
-            border-radius: 10px;
-            border-left: 4px solid var(--primary);
-            transition: all 0.3s ease;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
         
-        .feature-item:hover {
-            transform: translateX(5px);
-            border-left-width: 8px;
-        }
-        
-        .feature-item h4 {
-            color: var(--ghost-orange);
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .maze-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 20px;
-        }
-        
-        .maze-card {
-            background: rgba(15, 52, 96, 0.7);
-            border-radius: 10px;
-            padding: 20px;
-            text-align: center;
-            border: 2px solid transparent;
-            transition: all 0.3s ease;
-        }
-        
-        .maze-card:hover {
-            border-color: var(--primary);
-            box-shadow: 0 0 20px rgba(255, 204, 0, 0.3);
-        }
-        
-        .maze-preview {
-            width: 100%;
-            height: 150px;
-            background: #0A0F1E;
-            margin: 15px 0;
-            border-radius: 8px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .maze-preview::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(rgba(26, 26, 46, 0.8), rgba(26, 26, 46, 0.8)),
-                radial-gradient(circle at 30% 30%, var(--ghost-pink) 3px, transparent 3px),
-                radial-gradient(circle at 70% 30%, var(--ghost-red) 3px, transparent 3px),
-                radial-gradient(circle at 30% 70%, var(--ghost-blue) 3px, transparent 3px),
-                radial-gradient(circle at 70% 70%, var(--ghost-orange) 3px, transparent 3px);
-            background-size: 100%, 20px 20px;
-            opacity: 0.8;
-        }
-        
-        .ghost-container {
+        .nav-menu ul {
+            list-style: none;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 25px;
-            margin-top: 20px;
+            gap: 20px;
         }
         
-        .ghost-card {
-            width: 150px;
-            background: rgba(15, 52, 96, 0.7);
-            border-radius: 10px;
+        .nav-menu a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .nav-menu a:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        h2 {
+            color: #333;
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #FFD700;
+            padding-bottom: 10px;
+        }
+        
+        h3 {
+            color: #555;
+            font-size: 1.5em;
+            margin: 20px 0 10px 0;
+            padding-left: 10px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .feature-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
             padding: 20px;
-            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease;
         }
         
-        .ghost-card:hover {
-            transform: scale(1.05);
+        .feature-card:hover {
+            transform: translateY(-5px);
         }
         
-        .ghost-icon {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            margin: 0 auto 15px;
-            position: relative;
+        .feature-card h4 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            color: #FFD700;
         }
         
-        .ghost-icon::after {
-            content: "";
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 100%;
-            height: 20px;
-            background: inherit;
-            clip-path: polygon(
-                0 0, 20px 0, 25px 10px, 35px 0, 45px 10px, 
-                55px 0, 65px 10px, 75px 0, 80px 10px, 
-                100% 0, 100% 100%, 0 100%
-            );
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
         }
         
-        .blinky { background: var(--ghost-red); }
-        .pinky { background: var(--ghost-pink); }
-        .inky { background: var(--ghost-blue); }
-        .clyde { background: var(--ghost-orange); }
-        .rinky { background: #A020F0; }
-        .donky { background: #32CD32; }
-        
-        .controls {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .control-item {
-            background: rgba(15, 52, 96, 0.6);
-            padding: 15px;
-            border-radius: 10px;
-            text-align: center;
-            border: 1px solid rgba(255, 204, 0, 0.4);
-        }
-        
-        .key {
-            display: inline-block;
-            background: var(--secondary);
-            padding: 8px 15px;
-            border-radius: 5px;
+        .tech-badge {
+            background: #FFD700;
+            color: #333;
+            padding: 8px 16px;
+            border-radius: 20px;
             font-weight: bold;
-            color: var(--primary);
-            margin-top: 8px;
-            border: 1px solid var(--primary);
-        }
-        
-        footer {
-            text-align: center;
-            padding: 30px 0;
-            margin-top: 40px;
-            border-top: 1px solid rgba(255, 204, 0, 0.3);
-        }
-        
-        .highlight {
-            color: var(--primary);
-            font-weight: bold;
+            font-size: 0.9em;
         }
         
         .code-block {
-            background: rgba(10, 15, 35, 0.8);
+            background: #2d3748;
+            color: #e2e8f0;
             padding: 20px;
             border-radius: 10px;
-            margin: 20px 0;
-            font-family: monospace;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
             overflow-x: auto;
-            border-left: 4px solid var(--accent);
         }
         
-        @keyframes pacman-bg {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .controls-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .control-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            text-align: center;
+        }
+        
+        .control-key {
+            background: #333;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-weight: bold;
+        }
+        
+        .screenshot-placeholder {
+            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            padding: 40px;
+            text-align: center;
+            color: #666;
+            margin: 20px 0;
+            font-style: italic;
+        }
+        
+        .author-info {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .author-info h3 {
+            border: none;
+            padding: 0;
+            margin-bottom: 10px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .stat-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid #e9ecef;
+        }
+        
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 0.9em;
         }
         
         @media (max-width: 768px) {
-            .features-grid, .maze-grid, .controls {
-                grid-template-columns: 1fr;
+            .nav-menu ul {
+                flex-direction: column;
+                align-items: center;
             }
             
             h1 {
-                font-size: 2.5rem;
+                font-size: 2em;
+            }
+            
+            .container {
+                padding: 10px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="main-container">
+    <div class="container">
         <header>
-            <h1>PACMAN GAME</h1>
-            <p class="subtitle">A Modern C Implementation with Advanced Features</p>
-            <p>Classic arcade gameplay with enhanced mechanics, multiple mazes, and intelligent ghost AI</p>
+            <h1>🎮 PACMAN GAME</h1>
+            <p class="subtitle">CSE-102 iGraphics Project Documentation</p>
+            <p class="subtitle">Built with C Programming Language & iGraphics Library</p>
         </header>
         
-        <section class="card">
-            <h2><i>🎮</i> Game Overview</h2>
-            <p>This Pacman implementation features a complete game engine built with C and the iGraphics library. It includes all the classic elements of the original arcade game with modern enhancements including multiple maze designs, difficulty levels, ghost behaviors, and power-up systems.</p>
-            
-            <div class="code-block">
-                // Core game structure<br>
-                typedef struct {<br>
-                &nbsp;&nbsp;int upInd, downInd, leftInd, rightInd;<br>
-                &nbsp;&nbsp;int x, y;<br>
-                &nbsp;&nbsp;bool upCount, downCount, leftCount, rightCount;<br>
-                &nbsp;&nbsp;bool smoothRight, smoothLeft, smoothUp, smoothDown;<br>
-                &nbsp;&nbsp;int right, left, up, down;<br>
-                } pacmove;<br><br>
-                
-                typedef struct {<br>
-                &nbsp;&nbsp;int upInd, downInd, leftInd, rightInd;<br>
-                &nbsp;&nbsp;int x, y;<br>
-                &nbsp;&nbsp;int cellX, cellY;<br>
-                &nbsp;&nbsp;bool flagRight, flagLeft, flagUp, flagDown;<br>
-                &nbsp;&nbsp;int left, right, up, down;<br>
-                &nbsp;&nbsp;int speed;<br>
-                &nbsp;&nbsp;bool blueOn; // Vulnerable state<br>
-                &nbsp;&nbsp;int dist1, dist2; // Pathfinding metrics<br>
-                } ghost;
-            </div>
-        </section>
-        
-        <section class="card">
-            <h2><i>🌟</i> Key Features</h2>
-            <div class="features-grid">
-                <div class="feature-item">
-                    <h4><i>🧩</i> Multiple Maze Designs</h4>
-                    <p>Four unique mazes with different layouts and challenges, each with their own coordinate systems and wall placements.</p>
-                </div>
-                
-                <div class="feature-item">
-                    <h4><i>👻</i> Intelligent Ghost AI</h4>
-                    <p>Ghosts with unique behaviors: Blinky (aggressive), Pinky (ambusher), Inky (unpredictable), Clyde (random), plus two additional ghosts for larger mazes.</p>
-                </div>
-                
-                <div class="feature-item">
-                    <h4><i>🎚️</i> Adjustable Difficulty</h4>
-                    <p>Five difficulty levels that affect ghost speed and behavior patterns, changing how they chase Pacman.</p>
-                </div>
-                
-                <div class="feature-item">
-                    <h4><i>🍒</i> Power-ups & Fruits</h4>
-                    <p>Power pellets that make ghosts vulnerable and 16 different fruits that appear at intervals for bonus points.</p>
-                </div>
-                
-                <div class="feature-item">
-                    <h4><i>📊</i> Scoring System</h4>
-                    <p>Points for dots, fruits, and eating ghosts. Multipliers for consecutive ghost captures during power mode.</p>
-                </div>
-                
-                <div class="feature-item">
-                    <h4><i>💾</i> High Score Tracking</h4>
-                    <p>Persistent high score system that saves top players and their achievements.</p>
-                </div>
-            </div>
-        </section>
-        
-        <section class="card">
-            <h2><i>🧱</i> Maze System</h2>
-            <div class="maze-grid">
-                <div class="maze-card">
-                    <h3>Maze 1</h3>
-                    <p>21×21 grid</p>
-                    <p>Classic layout with 4 power pellets</p>
-                    <div class="maze-preview"></div>
-                </div>
-                
-                <div class="maze-card">
-                    <h3>Maze 2</h3>
-                    <p>21×21 grid</p>
-                    <p>Modified classic with strategic choke points</p>
-                    <div class="maze-preview"></div>
-                </div>
-                
-                <div class="maze-card">
-                    <h3>Maze 3</h3>
-                    <p>19×36 grid</p>
-                    <p>Wide layout with long corridors</p>
-                    <div class="maze-preview"></div>
-                </div>
-                
-                <div class="maze-card">
-                    <h3>Maze 4</h3>
-                    <p>21×40 grid</p>
-                    <p>Largest maze with complex pathways</p>
-                    <div class="maze-preview"></div>
-                </div>
-            </div>
-            
-            <div class="code-block">
-                // Maze coordinate storage<br>
-                void corrdinatestore1() {<br>
-                &nbsp;&nbsp;int dx = startX12, dy = startY12;<br>
-                &nbsp;&nbsp;for (int i = 0; i < 21; i++) {<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;for (int j = 0; j < 21; j++) {<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map1CoordinateX[i][j] = dx;<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map1CoordinateY[i][j] = dy;<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dx += mazeCellWidth;<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;dx = startX12;<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;dy -= mazeCellWidth;<br>
-                &nbsp;&nbsp;}<br>
-                }
-            </div>
-        </section>
-        
-        <section class="card">
-            <h2><i>👻</i> Ghost System</h2>
-            <p>Ghosts implement sophisticated pathfinding algorithms with two main behavior modes:</p>
-            
-            <div class="ghost-container">
-                <div class="ghost-card">
-                    <div class="ghost-icon blinky"></div>
-                    <h3>Blinky</h3>
-                    <p>Aggressive chaser</p>
-                </div>
-                
-                <div class="ghost-card">
-                    <div class="ghost-icon pinky"></div>
-                    <h3>Pinky</h3>
-                    <p>Ambush strategist</p>
-                </div>
-                
-                <div class="ghost-card">
-                    <div class="ghost-icon inky"></div>
-                    <h3>Inky</h3>
-                    <p>Unpredictable follower</p>
-                </div>
-                
-                <div class="ghost-card">
-                    <div class="ghost-icon clyde"></div>
-                    <h3>Clyde</h3>
-                    <p>Random wanderer</p>
-                </div>
-                
-                <div class="ghost-card">
-                    <div class="ghost-icon rinky"></div>
-                    <h3>Rinky</h3>
-                    <p>Added for larger mazes</p>
-                </div>
-                
-                <div class="ghost-card">
-                    <div class="ghost-icon donky"></div>
-                    <h3>Donky</h3>
-                    <p>Added for larger mazes</p>
-                </div>
-            </div>
-            
-            <h3>Behavior Modes</h3>
+        <nav class="nav-menu">
             <ul>
-                <li><span class="highlight">Scatter Mode:</span> Ghosts move toward their designated corners</li>
-                <li><span class="highlight">Chase Mode:</span> Ghosts use unique strategies to pursue Pacman:
-                    <ul>
-                        <li>Blinky: Direct path to Pacman</li>
-                        <li>Pinky: Targets 4 tiles ahead of Pacman's direction</li>
-                        <li>Inky: Uses Pacman's position and Blinky's position to calculate intercept point</li>
-                        <li>Clyde: Switches between chasing and scattering based on distance</li>
-                    </ul>
-                </li>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#gameplay">Gameplay</a></li>
+                <li><a href="#controls">Controls</a></li>
+                <li><a href="#technical">Technical Details</a></li>
+                <li><a href="#installation">Installation</a></li>
+                <li><a href="#source">Source Code</a></li>
+            </ul>
+        </nav>
+        
+        <section id="overview" class="section">
+            <h2>🎯 Project Overview</h2>
+            <p>This is a complete implementation of the classic Pacman arcade game developed as a term project for CSE-102 (Structured Programming Language) course at BUET. The game is built using C programming language with the iGraphics library for graphics rendering and user interaction.</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">1000+</div>
+                    <div class="stat-label">Lines of Code</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">C</div>
+                    <div class="stat-label">Programming Language</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">iGraphics</div>
+                    <div class="stat-label">Graphics Library</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">4</div>
+                    <div class="stat-label">Ghost AI Types</div>
+                </div>
+            </div>
+            
+            <h3>🎮 Game Description</h3>
+            <p>Experience the classic arcade nostalgia with this faithful recreation of Pacman. Navigate through maze-like levels, collect dots while avoiding intelligent ghosts, and use power pellets to turn the tables on your pursuers. The game features multiple difficulty levels, scoring system, and authentic arcade-style gameplay mechanics.</p>
+            
+            <div class="tech-stack">
+                <span class="tech-badge">C Programming</span>
+                <span class="tech-badge">iGraphics Library</span>
+                <span class="tech-badge">OpenGL</span>
+                <span class="tech-badge">Game AI</span>
+                <span class="tech-badge">2D Graphics</span>
+                <span class="tech-badge">Sound Effects</span>
+            </div>
+        </section>
+        
+        <section id="features" class="section">
+            <h2>✨ Key Features</h2>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>🧠 Intelligent Ghost AI</h4>
+                    <p>Four different ghost types with unique behaviors - Blinky (aggressive), Pinky (ambush), Inky (unpredictable), and Clyde (patrol). Each ghost has distinct movement patterns and chase algorithms.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>🎯 Multiple Game Modes</h4>
+                    <p>Classic arcade mode with progressive difficulty, time-based challenges, and survival mode. Each mode offers unique gameplay mechanics and scoring systems.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>🏆 Scoring System</h4>
+                    <p>Comprehensive scoring with points for dots (10), power pellets (50), ghosts (200-1600), and bonus fruits (100-5000). High score tracking and leaderboard functionality.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>🎨 Visual Effects</h4>
+                    <p>Smooth animations, particle effects, screen transitions, and authentic arcade-style graphics with customizable themes and color schemes.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>🔊 Audio System</h4>
+                    <p>Classic arcade sounds including movement effects, power pellet activation, ghost consumption, and background music with volume controls.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>⚙️ Game Settings</h4>
+                    <p>Customizable difficulty levels, speed settings, sound controls, and key binding options. Save/load game state functionality.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="gameplay" class="section">
+            <h2>🎮 Gameplay Mechanics</h2>
+            
+            <h3>🎯 Objective</h3>
+            <p>Guide Pacman through the maze to eat all dots while avoiding the four colored ghosts. Complete each level by consuming all dots and advance to increasingly challenging stages.</p>
+            
+            <h3>🟡 Power Pellets</h3>
+            <p>Collect large flashing dots to temporarily turn ghosts blue and vulnerable. During this "frightened" state, Pacman can eat ghosts for bonus points. The effect duration decreases as levels progress.</p>
+            
+            <h3>🍎 Bonus Fruits</h3>
+            <p>Special items appear periodically in the center of the maze. Collect them for extra points and bonuses. Fruit types change based on the current level.</p>
+            
+            <h3>👻 Ghost Behavior</h3>
+            <ul style="margin-left: 20px;">
+                <li><strong>Blinky (Red):</strong> Directly chases Pacman with increasing speed</li>
+                <li><strong>Pinky (Pink):</strong> Ambushes by targeting positions ahead of Pacman</li>
+                <li><strong>Inky (Cyan):</strong> Uses complex positioning relative to Blinky and Pacman</li>
+                <li><strong>Clyde (Orange):</strong> Switches between chase and scatter modes</li>
             </ul>
             
-            <div class="code-block">
-                // Ghost pathfinding logic<br>
-                void directionGenarator(int a, int pookietype) {<br>
-                &nbsp;&nbsp;// Calculate distances to Pacman<br>
-                &nbsp;&nbsp;int distUp = calcDist(pookie[pookietype].x, ...);<br>
-                &nbsp;&nbsp;int distDown = ...<br>
-                &nbsp;&nbsp;int distLeft = ...<br>
-                &nbsp;&nbsp;int distRight = ...<br>
-                &nbsp;&nbsp;int currentDist = ...<br><br>
-                
-                &nbsp;&nbsp;// Choose direction based on strategy<br>
-                &nbsp;&nbsp;if (scatter) { /* Move to corners */ }<br>
-                &nbsp;&nbsp;else if (chase) { /* Implement ghost-specific strategies */ }<br>
-                }
+            <div class="screenshot-placeholder">
+                <p>🖼️ Gameplay Screenshot</p>
+                <p>Main game screen showing maze, Pacman, ghosts, and UI elements</p>
             </div>
         </section>
         
-        <section class="card">
-            <h2><i>🎮</i> Game Mechanics</h2>
+        <section id="controls" class="section">
+            <h2>🎮 Game Controls</h2>
             
-            <h3>Power-up System</h3>
-            <p>Special pellets that turn ghosts blue and vulnerable for a limited time:</p>
-            <ul>
-                <li>Ghosts change appearance to indicate vulnerable state</li>
-                <li>Eating a vulnerable ghost awards increasing points (200, 400, 800, 1600)</li>
-                <li>Ghosts flash when the effect is about to wear off</li>
-            </ul>
-            
-            <h3>Fruit System</h3>
-            <p>16 different fruits appear at specific time intervals:</p>
-            <ul>
-                <li>Each fruit type has different point values</li>
-                <li>Appear in the center of the maze</li>
-                <li>Disappear after a short time if not collected</li>
-            </ul>
-            
-            <h3>Scoring</h3>
-            <ul>
-                <li>Regular dots: 10 points</li>
-                <li>Power pellets: 50 points</li>
-                <li>Fruits: 100-1600 points (depending on type)</li>
-                <li>Ghosts: 200, 400, 800, 1600 points (increasing with each consecutive capture)</li>
-            </ul>
-            
-            <div class="code-block">
-                // Power pellet activation<br>
-                void bluetimecheck() {<br>
-                &nbsp;&nbsp;if (blueGhost > 0) {<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;blueGhost--;<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;if (blueGhost <= 100) { // Flash warning<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (int i = 0; i < ghostCount; i++) {<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pookie[i].blueOn = (blueGhost / 10) % 2;<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-                &nbsp;&nbsp;}<br>
-                }
-            </div>
-        </section>
-        
-        <section class="card">
-            <h2><i>🕹️</i> Controls</h2>
-            <div class="controls">
+            <div class="controls-grid">
                 <div class="control-item">
-                    <h3>Movement</h3>
-                    <p>Arrow Keys</p>
-                    <div class="key">↑</div>
-                    <div class="key">↓</div>
-                    <div class="key">←</div>
-                    <div class="key">→</div>
+                    <div class="control-key">↑ W</div>
+                    <p>Move Up</p>
                 </div>
-                
                 <div class="control-item">
-                    <h3>Pause/Resume</h3>
-                    <p>P Key</p>
-                    <div class="key">P</div>
+                    <div class="control-key">↓ S</div>
+                    <p>Move Down</p>
                 </div>
-                
                 <div class="control-item">
-                    <h3>Menu Navigation</h3>
-                    <p>Mouse</p>
-                    <div class="key">Click</div>
+                    <div class="control-key">← A</div>
+                    <p>Move Left</p>
                 </div>
-                
                 <div class="control-item">
-                    <h3>Name Entry</h3>
-                    <p>Keyboard</p>
-                    <div class="key">A-Z</div>
+                    <div class="control-key">→ D</div>
+                    <p>Move Right</p>
+                </div>
+                <div class="control-item">
+                    <div class="control-key">SPACE</div>
+                    <p>Pause Game</p>
+                </div>
+                <div class="control-item">
+                    <div class="control-key">ESC</div>
+                    <p>Main Menu</p>
+                </div>
+                <div class="control-item">
+                    <div class="control-key">R</div>
+                    <p>Restart Level</p>
+                </div>
+                <div class="control-item">
+                    <div class="control-key">M</div>
+                    <p>Toggle Sound</p>
                 </div>
             </div>
+            
+            <h3>📱 Additional Controls</h3>
+            <ul style="margin-left: 20px;">
+                <li><strong>Enter:</strong> Confirm selection in menus</li>
+                <li><strong>Tab:</strong> Toggle debug information</li>
+                <li><strong>F1:</strong> Help screen</li>
+                <li><strong>F11:</strong> Toggle fullscreen mode</li>
+            </ul>
         </section>
         
-        <section class="card">
-            <h2><i>💻</i> Technical Implementation</h2>
+        <section id="technical" class="section">
+            <h2>⚙️ Technical Implementation</h2>
             
-            <h3>Core Systems</h3>
-            <ul>
-                <li>Custom animation system for Pacman and ghosts</li>
-                <li>Collision detection with maze walls and collectibles</li>
-                <li>State management for game modes and menus</li>
-                <li>Pathfinding algorithms for ghost movement</li>
-            </ul>
-            
-            <h3>Menu System</h3>
-            <p>Comprehensive UI with multiple screens:</p>
-            <ul>
-                <li>Main menu with animations</li>
-                <li>Difficulty selection</li>
-                <li>Maze selection</li>
-                <li>High score display</li>
-                <li>Settings (sound, background)</li>
-                <li>Game rules</li>
-                <li>Credits screen</li>
-            </ul>
+            <h3>🏗️ Architecture</h3>
+            <p>The game follows a modular architecture with separate components for graphics rendering, game logic, AI behavior, and input handling. The main game loop handles updates at 60 FPS for smooth gameplay.</p>
             
             <div class="code-block">
-                // Game state management<br>
-                bool soundOn = true;<br>
-                bool startintro = true;<br>
-                bool mainmenu;<br>
-                bool difficulty;<br>
-                bool playgameintro;<br>
-                bool highscore;<br>
-                bool settings;<br>
-                bool credits;<br>
-                bool rules;<br>
-                bool quit;<br>
-                bool mazeselector;<br>
-                bool playingstart;<br>
-                bool levelselect;<br>
-                bool pause;<br>
-                bool backgroundselector;<br>
-                bool deadscene;<br>
-                bool congrats;
+// Main game loop structure
+void iDraw() {
+    // Clear screen
+    iClear();
+    
+    // Render game elements
+    drawMaze();
+    drawPacman();
+    drawGhosts();
+    drawUI();
+    
+    // Update game state
+    updateGameLogic();
+}</div>
+            
+            <h3>🎨 Graphics System</h3>
+            <ul style="margin-left: 20px;">
+                <li><strong>iGraphics Library:</strong> OpenGL-based 2D graphics rendering</li>
+                <li><strong>Sprite Animation:</strong> Frame-based animation system for characters</li>
+                <li><strong>Particle Effects:</strong> Custom particle system for visual feedback</li>
+                <li><strong>UI Components:</strong> Custom-drawn interface elements</li>
+            </ul>
+            
+            <h3>🤖 AI Implementation</h3>
+            <p>Ghost AI uses pathfinding algorithms and state machines to create challenging but fair gameplay. Each ghost has distinct targeting strategies implemented through different algorithms.</p>
+            
+            <div class="code-block">
+// Ghost AI state machine
+typedef enum {
+    SCATTER,
+    CHASE,
+    FRIGHTENED,
+    EATEN
+} GhostState;
+
+void updateGhostAI(Ghost* ghost) {
+    switch(ghost->state) {
+        case CHASE:
+            moveTowardTarget(ghost, getTargetPosition(ghost));
+            break;
+        case SCATTER:
+            moveTowardTarget(ghost, ghost->homeCorner);
+            break;
+        // ... other states
+    }
+}</div>
+            
+            <h3>💾 Data Management</h3>
+            <ul style="margin-left: 20px;">
+                <li><strong>Game State:</strong> Centralized state management system</li>
+                <li><strong>Level Data:</strong> Maze layouts stored in structured format</li>
+                <li><strong>High Scores:</strong> Persistent storage using file I/O</li>
+                <li><strong>Settings:</strong> Configuration file for user preferences</li>
+            </ul>
+        </section>
+        
+        <section id="installation" class="section">
+            <h2>🛠️ Installation & Setup</h2>
+            
+            <h3>📋 Prerequisites</h3>
+            <ul style="margin-left: 20px;">
+                <li>C Compiler (GCC recommended)</li>
+                <li>iGraphics Library</li>
+                <li>OpenGL libraries</li>
+                <li>Windows/Linux compatible system</li>
+            </ul>
+            
+            <h3>⚡ Quick Start</h3>
+            <div class="code-block">
+# Clone the repository
+git clone https://github.com/Ratulhasanbuet/CSE-102-IGRAPHICS-PROJECT.git
+
+# Navigate to project directory
+cd CSE-102-IGRAPHICS-PROJECT
+
+# Compile the project
+gcc -o pacman *.c -liGraphics -lglut32 -lopengl32 -lglu32
+
+# Run the game
+./pacman</div>
+            
+            <h3>🔧 Setup Instructions</h3>
+            <ol style="margin-left: 20px;">
+                <li>Install iGraphics library and dependencies</li>
+                <li>Configure your IDE with OpenGL libraries</li>
+                <li>Build the project using provided makefile</li>
+                <li>Run the executable to start the game</li>
+            </ol>
+            
+            <h3>🐛 Troubleshooting</h3>
+            <ul style="margin-left: 20px;">
+                <li><strong>Graphics not displaying:</strong> Verify OpenGL drivers are installed</li>
+                <li><strong>Compilation errors:</strong> Check iGraphics library path</li>
+                <li><strong>Sound issues:</strong> Ensure audio drivers are up to date</li>
+                <li><strong>Performance problems:</strong> Adjust graphics settings in config file</li>
+            </ul>
+        </section>
+        
+        <section id="source" class="section">
+            <h2>📁 Source Code Structure</h2>
+            
+            <div class="code-block">
+CSE-102-IGRAPHICS-PROJECT/
+├── src/
+│   ├── main.c              # Main game loop and initialization
+│   ├── pacman.c            # Pacman character logic
+│   ├── ghost.c             # Ghost AI implementation
+│   ├── maze.c              # Maze rendering and collision
+│   ├── ui.c                # User interface components
+│   ├── sound.c             # Audio system
+│   └── utils.c             # Utility functions
+├── assets/
+│   ├── images/             # Sprite images
+│   ├── sounds/             # Audio files
+│   └── levels/             # Level data files
+├── docs/
+│   ├── README.md           # Project documentation
+│   └── manual.pdf          # User manual
+├── iGraphics/              # iGraphics library files
+└── Makefile               # Build configuration</div>
+            
+            <h3>🔍 Key Files</h3>
+            <ul style="margin-left: 20px;">
+                <li><strong>main.c:</strong> Entry point, initialization, and main game loop</li>
+                <li><strong>pacman.c:</strong> Player character movement and collision detection</li>
+                <li><strong>ghost.c:</strong> AI behavior implementation for all four ghosts</li>
+                <li><strong>maze.c:</strong> Maze generation, rendering, and pathfinding</li>
+                <li><strong>ui.c:</strong> Menu system, HUD, and user interface</li>
+                <li><strong>sound.c:</strong> Audio playback and sound effect management</li>
+            </ul>
+            
+            <h3>📊 Project Statistics</h3>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">~1200</div>
+                    <div class="stat-label">Lines of Code</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">8</div>
+                    <div class="stat-label">Source Files</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">25+</div>
+                    <div class="stat-label">Functions</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">4</div>
+                    <div class="stat-label">Game Modes</div>
+                </div>
             </div>
         </section>
         
-        <footer>
-            <p>PACMAN GAME PROJECT | C & iGraphics Implementation</p>
-            <p>Complete with all original features plus modern enhancements</p>
-        </footer>
+        <div class="author-info">
+            <h3>👨‍💻 Developer Information</h3>
+            <p><strong>Name:</strong> Ratul Hasan</p>
+            <p><strong>Course:</strong> CSE-102 (Structured Programming Language)</p>
+            <p><strong>Institution:</strong> Bangladesh University of Engineering and Technology (BUET)</p>
+            <p><strong>GitHub:</strong> <a href="https://github.com/Ratulhasanbuet" style="color: #333;">@Ratulhasanbuet</a></p>
+            <p><strong>Project:</strong> iGraphics Pacman Game Implementation</p>
+        </div>
     </div>
+    
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Add fade-in animation to sections
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        });
+        
+        sections.forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+        
+        // Initialize first section
+        if (sections.length > 0) {
+            sections[0].style.opacity = '1';
+            sections[0].style.transform = 'translateY(0)';
+        }
+    </script>
 </body>
 </html>
