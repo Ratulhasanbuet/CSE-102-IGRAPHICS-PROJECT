@@ -149,3 +149,84 @@
   <img src="https://img.icons8.com/emoji/48/video-game.png" alt="Gamepad Icon" style="margin-bottom: 10px;">
   <p style="font-size: 14px; color: #999;"><em>This isn’t just Pac-Man. It’s your version of arcade perfection.</em></p>
 </div>
+<hr>
+
+<h2 style="font-family: 'Segoe UI', sans-serif; color: #333;">🧩 Code Documentation</h2>
+
+<h3 style="color: #555;">🏗️ Structures</h3>
+<ul style="font-size: 16px; color: #444;">
+  <li><strong>pacmove</strong>: Controls Pac-Man's movement states and animations. Includes direction flags, indexes, and smoothing logic.</li>
+  <li><strong>ghost</strong>: Controls ghost behavior — position, direction, animation indices, vulnerability (blueOn), pathfinding distance values, and speed.</li>
+</ul>
+<p style="font-size: 16px;">🔢 Total Ghosts Used:
+  <ul>
+    <li>4 ghosts in maze 1 and 2: Inky, Blinky, Pinky, Clyde</li>
+    <li>6 ghosts in maze 3 and 4: +Donky and Rinky</li>
+  </ul>
+</p>
+
+<hr>
+
+<h3 style="color: #555;">🛠️ Key Functions</h3>
+<ul style="font-size: 16px; color: #444;">
+  <li><strong>pacmanmovement()</strong>: Updates Pac-Man’s position and animation based on directional input.</li>
+  <li><strong>pookiemovement()</strong>: Handles movement and behavior of all ghosts depending on maze, score, and AI mode.</li>
+  <li><strong>drawMaze1/2/3/4()</strong>: Renders brick layouts using `iShowImage` for each specific maze based on wall logic.</li>
+  <li><strong>drawFoodAndPowerPellet()</strong>: Draws regular food, power pellets, and fruit based on position and status flags.</li>
+  <li><strong>collisioncheck()</strong>: Detects food pickup, ghost collision, pellet effects, ghost eating, and game win conditions.</li>
+  <li><strong>bluetimecheck()</strong>: Decrements blue timer and resets ghost vulnerability.</li>
+  <li><strong>directionGenarator()</strong>: Assigns ghost movement based on proximity to Pac-Man (chase, scatter, or blast).</li>
+  <li><strong>foodCoordinateStore()</strong>: Initializes food and fruit positions based on maze layout and open cells.</li>
+  <li><strong>DataAnalysis()</strong>: Reads/writes sorted high scores using file I/O.</li>
+  <li><strong>pacinitialcord()</strong>, <strong>pookieinitialcoordinate()</strong>: Sets starting positions for Pac-Man and ghosts per maze.</li>
+</ul>
+
+<hr>
+
+<h3 style="color: #555;">📦 Important Variables</h3>
+<ul style="font-size: 16px; color: #444;">
+  <li><code>pac</code>: Instance of `pacmove` controlling Pac-Man’s movement.</li>
+  <li><code>pookie[6]</code>: Array of 6 ghost structs controlling AI behaviors.</li>
+  <li><code>maze1 - maze4</code>: 2D integer arrays defining each maze’s wall layout.</li>
+  <li><code>map1CoordinateX/Y</code>: Pixel coordinate mapping of maze 1 layout (same for other mazes).</li>
+  <li><code>foodXcor, foodYcor</code>: Stores food positions and status flags (-1=eaten, -2=fruit).</li>
+  <li><code>blueGhost</code>: Timer for ghost vulnerability duration.</li>
+  <li><code>fruitGen[]</code>, <code>randGen</code>: Controls fruit appearance and image variant.</li>
+  <li><code>selected</code>: Current maze level selector (1 to 4).</li>
+  <li><code>score</code>, <code>pacScore[]</code>: Tracks current score and display value.</li>
+  <li><code>pacmanlife</code>: Number of remaining lives.</li>
+  <li><code>diffSpeed</code>: Speed factor adjusted by difficulty level.</li>
+  <li><code>scatter</code>, <code>chase</code>, <code>blast</code>: Boolean flags controlling ghost behavior mode.</li>
+  <li><code>mainmenu, pause, settings...</code>: Boolean state flags for UI screens.</li>
+</ul>
+
+<hr>
+
+<h3 style="color: #555;">🧠 AI Behavior Highlights</h3>
+<ul style="font-size: 16px; color: #444;">
+  <li><strong>Scatter Mode:</strong> Ghosts target fixed offset positions.</li>
+  <li><strong>Chase Mode:</strong> Ghosts use dynamic distance comparisons and prediction logic.</li>
+  <li><strong>Pinky:</strong> Predicts ahead of Pac-Man's current direction.</li>
+  <li><strong>Inky:</strong> Predicts behind the current movement.</li>
+  <li><strong>Clyde:</strong> Ambush behavior.</li>
+  <li><strong>Donky and Rinky:</strong> Direct chasers with varied path logic.</li>
+</ul>
+
+<hr>
+
+<h3 style="color: #555;">🎮 Gameplay Flow Summary</h3>
+<ul style="font-size: 16px; color: #444;">
+  <li>Game initializes with intro and menu screens using timers.</li>
+  <li>Player enters name — stored for high scores.</li>
+  <li>Maze and difficulty are selected via UI flags.</li>
+  <li>Pac-Man and ghosts are positioned and begin movement.</li>
+  <li>Food items update scores and may spawn bonus fruits.</li>
+  <li>Power pellets trigger ghost vulnerability timers.</li>
+  <li>Ghosts respond based on player location and behavior state.</li>
+  <li>Upon winning or losing, score is saved and congrats UI is shown.</li>
+</ul>
+
+<div align="center" style="margin-top: 20px;">
+  <img src="https://img.icons8.com/ios-filled/50/code.png" alt="Code Icon" style="margin-bottom: 10px;">
+  <p style="font-size: 14px; color: #777;"><em>This is more than code — it's a full game engine tailored for C retro action.</em></p>
+</div>
