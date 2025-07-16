@@ -230,3 +230,349 @@
   <img src="https://img.icons8.com/ios-filled/50/code.png" alt="Code Icon" style="margin-bottom: 10px;">
   <p style="font-size: 14px; color: #777;"><em>This is more than code — it's a full game engine tailored for C retro action.</em></p>
 </div>
+<!-- Filename: index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pac-Man Game Documentation</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Pac-Man Game Documentation</h1>
+  </header>
+  <nav>
+    <ul>
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#how-to-play">How to Play</a></li>
+      <li><a href="#features">Main Features</a></li>
+      <li><a href="#code-structure">Code Structure</a></li>
+      <li><a href="#configuration">Configuration</a></li>
+      <li><a href="#controls">Controls</a></li>
+    </ul>
+  </nav>
+
+  <section id="overview">
+    <h2>1. Overview</h2>
+    <p>This is a full-featured Pac-Man clone built in C using <code>iGraphics.h</code>. It includes intro animation, menus, four levels, difficulty settings, and more.</p>
+  </section>
+
+  <section id="how-to-play">
+    <h2>2. How to Play</h2>
+    <ol>
+      <li>Run the game executable.</li>
+      <li>Press Enter to skip the intro and open the main menu.</li>
+      <li>Use the mouse to navigate:
+        <ul>
+          <li>Play &rarr; enter name &rarr; select level</li>
+          <li>Difficulty &rarr; choose ghost speed & AI behavior</li>
+          <li>Settings &rarr; toggle sound, pick maze theme</li>
+          <li>High Score, Credits, Rules, Quit</li>
+        </ul>
+      </li>
+      <li>In-game:
+        <ul>
+          <li>Arrow keys to move Pac-Man</li>
+          <li>Click pause icon or press ESC to pause</li>
+          <li>Collect all dots & fruits, avoid ghosts</li>
+          <li>Power-pellets turn ghosts blue (vulnerable)</li>
+        </ul>
+      </li>
+    </ol>
+  </section>
+
+  <section id="features">
+    <h2>3. Main Features</h2>
+    <ul>
+      <li><strong>Animated Menus</strong>: Intro slideshow, mouse-driven UI.</li>
+      <li><strong>Levels</strong>: Four maze layouts of varying sizes.</li>
+      <li><strong>Ghost AI</strong>: Scatter, chase, frightened modes.</li>
+      <li><strong>Scoring & Lives</strong>: Dots, fruits, escalating ghost bonuses.</li>
+      <li><strong>High Score</strong>: Persistent file-based leaderboard.</li>
+      <li><strong>Pause & Settings</strong>: Background selector, sound toggle.</li>
+    </ul>
+  </section>
+
+  <section id="code-structure">
+    <h2>4. Code Structure</h2>
+
+    <h3>4.1 Data Structures</h3>
+    <ul>
+      <li><code>struct move</code>: Pac-Man position, flags, animation frames.</li>
+      <li><code>struct ghost</code>: Ghost position, speed, AI flags, distances.</li>
+      <li>Maze arrays: <code>maze1[][]</code> … <code>maze4[][]</code>.</li>
+      <li>Coordinate lookup: <code>mapX[][]</code>, <code>mapY[][]</code>.</li>
+    </ul>
+
+    <h3>4.2 Core Functions</h3>
+    <ul>
+      <li><code>iDraw()</code>: Render loop based on state flags.</li>
+      <li><code>pacmanmovement()</code>, <code>pookiemovement()</code>: Movement & collision.</li>
+      <li><code>collisioncheck()</code>: Pellet eating, life/ghost interactions.</li>
+      <li><code>DataAnalysis()</code>: High-score file management.</li>
+    </ul>
+
+    <h3>4.3 Rendering & Assets</h3>
+    <ul>
+      <li>Maze walls with <code>iShowImage</code>.</li>
+      <li>Food, power pellets, fruits drawn as circles or sprites.</li>
+      <li>All images stored in themed folders, loaded via arrays.</li>
+    </ul>
+
+    <h3>4.4 Input Handling</h3>
+    <ul>
+      <li><code>iKeyboard()</code> for text and menu shortcuts.</li>
+      <li><code>iSpecialKeyboard()</code> for arrow-key movement.</li>
+      <li><code>iMouse()</code> & <code>iMouseMove()</code> for menus.</li>
+    </ul>
+
+    <h3>4.5 Timers & Flow</h3>
+    <ul>
+      <li><code>iSetTimer</code> for animations, AI updates, intro slideshow.</li>
+      <li>Pause/resume all timers on pause state.</li>
+    </ul>
+
+    <h3>4.6 File I/O & High Score</h3>
+    <ul>
+      <li>Appends to <code>score.txt</code>, reads/sorts, writes <code>highScore.txt</code>.</li>
+    </ul>
+  </section>
+
+  <section id="configuration">
+    <h2>5. Configuration</h2>
+    <ul>
+      <li><code>mazeCellWidth</code>: Pixel size of grid cell.</li>
+      <li><code>diffSpeed</code>: Ghost speed per difficulty.</li>
+      <li><code>fruitTimeInterval</code>: Fruit spawn timing.</li>
+      <li><code>soundOn</code>: Boolean toggle for sound.</li>
+    </ul>
+  </section>
+
+  <section id="controls">
+    <h2>6. Controls</h2>
+    <ul>
+      <li>Arrow keys: Move Pac-Man.</li>
+      <li>Mouse click: Menu and pause actions.</li>
+      <li>Enter: Confirm text input and menus.</li>
+      <li>ESC: Cancel name entry or pause.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>Generated documentation for the Pac-Man project. Customize as needed.</p>
+  </footer>
+</body>
+</html>
+<details>
+  <summary>📊 Difficulty Modes</summary>
+  <table>
+    <tr><th>Mode</th><th>Ghost Speed</th><th>Pac Speed</th><th>Behavior</th></tr>
+    <tr><td>Easy</td><td>2</td><td>3</td><td>Simple chase</td></tr>
+    <tr><td>Medium</td><td>3</td><td>3</td><td>Chase + faster ghost reactions</td></tr>
+    <tr><td>Hard</td><td>4</td><td>3</td><td>Predictive pathfinding + combos</td></tr>
+    <tr><td>Extreme</td><td>4</td><td>4</td><td>Blast mode enabled; ghost swarm</td></tr>
+  </table>
+</details>
+
+<details>
+  <summary>🎨 Asset Overview</summary>
+  <ul>
+    <li><code>pacman/</code>: Animated sprites (Right, Left, Up, Down)</li>
+    <li><code>ghosts/</code>: Includes Blinky, Pinky, Inky, Clyde, Donky, Rinky</li>
+    <li><code>mazeDesignImage/</code>: Eight stylized maze themes</li>
+    <li><code>fruit/</code>: 16 different fruit bonus images</li>
+    <li><code>life/</code>: Heart icons for player health</li>
+    <li><code>bg/, slbg/</code>: Backgrounds and selectors (500 frames)</li>
+    <li><code>introimage/, level/, creditsimage/</code>: Menu sequence visuals</li>
+    <li><code>score.txt</code>: Saves all player scores and names</li>
+    <li><code>highScore.txt</code>: Stores sorted leaderboard</li>
+  </ul>
+</details>
+
+<details>
+  <summary>🧪 System Architecture Summary</summary>
+  <ul>
+    <li>Main loop handled via <code>iDraw()</code> in <code>iGraphics.h</code></li>
+    <li><code>pacmanmovement()</code> & <code>pookiemovement()</code>: Smooth movement & logic</li>
+    <li>Ghost pathfinding uses <code>calcDist()</code> & directional heuristics</li>
+    <li>All animations triggered via <code>iSetTimer()</code> callbacks</li>
+    <li>Score updates and fruit logic managed by <code>collisioncheck()</code></li>
+    <li>Menu navigation via <code>iMouse()</code> & <code>iMouseMove()</code></li>
+    <li>High score analysis using file I/O + in-place sorting</li>
+    <li>Maze-specific coordinate mapping handled by <code>corrdinatestore*</code> functions</li>
+  </ul>
+</details>
+
+<details>
+  <summary>👨‍💻 Developer Notes</summary>
+  <ul>
+    <li>Built using C with <code>iGraphics</code> library for rendering</li>
+    <li>Designed modularly with over 15 major functions</li>
+    <li>Sprite and sound assets are manually mapped for performance</li>
+    <li>AI behaviors include prediction, ambush, scatter patterns</li>
+    <li>Difficulty ramps dynamically as score increases (e.g. chase → blast)</li>
+    <li>Fully keyboard + mouse interactive</li>
+    <li>Death animations and pause/resume logic debugged for smooth resets</li>
+  </ul>
+</details>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Pac-Man Game Documentation</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Pac-Man Remake</h1>
+    <button id="themeToggle">Toggle Dark/Light</button>
+    <nav>
+      <a href="#overview">Overview</a>
+      <a href="#features">Features</a>
+      <a href="#controls">Controls</a>
+      <a href="#setup">Setup</a>
+      <a href="#structure">Code Structure</a>
+      <a href="#assets">Assets</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Overview -->
+    <section id="overview">
+      <h2>Overview</h2>
+      <p>
+        A classic Pac-Man clone built on <code>iGraphics.h</code>, featuring four
+        maze designs, multiple difficulty levels, dynamic ghost AIs, power pellets,
+        bonus fruits, high-score saves, settings & more.
+      </p>
+      <div class="screenshot">
+        <!-- Replace with your screenshot -->
+        <img src="screenshot.png" alt="Pac-Man screenshot" />
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features">
+      <h2>Features</h2>
+      <ul>
+        <li>4 unique maze layouts selectable in Settings</li>
+        <li>Variable difficulty & ghost speeds</li>
+        <li>Ghost behaviors: scatter, chase, frightened (blue) modes</li>
+        <li>Power pellets that turn ghosts blue & edible</li>
+        <li>Random bonus fruits spawning periodically</li>
+        <li>Player life indicator and multiple lives</li>
+        <li>High-score management with text‐file persistence</li>
+        <li>Interactive menus: main, difficulty, settings, credits, rules</li>
+        <li>Dynamic backgrounds & pause menu</li>
+        <li>Responsive arrow-key controls with buffering</li>
+      </ul>
+    </section>
+
+    <!-- Controls -->
+    <section id="controls">
+      <h2>Controls</h2>
+      <table>
+        <thead>
+          <tr><th>Action</th><th>Key/Click</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Move Up</td><td>↑ Arrow</td></tr>
+          <tr><td>Move Down</td><td>↓ Arrow</td></tr>
+          <tr><td>Move Left</td><td>← Arrow</td></tr>
+          <tr><td>Move Right</td><td>→ Arrow</td></tr>
+          <tr><td>Pause</td><td>Pause Button / Click</td></tr>
+          <tr><td>Navigate Menus</td><td>Mouse Click / Hover</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Setup -->
+    <section id="setup">
+      <h2>Setup & Build</h2>
+      <ol>
+        <li>Clone or download this repo.</li>
+        <li>Install or link the <code>iGraphics.h</code> library.</li>
+        <li>Compile with a C compiler:
+          <pre><code>gcc pacman.c -lGL -lGLU -lglut -lpthread -lm -o pacman</code></pre>
+        </li>
+        <li>Ensure all asset folders (images, sprites, etc.) are in the working directory.</li>
+        <li>Run:
+          <pre><code>./pacman</code></pre>
+        </li>
+      </ol>
+    </section>
+
+    <!-- Code Structure -->
+    <section id="structure">
+      <h2>Code Structure</h2>
+      <div class="accordion">
+        <button class="accordion-toggle">pacman.c (full source)</button>
+        <div class="accordion-content">
+          <pre><code class="language-c">
+// … entire pacman.txt code goes here …
+#include "iGraphics.h"
+#include <stdlib.h>
+…
+int main(int argc, char *argv[]) {
+  DataAnalysis();
+  …
+  iInitialize(1200, 675, "PACMAN");
+  return 0;
+}
+          </code></pre>
+        </div>
+      </div>
+
+      <h3>Key Modules & Functions</h3>
+      <ul>
+        <li><code>drawMaze*</code>: Renders walls for each maze.</li>
+        <li><code>foodCoordinateStore()</code>: Maps dots & fruits.</li>
+        <li><code>pookiemovement()</code>: Ghost AI & pathfinding.</li>
+        <li><code>pacmanmovement()</code>: Buffered movement & collision.</li>
+        <li><code>collisioncheck()</code>: Dot eating, pellet effects.</li>
+        <li><code>DataAnalysis()</code>: Reads/writes high-score file.</li>
+        <li><code>Timers</code>: Game loop, intro animation, ghost modes.</li>
+      </ul>
+    </section>
+
+    <!-- Assets -->
+    <section id="assets">
+      <h2>Asset Organization</h2>
+      <p>All images are stored in folders by type:</p>
+      <ul>
+        <li><code>pacman/</code>: Pac-Man sprites</li>
+        <li><code>blinky/, pinky/, inky/, clyde/, rinky/, donky/</code>: Ghost frames</li>
+        <li><code>mazeDesignImage/</code>: Wall tiles</li>
+        <li><code>fruit/</code>: Bonus fruit sprites</li>
+        <li><code>bg/</code>: Backgrounds</li>
+        <li><code>life/</code>: Life icons</li>
+        <li>Various <code>introimage/, level/, pauseimage/, settingsimage/</code></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Ratul’s Pac-Man Project &mdash; Built with <code>iGraphics</code></p>
+  </footer>
+
+  <script>
+    // Accordion
+    document.querySelectorAll('.accordion-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.classList.toggle('active');
+        let panel = btn.nextElementSibling;
+        panel.style.maxHeight =
+          panel.style.maxHeight ? null : panel.scrollHeight + "px";
+      });
+    });
+
+    // Theme toggle
+    const themeBtn = document.getElementById('themeToggle');
+    themeBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark-theme');
+    });
+  </script>
+</body>
+</html>
