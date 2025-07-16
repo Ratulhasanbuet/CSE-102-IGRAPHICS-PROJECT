@@ -40,7 +40,7 @@ int foodYcor[1000];
 int mazeWidth;
 int mazeHeight;
 
-int timeToGenerateFood = 500;
+int timeToGenerateFood = 350;
 int t;
 int *foodCor = &t;
 int randGen;
@@ -115,6 +115,7 @@ bool pause;
 bool backgroundselector;
 bool deadscene;
 bool congrats;
+bool blast;
 
 typedef struct
 {
@@ -166,7 +167,7 @@ char pacmanLeft[2][30] = {"pacman/pacman (5).png", "pacman/pacman (6).png"};
 char pacmanUp[2][30] = {"pacman/pacman (7).png", "pacman/pacman (8).png"};
 char pacmanDown[2][30] = {"pacman/pacman (3).png", "pacman/pacman (4).png"};
 char pacdeadscene[11][30] = {"pacdead/pacdead0.png", "pacdead/pacdead1.png", "pacdead/pacdead2.png", "pacdead/pacdead3.png", "pacdead/pacdead4.png", "pacdead/pacdead5.png", "pacdead/pacdead6.png", "pacdead/pacdead7.png", "pacdead/pacdead8.png", "pacdead/pacdead9.png", "pacdead/pacdead10.png"};
-char fruit[7][30] = {"fruit/fruit (1).png", "fruit/fruit (2).png", "fruit/fruit (3).png", "fruit/fruit (4).png", "fruit/fruit (5).png", "fruit/fruit (6).png", "fruit/fruit (7).png"};
+char fruit[16][30] = {"fruit/fruit (1).png", "fruit/fruit (2).png", "fruit/fruit (3).png", "fruit/fruit (4).png", "fruit/fruit (5).png", "fruit/fruit (6).png", "fruit/fruit (7).png" ,"fruit/fruit (8).png" ,"fruit/fruit (9).png","fruit/fruit (10).png" ,"fruit/fruit (11).png", "fruit/fruit (12).png","fruit/fruit (13).png", "fruit/fruit (14).png","fruit/fruit (15).png", "fruit/fruit (16).png"};
 
 char inkyUp[2][30] = {"inky/inky (2).png", "inky/inky (3).png"};
 char inkyLeft[2][30] = {"inky/inky (7).png", "inky/inky (8).png"};
@@ -1133,7 +1134,7 @@ void pookiemovement()
                 if (pookietype == 0)
                 {
                     px = mazeX + px;
-                    py = mazeY;
+                    py = mazeY + py;
                 }
                 else if (pookietype == 1)
                 {
@@ -1148,7 +1149,30 @@ void pookiemovement()
                 else if (pookietype == 3)
                 {
                     px = mazeX + px / 3;
-                    py = mazeY;
+                    py = mazeY + py / 3;
+                }
+            }
+            if (blast)
+            {
+                if (pookietype == 0)
+                {
+                    px = pac.x;
+                    py = pac.y;
+                }
+                else if (pookietype == 1)
+                {
+                    px = pac.x;
+                    py = pac.y;
+                }
+                else if (pookietype == 2)
+                {
+                    px = pac.x;
+                    py = pac.y;
+                }
+                else if (pookietype == 3)
+                {
+                    px = pac.x;
+                    py = pac.y;
                 }
             }
             if (chase)
@@ -1218,7 +1242,6 @@ void pookiemovement()
 
                             if (!maze1[pookie[pookietype].cellY - 1][pookie[pookietype].cellX])
                             {
-
                                 if (distUp < currentDist)
                                     directionGenarator(2, pookietype);
                             }
@@ -1716,7 +1739,6 @@ void pookiemovement()
                             pookie[pookietype].cellX--;
                             if (!maze4[pookie[pookietype].cellY - 1][pookie[pookietype].cellX])
                             {
-
                                 if (distUp < currentDist)
                                     directionGenarator(2, pookietype);
                             }
@@ -2407,7 +2429,6 @@ void iMouse(int button, int state, int mx, int my)
                 pookieinitialcoordinate();
                 foodCoordinateStore();
                 foodcount();
-                collisioncheck();
             }
             else if ((mx <= 653 && mx >= 454) && (my <= 388 && my >= 331))
             {
@@ -2419,7 +2440,6 @@ void iMouse(int button, int state, int mx, int my)
                 pookieinitialcoordinate();
                 foodCoordinateStore();
                 foodcount();
-                collisioncheck();
             }
             else if ((mx >= 453 && my >= 229 && mx <= 655 && my <= 280))
             {
@@ -2432,7 +2452,6 @@ void iMouse(int button, int state, int mx, int my)
                 pookieinitialcoordinate();
                 foodCoordinateStore();
                 foodcount();
-                collisioncheck();
             }
             else if (mx <= 664 && my <= 180 && mx >= 444 && my >= 126)
             {
@@ -2445,7 +2464,6 @@ void iMouse(int button, int state, int mx, int my)
                 pookieinitialcoordinate();
                 foodCoordinateStore();
                 foodcount();
-                collisioncheck();
             }
         }
         else if (quit)
@@ -2712,6 +2730,7 @@ void collisioncheck()
 {
     if (playingstart)
     {
+
         if (selected == 1)
         {
             if (pac.smoothRight && !(pac.x % mazeCellWidth) && !(pac.y % mazeCellWidth) && !maze1[cellY][cellX + 1])
@@ -2857,7 +2876,7 @@ void collisioncheck()
         {
             foodCor = &fruitGen[rand() % (t - 1)];
             foodXcor[*foodCor][1] = -2;
-            randGen = rand() % 7;
+            randGen = rand() % 16;
         }
         if (totalfood == 0)
         {
@@ -2872,7 +2891,7 @@ void collisioncheck()
             {
                 if (foodXcor[i][1] == -2)
                 {
-                    if (randGen == 6)
+                    if (randGen == 15 ||randGen ==12)
                     {
                         pacmanlife++;
                     }
@@ -2888,10 +2907,15 @@ void collisioncheck()
                     score += 10;
                     converter(score, pacScore);
                     fruitGen[t++] = i;
-                    if (score > 1200)
+                    if (score > 1000)
                     {
                         chase = true;
                         scatter = false;
+                    }
+                    if (score > 6000)
+                    {
+                        chase = false;
+                        blast = true;
                     }
                 }
                 if ((i == 0 || i == 18 || i == 149 || i == 104) && selected == 1)
