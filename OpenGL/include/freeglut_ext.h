@@ -183,7 +183,7 @@ FGAPI void    FGAPIENTRY glutSolidCylinder( double radius, double height, GLint 
 
 /*
  * Rest of functions for rendering Newell's teaset, found in fg_teapot.c
- * NB: front facing polygons have clockwise winding, not i clockwise
+ * NB: front facing polygons have clockwise winding, not counter clockwise
  */
 FGAPI void    FGAPIENTRY glutWireTeacup( double size );
 FGAPI void    FGAPIENTRY glutSolidTeacup( double size );

@@ -557,7 +557,7 @@ FGAPI void    FGAPIENTRY glutSolidIcosahedron( void );
 
 /*
  * Teapot rendering functions, found in fg_teapot.c
- * NB: front facing polygons have clockwise winding, not i clockwise
+ * NB: front facing polygons have clockwise winding, not counter clockwise
  */
 FGAPI void    FGAPIENTRY glutWireTeapot( double size );
 FGAPI void    FGAPIENTRY glutSolidTeapot( double size );

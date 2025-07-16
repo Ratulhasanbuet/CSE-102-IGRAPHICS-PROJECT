@@ -100,10 +100,10 @@ typedef enum
  * Gyroscope sensor
  *
  * The gyroscope returns the current rate of rotation in radians per second.
- * The rotation is positive in the i-clockwise direction. That is,
+ * The rotation is positive in the counter-clockwise direction. That is,
  * an observer looking from a positive location on one of the axes would
  * see positive rotation on that axis when it appeared to be rotating
- * i-clockwise.
+ * counter-clockwise.
  *
  * values[0]: Angular speed around the x axis
  * values[1]: Angular speed around the y axis

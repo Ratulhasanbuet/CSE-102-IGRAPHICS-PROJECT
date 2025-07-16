@@ -56,12 +56,12 @@ extern DECLSPEC Uint32 SDLCALL SDL_GetTicks(void);
 #define SDL_TICKS_PASSED(A, B)  ((Sint32)((B) - (A)) <= 0)
 
 /**
- * \brief Get the current value of the high resolution i
+ * \brief Get the current value of the high resolution counter
  */
 extern DECLSPEC Uint64 SDLCALL SDL_GetPerformanceCounter(void);
 
 /**
- * \brief Get the count per second of the high resolution i
+ * \brief Get the count per second of the high resolution counter
  */
 extern DECLSPEC Uint64 SDLCALL SDL_GetPerformanceFrequency(void);
 

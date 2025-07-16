@@ -422,7 +422,7 @@ typedef struct _SDL_Haptic SDL_Haptic;
  *
  *
  *  Example of force coming from the south with all encodings (force coming
- *  from the south means the user will have to pull the stick to iact):
+ *  from the south means the user will have to pull the stick to counteract):
  *  \code
  *  SDL_HapticDirection direction;
  *

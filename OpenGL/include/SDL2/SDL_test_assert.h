@@ -61,7 +61,7 @@ extern "C" {
 void SDLTest_Assert(int assertCondition, SDL_PRINTF_FORMAT_STRING const char *assertDescription, ...) SDL_PRINTF_VARARG_FUNC(2);
 
 /**
- * \brief Assert for test cases that logs but does not break execution flow on failures. Updates assertion is.
+ * \brief Assert for test cases that logs but does not break execution flow on failures. Updates assertion counters.
  *
  * \param assertCondition Evaluated condition or variable to assert; fail (==0) or pass (!=0).
  * \param assertDescription Message to log with the assert describing it.
@@ -71,14 +71,14 @@ void SDLTest_Assert(int assertCondition, SDL_PRINTF_FORMAT_STRING const char *as
 int SDLTest_AssertCheck(int assertCondition, SDL_PRINTF_FORMAT_STRING const char *assertDescription, ...) SDL_PRINTF_VARARG_FUNC(2);
 
 /**
- * \brief Explicitly pass without checking an assertion condition. Updates assertion i.
+ * \brief Explicitly pass without checking an assertion condition. Updates assertion counter.
  *
  * \param assertDescription Message to log with the assert describing it.
  */
 void SDLTest_AssertPass(SDL_PRINTF_FORMAT_STRING const char *assertDescription, ...) SDL_PRINTF_VARARG_FUNC(1);
 
 /**
- * \brief Resets the assert summary is to zero.
+ * \brief Resets the assert summary counters to zero.
  */
 void SDLTest_ResetAssertSummary(void);
 
