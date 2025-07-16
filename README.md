@@ -3,65 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>PACMAN EXTREME - Game Manual</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #121212;
-      color: #f0f0f0;
-      padding: 20px;
-      max-width: 960px;
-      margin: auto;
-    }
-    h1, h2 {
-      text-align: center;
-      color: #ffcb00;
-    }
-    h2 {
-      border-bottom: 2px solid #ffcb00;
-      padding-bottom: 5px;
-      margin-top: 40px;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 15px 0;
-      background-color: #1e1e1e;
-    }
-    th, td {
-      border: 1px solid #444;
-      padding: 10px;
-      text-align: left;
-    }
-    th {
-      background-color: #2a2a2a;
-      color: #00ffff;
-    }
-    tr:nth-child(even) {
-      background-color: #202020;
-    }
-    summary {
-      cursor: pointer;
-      font-weight: bold;
-      color: #00ffff;
-      margin: 10px 0;
-    }
-    details {
-      background-color: #181818;
-      border: 1px solid #333;
-      border-radius: 4px;
-      margin-bottom: 15px;
-      padding: 10px;
-    }
-    ul {
-      padding-left: 20px;
-    }
-    code {
-      background-color: #292929;
-      color: #ffcb00;
-      padding: 3px 6px;
-      border-radius: 3px;
-    }
-  </style>
+ 
 </head>
 <body>
 
