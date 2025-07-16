@@ -1,112 +1,210 @@
-Filename: README.txt
+/* Filename: styles.css */
 
-Pac-Man Game Documentation
-===========================
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+  background: #f9f9f9;
+  color: #333;
+}
 
-1. Overview
------------
-This is a full-featured Pac-Man clone built in C using iGraphics.h. It includes:
-- Intro animation and menus
-- Level selection (4 maze layouts)
-- Difficulty settings influencing ghost speed and AI modes
-- In-game pause, background selector, high-score, settings, credits, rules
-- Scoring, lives, fruits, power-pellets, ghost AI modes (scatter, chase, frightened)
+header, footer {
+  background: #222;
+  color: #eee;
+  padding: 1em;
+  text-align: center;
+}
 
-2. How to Play
---------------
-1. Run the game executable.
-2. Watch the intro slideshow, then press Enter to enter the main menu.
-3. Navigate menus with mouse:
-   - Play: enter name, select level.
-   - Difficulty: choose ghost speed & AI behavior.
-   - Settings: toggle sound, pick maze skin.
-   - High Score, Credits, Rules, Quit.
-4. Controls in game:
-   - Arrow keys to move Pac-Man.
-   - Click pause icon or press ESC to pause.
-   - Mouse: resume, change background, return to menu.
-5. Objective:
-   - Eat all pellets and fruits to clear the level.
-   - Collect power-pellets to turn ghosts blue and earn bonus points.
-   - Avoid ghosts unless they are frightened.
-   - Survive with 3 lives; extra lives can appear as fruits.
+nav {
+  background: #444;
+}
 
-3. Main Features
-----------------
-- **Menus & Intro**: Animated slideshow, mouse-driven buttons.
-- **Levels**: Four distinct map arrays (21×21, 21×21, 19×36, 21×40).
-- **Ghost AI**:
-  - Scatter: ghosts roam fixed corners.
-  - Chase: predictive targeting per ghost type.
-  - Frightened: slow ghosts turn blue; can be eaten.
-- **Scoring**:
-  - Dots: 10 points.
-  - Fruits: up to 1000 points.
-  - Ghosts: 200, 600, 1800… escalating per successive eat.
-- **File I/O**:
-  - Records and sorts high scores in “highScore.txt”.
-  - Reads/writes player names and scores.
-- **Timers**: Uses iSetTimer for game loop, animations, ghost AI, intro, etc.
+nav ul {
+  margin: 0;
+  padding: 0.5em;
+  list-style: none;
+  text-align: center;
+}
 
-4. Code Structure
------------------
+nav li {
+  display: inline-block;
+  margin: 0 1em;
+}
 
-4.1 Data Structures
-   - `struct move` for Pac-Man: position, direction flags, animation indices.
-   - `struct ghost` for each enemy: position, speed, direction flags, AI distances.
-   - Arrays for maze layouts: `maze1[][]`, `maze2[][]`, `maze3[][]`, `maze4[][]`.
-   - Coordinate lookup: `mapX[][]`, `mapY[][]` for pixel positions.
-   - Food arrays: `foodXcor[][2]`, `foodYcor[]`, status flags.
+nav a {
+  color: #ddd;
+  text-decoration: none;
+}
 
-4.2 Core Functions
-   - `main()`: initialization, timers, event loop.
-   - `iDraw()`: draws everything based on current state flags.
-   - `pacmanmovement()`: updates Pac-Man position & collision.
-   - `pookiemovement()`: updates ghost positions with AI logic.
-   - `collisioncheck()`: pellet consumption, fruit spawn, life/ghost collisions.
-   - `DataAnalysis()`: reads, sorts, and writes high-score data.
+nav a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
 
-4.3 Rendering
-   - `drawMazeN()`: renders walls via `iShowImage` for each cell.
-   - `drawFoodAndPowerPellet()`: draws dots, power-pellets, fruits.
-   - Image arrays hold file paths for all sprites and backgrounds.
+section {
+  max-width: 800px;
+  margin: 2em auto;
+  padding: 0 1em;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
 
-4.4 Input Handling
-   - `iKeyboard()`: text entry for player name, menu shortcuts.
-   - `iSpecialKeyboard()`: arrow keys for movement.
-   - `iMouse()`, `iMouseMove()`: menu button hover and clicks.
+h1, h2 {
+  margin-top: 0;
+}
 
-4.5 Timers & Flow Control
-   - Intro slideshow timer (`introchange`).
-   - Ghost/animation timers: movement loops, frightened mode.
-   - Pause/resume functions to stop all timers when paused.
+h2 {
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 0.3em;
+}
 
-4.6 File I/O & High Score
-   - Appends new scores to “score.txt” on level end.
-   - Reads back, sorts descending, writes top entries to “highScore.txt”.
+code {
+  background: #eee;
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  font-family: Consolas, monospace;
+}
 
-4.7 Asset Organization
-   - Separate folders for each sprite set:
-     - `pacman/`, `inky/`, `blinky/`, `pinky/`, `clyde/`, `donky/`, `rinky/`
-   - UI images: `introimage/`, `menu image/`, `settingsimage/`, etc.
-   - Backgrounds: `bg/`, `slbg/`.
-   - All file paths stored in C arrays for easy theme switching.
+ul, ol {
+  margin-left: 1.2em;
+}
 
-5. Configuration
-----------------
-- `mazeCellWidth` and `mazeCellHeight` define grid cell size in pixels.
-- `diffSpeed` sets ghost movement speed per difficulty.
-- `fruitTimeInterval` controls interval between fruit spawns.
-- Sound toggled via a boolean `soundOn`.
+footer p {
+  margin: 0;
+}
+<!-- Filename: index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pac-Man Game Documentation</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Pac-Man Game Documentation</h1>
+  </header>
+  <nav>
+    <ul>
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#how-to-play">How to Play</a></li>
+      <li><a href="#features">Main Features</a></li>
+      <li><a href="#code-structure">Code Structure</a></li>
+      <li><a href="#configuration">Configuration</a></li>
+      <li><a href="#controls">Controls</a></li>
+    </ul>
+  </nav>
 
-6. Controls Summary
--------------------
-- Arrow keys: move Pac-Man.
-- Mouse:
-  - Click menu options.
-  - Click pause icon.
-  - In pause screen: resume, change background, return to menu.
-- Enter: confirm in text input and intro screen.
-- ESC: cancel name entry.
+  <section id="overview">
+    <h2>1. Overview</h2>
+    <p>This is a full-featured Pac-Man clone built in C using <code>iGraphics.h</code>. It includes intro animation, menus, four levels, difficulty settings, and more.</p>
+  </section>
 
-Enjoy customizing, extending, and playing your Pac-Man clone!
+  <section id="how-to-play">
+    <h2>2. How to Play</h2>
+    <ol>
+      <li>Run the game executable.</li>
+      <li>Press Enter to skip the intro and open the main menu.</li>
+      <li>Use the mouse to navigate:
+        <ul>
+          <li>Play &rarr; enter name &rarr; select level</li>
+          <li>Difficulty &rarr; choose ghost speed & AI behavior</li>
+          <li>Settings &rarr; toggle sound, pick maze theme</li>
+          <li>High Score, Credits, Rules, Quit</li>
+        </ul>
+      </li>
+      <li>In-game:
+        <ul>
+          <li>Arrow keys to move Pac-Man</li>
+          <li>Click pause icon or press ESC to pause</li>
+          <li>Collect all dots & fruits, avoid ghosts</li>
+          <li>Power-pellets turn ghosts blue (vulnerable)</li>
+        </ul>
+      </li>
+    </ol>
+  </section>
+
+  <section id="features">
+    <h2>3. Main Features</h2>
+    <ul>
+      <li><strong>Animated Menus</strong>: Intro slideshow, mouse-driven UI.</li>
+      <li><strong>Levels</strong>: Four maze layouts of varying sizes.</li>
+      <li><strong>Ghost AI</strong>: Scatter, chase, frightened modes.</li>
+      <li><strong>Scoring & Lives</strong>: Dots, fruits, escalating ghost bonuses.</li>
+      <li><strong>High Score</strong>: Persistent file-based leaderboard.</li>
+      <li><strong>Pause & Settings</strong>: Background selector, sound toggle.</li>
+    </ul>
+  </section>
+
+  <section id="code-structure">
+    <h2>4. Code Structure</h2>
+
+    <h3>4.1 Data Structures</h3>
+    <ul>
+      <li><code>struct move</code>: Pac-Man position, flags, animation frames.</li>
+      <li><code>struct ghost</code>: Ghost position, speed, AI flags, distances.</li>
+      <li>Maze arrays: <code>maze1[][]</code> … <code>maze4[][]</code>.</li>
+      <li>Coordinate lookup: <code>mapX[][]</code>, <code>mapY[][]</code>.</li>
+    </ul>
+
+    <h3>4.2 Core Functions</h3>
+    <ul>
+      <li><code>iDraw()</code>: Render loop based on state flags.</li>
+      <li><code>pacmanmovement()</code>, <code>pookiemovement()</code>: Movement & collision.</li>
+      <li><code>collisioncheck()</code>: Pellet eating, life/ghost interactions.</li>
+      <li><code>DataAnalysis()</code>: High-score file management.</li>
+    </ul>
+
+    <h3>4.3 Rendering & Assets</h3>
+    <ul>
+      <li>Maze walls with <code>iShowImage</code>.</li>
+      <li>Food, power pellets, fruits drawn as circles or sprites.</li>
+      <li>All images stored in themed folders, loaded via arrays.</li>
+    </ul>
+
+    <h3>4.4 Input Handling</h3>
+    <ul>
+      <li><code>iKeyboard()</code> for text and menu shortcuts.</li>
+      <li><code>iSpecialKeyboard()</code> for arrow-key movement.</li>
+      <li><code>iMouse()</code> & <code>iMouseMove()</code> for menus.</li>
+    </ul>
+
+    <h3>4.5 Timers & Flow</h3>
+    <ul>
+      <li><code>iSetTimer</code> for animations, AI updates, intro slideshow.</li>
+      <li>Pause/resume all timers on pause state.</li>
+    </ul>
+
+    <h3>4.6 File I/O & High Score</h3>
+    <ul>
+      <li>Appends to <code>score.txt</code>, reads/sorts, writes <code>highScore.txt</code>.</li>
+    </ul>
+  </section>
+
+  <section id="configuration">
+    <h2>5. Configuration</h2>
+    <ul>
+      <li><code>mazeCellWidth</code>: Pixel size of grid cell.</li>
+      <li><code>diffSpeed</code>: Ghost speed per difficulty.</li>
+      <li><code>fruitTimeInterval</code>: Fruit spawn timing.</li>
+      <li><code>soundOn</code>: Boolean toggle for sound.</li>
+    </ul>
+  </section>
+
+  <section id="controls">
+    <h2>6. Controls</h2>
+    <ul>
+      <li>Arrow keys: Move Pac-Man.</li>
+      <li>Mouse click: Menu and pause actions.</li>
+      <li>Enter: Confirm text input and menus.</li>
+      <li>ESC: Cancel name entry or pause.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>Generated documentation for the Pac-Man project. Customize as needed.</p>
+  </footer>
+</body>
+</html>
