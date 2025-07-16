@@ -151,6 +151,28 @@
       <tr><td>Maze 3</td><td>19×36</td><td>362</td><td>6</td><td>Includes Rinky & Donky</td></tr>
       <tr><td>Maze 4</td><td>21×40</td><td>454</td><td>6</td><td>Blast mode ghosts</td></tr>
     </table>
+     <h2>🧩 Maze Gallery</h2>
+  <div class="image-section">
+    <img src="mazeDesignImage/pixel.png" alt="Pixel Maze">
+    <img src="mazeDesignImage/nebula.png" alt="Nebula Maze">
+    <img src="mazeDesignImage/spectral.png" alt="Spectral Maze">
+    <img src="mazeDesignImage/psi.png" alt="Psi Maze">
+    <img src="mazeDesignImage/crack.png" alt="Crack Maze">
+    <img src="mazeDesignImage/echo.png" alt="Echo Maze">
+    <img src="mazeDesignImage/phantom.png" alt="Phantom Maze">
+    <img src="mazeDesignImage/spiral.png" alt="Spiral Maze">
+  </div>
+
+  <h2>📁 File Structure Overview</h2>
+  <pre>
+├── introimage/
+├── mazeDesignImage/
+├── pacman/
+├── ghost folders/
+├── score.txt / highScore.txt
+├── pacman.txt (main game logic)
+└── background assets...
+  </pre>
   </details>
 
   <details>
