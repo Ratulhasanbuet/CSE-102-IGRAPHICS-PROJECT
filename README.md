@@ -61,6 +61,24 @@
      Hasibul Islam, CSE'24</p>
   <p><strong>Instructed by:</strong><br>
      Abdur Rafi</p>
+
+     <h2>📋 Main Menu Overview</h2>
+
+<div style="text-align: center; margin-bottom: 20px;">
+  <img src="menu image/PACMAN.png" alt="Main Menu Screenshot" style="max-width: 100%; border: 2px solid #444; box-shadow: 0 0 12px #000;">
+</div>
+
+<ul style="line-height: 1.8;">
+  <li><strong>🎮 Play Game</strong> — Start the game and enter level selection.</li>
+  <li><strong>🏆 High Score</strong> — View top player scores from <code>highScore.txt</code>.</li>
+  <li><strong>⚙️ Settings</strong> — Toggle sound and choose background or maze theme.</li>
+  <li><strong>🔥 Difficulty</strong> — Select ghost speed and AI style.</li>
+  <li><strong>🧑‍💻 Credits</strong> — Show developer and instructor names.</li>
+  <li><strong>📖 Rules</strong> — Display gameplay instructions and ghost logic.</li>
+  <li><strong>❌ Quit</strong> — Exit with animated visual outro.</li>
+  <li><strong>🙏 Special Thanks</strong> — Personal acknowledgments section.</li>
+</ul>
+
 </section>
 
 
