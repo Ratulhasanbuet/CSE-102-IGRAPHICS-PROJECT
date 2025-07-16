@@ -167,7 +167,7 @@ char pacmanLeft[2][30] = {"pacman/pacman (5).png", "pacman/pacman (6).png"};
 char pacmanUp[2][30] = {"pacman/pacman (7).png", "pacman/pacman (8).png"};
 char pacmanDown[2][30] = {"pacman/pacman (3).png", "pacman/pacman (4).png"};
 char pacdeadscene[11][30] = {"pacdead/pacdead0.png", "pacdead/pacdead1.png", "pacdead/pacdead2.png", "pacdead/pacdead3.png", "pacdead/pacdead4.png", "pacdead/pacdead5.png", "pacdead/pacdead6.png", "pacdead/pacdead7.png", "pacdead/pacdead8.png", "pacdead/pacdead9.png", "pacdead/pacdead10.png"};
-char fruit[16][30] = {"fruit/fruit (1).png", "fruit/fruit (2).png", "fruit/fruit (3).png", "fruit/fruit (4).png", "fruit/fruit (5).png", "fruit/fruit (6).png", "fruit/fruit (7).png" ,"fruit/fruit (8).png" ,"fruit/fruit (9).png","fruit/fruit (10).png" ,"fruit/fruit (11).png", "fruit/fruit (12).png","fruit/fruit (13).png", "fruit/fruit (14).png","fruit/fruit (15).png", "fruit/fruit (16).png"};
+char fruit[16][30] = {"fruit/fruit (1).png", "fruit/fruit (2).png", "fruit/fruit (3).png", "fruit/fruit (4).png", "fruit/fruit (5).png", "fruit/fruit (6).png", "fruit/fruit (7).png", "fruit/fruit (8).png", "fruit/fruit (9).png", "fruit/fruit (10).png", "fruit/fruit (11).png", "fruit/fruit (12).png", "fruit/fruit (13).png", "fruit/fruit (14).png", "fruit/fruit (15).png", "fruit/fruit (16).png"};
 
 char inkyUp[2][30] = {"inky/inky (2).png", "inky/inky (3).png"};
 char inkyLeft[2][30] = {"inky/inky (7).png", "inky/inky (8).png"};
@@ -188,6 +188,16 @@ char clydeUp[2][30] = {"clyde/clyde (1).png", "clyde/clyde (2).png"};
 char clydeDown[2][30] = {"clyde/clyde (5).png", "clyde/clyde (6).png"};
 char clydeLeft[2][30] = {"clyde/clyde (7).png", "clyde/clyde (8).png"};
 char clydeRight[2][30] = {"clyde/clyde (3).png", "clyde/clyde (4).png"};
+
+char rinkyUp[2][30] = {"rinky/rinky7.png", "rinky/rinky8.png"};
+char rinkyDown[2][30] = {"rinky/rinky3.png", "rinky/rinky4.png"};
+char rinkyLeft[2][30] = {"rinky/rinky5.png", "rinky/rinky6.png"};
+char rinkyRight[2][30] = {"rinky/rinky1.png", "rinky/rinky2.png"};
+
+char donkyUp[2][30] = {"donky/donky7.png", "donky/donky8.png"};
+char donkyDown[2][30] = {"donky/donky3.png", "donky/donky4.png"};
+char donkyRight[2][30] = {"donky/donky1.png", "donky/donky2.png"};
+char donkyLeft[2][30] = {"donky/donky5.png", "donky/donky6.png"};
 
 char frozenGhost[2][40] = {"frozen/frozen (1).png", "frozen/frozen (2).png"};
 char frozenGhostEnd[2][40] = {"frozen/frozen (2).png", "frozen/frozen (3).png"};
@@ -2891,7 +2901,7 @@ void collisioncheck()
             {
                 if (foodXcor[i][1] == -2)
                 {
-                    if (randGen == 15 ||randGen ==12)
+                    if (randGen == 15 || randGen == 12)
                     {
                         pacmanlife++;
                     }
