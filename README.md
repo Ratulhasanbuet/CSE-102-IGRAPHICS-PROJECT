@@ -81,6 +81,49 @@
       <li>Customizable UI for rules, credits, and difficulty</li>
     </ul>
   </section>
+  <h2>🧩 Level Breakdown</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Level</th>
+      <th>Maze Size</th>
+      <th>Total Food Pellets</th>
+      <th>Power Pellet Indices</th>
+      <th>Maze Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Level 1</td>
+      <td>21 × 21</td>
+      <td>226 pellets</td>
+      <td>0, 18, 104, 149</td>
+      <td>Classic boxy corridors</td>
+    </tr>
+    <tr>
+      <td>Level 2</td>
+      <td>21 × 21</td>
+      <td>236 pellets</td>
+      <td>0, 18, 156, 165</td>
+      <td>Symmetrical lattice structure</td>
+    </tr>
+    <tr>
+      <td>Level 3</td>
+      <td>19 × 36</td>
+      <td>362 pellets</td>
+      <td>84, 100, 200, 292</td>
+      <td>Long horizontal maze with corridor dynamics</td>
+    </tr>
+    <tr>
+      <td>Level 4</td>
+      <td>21 × 40</td>
+      <td>454 pellets</td>
+      <td>15, 50, 87, 135, 172, 244, 327</td>
+      <td>Spiral paths and mixed turns</td>
+    </tr>
+  </tbody>
+</table>
+
 
   <section id="instructions">
     <h2>⚙️ How to Run</h2>
