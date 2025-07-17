@@ -246,43 +246,49 @@
     </thead>
     <tbody>
         <tr>
-            <td><img src="ghosts/blinky.png" width="60"></td>
+            <td><img src="blinky/blinky (1).png" width="60"></td>
             <td>Blinky</td>
             <td>Chaser</td>
             <td>Relentless pursuit of Pac-Man, direct pathfinding</td>
         </tr>
         <tr>
-            <td><img src="ghosts/pinky.png" width="60"></td>
+            <td><img src="pinky/pinky (1).png" width="60"></td>
             <td>Pinky</td>
             <td>Ambusher</td>
             <td>Predicts player’s future location to intercept</td>
         </tr>
         <tr>
-            <td><img src="ghosts/inky.png" width="60"></td>
+            <td><img src="inky/inky (1).png" width="60"></td>
             <td>Inky</td>
             <td>Flanker</td>
             <td>Uses dual-point tracking for unpredictable behavior</td>
         </tr>
         <tr>
-            <td><img src="ghosts/clyde.png" width="60"></td>
+            <td><img src="clyde/clyde (1).png" width="60"></td>
             <td>Clyde</td>
             <td>Wanderer</td>
             <td>Random movement with passive targeting logic</td>
         </tr>
         <tr>
-            <td><img src="ghosts/pookie.png" width="60"></td>
+            <td><img src="donky/donky1.png" width="60"></td>
             <td>Pookie</td>
             <td>Strategist</td>
             <td>Stylized wall-hugger with maze-aware turns</td>
         </tr>
         <tr>
-            <td><img src="ghosts/red_specter.png" width="60"></td>
+            <td><img src="frozen/frozen (1).png" width="60"></td>
+            <td>Red-Eyed Specter</td>
+            <td>Variant</td>
+            <td>Turns aggressive on hard difficulty, scary pursuit</td>
+        </tr>
+         <tr>
+            <td><img src="frozen/frozen (3).png" width="60"></td>
             <td>Red-Eyed Specter</td>
             <td>Variant</td>
             <td>Turns aggressive on hard difficulty, scary pursuit</td>
         </tr>
         <tr>
-            <td><img src="ghosts/green.png" width="60"></td>
+            <td><img src="rinky/rinky1.png" width="60"></td>
             <td>Green Ghost</td>
             <td>Neutral/Boss</td>
             <td>Bonus role or frozen state, mysterious movement</td>
