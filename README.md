@@ -215,24 +215,33 @@
     <li>🌿 Leafscape </li>
 
 </ul>
-<hr>
+<<h2>🍓 Fruit Bonus Gallery (16 Variants)</h2>
 
-<h2>🍓 Fruit Bonus Gallery (16 Variants)</h2>
 <table>
-<tr>
-  <td><img src="fruit/fruit (1).png" width="40"/></td>
-  <td><img src="fruit/fruit (2).png" width="40"/></td>
-  <td><img src="fruit/fruit (3).png" width="40"/></td>
-  <td><img src="fruit/fruit (4).png" width="40"/></td>
-  <td><img src="fruit/fruit (5).png" width="40"/></td>
-  <td><img src="fruit/fruit (6).png" width="40"/></td>
-  <td><img src="fruit/fruit (7).png" width="40"/></td>
-  <td><img src="fruit/fruit (8).png" width="40"/></td>
-</tr>
+  <tr>
+    <td><img src="fruit/fruit (1).png" width="40"/></td>
+    <td><img src="fruit/fruit (2).png" width="40"/></td>
+    <td><img src="fruit/fruit (3).png" width="40"/></td>
+    <td><img src="fruit/fruit (4).png" width="40"/></td>
+    <td><img src="fruit/fruit (5).png" width="40"/></td>
+    <td><img src="fruit/fruit (6).png" width="40"/></td>
+    <td><img src="fruit/fruit (7).png" width="40"/></td>
+    <td><img src="fruit/fruit (8).png" width="40"/></td>
+  </tr>
+  <tr>
+    <td><img src="fruit/fruit (9).png" width="40"/></td>
+    <td><img src="fruit/fruit (10).png" width="40"/></td>
+    <td><img src="fruit/fruit (11).png" width="40"/></td>
+    <td><img src="fruit/fruit (12).png" width="40"/></td>
+    <td><img src="fruit/fruit (13).png" width="40"/></td>
+    <td><img src="fruit/fruit (14).png" width="40"/></td>
+    <td><img src="fruit/fruit (15).png" width="40"/></td>
+    <td><img src="fruit/fruit (16).png" width="40"/></td>
+  </tr>
 </table>
-<p>🍒 Bonus: Fruit 12 and 15 grant extra life!</p>
 
-<hr>
+<p>🍒 <strong>Special Bonus:</strong> Fruit 12 and Fruit 15 grant extra life when consumed. Others contribute to score progression and trigger game events based on intervals.</p>
+
 
 <hr>
 
