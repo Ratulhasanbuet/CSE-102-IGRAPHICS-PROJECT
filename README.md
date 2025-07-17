@@ -28,6 +28,21 @@
 <p style="font-size: 16px;">Abdur Rafi</p>
 
 <hr>
+<h2>🤝 Special Thanks</h2>
+<p>I owe deep gratitude to the seniors whose wisdom and contributions helped guide this project:</p>
+
+<ul>
+  <li><strong>Abdur Rashid Tyshar</strong> — CSE-16, BUET</li>
+  <li><strong>Anwarul Bashir Shuaib</strong> — CSE-18, BUET</li>
+  <li><strong>Kazi Rakibul Hasan</strong> — CSE-18, BUET</li>
+</ul>
+
+<p style="font-style: italic; color: #555;">
+  “At first, I had no idea how to get started. Later, after watching my seniors’ videos and exploring their code, I began to understand how to approach things. I followed several complex techniques from their implementations. A heartfelt thank you to them for their invaluable support.”
+</p>
+
+<img src="specialThanks.png" width="300" alt="Tribute Note">
+
 
 <h2 style="font-family: 'Segoe UI', sans-serif; color: #333;">⚙️ Settings Menu</h2>
 <p style="font-size: 16px; color: #555;">
