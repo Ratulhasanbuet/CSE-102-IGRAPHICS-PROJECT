@@ -215,6 +215,24 @@
     <li>🌿 Leafscape </li>
 
 </ul>
+<hr>
+
+<h2>🍓 Fruit Bonus Gallery (16 Variants)</h2>
+<table>
+<tr>
+  <td><img src="fruit/fruit (1).png" width="40"/></td>
+  <td><img src="fruit/fruit (2).png" width="40"/></td>
+  <td><img src="fruit/fruit (3).png" width="40"/></td>
+  <td><img src="fruit/fruit (4).png" width="40"/></td>
+  <td><img src="fruit/fruit (5).png" width="40"/></td>
+  <td><img src="fruit/fruit (6).png" width="40"/></td>
+  <td><img src="fruit/fruit (7).png" width="40"/></td>
+  <td><img src="fruit/fruit (8).png" width="40"/></td>
+</tr>
+</table>
+<p>🍒 Bonus: Fruit 12 and 15 grant extra life!</p>
+
+<hr>
 
 <hr>
 
@@ -277,7 +295,7 @@
         </tr>
         <tr>
             <td><img src="frozen/frozen (1).png" width="60"></td>
-            <td>Red-Eyed Specter</td>
+            <td>White-Eyed Specter -Eatable</td>
             <td>Variant</td>
             <td>Turns aggressive on hard difficulty, scary pursuit</td>
         </tr>
