@@ -701,120 +701,87 @@
 <h2 align="center">🧩 Function Reference Table</h2>
 <p align="center"><em>Every function, every role—mapped for clarity</em></p>
 
-<table border="1" cellpadding="6" cellspacing="0" style="border-collapse: collapse; width:100%; font-size: 15px;">
-  <thead style="background-color: #f0f0f0;">
-    <tr>
-      <th>🔧 Function Name</th>
-      <th>📘 Purpose</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>iDraw()</code></td>
-      <td>Main rendering loop; switches between screens based on flags</td>
-    </tr>
-    <tr>
-      <td><code>iKeyPress()</code></td>
-      <td>Handles keyboard input: ENTER, ESC, and name entry</td>
-    </tr>
-    <tr>
-      <td><code>iSpecialKeyPress()</code></td>
-      <td>Arrow key movement for Pac-Man; updates direction flags</td>
-    </tr>
-    <tr>
-      <td><code>iMouse()</code></td>
-      <td>Mouse click handling for menu buttons and UI screens</td>
-    </tr>
-    <tr>
-      <td><code>iMouseMove()</code></td>
-      <td>Tracks mouse hover for interactive menu effects</td>
-    </tr>
-    <tr>
-      <td><code>iSetTimer()</code></td>
-      <td>Controls animation timing, movement updates, and transitions</td>
-    </tr>
-    <tr>
-      <td><code>drawMaze1() → drawMaze4()</code></td>
-      <td>Renders maze walls using mapped coordinates</td>
-    </tr>
-    <tr>
-      <td><code>drawFoodAndPowerPellet()</code></td>
-      <td>Draws pellets, power-ups, and fruit sprites</td>
-    </tr>
-    <tr>
-      <td><code>pacmanmovement()</code></td>
-      <td>Moves Pac-Man based on direction flags and smoothing logic</td>
-    </tr>
-    <tr>
-      <td><code>pookiemovement()</code></td>
-      <td>Ghost movement logic based on AI phase and direction</td>
-    </tr>
-    <tr>
-      <td><code>directionGenarator()</code></td>
-      <td>Generates ghost movement direction based on Pac-Man’s position</td>
-    </tr>
-    <tr>
-      <td><code>collisioncheck()</code></td>
-      <td>Checks for pellet eating, ghost collision, and power mode triggers</td>
-    </tr>
-    <tr>
-      <td><code>bluetimecheck()</code></td>
-      <td>Manages countdown for ghost vulnerability after power pellet</td>
-    </tr>
-    <tr>
-      <td><code>DataAnalysis()</code></td>
-      <td>Reads and sorts high scores from file; updates leaderboard</td>
-    </tr>
-    <tr>
-      <td><code>drawDeadScene()</code></td>
-      <td>Animates Pac-Man’s death sequence using sprite frames</td>
-    </tr>
-    <tr>
-      <td><code>drawGhost()</code></td>
-      <td>Renders ghost sprites based on direction and animation index</td>
-    </tr>
-    <tr>
-      <td><code>drawPacman()</code></td>
-      <td>Draws Pac-Man sprite based on movement direction</td>
-    </tr>
-    <tr>
-      <td><code>drawFruit()</code></td>
-      <td>Displays fruit sprites at randomized positions</td>
-    </tr>
-    <tr>
-      <td><code>drawLife()</code></td>
-      <td>Shows remaining lives using heart icons</td>
-    </tr>
-    <tr>
-      <td><code>drawScore()</code></td>
-      <td>Displays current score and combo multiplier</td>
-    </tr>
-    <tr>
-      <td><code>drawMenu()</code></td>
-      <td>Renders main menu screen with interactive buttons</td>
-    </tr>
-    <tr>
-      <td><code>drawSettings()</code></td>
-      <td>Displays settings screen with sound and difficulty options</td>
-    </tr>
-    <tr>
-      <td><code>drawPause()</code></td>
-      <td>Shows pause screen with resume and quit options</td>
-    </tr>
-    <tr>
-      <td><code>drawCongrats()</code></td>
-      <td>Displays win screen with final score and thank-you note</td>
-    </tr>
-    <tr>
-      <td><code>drawRules()</code></td>
-      <td>Shows game instructions and control guide</td>
-    </tr>
-    <tr>
-      <td><code>drawCredits()</code></td>
-      <td>Displays credits and acknowledgments</td>
-    </tr>
-  </tbody>
-</table>
+<h2 align="center">📘 Full Function Documentation</h2>
+<p align="center"><em>Understand every mechanic, behavior, and logic in your Pac-Man engine</em></p>
+
+<details>
+  <summary><strong>🟡 Core Initialization & Setup</strong></summary>
+  <table>
+    <tr><td><code>main()</code></td><td>Starts the game, initializes coordinates, sets up timers, and launches graphics</td></tr>
+    <tr><td><code>corrdinatestore1()</code> → <code>corrdinatestore4()</code></td><td>Maps pixel coordinates for each maze cell based on layout</td></tr>
+  </table>
+</details>
+
+<details>
+  <summary><strong>🟨 Rendering & Drawing</strong></summary>
+  <table>
+    <tr><td><code>iDraw()</code></td><td>Renders game screens based on state: menus, gameplay, scores, etc.</td></tr>
+    <tr><td><code>drawMaze1()</code> → <code>drawMaze4()</code></td><td>Draws wall cells of selected maze using <code>iShowImage()</code></td></tr>
+    <tr><td><code>drawFoodAndPowerPellet()</code></td><td>Draws dots, fruits, and power pellets using flags in <code>foodXcor[i][1]</code></td></tr>
+  </table>
+</details>
+
+<details>
+  <summary><strong>🟩 Movement & AI</strong></summary>
+  <table>
+    <tr><td><code>pacmanmovement()</code></td><td>Handles Pac-Man direction logic, smooth transitions, and animation updates</td></tr>
+    <tr><td><code>pookiemovement()</code></td><td>Controls ghost behavior based on chase, scatter, blast logic with grid movement</td></tr>
+    <tr><td><code>directionGenarator()</code> & <code>directionGenarator2()</code></td><td>Decides ghost movement based on proximity and available paths</td></tr>
+    <tr><td><code>calcDist(x1, y1, x2, y2)</code></td><td>Returns squared distance between two points for AI targeting</td></tr>
+  </table>
+</details>
+
+<details>
+  <summary><strong>🟦 Gameplay Mechanics</strong></summary>
+  <table>
+    <tr><td><code>collisioncheck()</code></td><td>Checks for pellet consumption, fruit bonuses, ghost collisions, score & life updates</td></tr>
+    <tr><td><code>bluetimecheck()</code></td><td>Ghost vulnerability timer handler; resets ghost state when time is up</td></tr>
+    <tr><td><code>deathScene()</code></td><td>Animates Pac-Man's death, updates lives, and triggers game-over</td></tr>
+    <tr><td><code>foodCoordinateStore()</code></td><td>Initializes pellet positions from maze grids</td></tr>
+    <tr><td><code>foodcount()</code></td><td>Sets total pellets based on selected maze layout</td></tr>
+    <tr><td><code>converter()</code></td><td>Converts integer score to string for display</td></tr>
+  </table>
+</details>
+
+<details>
+  <summary><strong>🟫 User Input & Interaction</strong></summary>
+  <table>
+    <tr><td><code>iMouseMove(mx, my)</code></td><td>Detects mouse hover for menu buttons and UI effects</td></tr>
+    <tr><td><code>iMouse()</code></td><td>Handles button clicks across menus, gameplay, and transitions</td></tr>
+    <tr><td><code>iKeyPress(key)</code></td><td>Processes character input for name entry and gameplay start</td></tr>
+    <tr><td><code>iSpecialKeyPress(key)</code></td><td>Controls Pac-Man movement via arrow keys</td></tr>
+  </table>
+</details>
+
+<details>
+  <summary><strong>🟪 Game State Transitions</strong></summary>
+  <table>
+    <tr><td><code>introchange()</code></td><td>Plays intro animation and switches to menu</td></tr>
+    <tr><td><code>scoreshow()</code></td><td>Displays score screen upon game completion</td></tr>
+    <tr><td><code>exitSequence()</code></td><td>Runs exit animation then terminates</td></tr>
+    <tr><td><code>background()</code></td><td>Handles background selection transitions</td></tr>
+    <tr><td><code>level()</code></td><td>Runs level selector screen animation</td></tr>
+  </table>
+</details>
+
+<details>
+  <summary><strong>🟧 Score Management</strong></summary>
+  <table>
+    <tr><td><code>DataAnalysis()</code></td><td>Reads, sorts, and stores high score data from <code>Score.txt</code> and updates leaderboard</td></tr>
+  </table>
+</details>
+
+<details>
+  <summary><strong>🟤 Utility Functions</strong></summary>
+  <table>
+    <tr><td><code>pacinitialcord()</code></td><td>Sets Pac-Man’s start cell and coordinates based on maze</td></tr>
+    <tr><td><code>pookieinitialcoordinate()</code></td><td>Initializes ghost positions and directions for selected maze</td></tr>
+    <tr><td><code>iResumeAll()</code> / <code>iPauseAll()</code></td><td>Resume or pause all active timers simultaneously</td></tr>
+  </table>
+</details>
+
+<p align="center"><em>This is the full logic engine driving your Pac-Man world!</em></p>
+
 
   <summary><strong>📁 Image & Asset Directory Mapping</strong></summary>
   <ul>
