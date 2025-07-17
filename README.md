@@ -698,17 +698,123 @@
 
 
 
-  <summary><strong>🧠 Game Flow Functions</strong></summary>
-  <ul>
-    <li><code>drawMaze1() → drawMaze4()</code>: Renders walls using mapped coordinates and maze design</li>
-    <li><code>drawFoodAndPowerPellet()</code>: Renders standard dots, power pellets, and fruit sprites</li>
-    <li><code>collisioncheck()</code>: Checks eating logic, triggers power mode, ghost collisions</li>
-    <li><code>pacmanmovement()</code>: Handles Pac-Man’s pixel motion based on direction flags</li>
-    <li><code>pookiemovement()</code>: Applies ghost AI logic like chase, scatter, blast, prediction</li>
-    <li><code>directionGenarator()</code>: Ghosts switch movement based on Pac-Man’s position/direction</li>
-    <li><code>bluetimecheck()</code>: Handles blue mode countdown and ghost reset</li>
-    <li><code>DataAnalysis()</code>: Reads, sorts, and saves high scores from text files</li>
-  </ul>
+<h2 align="center">🧩 Function Reference Table</h2>
+<p align="center"><em>Every function, every role—mapped for clarity</em></p>
+
+<table border="1" cellpadding="6" cellspacing="0" style="border-collapse: collapse; width:100%; font-size: 15px;">
+  <thead style="background-color: #f0f0f0;">
+    <tr>
+      <th>🔧 Function Name</th>
+      <th>📘 Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>iDraw()</code></td>
+      <td>Main rendering loop; switches between screens based on flags</td>
+    </tr>
+    <tr>
+      <td><code>iKeyPress()</code></td>
+      <td>Handles keyboard input: ENTER, ESC, and name entry</td>
+    </tr>
+    <tr>
+      <td><code>iSpecialKeyPress()</code></td>
+      <td>Arrow key movement for Pac-Man; updates direction flags</td>
+    </tr>
+    <tr>
+      <td><code>iMouse()</code></td>
+      <td>Mouse click handling for menu buttons and UI screens</td>
+    </tr>
+    <tr>
+      <td><code>iMouseMove()</code></td>
+      <td>Tracks mouse hover for interactive menu effects</td>
+    </tr>
+    <tr>
+      <td><code>iSetTimer()</code></td>
+      <td>Controls animation timing, movement updates, and transitions</td>
+    </tr>
+    <tr>
+      <td><code>drawMaze1() → drawMaze4()</code></td>
+      <td>Renders maze walls using mapped coordinates</td>
+    </tr>
+    <tr>
+      <td><code>drawFoodAndPowerPellet()</code></td>
+      <td>Draws pellets, power-ups, and fruit sprites</td>
+    </tr>
+    <tr>
+      <td><code>pacmanmovement()</code></td>
+      <td>Moves Pac-Man based on direction flags and smoothing logic</td>
+    </tr>
+    <tr>
+      <td><code>pookiemovement()</code></td>
+      <td>Ghost movement logic based on AI phase and direction</td>
+    </tr>
+    <tr>
+      <td><code>directionGenarator()</code></td>
+      <td>Generates ghost movement direction based on Pac-Man’s position</td>
+    </tr>
+    <tr>
+      <td><code>collisioncheck()</code></td>
+      <td>Checks for pellet eating, ghost collision, and power mode triggers</td>
+    </tr>
+    <tr>
+      <td><code>bluetimecheck()</code></td>
+      <td>Manages countdown for ghost vulnerability after power pellet</td>
+    </tr>
+    <tr>
+      <td><code>DataAnalysis()</code></td>
+      <td>Reads and sorts high scores from file; updates leaderboard</td>
+    </tr>
+    <tr>
+      <td><code>drawDeadScene()</code></td>
+      <td>Animates Pac-Man’s death sequence using sprite frames</td>
+    </tr>
+    <tr>
+      <td><code>drawGhost()</code></td>
+      <td>Renders ghost sprites based on direction and animation index</td>
+    </tr>
+    <tr>
+      <td><code>drawPacman()</code></td>
+      <td>Draws Pac-Man sprite based on movement direction</td>
+    </tr>
+    <tr>
+      <td><code>drawFruit()</code></td>
+      <td>Displays fruit sprites at randomized positions</td>
+    </tr>
+    <tr>
+      <td><code>drawLife()</code></td>
+      <td>Shows remaining lives using heart icons</td>
+    </tr>
+    <tr>
+      <td><code>drawScore()</code></td>
+      <td>Displays current score and combo multiplier</td>
+    </tr>
+    <tr>
+      <td><code>drawMenu()</code></td>
+      <td>Renders main menu screen with interactive buttons</td>
+    </tr>
+    <tr>
+      <td><code>drawSettings()</code></td>
+      <td>Displays settings screen with sound and difficulty options</td>
+    </tr>
+    <tr>
+      <td><code>drawPause()</code></td>
+      <td>Shows pause screen with resume and quit options</td>
+    </tr>
+    <tr>
+      <td><code>drawCongrats()</code></td>
+      <td>Displays win screen with final score and thank-you note</td>
+    </tr>
+    <tr>
+      <td><code>drawRules()</code></td>
+      <td>Shows game instructions and control guide</td>
+    </tr>
+    <tr>
+      <td><code>drawCredits()</code></td>
+      <td>Displays credits and acknowledgments</td>
+    </tr>
+  </tbody>
+</table>
 
   <summary><strong>📁 Image & Asset Directory Mapping</strong></summary>
   <ul>
