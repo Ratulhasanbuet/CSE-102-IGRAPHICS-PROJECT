@@ -370,12 +370,37 @@
 
 <hr>
 
-<h2 style="font-family: 'Segoe UI', sans-serif; color: #333;">👻 Ghost Modes</h2>
-<ul style="font-size: 16px; color: #444;">
-    <li>😴 Scatter — passive patrol</li>
-    <li>🎯 Chase — score-based aggression</li>
-    <li>💥 Blast — coordinated final pursuit</li>
-</ul>
+
+  <summary><strong>👻 Ghost Behavior Modes</strong></summary>
+  <br>
+  <table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; text-align: center; width: 100%; font-size: 16px;">
+    <thead style="background-color: #ffe0f0;">
+      <tr>
+        <th>🎭 Mode</th>
+        <th>🔍 Behavior Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>📍 Scatter</td>
+        <td>Ghosts retreat to their designated maze corners for tactical regrouping</td>
+      </tr>
+      <tr>
+        <td>🎯 Chase</td>
+        <td>AI predicts Pac-Man’s path and actively hunts with unique strategies</td>
+      </tr>
+      <tr>
+        <td>🔥 Blast</td>
+        <td>Maximum aggression and speed—ghosts become relentless and unpredictable</td>
+      </tr>
+      <tr>
+        <td>💙 Blue Mode</td>
+        <td>Triggered by power pellets—ghosts turn vulnerable and try to escape</td>
+      </tr>
+    </tbody>
+  </table>
+
+
 <h2>👻 Ghost Character Table</h2>
 
 <table border="1" cellpadding="10" cellspacing="0">
