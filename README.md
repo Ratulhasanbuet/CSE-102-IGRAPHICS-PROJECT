@@ -118,14 +118,81 @@
     </table>
 </section>
 
-<hr>
 
-<h2 style="font-family: 'Segoe UI', sans-serif; color: #333;">📜 Game Rules</h2>
-<ul style="font-size: 16px; color: #444;">
-    <li>🎯 Eat all pellets, avoid ghosts, survive</li>
-    <li>🍒 Power pellets make ghosts vulnerable</li>
-    <li>🧠 Ghost behaviors evolve with score</li>
-    <li>💾 High scores are saved locally</li>
+
+<h2 align="center">📜 Game Rules</h2>
+
+<table align="center" width="100%" cellspacing="10">
+  <tr>
+    <td width="60"><img src="mazeDesignImage/psi.png" alt="Maze Icon"/></td>
+    <td><strong>🎯 Eat all pellets</strong><br>Avoid ghosts and navigate through the maze to survive.</td>
+  </tr>
+  <tr>
+    <td><img src="https://img.icons8.com/color/48/lightning-bolt.png" alt="Power Icon"/></td>
+    <td><strong>🍒 Power Pellets</strong><br>Make ghosts vulnerable for a short time—use them strategically.</td>
+  </tr>
+  <tr>
+    <td><img src="https://img.icons8.com/color/48/brain.png" alt="Brain Icon"/></td>
+    <td><strong>🧠 Ghost Intelligence</strong><br>Ghosts become smarter and faster as your score increases.</td>
+  </tr>
+  <tr>
+    <td><img src="https://img.icons8.com/color/48/save.png" alt="Save Icon"/></td>
+    <td><strong>💾 High Scores</strong><br>Your score and name are saved locally in <code>player_name.txt</code>.</td>
+  </tr>
+</table>
+
+<h2>📜 Playing Rules</h2>
+
+<ul>
+  <li><strong>🟡 Pac-Man Movement:</strong> Use arrow keys to navigate freely through the maze grid. Movement is pixel-aligned for smooth transitions and corner detection.</li>
+  
+  <li><strong>👻 Ghost Behavior:</strong>
+    <ul>
+      <li>Ghosts begin in <em>scatter mode</em> and later switch to <em>chase mode</em> based on difficulty and elapsed time.</li>
+      <li>Each ghost has unique AI patterns:
+        <ul>
+          <li><strong>Blinky</strong> – Directly follows Pac-Man’s current position.</li>
+          <li><strong>Pinky</strong> – Predicts the player’s next move to intercept.</li>
+          <li><strong>Inky</strong> – Uses dual-position targeting for erratic movement.</li>
+          <li><strong>Clyde</strong> – Wanders with randomized turns.</li>
+        </ul>
+      </li>
+      <li>Ghosts switch to vulnerable mode when power pellets are eaten.</li>
+    </ul>
+  </li>
+
+  <li><strong>🍽️ Food & Fruit System:</strong>
+    <ul>
+      <li>Each pellet eaten adds <code>+10</code> to score.</li>
+      <li>Fruit spawns intermittently based on <code>foodhelp % fruitTimeInterval == 0</code>.</li>
+      <li>There are <strong>16 fruit types</strong>, selected randomly via <code>randGen</code>.</li>
+      <li>Consuming <strong>fruit #12 or #15</strong> grants an extra life.</li>
+    </ul>
+  </li>
+
+  <li><strong>⚡ Power Pellets:</strong>
+    <ul>
+      <li>Trigger ghost vulnerability mode.</li>
+      <li>Timer-based reset restores ghosts to original behavior.</li>
+    </ul>
+  </li>
+
+  <li><strong>💔 Death Logic:</strong>
+    <ul>
+      <li>Collision with a non-vulnerable ghost decreases <code>life</code>.</li>
+      <li>Pixel-based proximity detection ensures accurate hits.</li>
+      <li>Animation sequences play on death and respawn.</li>
+    </ul>
+  </li>
+
+  <li><strong>🎯 Win & Loss Conditions:</strong>
+    <ul>
+      <li>Win by clearing the entire maze of pellets and fruits.</li>
+      <li>Lose by running out of lives.</li>
+      <li>Final score recorded in <code>player_name.txt</code>.</li>
+      <li>“Congratulations” or “Game Over” screen displays based on outcome.</li>
+    </ul>
+  </li>
 </ul>
 
 <hr>
@@ -329,6 +396,52 @@
         </tr>
     </tbody>
 </table>
+
+  <summary><strong>💯 Scoring System</strong></summary>
+  <br>
+
+  <table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; text-align: center; width: 100%; font-size: 16px;">
+    <thead style="background-color: #ffe680;">
+      <tr>
+        <th>🏁 Action</th>
+        <th>📈 Points</th>
+        <th>🔍 Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>🔹 Regular Dot</td>
+        <td>+10</td>
+        <td>Standard pellets scattered throughout the maze</td>
+      </tr>
+      <tr>
+        <td>⚡ Power Pellet</td>
+        <td>+40</td>
+        <td>Enables ghost vulnerability for a short time</td>
+      </tr>
+      <tr>
+        <td>🍓 Fruit Bonus</td>
+        <td>+1000</td>
+        <td>Appears at timed intervals, type varies</td>
+      </tr>
+      <tr>
+        <td>👻 Blue Ghosts (Combo)</td>
+        <td>+100 → +300 → +900 → +2700</td>
+        <td>Chomp ghosts while they’re blue! Score grows with consecutive hits</td>
+      </tr>
+      <tr>
+        <td>🏁 Maze Completion</td>
+        <td>+2000</td>
+        <td>Clearing all food and fruit from the maze triggers bonus</td>
+      </tr>
+      <tr>
+        <td>🍒 Fruit Chain</td>
+        <td>~5000</td>
+        <td>Time-based chain eating triggers high bonus burst</td>
+      </tr>
+    </tbody>
+  </table>
+
 
 
 <div align="center" style="margin-top: 20px;">
