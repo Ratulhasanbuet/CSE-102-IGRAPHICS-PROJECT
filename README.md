@@ -436,7 +436,7 @@
       </tr>
       <tr>
         <td>🍒 Fruit Chain</td>
-        <td>~5000</td>
+        <td>~Extra Life</td>
         <td>Time-based chain eating triggers high bonus burst</td>
       </tr>
     </tbody>
