@@ -396,6 +396,32 @@
         </tr>
     </tbody>
 </table>
+<h2>🌌 Background Selector</h2>
+<p>Customize your Pac-Man world by choosing from five distinct background styles. Each provides unique ambiance while keeping gameplay mechanics unchanged.</p>
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="bg/bg.png" width="160"><br><strong>🧪 Syntax Splash</strong><br><em>Teal overlays with scientific energy</em>
+    </td>
+    <td align="center">
+      <img src="bg/bg (3).png" width="160"><br><strong>🔌 Crimson Circuit</strong><br><em>Black-red theme for intensity</em>
+    </td>
+    <td align="center">
+      <img src="bg/bg (1).png" width="160"><br><strong>🍃 Leafscape</strong><br><em>Soft, nature-inspired vibe</em>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="bg/bg (2).png" width="160"><br><strong>🌫️ Hollow</strong><br><em>Mystical mist and shadow play</em>
+    </td>
+    <td align="center">
+      <img src="bg/bg (4).png" width="160"><br><strong>🖥️ Code Nest</strong><br><em>Warm coding desk, student’s vibe</em>
+    </td>
+  </tr>
+</table>
+
+
 
   <summary><strong>💯 Scoring System</strong></summary>
   <br>
