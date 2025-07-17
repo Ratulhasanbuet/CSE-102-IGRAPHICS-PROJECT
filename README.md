@@ -292,19 +292,8 @@
 
 <hr>
 
-<h2 style="font-family: 'Segoe UI', sans-serif; color: #333;">🌌 Background Themes</h2>
-<p style="font-size: 16px; color: #555;">
-    Six vivid backgrounds enhance immersion:
-</p>
-<ul style="font-size: 16px; color: #444;">
-    <li>🎮 Code Nest</li>
-    <li>🌠 Syntax Splash</li>
-    <li>🧊 Hollow </li>
-    <li>🔥 Crimson Circuit</li>
-    <li>🌿 Leafscape </li>
 
-</ul>
-<<h2>🍓 Fruit Bonus Gallery (16 Variants)</h2>
+<h2>🍓 Fruit Bonus Gallery (16 Variants)</h2>
 
 <table>
   <tr>
@@ -411,6 +400,18 @@
         </tr>
     </tbody>
 </table>
+<h2 style="font-family: 'Segoe UI', sans-serif; color: #333;">🌌 Background Themes</h2>
+<p style="font-size: 16px; color: #555;">
+    Six vivid backgrounds enhance immersion:
+</p>
+<ul style="font-size: 16px; color: #444;">
+    <li>🎮 Code Nest</li>
+    <li>🌠 Syntax Splash</li>
+    <li>🧊 Hollow </li>
+    <li>🔥 Crimson Circuit</li>
+    <li>🌿 Leafscape </li>
+
+</ul>
 <h2>🌌 Background Selector</h2>
 <p>Customize your Pac-Man world by choosing from five distinct background styles. Each provides unique ambiance while keeping gameplay mechanics unchanged.</p>
 
