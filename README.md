@@ -399,6 +399,158 @@
       </tr>
     </tbody>
   </table>
+  
+  
+<table>
+  <thead>
+    <tr>
+      <th colspan="3" style="text-align:center; background-color:#ffebcd; color:#4b0082; font-size:1.3em; padding:8px;">
+        🎯 True Scatter Mode Strategy
+      </th>
+    </tr>
+    <tr style="background-color:#dcdcdc;">
+      <th style="padding:6px;">👻 Ghost</th>
+      <th style="padding:6px;">🎮 Behavior</th>
+      <th style="padding:6px;">📍 Scatter Target</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding:6px;">Inky</td>
+      <td style="padding:6px;">Retreat ghost</td>
+      <td style="padding:6px;">Bottom Right Corner</td>
+    </tr>
+    <tr style="background-color:#f9f9f9;">
+      <td style="padding:6px;">Blinky</td>
+      <td style="padding:6px;">Leader</td>
+      <td style="padding:6px;">Top Right Corner</td>
+    </tr>
+    <tr>
+      <td style="padding:6px;">Pinky</td>
+      <td style="padding:6px;">Ambusher</td>
+      <td style="padding:6px;">Top Left Corner</td>
+    </tr>
+    <tr style="background-color:#f9f9f9;">
+      <td style="padding:6px;">Clyde</td>
+      <td style="padding:6px;">Shy ambusher</td>
+      <td style="padding:6px;">Bottom Left Corner</td>
+    </tr>
+    <tr>
+      <td style="padding:6px;">Donky</td>
+      <td style="padding:6px;">Wall seeker</td>
+      <td style="padding:6px;">Middle Left</td>
+    </tr>
+    <tr style="background-color:#f9f9f9;">
+      <td style="padding:6px;">Rinky</td>
+      <td style="padding:6px;">Unpredictable</td>
+      <td style="padding:6px;">Center or Maze Midpoint</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+</br>
+<table>
+  <thead>
+    <tr>
+      <th colspan="3" style="text-align:center; background-color:#e0ffff; color:#1e90ff; font-size:1.2em; padding:10px;">
+        👻 Realistic Chase Logic Overview
+      </th>
+    </tr>
+    <tr style="background-color:#f0f0f0;">
+      <th style="padding:8px;">Ghost</th>
+      <th style="padding:8px;">🕹️ Behavior</th>
+      <th style="padding:8px;">⚙️ Improved Logic</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding:8px;">Blinky</td>
+      <td style="padding:8px;">Directly chases Pac</td>
+      <td style="padding:8px;"><code>px = pac.x; py = pac.y;</code></td>
+    </tr>
+    <tr style="background-color:#f9f9f9;">
+      <td style="padding:8px;">Pinky</td>
+      <td style="padding:8px;">Targets 4 tiles ahead</td>
+      <td style="padding:8px;">Predicts movement using smooth flags</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;">Inky</td>
+      <td style="padding:8px;">Complex vector logic w/ Blinky</td>
+      <td style="padding:8px;">Approx. behind or mirror offset</td>
+    </tr>
+    <tr style="background-color:#f9f9f9;">
+      <td style="padding:8px;">Clyde</td>
+      <td style="padding:8px;">Chases when far, flees when close</td>
+      <td style="padding:8px;">Conditional target based on distance</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 align="center">🔥 <u>Blast Mode — Ghost Behavior Breakdown</u> 🔥</h3>
+
+<table align="center" style="border-collapse: collapse; width: 100%;">
+  <thead>
+    <tr style="background-color: #202124; color: #00ffc3;">
+      <th>👻 Ghost</th>
+      <th>🧠 Behavior</th>
+      <th>🎯 Target Logic</th>
+      <th>⚙️ Strategy Level</th>
+      <th>✨ Unique Traits</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background-color: #292b2f;">
+      <td>🟥 <b>Blinky</b></td>
+      <td>Direct chase</td>
+      <td>Pac-Man’s current position</td>
+      <td><span style="color: #ff5050;">High</span></td>
+      <td>Relentless & fast</td>
+    </tr>
+    <tr style="background-color: #212325;">
+      <td>🟦 <b>Inky</b></td>
+      <td>Reverse ambush</td>
+      <td>Behind Pac-Man by 2–4 tiles</td>
+      <td><span style="color: #ff5050;">High</span></td>
+      <td>Sneaky flanker</td>
+    </tr>
+    <tr style="background-color: #292b2f;">
+      <td>🟣 <b>Pinky</b></td>
+      <td>Predictive ambush</td>
+      <td>Ahead of Pac-Man by 4 tiles</td>
+      <td><span style="color: #ff5050;">High</span></td>
+      <td>Deadly at intersections</td>
+    </tr>
+    <tr style="background-color: #212325;">
+      <td>🟠 <b>Clyde</b></td>
+      <td>Cutoff chaser</td>
+      <td>Always pursues, no retreat logic</td>
+      <td><span style="color: #ff5050;">High</span></td>
+      <td>Corner trap specialist</td>
+    </tr>
+    <tr style="background-color: #292b2f;">
+      <td>🟢 <b>Donky</b></td>
+      <td>Edge stalker</td>
+      <td>Wall-hugging offsets</td>
+      <td><span style="color: #ff5050;">High</span></td>
+      <td>Persistent in corridors</td>
+    </tr>
+    <tr style="background-color: #212325;">
+      <td>⚪ <b>Rinky</b></td>
+      <td>Chaotic pursuer</td>
+      <td>Jittery path near Pac-Man</td>
+      <td><span style="color: #ff5050;">High</span></td>
+      <td>Disrupts player patterns</td>
+    </tr>
+  </tbody>
+</table>
+
+<p align="center" style="font-size: 0.9em; color: #c0c0c0;">🔺 <i>Blast mode activates during high-score phases and overrides all ghost personalities with relentless pursuit behaviors.</i></p>
+
+
+
+
 
 
 <h2>👻 Ghost Character Table</h2>

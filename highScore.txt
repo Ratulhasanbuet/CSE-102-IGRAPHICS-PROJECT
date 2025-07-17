@@ -1,5 +1,7 @@
 RATUL 160380
+ratul 116770
 ratul 96080
+hg 95680
 ratul 95320
 ratul 77960
 ratul 23900
@@ -16,6 +18,7 @@ ratul 4520
 uj 3570
 ratul 3540
 fgn 2860
+rtj 2850
 ratul 2170
 ratul 360
 ratul 310

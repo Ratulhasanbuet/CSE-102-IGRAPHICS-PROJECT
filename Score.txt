@@ -20,3 +20,6 @@ ratul 23900
 ratul 96080
 ratul 95320
 RATUL 160380
+hg 95680
+rtj 2850
+ratul 116770
