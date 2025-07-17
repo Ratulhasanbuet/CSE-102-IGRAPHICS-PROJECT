@@ -1,13 +1,20 @@
 <div align="center">
 
-    <h1 style="font-family: 'Segoe UI', sans-serif; font-size: 48px; color: #ffcc00; text-shadow: 2px 2px #333;">
-        PAC-MAN: RETRO REIMAGINED</h1>
-    <p style="font-size: 18px; color: #777; font-style: italic;">A tribute to the timeless classic, built from scratch
-        in C with <code>iGraphics.h</code></p>
-    <br>
-    <img src="https://img.icons8.com/ios-filled/50/ghost.png" alt="Ghost Icon" style="margin: 0 10px;"><img
-        src="https://img.icons8.com/ios-filled/50/ghost.png" alt="Ghost Icon" style="margin: 0 10px;">
+  <h1>
+    <span style="color:#ffcc00;">PAC-MAN: RETRO REIMAGINED</span>
+  </h1>
+
+  <p><em>A tribute to the timeless classic, built from scratch in C with <code>iGraphics.h</code></em></p>
+
+  <p>
+    <img src="https://img.icons8.com/ios-filled/50/ghost.png" alt="Ghost Icon" width="40">
+    <img src="https://img.icons8.com/ios-filled/50/ghost.png" alt="Ghost Icon" width="40">
+  </p>
+
 </div>
+
+<hr>
+
 
 <hr>
 
