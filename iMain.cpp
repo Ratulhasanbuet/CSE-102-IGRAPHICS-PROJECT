@@ -4125,7 +4125,7 @@ int main(int argc, char *argv[])
     iSetTimer(10, collisioncheck);
     iSetTimer(1300, bluetimecheck);
     iSetTimer(30, pookiemovement);
-    iSetTimer(40, pacmanmovement);
+    iSetTimer(30, pacmanmovement);
     iSetTimer(30, introchange);
     iSetTimer(20, scoreshow);
     iSetTimer(5, background);
