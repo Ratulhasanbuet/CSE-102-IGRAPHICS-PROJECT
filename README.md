@@ -209,6 +209,44 @@
     </ul>
   </li>
 </ul>
+<h2>🎮 Game Controls</h2>
+<p>Master the maze with these keyboard controls:</p>
+
+<table>
+  <tr>
+    <th>🔘 Key</th>
+    <th>🕹️ Action</th>
+  </tr>
+  <tr>
+    <td><strong>Arrow Keys</strong></td>
+    <td>Move Pac-Man (Up, Down, Left, Right)</td>
+  </tr>
+  <tr>
+    <td><strong>P</strong></td>
+    <td>Pause the game</td>
+  </tr>
+  <tr>
+    <td><strong>R</strong></td>
+    <td>Resume the game</td>
+  </tr>
+  <tr>
+    <td><strong>ESC</strong></td>
+    <td>Quit the game</td>
+  </tr>
+  <tr>
+    <td><strong>Enter</strong></td>
+    <td>Confirm selections in menu</td>
+  </tr>
+  <tr>
+    <td><strong>Mouse Click</strong></td>
+    <td>Navigate menus and select options</td>
+  </tr>
+</table>
+
+<p style="font-style: italic; color: #555;">
+  Tip: You can also use the number keys (1–5) to quickly switch backgrounds if enabled in your settings logic.
+</p>
+
 
 <hr>
 
