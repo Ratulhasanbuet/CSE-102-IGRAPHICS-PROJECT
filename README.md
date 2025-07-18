@@ -28,7 +28,7 @@
 <p style="font-size: 16px;">Abdur Rafi</p>
 
 <hr>
-<h2>🤝 Special Thanks</h2>
+<h2>🤝🙏 Special Thanks</h2>
 <p>I owe deep gratitude to the seniors whose wisdom and contributions helped guide this project:</p>
 
 <ul>
@@ -597,15 +597,15 @@
         </tr>
         <tr>
             <td><img src="frozen/frozen (1).png" width="60"></td>
-            <td>White-Eyed Specter -Eatable</td>
+            <td>White-Eyed Specter</td>
             <td>Variant</td>
-            <td>Turns aggressive on hard difficulty, scary pursuit</td>
+            <td>Edible Ghost .... Eat and make point expotentially</td>
         </tr>
          <tr>
             <td><img src="frozen/frozen (3).png" width="60"></td>
             <td>Red-Eyed Specter</td>
             <td>Variant</td>
-            <td>Turns aggressive on hard difficulty, scary pursuit</td>
+            <td>Hurry Up.... Eat the Ghost and make point... Ghost will turn into real ghost in soon</td>
         </tr>
         <tr>
             <td><img src="rinky/rinky1.png" width="60"></td>
@@ -636,18 +636,21 @@
       <img src="bg/bg.png" width="160"><br><strong>🧪 Syntax Splash</strong><br><em>Teal overlays with scientific energy</em>
     </td>
     <td align="center">
-      <img src="bg/bg (3).png" width="160"><br><strong>🔌 Crimson Circuit</strong><br><em>Black-red theme for intensity</em>
+      <img src="bg/bg (1).png" width="160"><br><strong>🔌 Crimson Circuit</strong><br><em>Black-red theme for intensity</em>
     </td>
     <td align="center">
-      <img src="bg/bg (1).png" width="160"><br><strong>🍃 Leafscape</strong><br><em>Soft, nature-inspired vibe</em>
+      <img src="bg/bg (2).png" width="160"><br><strong>🍃 Leafscape</strong><br><em>Soft, nature-inspired vibe</em>
     </td>
   </tr>
   <tr>
     <td align="center">
-      <img src="bg/bg (2).png" width="160"><br><strong>🌫️ Hollow</strong><br><em>Mystical mist and shadow play</em>
+      <img src="bg/bg (3).png" width="160"><br><strong>🌫️ Hollow</strong><br><em>Mystical mist and shadow play</em>
     </td>
     <td align="center">
       <img src="bg/bg (4).png" width="160"><br><strong>🖥️ Code Nest</strong><br><em>Warm coding desk, student’s vibe</em>
+    </td>
+     <td align="center">
+      <img src="bg/bg (5).png" width="160"><br><strong>🥥🌴🌺🌅🌊 Nature</strong><br><em>Freshness</em>
     </td>
   </tr>
 </table>
