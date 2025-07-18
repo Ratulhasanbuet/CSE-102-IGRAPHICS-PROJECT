@@ -72,6 +72,7 @@ int pausec = 0;
 int backgroundselectorc = 0;
 int bgimage = 5;
 int slbgimage = 1;
+int rulescene = 0;
 int mazeX;
 int mazeY;
 int line = 0;
@@ -121,6 +122,8 @@ bool backgroundselector;
 bool deadscene;
 bool congrats;
 bool blast;
+bool rulesOption;
+bool back = false;
 
 typedef struct
 {
@@ -155,7 +158,7 @@ char menuimage[9][50] = {"menu image/PACMAN.png", "menu image/pacman1.png", "men
 char settingsimage[8][50] = {"settingsimage/settings.png", "settingsimage/settings1.png", "settingsimage/settings2.png", "settingsimage/settings3.png", "settingsimage/settings4.png", "settingsimage/settings5.png", "settingsimage/settings6.png", "settingsimage/settings7.png"};
 char highscoreimage[2][50] = {"highscoreimage/highscore (2).png", "highscoreimage/highscore (1).png"};
 char creditimage[2][50] = {"creditsimage/CREDITS.png", "creditsimage/credits1.png"};
-char rulesimage[2][50] = {"rules/RULES.png", "rules/rules1.png"};
+char rulesimage[250][50] = {"rules/rule (1).jpg", "rules/rule (2).jpg", "rules/rule (3).jpg", "rules/rule (4).jpg", "rules/rule (5).jpg", "rules/rule (6).jpg", "rules/rule (7).jpg", "rules/rule (8).jpg", "rules/rule (9).jpg", "rules/rule (10).jpg", "rules/rule (11).jpg", "rules/rule (12).jpg", "rules/rule (13).jpg", "rules/rule (14).jpg", "rules/rule (15).jpg", "rules/rule (16).jpg", "rules/rule (17).jpg", "rules/rule (18).jpg", "rules/rule (19).jpg", "rules/rule (20).jpg", "rules/rule (21).jpg", "rules/rule (22).jpg", "rules/rule (23).jpg", "rules/rule (24).jpg", "rules/rule (25).jpg", "rules/rule (26).jpg", "rules/rule (27).jpg", "rules/rule (28).jpg", "rules/rule (29).jpg", "rules/rule (30).jpg", "rules/rule (31).jpg", "rules/rule (32).jpg", "rules/rule (33).jpg", "rules/rule (34).jpg", "rules/rule (35).jpg", "rules/rule (36).jpg", "rules/rule (37).jpg", "rules/rule (38).jpg", "rules/rule (39).jpg", "rules/rule (40).jpg", "rules/rule (41).jpg", "rules/rule (42).jpg", "rules/rule (43).jpg", "rules/rule (44).jpg", "rules/rule (45).jpg", "rules/rule (46).jpg", "rules/rule (47).jpg", "rules/rule (48).jpg", "rules/rule (49).jpg", "rules/rule (50).jpg", "rules/rule (51).jpg", "rules/rule (52).jpg", "rules/rule (53).jpg", "rules/rule (54).jpg", "rules/rule (55).jpg", "rules/rule (56).jpg", "rules/rule (57).jpg", "rules/rule (58).jpg", "rules/rule (59).jpg", "rules/rule (60).jpg", "rules/rule (61).jpg", "rules/rule (62).jpg", "rules/rule (63).jpg", "rules/rule (64).jpg", "rules/rule (65).jpg", "rules/rule (66).jpg", "rules/rule (67).jpg", "rules/rule (68).jpg", "rules/rule (69).jpg", "rules/rule (70).jpg", "rules/rule (71).jpg", "rules/rule (72).jpg", "rules/rule (73).jpg", "rules/rule (74).jpg", "rules/rule (75).jpg", "rules/rule (76).jpg", "rules/rule (77).jpg", "rules/rule (78).jpg", "rules/rule (79).jpg", "rules/rule (80).jpg", "rules/rule (81).jpg", "rules/rule (82).jpg", "rules/rule (83).jpg", "rules/rule (84).jpg", "rules/rule (85).jpg", "rules/rule (86).jpg", "rules/rule (87).jpg", "rules/rule (88).jpg", "rules/rule (89).jpg", "rules/rule (90).jpg", "rules/rule (91).jpg", "rules/rule (92).jpg", "rules/rule (93).jpg", "rules/rule (94).jpg", "rules/rule (95).jpg", "rules/rule (96).jpg", "rules/rule (97).jpg", "rules/rule (98).jpg", "rules/rule (99).jpg", "rules/rule (100).jpg", "rules/rule (101).jpg", "rules/rule (102).jpg", "rules/rule (103).jpg", "rules/rule (104).jpg", "rules/rule (105).jpg", "rules/rule (106).jpg", "rules/rule (107).jpg", "rules/rule (108).jpg", "rules/rule (109).jpg", "rules/rule (110).jpg", "rules/rule (111).jpg", "rules/rule (112).jpg", "rules/rule (113).jpg", "rules/rule (114).jpg", "rules/rule (115).jpg", "rules/rule (116).jpg", "rules/rule (117).jpg", "rules/rule (118).jpg", "rules/rule (119).jpg", "rules/rule (120).jpg", "rules/rule (121).jpg", "rules/rule (122).jpg", "rules/rule (123).jpg", "rules/rule (124).jpg", "rules/rule (125).jpg", "rules/rule (126).jpg", "rules/rule (127).jpg", "rules/rule (128).jpg", "rules/rule (129).jpg", "rules/rule (130).jpg", "rules/rule (131).jpg", "rules/rule (132).jpg", "rules/rule (133).jpg", "rules/rule (134).jpg", "rules/rule (135).jpg", "rules/rule (136).jpg", "rules/rule (137).jpg", "rules/rule (138).jpg", "rules/rule (139).jpg", "rules/rule (140).jpg", "rules/rule (141).jpg", "rules/rule (142).jpg", "rules/rule (143).jpg", "rules/rule (144).jpg", "rules/rule (145).jpg", "rules/rule (146).jpg", "rules/rule (147).jpg", "rules/rule (148).jpg", "rules/rule (149).jpg", "rules/rule (150).jpg", "rules/rule (151).jpg", "rules/rule (152).jpg", "rules/rule (153).jpg", "rules/rule (154).jpg", "rules/rule (155).jpg", "rules/rule (156).jpg", "rules/rule (157).jpg", "rules/rule (158).jpg", "rules/rule (159).jpg", "rules/rule (160).jpg", "rules/rule (161).jpg", "rules/rule (162).jpg", "rules/rule (163).jpg", "rules/rule (164).jpg", "rules/rule (165).jpg", "rules/rule (166).jpg", "rules/rule (167).jpg", "rules/rule (168).jpg", "rules/rule (169).jpg", "rules/rule (170).jpg", "rules/rule (171).jpg", "rules/rule (172).jpg", "rules/rule (173).jpg", "rules/rule (174).jpg", "rules/rule (175).jpg", "rules/rule (176).jpg", "rules/rule (177).jpg", "rules/rule (178).jpg", "rules/rule (179).jpg", "rules/rule (180).jpg", "rules/rule (181).jpg", "rules/rule (182).jpg", "rules/rule (183).jpg", "rules/rule (184).jpg", "rules/rule (185).jpg", "rules/rule (186).jpg", "rules/rule (187).jpg", "rules/rule (188).jpg", "rules/rule (189).jpg", "rules/rule (190).jpg", "rules/rule (191).jpg", "rules/rule (192).jpg", "rules/rule (193).jpg", "rules/rule (194).jpg", "rules/rule (195).jpg", "rules/rule (196).jpg", "rules/rule (197).jpg", "rules/rule (198).jpg", "rules/rule (199).jpg", "rules/rule (200).jpg", "rules/rule (201).jpg", "rules/rule (202).jpg", "rules/rule (203).jpg", "rules/rule (204).jpg", "rules/rule (205).jpg", "rules/rule (206).jpg", "rules/rule (207).jpg", "rules/rule (208).jpg", "rules/rule (209).jpg", "rules/rule (210).jpg", "rules/rule (211).jpg", "rules/rule (212).jpg", "rules/rule (213).jpg", "rules/rule (214).jpg", "rules/rule (215).jpg", "rules/rule (216).jpg", "rules/rule (217).jpg", "rules/rule (218).jpg", "rules/rule (219).jpg", "rules/rule (220).jpg", "rules/rule (221).jpg", "rules/rule (222).jpg", "rules/rule (223).jpg", "rules/rule (224).jpg", "rules/rule (225).jpg", "rules/rule (226).jpg", "rules/rule (227).jpg", "rules/rule (228).jpg", "rules/rule (229).jpg", "rules/rule (230).jpg", "rules/rule (231).jpg", "rules/rule (232).jpg", "rules/rule (233).jpg", "rules/rule (234).jpg", "rules/rule (235).jpg", "rules/rule (236).jpg", "rules/rule (237).jpg", "rules/rule (238).jpg", "rules/rule (239).jpg", "rules/rule (240).jpg", "rules/rule (241).jpg", "rules/rule (242).jpg", "rules/rule (243).jpg", "rules/rule (244).jpg", "rules/rule (245).jpg", "rules/rule (246).jpg", "rules/rule (247).jpg", "rules/rule (248).jpg", "rules/rule (249).jpg", "rules/rule (250).jpg"};
 char levelselectimage[100][50] = {"level/level (1).jpg", "level/level (2).jpg", "level/level (3).jpg", "level/level (4).jpg", "level/level (5).jpg", "level/level (6).jpg", "level/level (7).jpg", "level/level (8).jpg", "level/level (9).jpg", "level/level (10).jpg", "level/level (11).jpg", "level/level (12).jpg", "level/level (13).jpg", "level/level (14).jpg", "level/level (15).jpg", "level/level (16).jpg", "level/level (17).jpg", "level/level (18).jpg", "level/level (20).jpg", "level/level (20).jpg", "level/level (21).jpg", "level/level (22).jpg", "level/level (23).jpg", "level/level (24).jpg", "level/level (25).jpg", "level/level (26).jpg", "level/level (27).jpg", "level/level (28).jpg", "level/level (29).jpg", "level/level (30).jpg", "level/level (31).jpg", "level/level (32).jpg", "level/level (33).jpg", "level/level (34).jpg", "level/level (35).jpg", "level/level (36).jpg", "level/level (37).jpg", "level/level (38).jpg", "level/level (39).jpg", "level/level (40).jpg", "level/level (41).jpg", "level/level (42).jpg", "level/level (43).jpg", "level/level (44).jpg", "level/level (45).jpg", "level/level (46).jpg", "level/level (47).jpg", "level/level (48).jpg", "level/level (49).jpg", "level/level (50).jpg", "level/level (51).jpg", "level/level (52).jpg", "level/level (53).jpg", "level/level (54).jpg", "level/level (55).jpg", "level/level (56).jpg", "level/level (57).jpg", "level/level (58).jpg", "level/level (59).jpg", "level/level (60).jpg", "level/level (61).jpg", "level/level (62).jpg", "level/level (63).jpg", "level/level (64).jpg", "level/level (65).jpg", "level/level (66).jpg", "level/level (67).jpg", "level/level (68).jpg", "level/level (69).jpg", "level/level (70).jpg", "level/level (71).jpg", "level/level (72).jpg", "level/level (73).jpg", "level/level (74).jpg", "level/level (75).jpg", "level/level (76).jpg", "level/level (77).jpg", "level/level (78).jpg", "level/level (79).jpg", "level/level (80).jpg", "level/level (81).jpg", "level/level (82).jpg", "level/level (83).jpg", "level/level (84).jpg", "level/level (85).jpg", "level/level (86).jpg", "level/level (87).jpg", "level/level (88).jpg", "level/level (89).jpg", "level/level (90).jpg", "level/level (91).jpg", "level/level (92).jpg", "level/level (93).jpg", "level/level (94).jpg", "level/level (95).jpg", "level/level (96).jpg", "level/level (97).jpg", "level/level (98).jpg", "level/level (99).jpg", "level/level (100).jpg"};
 char quitimage[3][50] = {"exitimage/exitimage.png", "exitimage/exitimage1.png", "exitimage/exitimage2.png"};
 char difficultyimage[5][50] = {"difficultyimage/Difficulty1.png", "difficultyimage/Difficulty2.png", "difficultyimage/Difficulty3.png", "difficultyimage/Difficulty4.png", "difficultyimage/Difficulty5.png"};
@@ -306,11 +309,11 @@ int maze3[19][36] =
         {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
         {1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1},
         {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1},
-        {1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1},
-        {1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1},
-        {1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1},
-        {1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1},
+        {1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1},
+        {1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1},
+        {1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1},
+        {1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1},
+        {1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1},
         {1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1},
         {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
         {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
@@ -330,30 +333,28 @@ void corrdinatestore3()
         dy -= mazeCellWidth;
     }
 }
-int maze4[21][40] =
-    {
-        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1},
-        {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1},
-        {1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1},
-        {1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1},
-        {1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1},
-        {1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1},
-        {1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1},
-        {1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-        {1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1},
-        {1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1},
-        {1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1},
-        {1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-};
+int maze4[21][40] = {
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+    {0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1},
+    {1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1},
+    {1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
+    {1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1},
+    {1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1},
+    {1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1},
+    {1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1},
+    {1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1},
+    {1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1},
+    {1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1},
+    {1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1},
+    {1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1},
+    {1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1},
+    {1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
 void corrdinatestore4()
 {
     int i, j;
@@ -481,7 +482,7 @@ void foodcount()
     }
     else if (selected == 3)
     {
-        totalfood = 362;
+        totalfood = 367;
     }
     else if (selected == 4)
     {
@@ -551,7 +552,7 @@ void iDraw()
     }
     else if (rules)
     {
-        iShowImage(0, 0, rulesimage[rulesc]);
+        iShowImage(0, 0, rulesimage[rulescene]);
     }
     else if (quit)
     {
@@ -2722,10 +2723,12 @@ void iMouse(int button, int state, int mx, int my)
                 quit = true;
                 mainmenu = false;
             }
-            else if (mx >= 415 && my >= 109 && mx <= 565 && my <= 136)
+            else if (mx >= 415 && my >= 109 && mx <= 565 && my <= 136) // Rules button
             {
                 rules = true;
                 mainmenu = false;
+                rulescene = 0; //  Reset scene index
+                back = false;  //  Ensure forward animation starts
             }
         }
         else if (specialthanks)
@@ -2890,10 +2893,10 @@ void iMouse(int button, int state, int mx, int my)
         }
         else if (rules)
         {
-            if ((mx >= 973 && mx <= 1174) && (my >= 71 && my <= 127))
+            if (mx >= 1034 && my >= 69 && mx <= 1140 && my <= 117)
             {
-                rules = false;
-                mainmenu = true;
+                back = true;
+                rulescene = 199;
             }
         }
         else if (credits)
@@ -3941,8 +3944,8 @@ void collisioncheck()
                             {
                                 if (i == 0)
                                 {
-                                    pookie[0].cellX = 1; // Inky
-                                    pookie[0].cellY = 17;
+                                    pookie[0].cellX = 15; // Inky
+                                    pookie[0].cellY = 14;
                                     pookie[0].x = 72 + (pookie[0].cellX) * mazeCellWidth;
                                     pookie[0].y = 48 + (18 - pookie[0].cellY) * mazeCellWidth;
                                     pookie[0].flagRight = true;
@@ -3950,8 +3953,9 @@ void collisioncheck()
                                 }
                                 else if (i == 1)
                                 {
-                                    pookie[1].cellX = 11; // Blinky
-                                    pookie[1].cellY = 17;
+
+                                    pookie[1].cellX = 16; // Blinky
+                                    pookie[1].cellY = 14;
                                     pookie[1].x = 72 + (pookie[1].cellX) * mazeCellWidth;
                                     pookie[1].y = 48 + (18 - pookie[1].cellY) * mazeCellWidth;
                                     pookie[1].flagUp = true;
@@ -3959,8 +3963,8 @@ void collisioncheck()
                                 }
                                 else if (i == 2)
                                 {
-                                    pookie[2].cellX = 20; // Pinky
-                                    pookie[2].cellY = 17;
+                                    pookie[2].cellX = 17; // Pinky
+                                    pookie[2].cellY = 14;
                                     pookie[2].x = 72 + (pookie[2].cellX) * mazeCellWidth;
                                     pookie[2].y = 48 + (18 - pookie[2].cellY) * mazeCellWidth;
                                     pookie[2].flagRight = true;
@@ -3969,8 +3973,8 @@ void collisioncheck()
                                 else if (i == 3)
                                 {
 
-                                    pookie[3].cellX = 34; // Clyde
-                                    pookie[3].cellY = 17;
+                                    pookie[3].cellX = 18; // Clyde
+                                    pookie[3].cellY = 14;
                                     pookie[3].x = 72 + (pookie[3].cellX) * mazeCellWidth;
                                     pookie[3].y = 48 + (18 - pookie[3].cellY) * mazeCellWidth;
                                     pookie[3].flagRight = true;
@@ -3978,8 +3982,8 @@ void collisioncheck()
                                 }
                                 else if (i == 4)
                                 {
-                                    pookie[4].cellX = 20; // donky
-                                    pookie[4].cellY = 17;
+                                    pookie[4].cellX = 19; // donky
+                                    pookie[4].cellY = 14;
                                     pookie[4].x = 72 + (pookie[4].cellX) * mazeCellWidth;
                                     pookie[4].y = 48 + (18 - pookie[4].cellY) * mazeCellWidth;
                                     pookie[4].flagRight = true;
@@ -3987,8 +3991,8 @@ void collisioncheck()
                                 }
                                 else if (i == 5)
                                 {
-                                    pookie[5].cellX = 34; // rinky
-                                    pookie[5].cellY = 17;
+                                    pookie[5].cellX = 18; // rinky
+                                    pookie[5].cellY = 14;
                                     pookie[5].x = 72 + (pookie[5].cellX) * mazeCellWidth;
                                     pookie[5].y = 48 + (18 - pookie[5].cellY) * mazeCellWidth;
                                     pookie[5].flagRight = true;
@@ -4238,45 +4242,45 @@ void pookieinitialcoordinate()
     }
     else if (selected == 3)
     {
-        pookie[0].cellX = 1; // Inky
-        pookie[0].cellY = 17;
+        pookie[0].cellX = 15; // Inky
+        pookie[0].cellY = 14;
         pookie[0].x = 72 + (pookie[0].cellX) * mazeCellWidth;
         pookie[0].y = 48 + (18 - pookie[0].cellY) * mazeCellWidth;
         pookie[0].flagRight = true;
         pookie[0].speed = diffSpeed;
 
-        pookie[1].cellX = 11; // Blinky
-        pookie[1].cellY = 17;
+        pookie[1].cellX = 16; // Blinky
+        pookie[1].cellY = 14;
         pookie[1].x = 72 + (pookie[1].cellX) * mazeCellWidth;
         pookie[1].y = 48 + (18 - pookie[1].cellY) * mazeCellWidth;
         pookie[1].flagUp = true;
         pookie[1].speed = diffSpeed;
 
-        pookie[2].cellX = 20; // Pinky
-        pookie[2].cellY = 17;
+        pookie[2].cellX = 17; // Pinky
+        pookie[2].cellY = 14;
         pookie[2].x = 72 + (pookie[2].cellX) * mazeCellWidth;
         pookie[2].y = 48 + (18 - pookie[2].cellY) * mazeCellWidth;
         pookie[2].flagRight = true;
         pookie[2].speed = diffSpeed;
 
-        pookie[3].cellX = 34; // Clyde
-        pookie[3].cellY = 17;
+        pookie[3].cellX = 18; // Clyde
+        pookie[3].cellY = 14;
         pookie[3].x = 72 + (pookie[3].cellX) * mazeCellWidth;
         pookie[3].y = 48 + (18 - pookie[3].cellY) * mazeCellWidth;
         pookie[3].flagRight = true;
         pookie[3].speed = diffSpeed;
 
-        pookie[4].cellX = 20; // donky
-        pookie[4].cellY = 17;
-        pookie[4].x = 72 + (pookie[2].cellX) * mazeCellWidth;
-        pookie[4].y = 48 + (18 - pookie[2].cellY) * mazeCellWidth;
+        pookie[4].cellX = 19; // donky
+        pookie[4].cellY = 14;
+        pookie[4].x = 72 + (pookie[4].cellX) * mazeCellWidth;
+        pookie[4].y = 48 + (18 - pookie[4].cellY) * mazeCellWidth;
         pookie[4].flagRight = true;
         pookie[4].speed = diffSpeed;
 
-        pookie[5].cellX = 34; // rinky
-        pookie[5].cellY = 17;
-        pookie[5].x = 72 + (pookie[3].cellX) * mazeCellWidth;
-        pookie[5].y = 48 + (18 - pookie[3].cellY) * mazeCellWidth;
+        pookie[5].cellX = 18; // rinky
+        pookie[5].cellY = 14;
+        pookie[5].x = 72 + (pookie[5].cellX) * mazeCellWidth;
+        pookie[5].y = 48 + (18 - pookie[5].cellY) * mazeCellWidth;
         pookie[5].flagRight = true;
         pookie[5].speed = diffSpeed;
     }
@@ -4312,15 +4316,15 @@ void pookieinitialcoordinate()
 
         pookie[4].cellX = 20; // donkey
         pookie[4].cellY = 19;
-        pookie[4].x = 72 + (pookie[2].cellX) * mazeCellWidth;
-        pookie[4].y = 48 + (20 - pookie[2].cellY) * mazeCellWidth;
+        pookie[4].x = 72 + (pookie[4].cellX) * mazeCellWidth;
+        pookie[4].y = 48 + (20 - pookie[4].cellY) * mazeCellWidth;
         pookie[4].flagRight = true;
         pookie[4].speed = diffSpeed;
 
         pookie[5].cellX = 35; // rinky
         pookie[5].cellY = 19;
-        pookie[5].x = 72 + (pookie[3].cellX) * mazeCellWidth;
-        pookie[5].y = 48 + (20 - pookie[3].cellY) * mazeCellWidth;
+        pookie[5].x = 72 + (pookie[5].cellX) * mazeCellWidth;
+        pookie[5].y = 48 + (20 - pookie[5].cellY) * mazeCellWidth;
         pookie[5].flagRight = true;
         pookie[5].speed = diffSpeed;
     }
@@ -4336,6 +4340,26 @@ void introchange()
             startintro = false;
             mainmenu = true;
             iPauseTimer(0);
+        }
+    }
+    if (rules && !back)
+    {
+        rulescene++;
+        if (rulescene > 199)
+        {
+            rulescene = 199;
+            iPauseTimer(0);
+        }
+    }
+    if (rules && back)
+    {
+        rulescene++;
+        if (rulescene > 249)
+        {
+            rules = false;
+            back = false;
+            mainmenu = true;
+            rulescene = 0;
         }
     }
 }
@@ -4378,7 +4402,6 @@ void background()
         }
     }
 }
-
 void level()
 {
     if (levelselect)
@@ -4492,9 +4515,9 @@ int main(int argc, char *argv[])
     iSetTimer(1300, bluetimecheck);
     iSetTimer(30, pookiemovement);
     iSetTimer(30, pacmanmovement);
-    iSetTimer(30, introchange);
+    iSetTimer(20, introchange);
     iSetTimer(20, scoreshow);
-    iSetTimer(5, background);
+    iSetTimer(20, background);
     iSetTimer(30, exitSequence);
     iSetTimer(30, level);
     iSetTimer(120, deathScene);

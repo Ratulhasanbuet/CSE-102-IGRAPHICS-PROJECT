@@ -650,7 +650,7 @@
       <img src="bg/bg (4).png" width="160"><br><strong>🖥️ Code Nest</strong><br><em>Warm coding desk, student’s vibe</em>
     </td>
      <td align="center">
-      <img src="bg/bg (5).png" width="160"><br><strong>🥥🌴🌺🌅🌊 Nature</strong><br><em>Freshness</em>
+      <img src="bg/bg (5).png" width="160"><br><strong>🌊🌳🌦️⛰️🏞️ Nature</strong><br><em>Freshness</em>
     </td>
   </tr>
 </table>
