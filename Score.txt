@@ -28,3 +28,4 @@ ratul 44340
 ratul 1150
 yj 52000
 dythg 113780
+o 5990
