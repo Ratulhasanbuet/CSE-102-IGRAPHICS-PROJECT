@@ -555,7 +555,7 @@ struct CacheEntry
 };
 static unordered_map<string, CacheEntry> imageCache;
 static list<string> lruList; // Most recently used at front
-static const size_t MAX_CACHE_SIZE = 50;
+static const size_t MAX_CACHE_SIZE = 500;
 
 void iShowImage2(int x, int y, const char *filename, int ignoreColor = -1)
 {
