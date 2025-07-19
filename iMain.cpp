@@ -3,7 +3,7 @@
 #include "iFont.h"
 #include <stdlib.h>
 #include <stdbool.h>
-#include <string.h>
+#include <string.h> /// have to work With maze 4 and the sound
 #include <math.h>
 #include <time.h>
 
@@ -573,6 +573,8 @@ void iDraw()
         drawFoodAndPowerPellet();
         iSetColor(255, 255, 255);
         iShowText(1056, 625, pacScore, "text.ttf", 30);
+        iShowText(950, 625, "Score:", "text.ttf", 45);
+        iShowText(950, 567, "Life:", "text.ttf", 45);
         //    iText(1056, 625, pacScore, GLUT_BITMAP_TIMES_ROMAN_24);
         for (int i = 0; i < pacmanlife; i++)
         {
