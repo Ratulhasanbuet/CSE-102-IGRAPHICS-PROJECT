@@ -916,7 +916,7 @@
   <tr><td><code>iResumeAll()</code> / <code>iPauseAll()</code></td><td>Resumes or pauses all timers that control animation and movement</td></tr>
 </table>
 
-<p align="center"><em>This block documents every function in your engine with clarity and precision.</em> 🧠💾</p>
+
 
 
   <summary><strong>📁 Image & Asset Directory Mapping</strong></summary>
@@ -928,7 +928,7 @@
     <li><strong>UI Screens:</strong> <code>menu image/</code>, <code>settingsimage/</code>, <code>pauseimage/</code></li>
     <li><strong>Thank You Notes:</strong> <code>thanksimage/</code></li>
     <li><strong>Life Icons:</strong> <code>life/love (x).png</code></li>
-    <li><strong>Dead Scene:</strong> <code>pacdead/pacdead(x).png</code></li>
+    <li><strong>Dead Scene:</strong> <code>death/death(x).png</code></li>
   </ul>
 
 <p align="center"><em>Powered by code, pixels, and pure determination.</em> ⚡</p>

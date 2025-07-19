@@ -1,5 +1,6 @@
 
 #include "iGraphics.h"
+#include "iFont.h"
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
@@ -181,7 +182,7 @@ char pacmanRight[2][30] = {"pacman/pacman (1).png", "pacman/pacman (2).png"};
 char pacmanLeft[2][30] = {"pacman/pacman (5).png", "pacman/pacman (6).png"};
 char pacmanUp[2][30] = {"pacman/pacman (7).png", "pacman/pacman (8).png"};
 char pacmanDown[2][30] = {"pacman/pacman (3).png", "pacman/pacman (4).png"};
-char pacdeadscene[11][30] = {"pacdead/pacdead0.png", "pacdead/pacdead1.png", "pacdead/pacdead2.png", "pacdead/pacdead3.png", "pacdead/pacdead4.png", "pacdead/pacdead5.png", "pacdead/pacdead6.png", "pacdead/pacdead7.png", "pacdead/pacdead8.png", "pacdead/pacdead9.png", "pacdead/pacdead10.png"};
+char pacdeadscene[11][30] = {"death/Death0.png", "death/Death1.png", "death/Death2.png", "death/Death3.png", "death/Death4.png", "death/Death5.png", "death/Death6.png", "death/Death7.png", "death/Death8.png", "death/Death9.png", "death/Death10.png"};
 char fruit[16][30] = {"fruit/fruit (1).png", "fruit/fruit (2).png", "fruit/fruit (3).png", "fruit/fruit (4).png", "fruit/fruit (5).png", "fruit/fruit (6).png", "fruit/fruit (7).png", "fruit/fruit (8).png", "fruit/fruit (9).png", "fruit/fruit (10).png", "fruit/fruit (11).png", "fruit/fruit (12).png", "fruit/fruit (13).png", "fruit/fruit (14).png", "fruit/fruit (15).png", "fruit/fruit (16).png"};
 
 char inkyUp[2][30] = {"inky/inky (2).png", "inky/inky (3).png"};
@@ -309,11 +310,11 @@ int maze3[19][36] =
         {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
         {1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1},
         {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1},
-        {1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1},
-        {1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1},
-        {1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1},
-        {1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1},
+        {1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1},
+        {1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1},
+        {1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1},
+        {1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1},
+        {1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1},
         {1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1},
         {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
         {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
@@ -333,30 +334,28 @@ void corrdinatestore3()
         dy -= mazeCellWidth;
     }
 }
-int maze4[21][40] =
-    {
-        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1},
-        {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1},
-        {1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1},
-        {1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1},
-        {1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1},
-        {1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1},
-        {1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1},
-        {1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-        {1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1},
-        {1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1},
-        {1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1},
-        {1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-};
+int maze4[21][40] = {
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+    {0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1},
+    {1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1},
+    {1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
+    {1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1},
+    {1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1},
+    {1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1},
+    {1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1},
+    {1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1},
+    {1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1},
+    {1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1},
+    {1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1},
+    {1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
 void corrdinatestore4()
 {
     int i, j;
@@ -467,7 +466,8 @@ void drawFoodAndPowerPellet()
         }
         else
         {
-            // Regular dot
+            // Regular
+            iSetColor(255, 140, 0); // Your default yellow dot color
             iFilledCircle(x + 12, y + 12, 3);
         }
     }
@@ -484,7 +484,7 @@ void foodcount()
     }
     else if (selected == 3)
     {
-        totalfood = 362;
+        totalfood = 367;
     }
     else if (selected == 4)
     {
@@ -529,8 +529,9 @@ void iDraw()
             if (i == 5)
                 break;
             iSetColor(0, 0, 0);
-            iText(215, 384 - (i * 84), name[i], GLUT_BITMAP_TIMES_ROMAN_24);
-            iText(867, 390 - (i * 84), converter(point[i], temp), GLUT_BITMAP_TIMES_ROMAN_24);
+            iShowText(215, 384 - (i * 84), name[i], "text.ttf", 40);
+            iShowText(840, 390 - (i * 84), converter(point[i], temp), "text.ttf", 40);
+            // iShowText(double x, double y, const char *text, const char *fontPath, int fontSize = 48)
         }
     }
 
@@ -538,7 +539,7 @@ void iDraw()
     {
         iShowImage(0, 0, playgameintroimage[0]);
         iSetColor(255, 255, 255);
-        iText(430, 282, namestr, GLUT_BITMAP_TIMES_ROMAN_24);
+        iShowText(430, 282, namestr, "text.ttf", 40);
     }
     else if (settings)
     {
@@ -568,10 +569,12 @@ void iDraw()
     {
         iShowImage(0, 0, backgroundimage[bgimage]);
         drawFoodAndPowerPellet();
-
-        iText(1056, 625, pacScore, GLUT_BITMAP_TIMES_ROMAN_24);
+        iSetColor(255, 255, 255);
+        iShowText(1056, 625, pacScore, "text.ttf", 30);
+        //    iText(1056, 625, pacScore, GLUT_BITMAP_TIMES_ROMAN_24);
         for (int i = 0; i < pacmanlife; i++)
-            if (i > 4)
+        {
+            if (i > 3)
             {
                 iShowImage(1040 + 40 * (i - 4), 537, life[i]);
             }
@@ -579,6 +582,7 @@ void iDraw()
             {
                 iShowImage(1040 + 40 * i, 567, life[i]);
             }
+        }
         if (selected == 1)
         {
             drawMaze1();
@@ -1031,7 +1035,7 @@ void iDraw()
     else if (congrats)
     {
         iShowImage(0, 0, scoreshowimage[congratsc]);
-        iText(570, 300, pacScore, GLUT_BITMAP_TIMES_ROMAN_24);
+        iShowText(540, 300, pacScore, "text.ttf", 60);
     }
 
     else if (exitintro)
@@ -1051,38 +1055,38 @@ void iDraw()
         if (slbgimage == 1)
         {
             iShowImage(0, 0, slbg1[backgroundselectorc]);
-            iSetColor(255, 255, 255);
-            iText(45, 28, "BACK", GLUT_BITMAP_TIMES_ROMAN_24);
+            iSetColor(0, 0, 0);
+            iShowText(45, 28, "BACK", "text.ttf", 50);
         }
         else if (slbgimage == 2)
         {
             iShowImage(0, 0, slbg2[backgroundselectorc]);
             iSetColor(0, 0, 0);
-            iText(45, 28, "BACK", GLUT_BITMAP_TIMES_ROMAN_24);
+            iShowText(45, 28, "BACK", "text.ttf", 50);
         }
         else if (slbgimage == 3)
         {
             iShowImage(0, 0, slbg3[backgroundselectorc]);
             iSetColor(0, 0, 0);
-            iText(45, 28, "BACK", GLUT_BITMAP_TIMES_ROMAN_24);
+            iShowText(45, 28, "BACK", "text.ttf", 50);
         }
         else if (slbgimage == 4)
         {
             iShowImage(0, 0, slbg4[backgroundselectorc]);
             iSetColor(0, 0, 0);
-            iText(45, 28, "BACK", GLUT_BITMAP_TIMES_ROMAN_24);
+            iShowText(45, 28, "BACK", "text.ttf", 50);
         }
         else if (slbgimage == 5)
         {
             iShowImage(0, 0, slbg5[backgroundselectorc]);
             iSetColor(0, 0, 0);
-            iText(45, 28, "BACK", GLUT_BITMAP_TIMES_ROMAN_24);
+            iShowText(45, 28, "BACK", "text.ttf", 50);
         }
         else if (slbgimage == 6)
         {
             iShowImage(0, 0, slbg6[backgroundselectorc]);
             iSetColor(0, 0, 0);
-            iText(45, 28, "BACK", GLUT_BITMAP_TIMES_ROMAN_24);
+            iShowText(45, 28, "BACK", "text.ttf", 50);
         }
     }
 };
@@ -1480,15 +1484,15 @@ void pookiemovement()
         {
             mazeX = 72;
             mazeY = 48;
-            mazeWidth = 456; // 36*mazeCellWidth
-            mazeHeight = 408;
+            mazeWidth = 864; // 36*mazeCellWidth
+            mazeHeight = 456;
         }
         else if (selected == 4)
         {
             mazeX = 72;
             mazeY = 48;
-            mazeWidth = 504;
-            mazeHeight = 456;
+            mazeWidth = 960;
+            mazeHeight = 840;
         }
         if (selected == 1 || selected == 2)
         {
@@ -2643,7 +2647,7 @@ void iMouseMove(int mx, int my)
         {
             pausec = 2;
         }
-        else if (mx >= 260 && my >= 179 && mx <= 697 && my <= 245)
+        else if (mx >= 270 && my >= 178 && mx <= 928 && my <= 251)
         {
             pausec = 3;
         }
@@ -3946,8 +3950,8 @@ void collisioncheck()
                             {
                                 if (i == 0)
                                 {
-                                    pookie[0].cellX = 1; // Inky
-                                    pookie[0].cellY = 17;
+                                    pookie[0].cellX = 15; // Inky
+                                    pookie[0].cellY = 14;
                                     pookie[0].x = 72 + (pookie[0].cellX) * mazeCellWidth;
                                     pookie[0].y = 48 + (18 - pookie[0].cellY) * mazeCellWidth;
                                     pookie[0].flagRight = true;
@@ -3955,8 +3959,9 @@ void collisioncheck()
                                 }
                                 else if (i == 1)
                                 {
-                                    pookie[1].cellX = 11; // Blinky
-                                    pookie[1].cellY = 17;
+
+                                    pookie[1].cellX = 16; // Blinky
+                                    pookie[1].cellY = 14;
                                     pookie[1].x = 72 + (pookie[1].cellX) * mazeCellWidth;
                                     pookie[1].y = 48 + (18 - pookie[1].cellY) * mazeCellWidth;
                                     pookie[1].flagUp = true;
@@ -3964,8 +3969,8 @@ void collisioncheck()
                                 }
                                 else if (i == 2)
                                 {
-                                    pookie[2].cellX = 20; // Pinky
-                                    pookie[2].cellY = 17;
+                                    pookie[2].cellX = 17; // Pinky
+                                    pookie[2].cellY = 14;
                                     pookie[2].x = 72 + (pookie[2].cellX) * mazeCellWidth;
                                     pookie[2].y = 48 + (18 - pookie[2].cellY) * mazeCellWidth;
                                     pookie[2].flagRight = true;
@@ -3974,8 +3979,8 @@ void collisioncheck()
                                 else if (i == 3)
                                 {
 
-                                    pookie[3].cellX = 34; // Clyde
-                                    pookie[3].cellY = 17;
+                                    pookie[3].cellX = 18; // Clyde
+                                    pookie[3].cellY = 14;
                                     pookie[3].x = 72 + (pookie[3].cellX) * mazeCellWidth;
                                     pookie[3].y = 48 + (18 - pookie[3].cellY) * mazeCellWidth;
                                     pookie[3].flagRight = true;
@@ -3983,8 +3988,8 @@ void collisioncheck()
                                 }
                                 else if (i == 4)
                                 {
-                                    pookie[4].cellX = 20; // donky
-                                    pookie[4].cellY = 17;
+                                    pookie[4].cellX = 19; // donky
+                                    pookie[4].cellY = 14;
                                     pookie[4].x = 72 + (pookie[4].cellX) * mazeCellWidth;
                                     pookie[4].y = 48 + (18 - pookie[4].cellY) * mazeCellWidth;
                                     pookie[4].flagRight = true;
@@ -3992,8 +3997,8 @@ void collisioncheck()
                                 }
                                 else if (i == 5)
                                 {
-                                    pookie[5].cellX = 34; // rinky
-                                    pookie[5].cellY = 17;
+                                    pookie[5].cellX = 18; // rinky
+                                    pookie[5].cellY = 14;
                                     pookie[5].x = 72 + (pookie[5].cellX) * mazeCellWidth;
                                     pookie[5].y = 48 + (18 - pookie[5].cellY) * mazeCellWidth;
                                     pookie[5].flagRight = true;
@@ -4243,45 +4248,45 @@ void pookieinitialcoordinate()
     }
     else if (selected == 3)
     {
-        pookie[0].cellX = 1; // Inky
-        pookie[0].cellY = 17;
+        pookie[0].cellX = 15; // Inky
+        pookie[0].cellY = 14;
         pookie[0].x = 72 + (pookie[0].cellX) * mazeCellWidth;
         pookie[0].y = 48 + (18 - pookie[0].cellY) * mazeCellWidth;
         pookie[0].flagRight = true;
         pookie[0].speed = diffSpeed;
 
-        pookie[1].cellX = 11; // Blinky
-        pookie[1].cellY = 17;
+        pookie[1].cellX = 16; // Blinky
+        pookie[1].cellY = 14;
         pookie[1].x = 72 + (pookie[1].cellX) * mazeCellWidth;
         pookie[1].y = 48 + (18 - pookie[1].cellY) * mazeCellWidth;
         pookie[1].flagUp = true;
         pookie[1].speed = diffSpeed;
 
-        pookie[2].cellX = 20; // Pinky
-        pookie[2].cellY = 17;
+        pookie[2].cellX = 17; // Pinky
+        pookie[2].cellY = 14;
         pookie[2].x = 72 + (pookie[2].cellX) * mazeCellWidth;
         pookie[2].y = 48 + (18 - pookie[2].cellY) * mazeCellWidth;
         pookie[2].flagRight = true;
         pookie[2].speed = diffSpeed;
 
-        pookie[3].cellX = 34; // Clyde
-        pookie[3].cellY = 17;
+        pookie[3].cellX = 18; // Clyde
+        pookie[3].cellY = 14;
         pookie[3].x = 72 + (pookie[3].cellX) * mazeCellWidth;
         pookie[3].y = 48 + (18 - pookie[3].cellY) * mazeCellWidth;
         pookie[3].flagRight = true;
         pookie[3].speed = diffSpeed;
 
-        pookie[4].cellX = 20; // donky
-        pookie[4].cellY = 17;
-        pookie[4].x = 72 + (pookie[2].cellX) * mazeCellWidth;
-        pookie[4].y = 48 + (18 - pookie[2].cellY) * mazeCellWidth;
+        pookie[4].cellX = 19; // donky
+        pookie[4].cellY = 14;
+        pookie[4].x = 72 + (pookie[4].cellX) * mazeCellWidth;
+        pookie[4].y = 48 + (18 - pookie[4].cellY) * mazeCellWidth;
         pookie[4].flagRight = true;
         pookie[4].speed = diffSpeed;
 
-        pookie[5].cellX = 34; // rinky
-        pookie[5].cellY = 17;
-        pookie[5].x = 72 + (pookie[3].cellX) * mazeCellWidth;
-        pookie[5].y = 48 + (18 - pookie[3].cellY) * mazeCellWidth;
+        pookie[5].cellX = 18; // rinky
+        pookie[5].cellY = 14;
+        pookie[5].x = 72 + (pookie[5].cellX) * mazeCellWidth;
+        pookie[5].y = 48 + (18 - pookie[5].cellY) * mazeCellWidth;
         pookie[5].flagRight = true;
         pookie[5].speed = diffSpeed;
     }
@@ -4317,15 +4322,15 @@ void pookieinitialcoordinate()
 
         pookie[4].cellX = 20; // donkey
         pookie[4].cellY = 19;
-        pookie[4].x = 72 + (pookie[2].cellX) * mazeCellWidth;
-        pookie[4].y = 48 + (20 - pookie[2].cellY) * mazeCellWidth;
+        pookie[4].x = 72 + (pookie[4].cellX) * mazeCellWidth;
+        pookie[4].y = 48 + (20 - pookie[4].cellY) * mazeCellWidth;
         pookie[4].flagRight = true;
         pookie[4].speed = diffSpeed;
 
         pookie[5].cellX = 35; // rinky
         pookie[5].cellY = 19;
-        pookie[5].x = 72 + (pookie[3].cellX) * mazeCellWidth;
-        pookie[5].y = 48 + (20 - pookie[3].cellY) * mazeCellWidth;
+        pookie[5].x = 72 + (pookie[5].cellX) * mazeCellWidth;
+        pookie[5].y = 48 + (20 - pookie[5].cellY) * mazeCellWidth;
         pookie[5].flagRight = true;
         pookie[5].speed = diffSpeed;
     }
@@ -4341,6 +4346,26 @@ void introchange()
             startintro = false;
             mainmenu = true;
             iPauseTimer(0);
+        }
+    }
+    if (rules && !back)
+    {
+        rulescene++;
+        if (rulescene > 199)
+        {
+            rulescene = 199;
+            iPauseTimer(0);
+        }
+    }
+    if (rules && back)
+    {
+        rulescene++;
+        if (rulescene > 249)
+        {
+            rules = false;
+            back = false;
+            mainmenu = true;
+            rulescene = 0;
         }
     }
 }
@@ -4383,30 +4408,6 @@ void background()
         }
     }
 }
-void ruleStart()
-{
-    if (rules && !back)
-    {
-        rulescene++;
-        if (rulescene > 199)
-        {
-            rulescene = 199;
-            iPauseTimer(0);
-        }
-    }
-    if (rules && back)
-    {
-        rulescene++;
-        if (rulescene > 249)
-        {
-            rules = false;
-            back = false;
-            mainmenu = true;
-            rulescene = 0;
-        }
-    }
-}
-
 void level()
 {
     if (levelselect)
@@ -4424,7 +4425,7 @@ void deathScene()
     if (pacdead)
     {
         deadSceneCount++;
-        if (deadSceneCount > 11)
+        if (deadSceneCount > 10)
         {
             deadSceneCount = 0;
             pacdead = false;
@@ -4520,10 +4521,9 @@ int main(int argc, char *argv[])
     iSetTimer(1300, bluetimecheck);
     iSetTimer(30, pookiemovement);
     iSetTimer(30, pacmanmovement);
-    iSetTimer(30, introchange);
-    iSetTimer(30, ruleStart);
+    iSetTimer(20, introchange);
     iSetTimer(20, scoreshow);
-    iSetTimer(5, background);
+    iSetTimer(20, background);
     iSetTimer(30, exitSequence);
     iSetTimer(30, level);
     iSetTimer(120, deathScene);
