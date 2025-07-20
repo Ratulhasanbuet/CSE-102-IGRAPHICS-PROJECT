@@ -1094,7 +1094,7 @@ void iDraw()
         }
     }
 };
-void directionGenarator2(int ara[], int dir, int pookietype)
+void directionGenarator2(int ara[], int dir, int pookietype)   //FOLLOWED SHUAIB SIR CODE
 {
     if (ara[dir] == 0)
     {
@@ -1113,7 +1113,7 @@ void directionGenarator2(int ara[], int dir, int pookietype)
         pookie[pookietype].flagDown = true;
     }
 }
-void directionGenarator(int a, int pookietype)
+void directionGenarator(int a, int pookietype)  //FOLLOWED SHUAIB SIR CODE
 {
     time_t t;
     srand((unsigned)time(&t));
