@@ -490,7 +490,7 @@ void foodcount()
     }
     else if (selected == 4)
     {
-        totalfood = 454;
+        totalfood = 482;
     }
 }
 
@@ -4444,6 +4444,7 @@ void deathScene()
         }
     }
 }
+
 void DataAnalysis()
 {
 
@@ -4453,7 +4454,7 @@ void DataAnalysis()
     if (score != 0)
     {
         // Sub write
-        fp = fopen("Score.txt", "a");
+        fp = fopen("score.txt", "a");
         fprintf(fp, "%s %d\n", playername, score);
         fclose(fp);
     }
