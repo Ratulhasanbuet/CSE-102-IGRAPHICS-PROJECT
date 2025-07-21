@@ -1,6 +1,7 @@
 
 #include "iGraphics.h"
 #include "iFont.h"
+#include "iSound.h"
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h> /// have to work With maze 4 and the sound
@@ -489,7 +490,7 @@ void foodcount()
     }
     else if (selected == 4)
     {
-        totalfood = 454;
+        totalfood = 482;
     }
 }
 

@@ -1,6 +1,7 @@
 
 #include "iGraphics.h"
 #include "iFont.h"
+#include "iSound.h"
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h> /// have to work With maze 4 and the sound
@@ -4452,7 +4453,7 @@ void DataAnalysis()
     if (score != 0)
     {
         // Sub write
-        fp = fopen("score.txt", "a");
+        fp = fopen("Score.txt", "a");
         fprintf(fp, "%s %d\n", playername, score);
         fclose(fp);
     }
