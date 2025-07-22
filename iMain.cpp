@@ -4476,9 +4476,9 @@ void DataAnalysis()
     }
     fclose(fp);
     // Sort data
-    for (int i = 0; i < line - 1; i++)
+    for (int i = 0; i < line; i++)
     {
-        for (int j = 0; j < line - 1 - i; j++)
+        for (int j = 0; j < line; j++)
         {
             if (point[i] > point[j])
             {
