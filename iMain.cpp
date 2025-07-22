@@ -503,15 +503,6 @@ char *converter(int num, char *str)
     sprintf(str, "%d", num);
     return str;
 }
-void realignPacToGrid()
-{
-    pac.x = (pac.x / mazeCellWidth) * mazeCellWidth;
-    pac.y = (pac.y / mazeCellWidth) * mazeCellWidth;
-    pac.smoothRight = false;
-    pac.smoothLeft = false;
-    pac.smoothUp = false;
-    pac.smoothDown = false;
-}
 
 /*
 function iDraw() is called again and again by the system.
@@ -3060,7 +3051,6 @@ void iMouse(int button, int state, int mx, int my)
                     pause = true;
                     backgroundselectorc = 0;
                 }
-                realignPacToGrid();
             }
             else if (slbgimage == 2)
             {
@@ -3110,7 +3100,6 @@ void iMouse(int button, int state, int mx, int my)
                     pause = true;
                     backgroundselectorc = 0;
                 }
-                realignPacToGrid();
             }
             else if (slbgimage == 3)
             {
@@ -3160,7 +3149,6 @@ void iMouse(int button, int state, int mx, int my)
                     pause = true;
                     backgroundselectorc = 0;
                 }
-                realignPacToGrid();
             }
             else if (slbgimage == 4)
             {
@@ -3210,7 +3198,6 @@ void iMouse(int button, int state, int mx, int my)
                     pause = true;
                     backgroundselectorc = 0;
                 }
-                realignPacToGrid();
             }
             else if (slbgimage == 5)
             {
@@ -3260,7 +3247,6 @@ void iMouse(int button, int state, int mx, int my)
                     pause = true;
                     backgroundselectorc = 0;
                 }
-                realignPacToGrid();
             }
             else if (slbgimage == 6)
             {
@@ -3310,7 +3296,6 @@ void iMouse(int button, int state, int mx, int my)
                     pause = true;
                     backgroundselectorc = 0;
                 }
-                realignPacToGrid();
             }
         }
     }
@@ -4411,7 +4396,6 @@ void background()
         if (backgroundselectorc > 99)
         {
             backgroundselectorc = 99;
-           
         }
     }
 }
