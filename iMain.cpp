@@ -4502,14 +4502,15 @@ void DataAnalysis()
 
 int main(int argc, char *argv[])
 {
-    DataAnalysis();
+
     glutInit(&argc, argv);
+    DataAnalysis();
     corrdinatestore1();
     corrdinatestore2();
     corrdinatestore3();
     corrdinatestore4();
 
-    iSetTimer(10, collisioncheck);
+    iSetTimer(20, collisioncheck);
     iSetTimer(1300, bluetimecheck);
     iSetTimer(30, pookiemovement);
     iSetTimer(30, pacmanmovement);
