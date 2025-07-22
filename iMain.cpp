@@ -507,6 +507,10 @@ void realignPacToGrid()
 {
     pac.x = (pac.x / mazeCellWidth) * mazeCellWidth;
     pac.y = (pac.y / mazeCellWidth) * mazeCellWidth;
+    pac.smoothRight = false;
+    pac.smoothLeft = false;
+    pac.smoothUp = false;
+    pac.smoothDown = false;
 }
 
 /*
@@ -4407,7 +4411,7 @@ void background()
         if (backgroundselectorc > 99)
         {
             backgroundselectorc = 99;
-            iPauseTimer(0);
+           
         }
     }
 }
@@ -4465,7 +4469,7 @@ void DataAnalysis()
     if (score != 0)
     {
         // Sub write
-        fp = fopen("score.txt", "a");
+        fp = fopen("Score.txt", "a");
         fprintf(fp, "%s %d\n", playername, score);
         fclose(fp);
     }
@@ -4488,9 +4492,9 @@ void DataAnalysis()
     }
     fclose(fp);
     // Sort data
-    for (int i = 0; i < line; i++)
+    for (int i = 0; i < line - 1; i++)
     {
-        for (int j = 0; j < line; j++)
+        for (int j = 0; j < line - 1 - i; j++)
         {
             if (point[i] > point[j])
             {
