@@ -21,7 +21,10 @@
 <h2 style="font-family: 'Segoe UI', sans-serif; color: #333;">🎮 Authors</h2>
 <ul style="font-size: 16px;">
     <li><strong>Md Ratul Hasan</strong> — CSE'24</li>
-    <li><strong>Hasibul Islam</strong> — CSE'24</li>
+    <img src="image(1).jpg" width="300" height="300" alt="Tribute Note">
+    <li><strong>Hasibul Islam</strong> — CSE'24</li>\
+     <img src="image(2).webp" width="300" height="300" alt="Tribute Note">
+
 </ul>
 
 <h3 style="color: #555;">🧭 Guided by</h3>
