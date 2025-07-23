@@ -7,10 +7,6 @@
 #include <string.h> /// have to work With maze 4 and the sound
 #include <math.h>
 #include <time.h>
-#define MAX_PLAYERS 100
-#define MAX_NAME_LEN 50
-#define SCORE_FILE "Score.txt"
-#define HIGHSCORE_FILE "highScore.txt"
 
 void pacinitialcord();
 void pookieinitialcoordinate();
@@ -81,7 +77,7 @@ int slbgimage = 1;
 int rulescene = 0;
 int mazeX;
 int mazeY;
-int line = 0;
+int line;
 
 int maze = 0;
 int intro = 0;
@@ -89,8 +85,9 @@ int exitintroimage = 0;
 int ratul = 0;
 char namestr[100];
 char playername[100];
-int *point;
+
 char **name;
+int *point;
 int len;
 bool typingName = false;
 int score;
@@ -536,10 +533,8 @@ void iDraw()
     {
         iShowImage(0, 0, highscoreimage[highscorec]);
 
-        for (int i = 0; i < line; i++)
+        for (int i = 0; i < 5; i++)
         {
-            if (i > 4)
-                break;
             if (i == 0)
                 iSetColor(255, 215, 0);
             else if (i == 1)
@@ -548,8 +543,9 @@ void iDraw()
                 iSetColor(205, 127, 50);
             else
                 iSetColor(0, 0, 0);
-            iShowText(215, 384 - (i * 84), name[i], "text.ttf", 40);
-            iShowText(840, 390 - (i * 84), converter(point[i], temp), "text.ttf", 40);
+
+            iShowText(186, 391 - (i * 88), name[i], "text.ttf", 40);
+            iShowText(810, 391 - (i * 88), converter(point[i], temp), "text.ttf", 40);
             // iShowText(double x, double y, const char *text, const char *fontPath, int fontSize = 48)
         }
     }
@@ -2785,7 +2781,8 @@ void iMouse(int button, int state, int mx, int my)
             {
                 mainmenu = true;
                 specialthanks = false;
-                iResumeSound(sound4);
+                if (soundOn)
+                    iResumeSound(sound4);
             }
         }
         else if (highscore)
@@ -2794,7 +2791,8 @@ void iMouse(int button, int state, int mx, int my)
             {
                 highscore = false;
                 mainmenu = true;
-                iResumeSound(sound4);
+                if (soundOn)
+                    iResumeSound(sound4);
             }
         }
         else if (difficulty)
@@ -2803,7 +2801,8 @@ void iMouse(int button, int state, int mx, int my)
             {
                 difficulty = false;
                 mainmenu = true;
-                iResumeSound(sound4);
+                if (soundOn)
+                    iResumeSound(sound4);
             }
             else if ((mx >= 468 && mx <= 697) && (my >= 397 && my <= 448))
             {
@@ -2864,7 +2863,8 @@ void iMouse(int button, int state, int mx, int my)
                 {
                     settings = false;
                     mainmenu = true;
-                    iResumeSound(sound4);
+                    if (soundOn)
+                        iResumeSound(sound4);
                 }
             }
             else
@@ -2872,7 +2872,8 @@ void iMouse(int button, int state, int mx, int my)
                 if ((mx >= 408 && mx <= 783) && (my >= 388 && my <= 439))
                 {
                     soundOn = true;
-                    iResumeSound(sound4);
+                    if (soundOn)
+                        iResumeSound(sound4);
                     //  iResumeAllSound();
                 }
                 else if ((mx >= 380 && mx <= 828) && (my >= 277 && my <= 320))
@@ -2884,7 +2885,8 @@ void iMouse(int button, int state, int mx, int my)
                 {
                     settings = false;
                     mainmenu = true;
-                    iResumeSound(sound4);
+                    if (soundOn)
+                        iResumeSound(sound4);
                 }
             }
         }
@@ -3045,7 +3047,8 @@ void iMouse(int button, int state, int mx, int my)
                 quitc = 0;
                 quit = false;
                 mainmenu = true;
-                iResumeSound(sound4);
+                if (soundOn)
+                    iResumeSound(sound4);
             }
         }
         else if (pause)
@@ -3056,7 +3059,8 @@ void iMouse(int button, int state, int mx, int my)
                 mainmenu = true;
                 playingstart = false;
                 selected = 0;
-                iResumeSound(sound4);
+                if (soundOn)
+                    iResumeSound(sound4);
             }
             else if (mx >= 261 && my >= 299 && mx <= 534 && my <= 372)
             {
@@ -3521,7 +3525,6 @@ void iKeyPress(unsigned char key)
 
                 playgameintro = false;
                 levelselect = true;
-                iResumeAll();
             }
             else if (key == 27) // ESC key
             {
@@ -3537,6 +3540,10 @@ void iKeyPress(unsigned char key)
             }
             else if (len < 99) // Add new character if space available
             {
+                if (key == ' ')
+                {
+                    namestr[len++] = '_';
+                }
                 namestr[len++] = key;
                 iPlaySound("sound/keypress.wav", false, 80);
                 namestr[len] = '\0'; // Always null-terminate
@@ -4483,11 +4490,12 @@ void scoreshow()
             playingstart = false;
             mainmenu = true;
             times = 0;
-            selected = (selected + 1) % 4;
-            //   pacinitialcord();
-            // pookieinitialcoordinate();
-            // foodCoordinateStore();
-            // foodcount();
+            iStopSound(sound3);
+            // selected = (selected + 1) % 4;
+            //    pacinitialcord();
+            //  pookieinitialcoordinate();
+            //  foodCoordinateStore();
+            //  foodcount();
         }
     }
 }
@@ -4571,77 +4579,58 @@ void deathScene()
 
 void DataAnalysis()
 {
-    FILE *fp;
-    char nameBuffer[MAX_PLAYERS][MAX_NAME_LEN];
-    int scoreBuffer[MAX_PLAYERS];
-    int playerCount = 0;
 
-    // Record current score if valid
-    if (score > 0)
+    FILE *fp;
+    char ch;
+    line = 0;
+    if (score != 0)
     {
-        fp = fopen(SCORE_FILE, "a");
-        if (fp)
-        {
-            fprintf(fp, "%s %d\n", playername, score);
-            fclose(fp);
-        }
+        // Sub write
+        fp = fopen("Score.txt", "a");
+        fprintf(fp, "%s %d\n", playername, score);
+        fclose(fp);
     }
 
-    // Load all scores
-    fp = fopen(SCORE_FILE, "r");
-    if (!fp)
-        return;
-
-    while (fscanf(fp, "%s %d", nameBuffer[playerCount], &scoreBuffer[playerCount]) == 2)
+    fp = fopen("Score.txt", "r");
+    while (fscanf(fp, "%c", &ch) == 1)
     {
-        playerCount++;
-        if (playerCount >= MAX_PLAYERS)
-            break;
+        if (ch == '\n')
+            line++;
     }
     fclose(fp);
-
-    // Sort scores descending
-    for (int i = 0; i < playerCount - 1; i++)
+    // Store data
+    fp = fopen("Score.txt", "r");
+    name = (char **)malloc(sizeof(char *) * line);
+    point = (int *)malloc(sizeof(int) * line);
+    for (int i = 0; i < line; i++)
     {
-        for (int j = i + 1; j < playerCount; j++)
+        name[i] = (char *)malloc(sizeof(char) * 20);
+        fscanf(fp, " %s %d", name[i], &point[i]);
+    }
+    fclose(fp);
+    // Sort data
+    for (int i = 0; i < line; i++)
+    {
+        for (int j = i; j < line; j++)
         {
-            if (scoreBuffer[i] < scoreBuffer[j])
+            if (point[i] < point[j])
             {
-                int tempScore = scoreBuffer[i];
-                scoreBuffer[i] = scoreBuffer[j];
-                scoreBuffer[j] = tempScore;
-
-                char tempName[MAX_NAME_LEN];
-                strcpy(tempName, nameBuffer[i]);
-                strcpy(nameBuffer[i], nameBuffer[j]);
-                strcpy(nameBuffer[j], tempName);
+                int t = point[i];
+                point[i] = point[j];
+                point[j] = t;
+                char *p = name[i];
+                name[i] = name[j];
+                name[j] = p;
             }
         }
     }
-
-    // Store to highScore.txt
-    fp = fopen(HIGHSCORE_FILE, "w");
-    if (!fp)
-        return;
-
-    for (int i = 0; i < playerCount && i < 5; i++)
+    // Write Data
+    fp = fopen("highScore.txt", "w");
+    for (int i = 0; i < line; i++)
     {
-        fprintf(fp, "%s %d\n", nameBuffer[i], scoreBuffer[i]);
+        fprintf(fp, "%s %d\n", name[i], point[i]);
     }
-
     fclose(fp);
-
-    // Prepare arrays for display
-    name = (char **)malloc(sizeof(char *) * 5);
-    point = (int *)malloc(sizeof(int) * 5);
-    for (int i = 0; i < 5 && i < playerCount; i++)
-    {
-        name[i] = (char *)malloc(strlen(nameBuffer[i]) + 1);
-        strcpy(name[i], nameBuffer[i]);
-        point[i] = scoreBuffer[i];
-    }
-
-    line = playerCount;
 }
 
 int main(int argc, char *argv[])
