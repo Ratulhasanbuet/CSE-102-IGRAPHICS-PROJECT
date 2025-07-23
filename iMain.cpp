@@ -76,7 +76,7 @@ int selected;
 int levelintro = 0;
 int pausec = 0;
 int backgroundselectorc = 0;
-int bgimage = 5;
+int bgimage = 6;
 int slbgimage = 1;
 int rulescene = 0;
 int mazeX;

@@ -32,7 +32,7 @@
 <p>I owe deep gratitude to the seniors whose wisdom and contributions helped guide this project:</p>
 
 <ul>
-  <li><strong>Abdur Rashid Tyshar</strong> — CSE-16, BUET</li>
+  <li><strong>Abdur Rashid Tushar</strong> — CSE-16, BUET</li>
   <li><strong>Anwarul Bashir Shuaib</strong> — CSE-18, BUET</li>
   <li><strong>Kazi Rakibul Hasan</strong> — CSE-18, BUET</li>
 </ul>
