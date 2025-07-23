@@ -152,7 +152,7 @@
   </tr>
   <tr>
     <td><img src="https://img.icons8.com/color/48/save.png" alt="Save Icon"/></td>
-    <td><strong>💾 High Scores</strong><br>Your score and name are saved locally in <code>player_name.txt</code>.</td>
+    <td><strong>💾 High Scores</strong><br>Your score and name are saved locally in <code>Score.txt & Sorted in HighScore.txt</code>.</td>
   </tr>
 </table>
 
@@ -356,7 +356,7 @@
   </tr>
 </table>
 
-<p>🍒 <strong>Special Bonus:</strong> Fruit 12 and Fruit 15 grant extra life when consumed. Others contribute to score progression and trigger game events based on intervals.</p>
+<p>🍒 <strong>Special Bonus:</strong> Fruit 13 and Fruit 16 grant extra life when consumed. Others contribute to score progression and trigger game events based on intervals.</p>
 
 
 <hr>

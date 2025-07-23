@@ -127,6 +127,12 @@ bool blast;
 bool rulesOption;
 bool back = false;
 
+int sound1;
+int sound2;
+int sound3;
+int sound4;
+int times = 0;
+
 typedef struct
 {
     int upInd, downInd, leftInd, rightInd;
@@ -526,10 +532,8 @@ void iDraw()
     {
         iShowImage(0, 0, highscoreimage[highscorec]);
 
-        for (int i = 0; i < line; i++)
+        for (int i = 0; i < 5; i++)
         {
-            if (i == 5)
-                break;
             iSetColor(0, 0, 0);
             iShowText(215, 384 - (i * 84), name[i], "text.ttf", 40);
             iShowText(840, 390 - (i * 84), converter(point[i], temp), "text.ttf", 40);
@@ -2681,6 +2685,21 @@ void iMouseMove(int mx, int my)
             quitc = 0;
     }
 }
+void iPauseAllSound()
+{
+    iPauseSound(sound1);
+    iPauseSound(sound2);
+    iPauseSound(sound3);
+    iPauseSound(sound4);
+}
+
+void iResumeAllSound()
+{
+    iResumeSound(sound1);
+    iResumeSound(sound2);
+    iResumeSound(sound3);
+    iResumeSound(sound4);
+}
 void iMouse(int button, int state, int mx, int my)
 {
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
@@ -2693,39 +2712,48 @@ void iMouse(int button, int state, int mx, int my)
             {
                 specialthanks = true;
                 mainmenu = false;
+                iStopSound(sound1);
             }
             else if (mx >= 425 && my >= 476 && mx <= 678 && my <= 508)
             {
                 playgameintro = true;
                 mainmenu = false;
+                iStopSound(sound1);
             }
             else if (mx >= 417 && my >= 404 && mx <= 697 && my <= 437)
             {
                 highscore = true;
                 mainmenu = false;
+                iStopSound(sound1);
             }
             else if (mx >= 424 && my >= 331 && mx <= 631 && my <= 357)
             {
                 settings = true;
                 mainmenu = false;
+                iStopSound(sound1);
             }
             else if (mx >= 423 && my >= 253 && mx <= 670 && my <= 285)
             {
                 difficulty = true;
                 mainmenu = false;
+                iStopSound(sound1);
             }
             else if (mx >= 424 && my >= 184 && mx <= 613 && my <= 211)
             {
                 credits = true;
                 mainmenu = false;
+                iStopSound(sound1);
             }
             else if (mx >= 419 && my >= 32 && mx <= 529 && my <= 71)
             {
                 quit = true;
                 mainmenu = false;
+                iStopSound(sound1);
+                iPauseSound(sound4);
             }
             else if (mx >= 415 && my >= 109 && mx <= 565 && my <= 136) // Rules button
             {
+                iStopSound(sound1);
                 rules = true;
                 mainmenu = false;
                 rulescene = 0; //  Reset scene index
@@ -2802,6 +2830,8 @@ void iMouse(int button, int state, int mx, int my)
                 if ((mx >= 408 && mx <= 783) && (my >= 388 && my <= 439))
                 {
                     soundOn = false;
+                    iPauseSound(sound4);
+                    //    iPauseAllSound();
                 }
                 else if ((mx >= 380 && mx <= 828) && (my >= 277 && my <= 320))
                 {
@@ -2819,6 +2849,8 @@ void iMouse(int button, int state, int mx, int my)
                 if ((mx >= 408 && mx <= 783) && (my >= 388 && my <= 439))
                 {
                     soundOn = true;
+                    iResumeSound(sound4);
+                    //  iResumeAllSound();
                 }
                 else if ((mx >= 380 && mx <= 828) && (my >= 277 && my <= 320))
                 {
@@ -2921,6 +2953,8 @@ void iMouse(int button, int state, int mx, int my)
                 pookieinitialcoordinate();
                 foodCoordinateStore();
                 foodcount();
+                //     iStopSound(sound4);
+                iPauseSound(sound4);
             }
             else if ((mx <= 653 && mx >= 454) && (my <= 388 && my >= 331))
             {
@@ -2932,6 +2966,8 @@ void iMouse(int button, int state, int mx, int my)
                 pookieinitialcoordinate();
                 foodCoordinateStore();
                 foodcount();
+                //      iStopSound(sound4);
+                iPauseSound(sound4);
             }
             else if ((mx >= 453 && my >= 229 && mx <= 655 && my <= 280))
             {
@@ -2944,6 +2980,8 @@ void iMouse(int button, int state, int mx, int my)
                 pookieinitialcoordinate();
                 foodCoordinateStore();
                 foodcount();
+                //  iStopSound(sound4);
+                iPauseSound(sound4);
             }
             else if (mx <= 664 && my <= 180 && mx >= 444 && my >= 126)
             {
@@ -2956,6 +2994,8 @@ void iMouse(int button, int state, int mx, int my)
                 pookieinitialcoordinate();
                 foodCoordinateStore();
                 foodcount();
+                //  iStopSound(sound4);
+                iPauseSound(sound4);
             }
         }
         else if (quit)
@@ -2970,6 +3010,7 @@ void iMouse(int button, int state, int mx, int my)
                 quitc = 0;
                 quit = false;
                 mainmenu = true;
+                iResumeSound(sound4);
             }
         }
         else if (pause)
@@ -2978,7 +3019,10 @@ void iMouse(int button, int state, int mx, int my)
             {
                 pause = false;
                 mainmenu = true;
+                playingstart = false;
                 iResumeAll();
+                // iPlaySound("sound/Dyson Sphere.wav", true, 50);
+                iResumeSound(sound4);
             }
             else if (mx >= 261 && my >= 299 && mx <= 534 && my <= 372)
             {
@@ -3403,10 +3447,12 @@ void iKeyPress(unsigned char key)
 {
     if (startintro)
     {
+        sound4 = iPlaySound("sound/Dyson Sphere.wav", false, 50); // background music
         if (key == 13)
         {
             startintro = false;
             mainmenu = true;
+            // sound4 = iPlaySound("sound/Dyson Sphere.wav", false, 50); // background music
         }
     }
     else if (congrats)
@@ -3415,6 +3461,7 @@ void iKeyPress(unsigned char key)
         {
             congrats = false;
             mainmenu = true;
+            iStopSound(sound3);
         }
     }
     else if (playgameintro)
@@ -3496,563 +3543,576 @@ void bluetimecheck()
 
 void collisioncheck()
 {
-
-    if (selected == 1)
+    if (playingstart)
     {
-        if (pac.smoothRight && !(pac.x % mazeCellWidth) && !(pac.y % mazeCellWidth) && !maze1[cellY][cellX + 1])
+        if (selected == 1)
         {
-            pac.downCount = false;
-            pac.upCount = false;
-            pac.leftCount = false;
-            pac.rightCount = true;
-            pac.smoothRight = false;
-        }
-        else if (pac.smoothLeft && !(pac.x % mazeCellWidth) && !(pac.y % mazeCellWidth) && !maze1[cellY][cellX - 1])
-        {
-            pac.downCount = false;
-            pac.rightCount = false;
-            pac.upCount = false;
-            pac.leftCount = true;
-            pac.smoothLeft = false;
-        }
-        else if (pac.smoothUp && !(pac.x % mazeCellWidth) && !(pac.y % mazeCellWidth) && !maze1[cellY - 1][cellX])
-        {
-            pac.downCount = false;
-            pac.rightCount = false;
-            pac.leftCount = false;
-            pac.upCount = true;
-            pac.smoothUp = false;
-        }
-        else if (pac.smoothDown && !(pac.x % mazeCellWidth) && !(pac.y % mazeCellWidth) && !maze1[cellY + 1][cellX])
-        {
-            pac.rightCount = false;
-            pac.leftCount = false;
-            pac.upCount = false;
-            pac.downCount = true;
-            pac.smoothDown = false;
-        }
-    }
-    if (selected == 2)
-    {
-        if (pac.smoothRight && !(pac.x % mazeCellWidth) && !(pac.y % mazeCellWidth) && !maze2[cellY][cellX + 1])
-        {
-            pac.downCount = false;
-            pac.upCount = false;
-            pac.leftCount = false;
-            pac.rightCount = true;
-            pac.smoothRight = false;
-        }
-        else if (pac.smoothLeft && !(pac.x % mazeCellWidth) && !(pac.y % mazeCellWidth) && !maze2[cellY][cellX - 1])
-        {
-            pac.downCount = false;
-            pac.rightCount = false;
-            pac.upCount = false;
-            pac.leftCount = true;
-            pac.smoothLeft = false;
-        }
-        else if (pac.smoothUp && !(pac.x % mazeCellWidth) && !(pac.y % mazeCellWidth) && !maze2[cellY - 1][cellX])
-        {
-            pac.downCount = false;
-            pac.rightCount = false;
-            pac.leftCount = false;
-            pac.upCount = true;
-            pac.smoothUp = false;
-        }
-        else if (pac.smoothDown && !(pac.x % mazeCellWidth) && !(pac.y % mazeCellWidth) && !maze2[cellY + 1][cellX])
-        {
-            pac.rightCount = false;
-            pac.leftCount = false;
-            pac.upCount = false;
-            pac.downCount = true;
-            pac.smoothDown = false;
-        }
-    }
-    if (selected == 3)
-    {
-        if (pac.smoothRight && !(pac.x % mazeCellWidth) && !(pac.y % mazeCellWidth) && !maze3[cellY][cellX + 1])
-        {
-            pac.downCount = false;
-            pac.upCount = false;
-            pac.leftCount = false;
-            pac.rightCount = true;
-            pac.smoothRight = false;
-        }
-        else if (pac.smoothLeft && !(pac.x % mazeCellWidth) && !(pac.y % mazeCellWidth) && !maze3[cellY][cellX - 1])
-        {
-            pac.downCount = false;
-            pac.rightCount = false;
-            pac.upCount = false;
-            pac.leftCount = true;
-            pac.smoothLeft = false;
-        }
-        else if (pac.smoothUp && !(pac.x % mazeCellWidth) && !(pac.y % mazeCellWidth) && !maze3[cellY - 1][cellX])
-        {
-            pac.downCount = false;
-            pac.rightCount = false;
-            pac.leftCount = false;
-            pac.upCount = true;
-            pac.smoothUp = false;
-        }
-        else if (pac.smoothDown && !(pac.x % mazeCellWidth) && !(pac.y % mazeCellWidth) && !maze3[cellY + 1][cellX])
-        {
-            pac.rightCount = false;
-            pac.leftCount = false;
-            pac.upCount = false;
-            pac.downCount = true;
-            pac.smoothDown = false;
-        }
-    }
-    if (selected == 4)
-    {
-        if (pac.smoothRight && !(pac.x % mazeCellWidth) && !(pac.y % mazeCellWidth) && !maze4[cellY][cellX + 1])
-        {
-            pac.downCount = false;
-            pac.upCount = false;
-            pac.leftCount = false;
-            pac.rightCount = true;
-            pac.smoothRight = false;
-        }
-        else if (pac.smoothLeft && !(pac.x % mazeCellWidth) && !(pac.y % mazeCellWidth) && !maze4[cellY][cellX - 1])
-        {
-            pac.downCount = false;
-            pac.rightCount = false;
-            pac.upCount = false;
-            pac.leftCount = true;
-            pac.smoothLeft = false;
-        }
-        else if (pac.smoothUp && !(pac.x % mazeCellWidth) && !(pac.y % mazeCellWidth) && !maze4[cellY - 1][cellX])
-        {
-            pac.downCount = false;
-            pac.rightCount = false;
-            pac.leftCount = false;
-            pac.upCount = true;
-            pac.smoothUp = false;
-        }
-        else if (pac.smoothDown && !(pac.x % mazeCellWidth) && !(pac.y % mazeCellWidth) && !maze4[cellY + 1][cellX])
-        {
-            pac.rightCount = false;
-            pac.leftCount = false;
-            pac.upCount = false;
-            pac.downCount = true;
-            pac.smoothDown = false;
-        }
-    }
-    foodhelp++;
-    if (!(foodhelp % fruitTimeInterval) && foodXcor[*foodCor][1] != -2 && foodXcor[*foodCor][1] != 0)
-    {
-        foodCor = &fruitGen[rand() % (t - 1)];
-        foodXcor[*foodCor][1] = -2;
-        randGen = rand() % 16;
-    }
-    if (totalfood == 0)
-    {
-        congrats = true;
-        DataAnalysis();
-        playingstart = false;
-    }
-    if (selected == 1 || selected == 2)
-    {
-
-        for (int i = 0; i <= foodNum; i++)
-        {
-            if ((pac.x == foodXcor[i][0]) && (pac.y == foodYcor[i]) && foodXcor[i][1] != -1)
+            if (pac.smoothRight && !(pac.x % mazeCellWidth) && !(pac.y % mazeCellWidth) && !maze1[cellY][cellX + 1])
             {
-                if (foodXcor[i][1] == -2)
-                {
-                    if (randGen == 15 || randGen == 12)
-                    {
-                        pacmanlife++;
-                    }
-                    foodXcor[i][1] = -1;
-                    score += 1000;
-                    converter(score, pacScore);
-                }
-                else
-                {
-                    totalfood--;
-                    printf("totalfood=%d ", totalfood);
-                    foodXcor[i][1] = -1;
-                    score += 10;
-                    converter(score, pacScore);
-                    fruitGen[t++] = i;
-                    if (score > 1000)
-                    {
-                        chase = true;
-                        scatter = false;
-                    }
-                    if (score > 6000)
-                    {
-                        chase = false;
-                        blast = true;
-                    }
-                }
-                if ((i == 0 || i == 18 || i == 149 || i == 104) && selected == 1)
-                {
-
-                    blueScore = -1;
-                    score += 40;
-                    blueGhost = 10; // add foodXcor[i][1]!=-2
-                    for (int i = 0; i < 4; i++)
-                        pookie[i].blueOn = true;
-                }
-                else if ((i == 0 || i == 18 || i == 165 || i == 156) && selected == 2)
-                {
-
-                    blueScore = -1;
-                    score += 40;
-                    blueGhost = 10; // add foodXcor[i][1]!=-2
-                    for (int i = 0; i < 4; i++)
-                        pookie[i].blueOn = true;
-                }
+                pac.downCount = false;
+                pac.upCount = false;
+                pac.leftCount = false;
+                pac.rightCount = true;
+                pac.smoothRight = false;
+            }
+            else if (pac.smoothLeft && !(pac.x % mazeCellWidth) && !(pac.y % mazeCellWidth) && !maze1[cellY][cellX - 1])
+            {
+                pac.downCount = false;
+                pac.rightCount = false;
+                pac.upCount = false;
+                pac.leftCount = true;
+                pac.smoothLeft = false;
+            }
+            else if (pac.smoothUp && !(pac.x % mazeCellWidth) && !(pac.y % mazeCellWidth) && !maze1[cellY - 1][cellX])
+            {
+                pac.downCount = false;
+                pac.rightCount = false;
+                pac.leftCount = false;
+                pac.upCount = true;
+                pac.smoothUp = false;
+            }
+            else if (pac.smoothDown && !(pac.x % mazeCellWidth) && !(pac.y % mazeCellWidth) && !maze1[cellY + 1][cellX])
+            {
+                pac.rightCount = false;
+                pac.leftCount = false;
+                pac.upCount = false;
+                pac.downCount = true;
+                pac.smoothDown = false;
             }
         }
-    }
-    if (selected == 3 || selected == 4)
-    {
-
-        for (int i = 0; i <= foodNum; i++)
+        if (selected == 2)
         {
-            if ((pac.x == foodXcor[i][0]) && (pac.y == foodYcor[i]) && foodXcor[i][1] != -1)
+            if (pac.smoothRight && !(pac.x % mazeCellWidth) && !(pac.y % mazeCellWidth) && !maze2[cellY][cellX + 1])
             {
-                if (foodXcor[i][1] == -2)
-                {
-                    if (randGen == 15 || randGen == 12)
-                    {
-                        pacmanlife++;
-                    }
-                    foodXcor[i][1] = -1;
-                    score += 1000;
-                    converter(score, pacScore);
-                }
-                else
-                {
-                    totalfood--;
-                    printf("totalfood=%d ", totalfood);
-                    foodXcor[i][1] = -1;
-                    score += 10;
-                    converter(score, pacScore);
-                    fruitGen[t++] = i;
-                    if (score > 3000)
-                    {
-                        chase = true;
-                        scatter = false;
-                    }
-                    if (score > 9000)
-                    {
-                        chase = false;
-                        blast = true;
-                    }
-                }
-
-                if (selected == 3 && (i == 84 || i == 292 || i == 100 || i == 200))
-                {
-
-                    blueScore = -1;
-                    score += 40;
-                    blueGhost = 10; // add foodXcor[i][1]!=-2
-                    for (int i = 0; i < 6; i++)
-                        pookie[i].blueOn = true;
-                }
-                else if (selected == 4 && (i == 15 || i == 50 || i == 87 || i == 135 || i == 172 || i == 244 || i == 327))
-                {
-
-                    blueScore = -1;
-                    score += 40;
-                    blueGhost = 10; // add foodXcor[i][1]!=-2
-                    for (int i = 0; i < 6; i++)
-                        pookie[i].blueOn = true;
-                }
+                pac.downCount = false;
+                pac.upCount = false;
+                pac.leftCount = false;
+                pac.rightCount = true;
+                pac.smoothRight = false;
+            }
+            else if (pac.smoothLeft && !(pac.x % mazeCellWidth) && !(pac.y % mazeCellWidth) && !maze2[cellY][cellX - 1])
+            {
+                pac.downCount = false;
+                pac.rightCount = false;
+                pac.upCount = false;
+                pac.leftCount = true;
+                pac.smoothLeft = false;
+            }
+            else if (pac.smoothUp && !(pac.x % mazeCellWidth) && !(pac.y % mazeCellWidth) && !maze2[cellY - 1][cellX])
+            {
+                pac.downCount = false;
+                pac.rightCount = false;
+                pac.leftCount = false;
+                pac.upCount = true;
+                pac.smoothUp = false;
+            }
+            else if (pac.smoothDown && !(pac.x % mazeCellWidth) && !(pac.y % mazeCellWidth) && !maze2[cellY + 1][cellX])
+            {
+                pac.rightCount = false;
+                pac.leftCount = false;
+                pac.upCount = false;
+                pac.downCount = true;
+                pac.smoothDown = false;
             }
         }
-    }
-    if (selected == 1 || selected == 2)
-    {
-        if (blueGhost)
+        if (selected == 3)
         {
-            for (int i = 0; i < 4; i++)
+            if (pac.smoothRight && !(pac.x % mazeCellWidth) && !(pac.y % mazeCellWidth) && !maze3[cellY][cellX + 1])
             {
-                if (pookie[i].blueOn)
+                pac.downCount = false;
+                pac.upCount = false;
+                pac.leftCount = false;
+                pac.rightCount = true;
+                pac.smoothRight = false;
+            }
+            else if (pac.smoothLeft && !(pac.x % mazeCellWidth) && !(pac.y % mazeCellWidth) && !maze3[cellY][cellX - 1])
+            {
+                pac.downCount = false;
+                pac.rightCount = false;
+                pac.upCount = false;
+                pac.leftCount = true;
+                pac.smoothLeft = false;
+            }
+            else if (pac.smoothUp && !(pac.x % mazeCellWidth) && !(pac.y % mazeCellWidth) && !maze3[cellY - 1][cellX])
+            {
+                pac.downCount = false;
+                pac.rightCount = false;
+                pac.leftCount = false;
+                pac.upCount = true;
+                pac.smoothUp = false;
+            }
+            else if (pac.smoothDown && !(pac.x % mazeCellWidth) && !(pac.y % mazeCellWidth) && !maze3[cellY + 1][cellX])
+            {
+                pac.rightCount = false;
+                pac.leftCount = false;
+                pac.upCount = false;
+                pac.downCount = true;
+                pac.smoothDown = false;
+            }
+        }
+        if (selected == 4)
+        {
+            if (pac.smoothRight && !(pac.x % mazeCellWidth) && !(pac.y % mazeCellWidth) && !maze4[cellY][cellX + 1])
+            {
+                pac.downCount = false;
+                pac.upCount = false;
+                pac.leftCount = false;
+                pac.rightCount = true;
+                pac.smoothRight = false;
+            }
+            else if (pac.smoothLeft && !(pac.x % mazeCellWidth) && !(pac.y % mazeCellWidth) && !maze4[cellY][cellX - 1])
+            {
+                pac.downCount = false;
+                pac.rightCount = false;
+                pac.upCount = false;
+                pac.leftCount = true;
+                pac.smoothLeft = false;
+            }
+            else if (pac.smoothUp && !(pac.x % mazeCellWidth) && !(pac.y % mazeCellWidth) && !maze4[cellY - 1][cellX])
+            {
+                pac.downCount = false;
+                pac.rightCount = false;
+                pac.leftCount = false;
+                pac.upCount = true;
+                pac.smoothUp = false;
+            }
+            else if (pac.smoothDown && !(pac.x % mazeCellWidth) && !(pac.y % mazeCellWidth) && !maze4[cellY + 1][cellX])
+            {
+                pac.rightCount = false;
+                pac.leftCount = false;
+                pac.upCount = false;
+                pac.downCount = true;
+                pac.smoothDown = false;
+            }
+        }
+        foodhelp++;
+        if (!(foodhelp % fruitTimeInterval) && foodXcor[*foodCor][1] != -2 && foodXcor[*foodCor][1] != 0)
+        {
+            foodCor = &fruitGen[rand() % (t - 1)];
+            foodXcor[*foodCor][1] = -2;
+            randGen = rand() % 16;
+        }
+        if (totalfood == 0)
+        {
+            congrats = true;
+            DataAnalysis();
+            playingstart = false;
+        }
+        if (selected == 1 || selected == 2)
+        {
+
+            for (int i = 0; i <= foodNum; i++)
+            {
+                if ((pac.x == foodXcor[i][0]) && (pac.y == foodYcor[i]) && foodXcor[i][1] != -1)
                 {
-                    if (!(pookie[i].x % mazeCellWidth) && !(pookie[i].y % mazeCellWidth))
+                    if (foodXcor[i][1] == -2)
                     {
-                        pookie[i].speed = 1;
+                        if (soundOn)
+                            iPlaySound("sound/pacman_eatfruit.wav", false, 50);
+                        if (randGen == 15 || randGen == 12)
+                        {
+                            pacmanlife++;
+                        }
+                        foodXcor[i][1] = -1;
+                        score += 1000;
+                        converter(score, pacScore);
+                    }
+                    else
+                    {
+                        if (soundOn)
+                            iPlaySound("sound/fright_firstloop.wav", false, 50);
+                        totalfood--;
+                        printf("totalfood=%d ", totalfood);
+                        foodXcor[i][1] = -1;
+                        score += 10;
+                        converter(score, pacScore);
+                        fruitGen[t++] = i;
+                        if (score > 1000)
+                        {
+                            chase = true;
+                            scatter = false;
+                        }
+                        if (score > 6000)
+                        {
+                            chase = false;
+                            blast = true;
+                        }
+                    }
+                    if ((i == 0 || i == 18 || i == 149 || i == 104) && selected == 1)
+                    {
+
+                        blueScore = -1;
+                        score += 40;
+                        blueGhost = 10; // add foodXcor[i][1]!=-2
+                        for (int i = 0; i < 4; i++)
+                            pookie[i].blueOn = true;
+                    }
+                    else if ((i == 0 || i == 18 || i == 165 || i == 156) && selected == 2)
+                    {
+
+                        blueScore = -1;
+                        score += 40;
+                        blueGhost = 10; // add foodXcor[i][1]!=-2
+                        for (int i = 0; i < 4; i++)
+                            pookie[i].blueOn = true;
                     }
                 }
             }
         }
-        if (!blueGhost && (pookie[0].speed != diffSpeed || pookie[1].speed != diffSpeed || pookie[2].speed != diffSpeed || pookie[3].speed != diffSpeed))
+        if (selected == 3 || selected == 4)
         {
-            for (int i = 0; i < 4; i++)
+
+            for (int i = 0; i <= foodNum; i++)
             {
-                if (!(pookie[i].x % mazeCellWidth) && !(pookie[i].y % mazeCellWidth))
+                if ((pac.x == foodXcor[i][0]) && (pac.y == foodYcor[i]) && foodXcor[i][1] != -1)
                 {
-                    pookie[i].speed = diffSpeed;
+                    if (foodXcor[i][1] == -2)
+                    {
+                        if (soundOn)
+                            iPlaySound("sound/pacman_eatfruit.wav", false, 50);
+                        if (randGen == 15 || randGen == 12)
+                        {
+                            pacmanlife++;
+                        }
+                        foodXcor[i][1] = -1;
+                        score += 1000;
+                        converter(score, pacScore);
+                    }
+                    else
+                    {
+                        if (soundOn)
+                            iPlaySound("sound/fright_firstloop.wav", false, 50);
+                        totalfood--;
+                        printf("totalfood=%d ", totalfood);
+                        foodXcor[i][1] = -1;
+                        score += 10;
+                        converter(score, pacScore);
+                        fruitGen[t++] = i;
+                        if (score > 3000)
+                        {
+                            chase = true;
+                            scatter = false;
+                        }
+                        if (score > 9000)
+                        {
+                            chase = false;
+                            blast = true;
+                        }
+                    }
+
+                    if (selected == 3 && (i == 84 || i == 292 || i == 100 || i == 200))
+                    {
+
+                        blueScore = -1;
+                        score += 40;
+                        blueGhost = 10; // add foodXcor[i][1]!=-2
+                        for (int i = 0; i < 6; i++)
+                            pookie[i].blueOn = true;
+                    }
+                    else if (selected == 4 && (i == 15 || i == 50 || i == 87 || i == 135 || i == 172 || i == 244 || i == 327))
+                    {
+
+                        blueScore = -1;
+                        score += 40;
+                        blueGhost = 10; // add foodXcor[i][1]!=-2
+                        for (int i = 0; i < 6; i++)
+                            pookie[i].blueOn = true;
+                    }
                 }
             }
         }
-        for (int i = 0; i < 4; i++)
+        if (selected == 1 || selected == 2)
         {
-            if (abs(pac.x - pookie[i].x) <= 20 && abs(pac.y - pookie[i].y) <= 20)
+            if (blueGhost)
             {
-                if (!blueGhost || !pookie[i].blueOn)
-                {
-                    pacdead = true;
-                    iPauseTimer(3);
-                    iPauseTimer(2);
-                }
-                else
+                for (int i = 0; i < 4; i++)
                 {
                     if (pookie[i].blueOn)
                     {
-
-                        blueScore++;
-                        score += (100) * pow(3, blueScore);
-                        converter(score, pacScore);
-                        pookie[i].blueOn = false;
-                        if (selected == 1)
+                        if (!(pookie[i].x % mazeCellWidth) && !(pookie[i].y % mazeCellWidth))
                         {
-                            if (i == 0)
-                            {
-                                pookie[0].cellX = 9; // Inky
-                                pookie[0].cellY = 9;
-                                pookie[0].x = 168 + (pookie[0].cellX) * mazeCellWidth;
-                                pookie[0].y = 48 + (20 - pookie[0].cellY) * mazeCellWidth;
-                                pookie[0].flagRight = true;
-                                pookie[0].speed = diffSpeed;
-                            }
-                            else if (i == 1)
-                            {
-                                pookie[1].cellX = 10; // Blinky
-                                pookie[1].cellY = 9;
-                                pookie[1].x = 168 + (pookie[1].cellX) * mazeCellWidth;
-                                pookie[1].y = 48 + (20 - pookie[1].cellY) * mazeCellWidth;
-                                pookie[1].flagUp = true;
-                                pookie[1].speed = diffSpeed;
-                            }
-                            else if (i == 2)
-                            {
-
-                                pookie[2].cellX = 10; // Pinky
-                                pookie[2].cellY = 9;
-                                pookie[2].x = 168 + (pookie[2].cellX) * mazeCellWidth;
-                                pookie[2].y = 48 + (20 - pookie[2].cellY) * mazeCellWidth;
-                                pookie[2].flagRight = true;
-                                pookie[2].speed = diffSpeed;
-                            }
-                            else if (i == 3)
-                            {
-                                pookie[3].cellX = 11; // Clyde
-                                pookie[3].cellY = 9;
-                                pookie[3].x = 168 + (pookie[3].cellX) * mazeCellWidth;
-                                pookie[3].y = 48 + (20 - pookie[3].cellY) * mazeCellWidth;
-                                pookie[3].flagRight = true;
-                                pookie[3].speed = diffSpeed;
-                            }
-                        }
-                        else if (selected == 2)
-                        {
-                            if (i == 0)
-                            {
-                                pookie[0].cellX = 9; // Inky
-                                pookie[0].cellY = 8;
-                                pookie[0].x = 168 + (pookie[0].cellX) * mazeCellWidth;
-                                pookie[0].y = 48 + (20 - pookie[0].cellY) * mazeCellWidth;
-                                pookie[0].flagRight = true;
-                                pookie[0].speed = diffSpeed;
-                            }
-                            else if (i == 1)
-                            {
-                                pookie[1].cellX = 10; // Blinky
-                                pookie[1].cellY = 8;
-                                pookie[1].x = 168 + (pookie[1].cellX) * mazeCellWidth;
-                                pookie[1].y = 48 + (20 - pookie[1].cellY) * mazeCellWidth;
-                                pookie[1].flagUp = true;
-                                pookie[1].speed = diffSpeed;
-                            }
-                            else if (i == 2)
-                            {
-                                pookie[2].cellX = 10; // Pinky
-                                pookie[2].cellY = 8;
-                                pookie[2].x = 168 + (pookie[2].cellX) * mazeCellWidth;
-                                pookie[2].y = 48 + (20 - pookie[2].cellY) * mazeCellWidth;
-                                pookie[2].flagRight = true;
-                                pookie[2].speed = diffSpeed;
-                            }
-                            else if (i == 3)
-                            {
-                                pookie[3].cellX = 11; // Clyde
-                                pookie[3].cellY = 8;
-                                pookie[3].x = 168 + (pookie[3].cellX) * mazeCellWidth;
-                                pookie[3].y = 48 + (20 - pookie[3].cellY) * mazeCellWidth;
-                                pookie[3].flagRight = true;
-                                pookie[3].speed = diffSpeed;
-                            }
+                            pookie[i].speed = 1;
                         }
                     }
                 }
             }
-        }
-    }
-
-    if (selected == 3 || selected == 4)
-    {
-        if (blueGhost)
-        {
-            for (int i = 0; i < 6; i++)
+            if (!blueGhost && (pookie[0].speed != diffSpeed || pookie[1].speed != diffSpeed || pookie[2].speed != diffSpeed || pookie[3].speed != diffSpeed))
             {
-                if (pookie[i].blueOn)
+                for (int i = 0; i < 4; i++)
                 {
                     if (!(pookie[i].x % mazeCellWidth) && !(pookie[i].y % mazeCellWidth))
                     {
-                        pookie[i].speed = 1;
+                        pookie[i].speed = diffSpeed;
+                    }
+                }
+            }
+            for (int i = 0; i < 4; i++)
+            {
+                if (abs(pac.x - pookie[i].x) <= 20 && abs(pac.y - pookie[i].y) <= 20)
+                {
+                    if (!blueGhost || !pookie[i].blueOn)
+                    {
+                        pacdead = true;
+                        iPauseTimer(3);
+                        iPauseTimer(2);
+                    }
+                    else
+                    {
+                        if (pookie[i].blueOn)
+                        {
+                            if (soundOn)
+                                iPlaySound("sound/pacman_eatghost.wav", false, 50);
+                            blueScore++;
+                            score += (100) * pow(3, blueScore);
+                            converter(score, pacScore);
+                            pookie[i].blueOn = false;
+                            if (selected == 1)
+                            {
+                                if (i == 0)
+                                {
+                                    pookie[0].cellX = 9; // Inky
+                                    pookie[0].cellY = 9;
+                                    pookie[0].x = 168 + (pookie[0].cellX) * mazeCellWidth;
+                                    pookie[0].y = 48 + (20 - pookie[0].cellY) * mazeCellWidth;
+                                    pookie[0].flagRight = true;
+                                    pookie[0].speed = diffSpeed;
+                                }
+                                else if (i == 1)
+                                {
+                                    pookie[1].cellX = 10; // Blinky
+                                    pookie[1].cellY = 9;
+                                    pookie[1].x = 168 + (pookie[1].cellX) * mazeCellWidth;
+                                    pookie[1].y = 48 + (20 - pookie[1].cellY) * mazeCellWidth;
+                                    pookie[1].flagUp = true;
+                                    pookie[1].speed = diffSpeed;
+                                }
+                                else if (i == 2)
+                                {
+
+                                    pookie[2].cellX = 10; // Pinky
+                                    pookie[2].cellY = 9;
+                                    pookie[2].x = 168 + (pookie[2].cellX) * mazeCellWidth;
+                                    pookie[2].y = 48 + (20 - pookie[2].cellY) * mazeCellWidth;
+                                    pookie[2].flagRight = true;
+                                    pookie[2].speed = diffSpeed;
+                                }
+                                else if (i == 3)
+                                {
+                                    pookie[3].cellX = 11; // Clyde
+                                    pookie[3].cellY = 9;
+                                    pookie[3].x = 168 + (pookie[3].cellX) * mazeCellWidth;
+                                    pookie[3].y = 48 + (20 - pookie[3].cellY) * mazeCellWidth;
+                                    pookie[3].flagRight = true;
+                                    pookie[3].speed = diffSpeed;
+                                }
+                            }
+                            else if (selected == 2)
+                            {
+                                if (i == 0)
+                                {
+                                    pookie[0].cellX = 9; // Inky
+                                    pookie[0].cellY = 8;
+                                    pookie[0].x = 168 + (pookie[0].cellX) * mazeCellWidth;
+                                    pookie[0].y = 48 + (20 - pookie[0].cellY) * mazeCellWidth;
+                                    pookie[0].flagRight = true;
+                                    pookie[0].speed = diffSpeed;
+                                }
+                                else if (i == 1)
+                                {
+                                    pookie[1].cellX = 10; // Blinky
+                                    pookie[1].cellY = 8;
+                                    pookie[1].x = 168 + (pookie[1].cellX) * mazeCellWidth;
+                                    pookie[1].y = 48 + (20 - pookie[1].cellY) * mazeCellWidth;
+                                    pookie[1].flagUp = true;
+                                    pookie[1].speed = diffSpeed;
+                                }
+                                else if (i == 2)
+                                {
+                                    pookie[2].cellX = 10; // Pinky
+                                    pookie[2].cellY = 8;
+                                    pookie[2].x = 168 + (pookie[2].cellX) * mazeCellWidth;
+                                    pookie[2].y = 48 + (20 - pookie[2].cellY) * mazeCellWidth;
+                                    pookie[2].flagRight = true;
+                                    pookie[2].speed = diffSpeed;
+                                }
+                                else if (i == 3)
+                                {
+                                    pookie[3].cellX = 11; // Clyde
+                                    pookie[3].cellY = 8;
+                                    pookie[3].x = 168 + (pookie[3].cellX) * mazeCellWidth;
+                                    pookie[3].y = 48 + (20 - pookie[3].cellY) * mazeCellWidth;
+                                    pookie[3].flagRight = true;
+                                    pookie[3].speed = diffSpeed;
+                                }
+                            }
+                        }
                     }
                 }
             }
         }
-        if (!blueGhost && (pookie[0].speed != diffSpeed || pookie[1].speed != diffSpeed || pookie[2].speed != diffSpeed || pookie[3].speed != diffSpeed || pookie[4].speed != diffSpeed || pookie[5].speed != diffSpeed))
+
+        if (selected == 3 || selected == 4)
         {
-            for (int i = 0; i < 6; i++)
+            if (blueGhost)
             {
-                if (!(pookie[i].x % mazeCellWidth) && !(pookie[i].y % mazeCellWidth))
-                {
-                    pookie[i].speed = diffSpeed;
-                }
-            }
-        }
-        for (int i = 0; i < 6; i++)
-        {
-            if (abs(pac.x - pookie[i].x) <= 20 && abs(pac.y - pookie[i].y) <= 20)
-            {
-                if (!blueGhost || !pookie[i].blueOn)
-                {
-                    pacdead = true;
-                    iPauseTimer(3);
-                    iPauseTimer(2);
-                }
-                else
+                for (int i = 0; i < 6; i++)
                 {
                     if (pookie[i].blueOn)
                     {
-
-                        blueScore++;
-                        score += (100) * pow(3, blueScore);
-                        converter(score, pacScore);
-                        pookie[i].blueOn = false;
-
-                        if (selected == 3)
+                        if (!(pookie[i].x % mazeCellWidth) && !(pookie[i].y % mazeCellWidth))
                         {
-                            if (i == 0)
-                            {
-                                pookie[0].cellX = 15; // Inky
-                                pookie[0].cellY = 14;
-                                pookie[0].x = 72 + (pookie[0].cellX) * mazeCellWidth;
-                                pookie[0].y = 48 + (18 - pookie[0].cellY) * mazeCellWidth;
-                                pookie[0].flagRight = true;
-                                pookie[0].speed = diffSpeed;
-                            }
-                            else if (i == 1)
-                            {
-
-                                pookie[1].cellX = 16; // Blinky
-                                pookie[1].cellY = 14;
-                                pookie[1].x = 72 + (pookie[1].cellX) * mazeCellWidth;
-                                pookie[1].y = 48 + (18 - pookie[1].cellY) * mazeCellWidth;
-                                pookie[1].flagUp = true;
-                                pookie[1].speed = diffSpeed;
-                            }
-                            else if (i == 2)
-                            {
-                                pookie[2].cellX = 17; // Pinky
-                                pookie[2].cellY = 14;
-                                pookie[2].x = 72 + (pookie[2].cellX) * mazeCellWidth;
-                                pookie[2].y = 48 + (18 - pookie[2].cellY) * mazeCellWidth;
-                                pookie[2].flagRight = true;
-                                pookie[2].speed = diffSpeed;
-                            }
-                            else if (i == 3)
-                            {
-
-                                pookie[3].cellX = 18; // Clyde
-                                pookie[3].cellY = 14;
-                                pookie[3].x = 72 + (pookie[3].cellX) * mazeCellWidth;
-                                pookie[3].y = 48 + (18 - pookie[3].cellY) * mazeCellWidth;
-                                pookie[3].flagRight = true;
-                                pookie[3].speed = diffSpeed;
-                            }
-                            else if (i == 4)
-                            {
-                                pookie[4].cellX = 19; // donky
-                                pookie[4].cellY = 14;
-                                pookie[4].x = 72 + (pookie[4].cellX) * mazeCellWidth;
-                                pookie[4].y = 48 + (18 - pookie[4].cellY) * mazeCellWidth;
-                                pookie[4].flagRight = true;
-                                pookie[4].speed = diffSpeed;
-                            }
-                            else if (i == 5)
-                            {
-                                pookie[5].cellX = 18; // rinky
-                                pookie[5].cellY = 14;
-                                pookie[5].x = 72 + (pookie[5].cellX) * mazeCellWidth;
-                                pookie[5].y = 48 + (18 - pookie[5].cellY) * mazeCellWidth;
-                                pookie[5].flagRight = true;
-                                pookie[5].speed = diffSpeed;
-                            }
+                            pookie[i].speed = 1;
                         }
-                        else if (selected == 4)
+                    }
+                }
+            }
+            if (!blueGhost && (pookie[0].speed != diffSpeed || pookie[1].speed != diffSpeed || pookie[2].speed != diffSpeed || pookie[3].speed != diffSpeed || pookie[4].speed != diffSpeed || pookie[5].speed != diffSpeed))
+            {
+                for (int i = 0; i < 6; i++)
+                {
+                    if (!(pookie[i].x % mazeCellWidth) && !(pookie[i].y % mazeCellWidth))
+                    {
+                        pookie[i].speed = diffSpeed;
+                    }
+                }
+            }
+            for (int i = 0; i < 6; i++)
+            {
+                if (abs(pac.x - pookie[i].x) <= 20 && abs(pac.y - pookie[i].y) <= 20)
+                {
+                    if (!blueGhost || !pookie[i].blueOn)
+                    {
+
+                        pacdead = true;
+                        iPauseTimer(3);
+                        iPauseTimer(2);
+                    }
+                    else
+                    {
+                        if (pookie[i].blueOn)
                         {
-                            if (i == 0)
+                            if (soundOn)
+                                iPlaySound("sound/pacman_eatghost.wav", false, 50);
+                            blueScore++;
+                            score += (100) * pow(3, blueScore);
+                            converter(score, pacScore);
+                            pookie[i].blueOn = false;
+
+                            if (selected == 3)
                             {
-                                pookie[0].cellX = 1; // Inky
-                                pookie[0].cellY = 19;
-                                pookie[0].x = 72 + (pookie[0].cellX) * mazeCellWidth;
-                                pookie[0].y = 48 + (20 - pookie[0].cellY) * mazeCellWidth;
-                                pookie[0].flagRight = true;
-                                pookie[0].speed = diffSpeed;
+                                if (i == 0)
+                                {
+                                    pookie[0].cellX = 15; // Inky
+                                    pookie[0].cellY = 14;
+                                    pookie[0].x = 72 + (pookie[0].cellX) * mazeCellWidth;
+                                    pookie[0].y = 48 + (18 - pookie[0].cellY) * mazeCellWidth;
+                                    pookie[0].flagRight = true;
+                                    pookie[0].speed = diffSpeed;
+                                }
+                                else if (i == 1)
+                                {
+
+                                    pookie[1].cellX = 16; // Blinky
+                                    pookie[1].cellY = 14;
+                                    pookie[1].x = 72 + (pookie[1].cellX) * mazeCellWidth;
+                                    pookie[1].y = 48 + (18 - pookie[1].cellY) * mazeCellWidth;
+                                    pookie[1].flagUp = true;
+                                    pookie[1].speed = diffSpeed;
+                                }
+                                else if (i == 2)
+                                {
+                                    pookie[2].cellX = 17; // Pinky
+                                    pookie[2].cellY = 14;
+                                    pookie[2].x = 72 + (pookie[2].cellX) * mazeCellWidth;
+                                    pookie[2].y = 48 + (18 - pookie[2].cellY) * mazeCellWidth;
+                                    pookie[2].flagRight = true;
+                                    pookie[2].speed = diffSpeed;
+                                }
+                                else if (i == 3)
+                                {
+
+                                    pookie[3].cellX = 18; // Clyde
+                                    pookie[3].cellY = 14;
+                                    pookie[3].x = 72 + (pookie[3].cellX) * mazeCellWidth;
+                                    pookie[3].y = 48 + (18 - pookie[3].cellY) * mazeCellWidth;
+                                    pookie[3].flagRight = true;
+                                    pookie[3].speed = diffSpeed;
+                                }
+                                else if (i == 4)
+                                {
+                                    pookie[4].cellX = 19; // donky
+                                    pookie[4].cellY = 14;
+                                    pookie[4].x = 72 + (pookie[4].cellX) * mazeCellWidth;
+                                    pookie[4].y = 48 + (18 - pookie[4].cellY) * mazeCellWidth;
+                                    pookie[4].flagRight = true;
+                                    pookie[4].speed = diffSpeed;
+                                }
+                                else if (i == 5)
+                                {
+                                    pookie[5].cellX = 18; // rinky
+                                    pookie[5].cellY = 14;
+                                    pookie[5].x = 72 + (pookie[5].cellX) * mazeCellWidth;
+                                    pookie[5].y = 48 + (18 - pookie[5].cellY) * mazeCellWidth;
+                                    pookie[5].flagRight = true;
+                                    pookie[5].speed = diffSpeed;
+                                }
                             }
-                            else if (i == 1)
+                            else if (selected == 4)
                             {
-                                pookie[1].cellX = 12; // Blinky
-                                pookie[1].cellY = 19;
-                                pookie[1].x = 72 + (pookie[1].cellX) * mazeCellWidth;
-                                pookie[1].y = 48 + (20 - pookie[1].cellY) * mazeCellWidth;
-                                pookie[1].flagUp = true;
-                                pookie[1].speed = diffSpeed;
-                            }
-                            else if (i == 2)
-                            {
-                                pookie[2].cellX = 20; // Pinky
-                                pookie[2].cellY = 19;
-                                pookie[2].x = 72 + (pookie[2].cellX) * mazeCellWidth;
-                                pookie[2].y = 48 + (20 - pookie[2].cellY) * mazeCellWidth;
-                                pookie[2].flagRight = true;
-                                pookie[2].speed = diffSpeed;
-                            }
-                            else if (i == 3)
-                            {
-                                pookie[3].cellX = 35; // Clyde
-                                pookie[3].cellY = 19;
-                                pookie[3].x = 72 + (pookie[3].cellX) * mazeCellWidth;
-                                pookie[3].y = 48 + (20 - pookie[3].cellY) * mazeCellWidth;
-                                pookie[3].flagRight = true;
-                                pookie[3].speed = diffSpeed;
-                            }
-                            else if (i == 4)
-                            {
-                                pookie[4].cellX = 20; // donkey
-                                pookie[4].cellY = 19;
-                                pookie[4].x = 72 + (pookie[4].cellX) * mazeCellWidth;
-                                pookie[4].y = 48 + (20 - pookie[4].cellY) * mazeCellWidth;
-                                pookie[4].flagRight = true;
-                                pookie[4].speed = diffSpeed;
-                            }
-                            else if (i == 5)
-                            {
-                                pookie[5].cellX = 35; // rinky
-                                pookie[5].cellY = 19;
-                                pookie[5].x = 72 + (pookie[5].cellX) * mazeCellWidth;
-                                pookie[5].y = 48 + (20 - pookie[5].cellY) * mazeCellWidth;
-                                pookie[5].flagRight = true;
-                                pookie[5].speed = diffSpeed;
+                                if (i == 0)
+                                {
+                                    pookie[0].cellX = 1; // Inky
+                                    pookie[0].cellY = 19;
+                                    pookie[0].x = 72 + (pookie[0].cellX) * mazeCellWidth;
+                                    pookie[0].y = 48 + (20 - pookie[0].cellY) * mazeCellWidth;
+                                    pookie[0].flagRight = true;
+                                    pookie[0].speed = diffSpeed;
+                                }
+                                else if (i == 1)
+                                {
+                                    pookie[1].cellX = 12; // Blinky
+                                    pookie[1].cellY = 19;
+                                    pookie[1].x = 72 + (pookie[1].cellX) * mazeCellWidth;
+                                    pookie[1].y = 48 + (20 - pookie[1].cellY) * mazeCellWidth;
+                                    pookie[1].flagUp = true;
+                                    pookie[1].speed = diffSpeed;
+                                }
+                                else if (i == 2)
+                                {
+                                    pookie[2].cellX = 20; // Pinky
+                                    pookie[2].cellY = 19;
+                                    pookie[2].x = 72 + (pookie[2].cellX) * mazeCellWidth;
+                                    pookie[2].y = 48 + (20 - pookie[2].cellY) * mazeCellWidth;
+                                    pookie[2].flagRight = true;
+                                    pookie[2].speed = diffSpeed;
+                                }
+                                else if (i == 3)
+                                {
+                                    pookie[3].cellX = 35; // Clyde
+                                    pookie[3].cellY = 19;
+                                    pookie[3].x = 72 + (pookie[3].cellX) * mazeCellWidth;
+                                    pookie[3].y = 48 + (20 - pookie[3].cellY) * mazeCellWidth;
+                                    pookie[3].flagRight = true;
+                                    pookie[3].speed = diffSpeed;
+                                }
+                                else if (i == 4)
+                                {
+                                    pookie[4].cellX = 20; // donkey
+                                    pookie[4].cellY = 19;
+                                    pookie[4].x = 72 + (pookie[4].cellX) * mazeCellWidth;
+                                    pookie[4].y = 48 + (20 - pookie[4].cellY) * mazeCellWidth;
+                                    pookie[4].flagRight = true;
+                                    pookie[4].speed = diffSpeed;
+                                }
+                                else if (i == 5)
+                                {
+                                    pookie[5].cellX = 35; // rinky
+                                    pookie[5].cellY = 19;
+                                    pookie[5].x = 72 + (pookie[5].cellX) * mazeCellWidth;
+                                    pookie[5].y = 48 + (20 - pookie[5].cellY) * mazeCellWidth;
+                                    pookie[5].flagRight = true;
+                                    pookie[5].speed = diffSpeed;
+                                }
                             }
                         }
                     }
@@ -4337,7 +4397,6 @@ void introchange()
             intro = 0;
             startintro = false;
             mainmenu = true;
-            iPauseTimer(0);
         }
     }
     if (rules && !back)
@@ -4371,7 +4430,7 @@ void scoreshow()
             congratsc = 0;
             congrats = false;
             mainmenu = true;
-            iPauseAll();
+            iStopSound(sound3);
         }
     }
 }
@@ -4418,9 +4477,11 @@ void deathScene()
         deadSceneCount++;
         if (deadSceneCount > 10)
         {
+            if (soundOn)
+                sound2 = iPlaySound("sound/pacman_death.wav", false, 50);
             deadSceneCount = 0;
             pacdead = false;
-
+            times = 0;
             pacmanlife--;
             pacinitialcord();
             pookieinitialcoordinate();
@@ -4436,6 +4497,9 @@ void deathScene()
                 scatter = true;
                 DataAnalysis();
                 congrats = true;
+                iStopSound(sound2);
+                if (soundOn)
+                    sound3 = iPlaySound("sound/gameover.wav", false, 50);
             }
 
             iResumeTimer(3);
@@ -4509,6 +4573,8 @@ int main(int argc, char *argv[])
     corrdinatestore2();
     corrdinatestore3();
     corrdinatestore4();
+    if (soundOn)
+        sound1 = iPlaySound("sound/Music_startSound.wav", false, 50);
 
     iSetTimer(20, collisioncheck);
     iSetTimer(1300, bluetimecheck);
