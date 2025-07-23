@@ -2704,7 +2704,7 @@ void iMouse(int button, int state, int mx, int my)
 {
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
     {
-
+        iPlaySound("sound/keypress.wav", false, 50);
         printf("mx=%d my=%d", mx, my);
         if (mainmenu)
         {
@@ -2754,6 +2754,7 @@ void iMouse(int button, int state, int mx, int my)
             else if (mx >= 415 && my >= 109 && mx <= 565 && my <= 136) // Rules button
             {
                 iStopSound(sound1);
+                iPauseSound(sound4);
                 rules = true;
                 mainmenu = false;
                 rulescene = 0; //  Reset scene index
@@ -2813,7 +2814,7 @@ void iMouse(int button, int state, int mx, int my)
         }
         if (playgameintro)
         {
-            if ((mx >= 18 && mx <= 161) && (my >= 36 && my <= 87))
+            if ((mx >= 18 && mx <= 161) && (my >= 183 && my <= 109))
             {
                 playgameintro = false;
                 mainmenu = true;
@@ -2955,6 +2956,7 @@ void iMouse(int button, int state, int mx, int my)
                 foodcount();
                 //     iStopSound(sound4);
                 iPauseSound(sound4);
+                iPlaySound("sound/Tada.wav", false, 100);
             }
             else if ((mx <= 653 && mx >= 454) && (my <= 388 && my >= 331))
             {
@@ -2968,6 +2970,7 @@ void iMouse(int button, int state, int mx, int my)
                 foodcount();
                 //      iStopSound(sound4);
                 iPauseSound(sound4);
+                iPlaySound("sound/Tada.wav", false, 100);
             }
             else if ((mx >= 453 && my >= 229 && mx <= 655 && my <= 280))
             {
@@ -2982,6 +2985,7 @@ void iMouse(int button, int state, int mx, int my)
                 foodcount();
                 //  iStopSound(sound4);
                 iPauseSound(sound4);
+                iPlaySound("sound/Tada.wav", false, 100);
             }
             else if (mx <= 664 && my <= 180 && mx >= 444 && my >= 126)
             {
@@ -2996,6 +3000,7 @@ void iMouse(int button, int state, int mx, int my)
                 foodcount();
                 //  iStopSound(sound4);
                 iPauseSound(sound4);
+                iPlaySound("sound/Tada.wav", false, 100);
             }
         }
         else if (quit)
@@ -3447,12 +3452,15 @@ void iKeyPress(unsigned char key)
 {
     if (startintro)
     {
-        sound4 = iPlaySound("sound/Dyson Sphere.wav", false, 50); // background music
         if (key == 13)
         {
             startintro = false;
             mainmenu = true;
             // sound4 = iPlaySound("sound/Dyson Sphere.wav", false, 50); // background music
+        }
+        if (1)
+        {
+            sound4 = iPlaySound("sound/Dyson Sphere.wav", false, 50); // background music
         }
     }
     else if (congrats)
@@ -3500,10 +3508,12 @@ void iKeyPress(unsigned char key)
             else if (len && key == 8) // BACKSPACE
             {
                 namestr[--len] = '\0';
+                iPlaySound("sound/keypress.wav", false, 80);
             }
             else if (len < 99) // Add new character if space available
             {
                 namestr[len++] = key;
+                iPlaySound("sound/keypress.wav", false, 80);
                 namestr[len] = '\0'; // Always null-terminate
             }
         }
@@ -3707,11 +3717,16 @@ void collisioncheck()
                 {
                     if (foodXcor[i][1] == -2)
                     {
-                        if (soundOn)
-                            iPlaySound("sound/pacman_eatfruit.wav", false, 50);
-                        if (randGen == 15 || randGen == 12)
+                        if (randGen == 1 || randGen == 12)
                         {
                             pacmanlife++;
+                            if (soundOn)
+                                iPlaySound("sound/Treasure.wav", false, 50);
+                        }
+                        else
+                        {
+                            if (soundOn)
+                                iPlaySound("sound/pacman_eatfruit.wav", false, 50);
                         }
                         foodXcor[i][1] = -1;
                         score += 1000;
@@ -4401,6 +4416,8 @@ void introchange()
     }
     if (rules && !back)
     {
+        if (rulescene == 0)
+            iPlaySound("sound/slide.wav", false, 70);
         rulescene++;
         if (rulescene > 199)
         {
@@ -4411,12 +4428,15 @@ void introchange()
     if (rules && back)
     {
         rulescene++;
+        if (rulescene == 201)
+            iPlaySound("sound/slide.wav", false, 70);
         if (rulescene > 249)
         {
             rules = false;
             back = false;
             mainmenu = true;
             rulescene = 0;
+            iResumeSound(sound4);
         }
     }
 }
@@ -4474,11 +4494,16 @@ void deathScene()
 {
     if (pacdead)
     {
-        deadSceneCount++;
-        if (deadSceneCount > 10)
+        if (deadSceneCount == 0)
         {
             if (soundOn)
                 sound2 = iPlaySound("sound/pacman_death.wav", false, 50);
+        }
+        deadSceneCount++;
+        if (deadSceneCount > 10)
+        {
+            // if (soundOn)
+            // sound2 = iPlaySound("sound/pacman_death.wav", false, 50);
             deadSceneCount = 0;
             pacdead = false;
             times = 0;
