@@ -356,7 +356,7 @@
   </tr>
 </table>
 
-<p>🍒 <strong>Special Bonus:</strong> Fruit 13 and Fruit 16 grant extra life when consumed. Others contribute to score progression and trigger game events based on intervals.</p>
+<p>🍒 <strong>Special Bonus:</strong> Fruit 2 and Fruit 13 grant extra life when consumed. Others contribute to score progression and trigger game events based on intervals.</p>
 
 
 <hr>
