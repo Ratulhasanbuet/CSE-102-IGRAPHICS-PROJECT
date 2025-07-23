@@ -563,6 +563,8 @@ void iDraw()
     else if (mazeselector)
     {
         iShowImage(0, 0, mazeselectorimage[mazeselectorc]);
+        iSetColor(0, 0, 0);
+        iShowText(40, 35, "Back", "text.ttf", 50);
     }
     else if (credits)
     {
@@ -2897,58 +2899,47 @@ void iMouse(int button, int state, int mx, int my)
             {
                 mazeselectorc = 0;
                 maze = 0;
-                mazeselector = false;
-                settings = true;
             }
             else if (mx >= 79 && my >= 310 && mx <= 323 && my <= 428) // nebula
             {
                 mazeselectorc = 1;
                 maze = 1;
-                mazeselector = false;
-                settings = true;
             }
             else if (mx >= 126 && my >= 95 && mx <= 395 && my <= 217) // spectral
             {
                 mazeselectorc = 2;
-                mazeselector = false;
                 maze = 2;
-                settings = true;
             }
             else if (mx >= 530 && my >= 51 && mx <= 745 && my <= 174) // psi
             {
                 mazeselectorc = 3;
-                mazeselector = false;
-                settings = true;
                 maze = 3;
             }
             else if (mx >= 854 && my >= 66 && mx <= 1108 && my <= 189) // crack
             {
                 mazeselectorc = 4;
-                mazeselector = false;
-                settings = true;
                 maze = 4;
             }
             else if (mx >= 887 && my >= 254 && mx <= 1126 && my <= 383) // echo
             {
                 mazeselectorc = 5;
-                mazeselector = false;
-                settings = true;
                 maze = 5;
             }
             else if (mx >= 853 && my >= 460 && mx <= 1087 && my <= 591) // phantom
             {
                 mazeselectorc = 6;
-                mazeselector = false;
-                settings = true;
                 maze = 6;
             }
             else if (mx >= 493 && my >= 527 && mx <= 735 && my <= 664)
             {
                 mazeselectorc = 7;
-                mazeselector = false;
-                settings = true;
                 maze = 7;
             } // spiral
+            else if (mx >= 29 && my >= 26 && mx <= 129 && my <= 63)
+            {
+                settings = true;
+                mazeselector = false;
+            }
         }
         else if (rules)
         {
@@ -3544,7 +3535,8 @@ void iKeyPress(unsigned char key)
                 {
                     namestr[len++] = '_';
                 }
-                namestr[len++] = key;
+                else
+                    namestr[len++] = key;
                 iPlaySound("sound/keypress.wav", false, 80);
                 namestr[len] = '\0'; // Always null-terminate
             }
