@@ -2731,54 +2731,78 @@ void iMouse(int button, int state, int mx, int my)
             {
                 specialthanks = true;
                 mainmenu = false;
-                iStopSound(sound1);
-                iPauseSound(sound4);
+                if (soundOn)
+                {
+                    iStopSound(sound1);
+                    iPauseSound(sound4);
+                }
             }
             else if (mx >= 425 && my >= 476 && mx <= 678 && my <= 508)
             {
                 playgameintro = true;
                 mainmenu = false;
-                iStopSound(sound1);
+                if (soundOn)
+                {
+                    iStopSound(sound1);
+                }
             }
             else if (mx >= 417 && my >= 404 && mx <= 697 && my <= 437)
             {
                 highscore = true;
                 mainmenu = false;
-                iStopSound(sound1);
-                iPauseSound(sound4);
+                if (soundOn)
+                {
+                    iStopSound(sound1);
+                    iPauseSound(sound4);
+                }
             }
             else if (mx >= 424 && my >= 331 && mx <= 631 && my <= 357)
             {
                 settings = true;
                 mainmenu = false;
-                iStopSound(sound1);
-                iPauseSound(sound4);
+                if (soundOn)
+                {
+                    iStopSound(sound1);
+                    iPauseSound(sound4);
+                }
             }
             else if (mx >= 423 && my >= 253 && mx <= 670 && my <= 285)
             {
                 difficulty = true;
                 mainmenu = false;
-                iStopSound(sound1);
-                iPauseSound(sound4);
+                if (soundOn)
+                {
+                    iStopSound(sound1);
+                    iPauseSound(sound4);
+                }
             }
             else if (mx >= 424 && my >= 184 && mx <= 613 && my <= 211)
             {
                 credits = true;
                 mainmenu = false;
-                iStopSound(sound1);
-                iPauseSound(sound4);
+                if (soundOn)
+                {
+                    iStopSound(sound1);
+                    iPauseSound(sound4);
+                }
             }
             else if (mx >= 419 && my >= 32 && mx <= 529 && my <= 71)
             {
                 quit = true;
                 mainmenu = false;
-                iStopSound(sound1);
-                iPauseSound(sound4);
+                if (soundOn)
+                {
+                    iStopSound(sound1);
+                    iPauseSound(sound4);
+                }
             }
             else if (mx >= 415 && my >= 109 && mx <= 565 && my <= 136) // Rules button
             {
-                iStopSound(sound1);
-                iPauseSound(sound4);
+                if (soundOn)
+                {
+                    iStopSound(sound1);
+                    iPauseSound(sound4);
+                }
                 rules = true;
                 mainmenu = false;
                 rulescene = 0; //  Reset scene index
@@ -2861,7 +2885,10 @@ void iMouse(int button, int state, int mx, int my)
                 if ((mx >= 408 && mx <= 783) && (my >= 388 && my <= 439))
                 {
                     soundOn = false;
-                    iPauseSound(sound4);
+                    if (soundOn & !settings)
+                    {
+                        iPauseSound(sound4);
+                    }
                     //    iPauseAllSound();
                 }
                 else if ((mx >= 380 && mx <= 828) && (my >= 277 && my <= 320))
@@ -2873,7 +2900,7 @@ void iMouse(int button, int state, int mx, int my)
                 {
                     settings = false;
                     mainmenu = true;
-                    if (soundOn)
+                    if (soundOn & !settings)
                         iResumeSound(sound4);
                 }
             }
@@ -2882,7 +2909,7 @@ void iMouse(int button, int state, int mx, int my)
                 if ((mx >= 408 && mx <= 783) && (my >= 388 && my <= 439))
                 {
                     soundOn = true;
-                    if (soundOn)
+                    if (soundOn & !settings)
                         iResumeSound(sound4);
                     //  iResumeAllSound();
                 }
@@ -2955,6 +2982,7 @@ void iMouse(int button, int state, int mx, int my)
             {
                 back = true;
                 rulescene = 199;
+                //   iResumeTimer(0);
             }
         }
         else if (credits)
@@ -4531,31 +4559,6 @@ void introchange()
             mainmenu = true;
         }
     }
-    if (rules && !back)
-    {
-        if (rulescene == 0)
-            iPlaySound("sound/slide.wav", false, 70);
-        rulescene++;
-        if (rulescene > 199)
-        {
-            rulescene = 199;
-            iPauseTimer(0);
-        }
-    }
-    if (rules && back)
-    {
-        rulescene++;
-        if (rulescene == 201)
-            iPlaySound("sound/slide.wav", false, 70);
-        if (rulescene > 249)
-        {
-            rules = false;
-            back = false;
-            mainmenu = true;
-            rulescene = 0;
-            iResumeSound(sound4);
-        }
-    }
 }
 void scoreshow()
 {
@@ -4613,6 +4616,32 @@ void levelShow()
             iPauseTimer(0);
         }
     }
+    if (rules && !back)
+    {
+        if (rulescene == 0)
+            iPlaySound("sound/slide.wav", false, 70);
+        rulescene++;
+        if (rulescene > 199)
+        {
+            rulescene = 199;
+            iPauseTimer(0);
+        }
+    }
+    if (rules && back)
+    {
+        rulescene++;
+        if (rulescene == 201)
+            iPlaySound("sound/slide.wav", false, 70);
+        if (rulescene > 249)
+        {
+            rules = false;
+            back = false;
+            mainmenu = true;
+            rulescene = 0;
+            if (soundOn)
+                iResumeSound(sound4);
+        }
+    }
 }
 void deathScene()
 {
@@ -4652,6 +4681,35 @@ void deathScene()
 
             iResumeTimer(3);
             iResumeTimer(2);
+        }
+    }
+}
+void RulesShow() // Because of the iSetTimer limitation ( Error: Maximum number of timers reached. ) thisfuction is operated in void levelShow() function
+{
+    if (rules && !back)
+    {
+        if (rulescene == 0)
+            iPlaySound("sound/slide.wav", false, 70);
+        rulescene++;
+        if (rulescene > 199)
+        {
+            rulescene = 199;
+            iPauseTimer(0);
+        }
+    }
+    if (rules && back)
+    {
+        rulescene++;
+        if (rulescene == 201)
+            iPlaySound("sound/slide.wav", false, 70);
+        if (rulescene > 249)
+        {
+            rules = false;
+            back = false;
+            mainmenu = true;
+            rulescene = 0;
+            if (soundOn)
+                iResumeSound(sound4);
         }
     }
 }
@@ -4735,6 +4793,7 @@ int main(int argc, char *argv[])
     iSetTimer(20, background);
     iSetTimer(30, exitSequence);
     iSetTimer(30, levelShow);
+    //  iSetTimer(30, RulesShow);    Error: Maximum number of timers reached.
     iSetTimer(120, deathScene);
     iInitialize(1200, 675, "PACMAN");
     return 0;
