@@ -1,4 +1,3 @@
-
 #include "iGraphics.h"
 #include "iFont.h"
 #include "iSound.h"
@@ -3835,7 +3834,7 @@ void collisioncheck()
         foodhelp++;
         if (!(foodhelp % fruitTimeInterval) && foodXcor[*foodCor][1] != -2 && foodXcor[*foodCor][1] != 0)
         {
-            foodCor = &fruitGen[rand() % (t - 1)];
+            foodCor = &fruitGen[rand() % (t - 1)];  //followed shuaib sir code
             foodXcor[*foodCor][1] = -2;
             randGen = rand() % 16;
         }
