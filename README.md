@@ -22,7 +22,7 @@
 <ul style="font-size: 16px;">
     <li><strong>Md Ratul Hasan</strong> — CSE'24</li>
     <img src="image(1).jpg" width="300" height="300" alt="Tribute Note">
-    <li><strong>Hasibul Islam</strong> — CSE'24</li>\
+    <li><strong>Hasibul Islam</strong> — CSE'24</li>
      <img src="image(2).webp" width="300" height="300" alt="Tribute Note">
 
 </ul>
@@ -689,17 +689,12 @@
       </tr>
       <tr>
         <td>👻 Blue Ghosts (Combo)</td>
-        <td>+100 → +300 → +900 → +2700</td>
+        <td>+100 → +300 → +900  → +2700 → +8100 → +24300</td>
         <td>Chomp ghosts while they’re blue! Score grows with consecutive hits</td>
       </tr>
       <tr>
-        <td>🏁 Maze Completion</td>
-        <td>+2000</td>
-        <td>Clearing all food and fruit from the maze triggers bonus</td>
-      </tr>
-      <tr>
         <td>🍒 Fruit Chain</td>
-        <td>~Extra Life</td>
+        <td>~Extra Life </td>
         <td>Time-based chain eating triggers high bonus burst</td>
       </tr>
     </tbody>

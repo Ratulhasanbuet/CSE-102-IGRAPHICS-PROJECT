@@ -4722,7 +4722,7 @@ int main(int argc, char *argv[])
     if (soundOn)
     {
         sound1 = iPlaySound("sound/Music_startSound.wav", false, 50);
-        sound4 = iPlaySound("sound/Dyson Sphere.wav", false, 40);
+      // sound4 = iPlaySound("sound/Dyson Sphere.wav", false, 40);
     }
     iSetTimer(20, collisioncheck);
     iSetTimer(1300, bluetimecheck);
