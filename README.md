@@ -858,6 +858,8 @@
 <table>
   <tr><td><code>main()</code></td><td>Starts the game, initializes coordinates, sets up timers, and launches graphics</td></tr>
   <tr><td><code>corrdinatestore1()</code> → <code>corrdinatestore4()</code></td><td>Maps pixel coordinates for each maze cell based on layout</td></tr>
+    <tr><td><code>DataAnalysis</code></td><td>took score and HighScore from <code>Score.text</code> file as an Initialization</td></tr>
+
 </table>
 
 <h3>🟨 Rendering & Drawing</h3>

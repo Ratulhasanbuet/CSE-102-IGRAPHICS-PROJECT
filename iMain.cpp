@@ -8,11 +8,10 @@
 #include <math.h>
 #include <time.h>
 
-void pacinitialcord();
 void pookieinitialcoordinate();
 char *converter(int num, char *str);
 void foodCoordinateStore();
-int calcDist(int x1, int y1, int x2, int y2);
+int calculateDistance(int x1, int y1, int x2, int y2);
 void drawFoodAndPowerPellet();
 void pookiemovement();
 void pacmanmovement();
@@ -21,9 +20,26 @@ void iPauseAll();
 void bluetimecheck();
 void DataAnalysis();
 void foodcount();
-void pacinitialcord();
-void pookieinitialcoordinate();
+void PacmanInitialCoordinate();
 void collisioncheck();
+void directionGenerator();
+void directionGenerator2();
+void getGhostTarget(int pookietype, int *px, int *py);
+void Reset();
+void deathScene();
+void levelShow();
+void background();
+void exitSequence();
+void scoreshow();
+void introchange();
+void corrdinatestore1();
+void corrdinatestore2();
+void corrdinatestore3();
+void corrdinatestore4();
+void drawMaze1();
+void drawMaze2();
+void drawMaze3();
+void drawMaze4();
 
 int mazeCellWidth = 24;
 int mazeCellHeight = 24;
@@ -1141,11 +1157,11 @@ void directionGenarator(int a, int pookietype) // FOLLOWED SHUAIB SIR CODE
     int para[4] = {-1, -1, -1, -1};
     bool flag = false;
 
-    int distUp = calcDist(pookie[pookietype].x, pookie[pookietype].y + mazeCellWidth, pac.x, pac.y);
-    int distDown = calcDist(pookie[pookietype].x, pookie[pookietype].y - mazeCellWidth, pac.x, pac.y);
-    int distLeft = calcDist(pookie[pookietype].x - mazeCellWidth, pookie[pookietype].y, pac.x, pac.y);
-    int distRight = calcDist(pookie[pookietype].x + mazeCellWidth, pookie[pookietype].y, pac.x, pac.y);
-    int currentDist = calcDist(pookie[pookietype].x, pookie[pookietype].y, pac.x, pac.y);
+    int distUp = calculateDistance(pookie[pookietype].x, pookie[pookietype].y + mazeCellWidth, pac.x, pac.y);
+    int distDown = calculateDistance(pookie[pookietype].x, pookie[pookietype].y - mazeCellWidth, pac.x, pac.y);
+    int distLeft = calculateDistance(pookie[pookietype].x - mazeCellWidth, pookie[pookietype].y, pac.x, pac.y);
+    int distRight = calculateDistance(pookie[pookietype].x + mazeCellWidth, pookie[pookietype].y, pac.x, pac.y);
+    int currentDist = calculateDistance(pookie[pookietype].x, pookie[pookietype].y, pac.x, pac.y);
     if (selected == 1)
     {
         if (a > 3)
@@ -1420,7 +1436,7 @@ void directionGenarator(int a, int pookietype) // FOLLOWED SHUAIB SIR CODE
     }
 }
 
-int calcDist(int x1, int y1, int x2, int y2)
+int calculateDistance(int x1, int y1, int x2, int y2)
 {
     int dx = x1 - x2;
     int dy = y1 - y2;
@@ -1552,7 +1568,7 @@ void pookiemovement()
                 if (chase)
                 {
                     // Calculate distance for Clyde logic
-                    int distToPac = calcDist(pookie[pookietype].x, pookie[pookietype].y, pac.x, pac.y);
+                    int distToPac = calculateDistance(pookie[pookietype].x, pookie[pookietype].y, pac.x, pac.y);
 
                     switch (pookietype)
                     {
@@ -1602,11 +1618,11 @@ void pookiemovement()
                     }
                 }
 
-                int distUp = calcDist(pookie[pookietype].x, pookie[pookietype].y + mazeCellWidth, px, py);
-                int distDown = calcDist(pookie[pookietype].x, pookie[pookietype].y - mazeCellWidth, px, py);
-                int distLeft = calcDist(pookie[pookietype].x - mazeCellWidth, pookie[pookietype].y, px, py);
-                int distRight = calcDist(pookie[pookietype].x + mazeCellWidth, pookie[pookietype].y, px, py);
-                int currentDist = calcDist(pookie[pookietype].x, pookie[pookietype].y, px, py);
+                int distUp = calculateDistance(pookie[pookietype].x, pookie[pookietype].y + mazeCellWidth, px, py);
+                int distDown = calculateDistance(pookie[pookietype].x, pookie[pookietype].y - mazeCellWidth, px, py);
+                int distLeft = calculateDistance(pookie[pookietype].x - mazeCellWidth, pookie[pookietype].y, px, py);
+                int distRight = calculateDistance(pookie[pookietype].x + mazeCellWidth, pookie[pookietype].y, px, py);
+                int currentDist = calculateDistance(pookie[pookietype].x, pookie[pookietype].y, px, py);
 
                 if (selected == 1)
                 {
@@ -1964,7 +1980,7 @@ void pookiemovement()
             if (chase)
             {
                 // Calculate distance for Clyde logic
-                int distToPac = calcDist(pookie[pookietype].x, pookie[pookietype].y, pac.x, pac.y);
+                int distToPac = calculateDistance(pookie[pookietype].x, pookie[pookietype].y, pac.x, pac.y);
 
                 switch (pookietype)
                 {
@@ -2024,11 +2040,11 @@ void pookiemovement()
                 }
             }
 
-            int distUp = calcDist(pookie[pookietype].x, pookie[pookietype].y + mazeCellWidth, px, py);
-            int distDown = calcDist(pookie[pookietype].x, pookie[pookietype].y - mazeCellWidth, px, py);
-            int distLeft = calcDist(pookie[pookietype].x - mazeCellWidth, pookie[pookietype].y, px, py);
-            int distRight = calcDist(pookie[pookietype].x + mazeCellWidth, pookie[pookietype].y, px, py);
-            int currentDist = calcDist(pookie[pookietype].x, pookie[pookietype].y, px, py);
+            int distUp = calculateDistance(pookie[pookietype].x, pookie[pookietype].y + mazeCellWidth, px, py);
+            int distDown = calculateDistance(pookie[pookietype].x, pookie[pookietype].y - mazeCellWidth, px, py);
+            int distLeft = calculateDistance(pookie[pookietype].x - mazeCellWidth, pookie[pookietype].y, px, py);
+            int distRight = calculateDistance(pookie[pookietype].x + mazeCellWidth, pookie[pookietype].y, px, py);
+            int currentDist = calculateDistance(pookie[pookietype].x, pookie[pookietype].y, px, py);
 
             if (selected == 3)
             {
@@ -2696,25 +2712,11 @@ void iMouseMove(int mx, int my)
             quitc = 0;
     }
 }
-void iPauseAllSound()
-{
-    iPauseSound(sound1);
-    iPauseSound(sound2);
-    iPauseSound(sound3);
-    iPauseSound(sound4);
-}
 
-void iResumeAllSound()
-{
-    iResumeSound(sound1);
-    iResumeSound(sound2);
-    iResumeSound(sound3);
-    iResumeSound(sound4);
-}
 void Reset()
 {
     pookieinitialcoordinate();
-    pacinitialcord();
+    PacmanInitialCoordinate();
 }
 void iMouse(int button, int state, int mx, int my)
 {
@@ -2972,7 +2974,7 @@ void iMouse(int button, int state, int mx, int my)
                 levelselect = false;
                 playingstart = true;
                 levelintro = 0;
-                pacinitialcord();
+                PacmanInitialCoordinate();
                 pookieinitialcoordinate();
                 foodCoordinateStore();
                 foodcount();
@@ -2989,7 +2991,7 @@ void iMouse(int button, int state, int mx, int my)
                 levelselect = false;
                 playingstart = true;
                 levelintro = 0;
-                pacinitialcord();
+                PacmanInitialCoordinate();
                 pookieinitialcoordinate();
                 foodCoordinateStore();
                 foodcount();
@@ -3007,7 +3009,7 @@ void iMouse(int button, int state, int mx, int my)
                 playingstart = true;
 
                 levelintro = 0;
-                pacinitialcord();
+                PacmanInitialCoordinate();
                 pookieinitialcoordinate();
                 foodCoordinateStore();
                 foodcount();
@@ -3024,7 +3026,7 @@ void iMouse(int button, int state, int mx, int my)
                 levelselect = false;
                 playingstart = true;
                 levelintro = 0;
-                pacinitialcord();
+                PacmanInitialCoordinate();
                 pookieinitialcoordinate();
                 foodCoordinateStore();
                 foodcount();
@@ -4327,7 +4329,7 @@ void iSpecialKeyPress(unsigned char key)
         }
     }
 }
-void pacinitialcord()
+void PacmanInitialCoordinate()
 {
     if (selected == 1 || selected == 2)
     {
@@ -4569,7 +4571,7 @@ void scoreshow()
             times = 0;
             iStopSound(sound3);
             // selected = (selected + 1) % 4;
-            //    pacinitialcord();
+            //    PacmanInitialCoordinate();
             //  pookieinitialcoordinate();
             //  foodCoordinateStore();
             //  foodcount();
@@ -4600,7 +4602,7 @@ void background()
         }
     }
 }
-void level()
+void levelShow()
 {
     if (levelselect)
     {
@@ -4629,7 +4631,7 @@ void deathScene()
             deadSceneCount = 0;
             pacdead = false;
             pacmanlife--;
-            pacinitialcord();
+            PacmanInitialCoordinate();
             pookieinitialcoordinate();
             blueGhost = false;
             pookie[0].blueOn = false;
@@ -4722,7 +4724,7 @@ int main(int argc, char *argv[])
     if (soundOn)
     {
         sound1 = iPlaySound("sound/Music_startSound.wav", false, 50);
-      // sound4 = iPlaySound("sound/Dyson Sphere.wav", false, 40);
+        sound4 = iPlaySound("sound/Dyson Sphere.wav", false, 40);
     }
     iSetTimer(20, collisioncheck);
     iSetTimer(1300, bluetimecheck);
@@ -4732,7 +4734,7 @@ int main(int argc, char *argv[])
     iSetTimer(20, scoreshow);
     iSetTimer(20, background);
     iSetTimer(30, exitSequence);
-    iSetTimer(30, level);
+    iSetTimer(30, levelShow);
     iSetTimer(120, deathScene);
     iInitialize(1200, 675, "PACMAN");
     return 0;

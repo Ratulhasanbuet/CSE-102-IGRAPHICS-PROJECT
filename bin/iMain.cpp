@@ -8,11 +8,11 @@
 #include <math.h>
 #include <time.h>
 
-void pacinitialcord();
+void PacmanInitialCoordinate();
 void pookieinitialcoordinate();
 char *converter(int num, char *str);
 void foodCoordinateStore();
-int calcDist(int x1, int y1, int x2, int y2);
+int calculateDistance(int x1, int y1, int x2, int y2);
 void drawFoodAndPowerPellet();
 void pookiemovement();
 void pacmanmovement();
@@ -21,7 +21,7 @@ void iPauseAll();
 void bluetimecheck();
 void DataAnalysis();
 void foodcount();
-void pacinitialcord();
+void PacmanInitialCoordinate();
 void pookieinitialcoordinate();
 void collisioncheck();
 
@@ -1126,11 +1126,11 @@ void directionGenarator(int a, int pookietype) // FOLLOWED SHUAIB SIR CODE
     int para[4] = {-1, -1, -1, -1};
     bool flag = false;
 
-    int distUp = calcDist(pookie[pookietype].x, pookie[pookietype].y + mazeCellWidth, pac.x, pac.y);
-    int distDown = calcDist(pookie[pookietype].x, pookie[pookietype].y - mazeCellWidth, pac.x, pac.y);
-    int distLeft = calcDist(pookie[pookietype].x - mazeCellWidth, pookie[pookietype].y, pac.x, pac.y);
-    int distRight = calcDist(pookie[pookietype].x + mazeCellWidth, pookie[pookietype].y, pac.x, pac.y);
-    int currentDist = calcDist(pookie[pookietype].x, pookie[pookietype].y, pac.x, pac.y);
+    int distUp = calculateDistance(pookie[pookietype].x, pookie[pookietype].y + mazeCellWidth, pac.x, pac.y);
+    int distDown = calculateDistance(pookie[pookietype].x, pookie[pookietype].y - mazeCellWidth, pac.x, pac.y);
+    int distLeft = calculateDistance(pookie[pookietype].x - mazeCellWidth, pookie[pookietype].y, pac.x, pac.y);
+    int distRight = calculateDistance(pookie[pookietype].x + mazeCellWidth, pookie[pookietype].y, pac.x, pac.y);
+    int currentDist = calculateDistance(pookie[pookietype].x, pookie[pookietype].y, pac.x, pac.y);
     if (selected == 1)
     {
         if (a > 3)
@@ -1405,7 +1405,7 @@ void directionGenarator(int a, int pookietype) // FOLLOWED SHUAIB SIR CODE
     }
 }
 
-int calcDist(int x1, int y1, int x2, int y2)
+int calculateDistance(int x1, int y1, int x2, int y2)
 {
     int dx = x1 - x2;
     int dy = y1 - y2;
@@ -1537,7 +1537,7 @@ void pookiemovement()
                 if (chase)
                 {
                     // Calculate distance for Clyde logic
-                    int distToPac = calcDist(pookie[pookietype].x, pookie[pookietype].y, pac.x, pac.y);
+                    int distToPac = calculateDistance(pookie[pookietype].x, pookie[pookietype].y, pac.x, pac.y);
 
                     switch (pookietype)
                     {
@@ -1587,11 +1587,11 @@ void pookiemovement()
                     }
                 }
 
-                int distUp = calcDist(pookie[pookietype].x, pookie[pookietype].y + mazeCellWidth, px, py);
-                int distDown = calcDist(pookie[pookietype].x, pookie[pookietype].y - mazeCellWidth, px, py);
-                int distLeft = calcDist(pookie[pookietype].x - mazeCellWidth, pookie[pookietype].y, px, py);
-                int distRight = calcDist(pookie[pookietype].x + mazeCellWidth, pookie[pookietype].y, px, py);
-                int currentDist = calcDist(pookie[pookietype].x, pookie[pookietype].y, px, py);
+                int distUp = calculateDistance(pookie[pookietype].x, pookie[pookietype].y + mazeCellWidth, px, py);
+                int distDown = calculateDistance(pookie[pookietype].x, pookie[pookietype].y - mazeCellWidth, px, py);
+                int distLeft = calculateDistance(pookie[pookietype].x - mazeCellWidth, pookie[pookietype].y, px, py);
+                int distRight = calculateDistance(pookie[pookietype].x + mazeCellWidth, pookie[pookietype].y, px, py);
+                int currentDist = calculateDistance(pookie[pookietype].x, pookie[pookietype].y, px, py);
 
                 if (selected == 1)
                 {
@@ -1949,7 +1949,7 @@ void pookiemovement()
             if (chase)
             {
                 // Calculate distance for Clyde logic
-                int distToPac = calcDist(pookie[pookietype].x, pookie[pookietype].y, pac.x, pac.y);
+                int distToPac = calculateDistance(pookie[pookietype].x, pookie[pookietype].y, pac.x, pac.y);
 
                 switch (pookietype)
                 {
@@ -2009,11 +2009,11 @@ void pookiemovement()
                 }
             }
 
-            int distUp = calcDist(pookie[pookietype].x, pookie[pookietype].y + mazeCellWidth, px, py);
-            int distDown = calcDist(pookie[pookietype].x, pookie[pookietype].y - mazeCellWidth, px, py);
-            int distLeft = calcDist(pookie[pookietype].x - mazeCellWidth, pookie[pookietype].y, px, py);
-            int distRight = calcDist(pookie[pookietype].x + mazeCellWidth, pookie[pookietype].y, px, py);
-            int currentDist = calcDist(pookie[pookietype].x, pookie[pookietype].y, px, py);
+            int distUp = calculateDistance(pookie[pookietype].x, pookie[pookietype].y + mazeCellWidth, px, py);
+            int distDown = calculateDistance(pookie[pookietype].x, pookie[pookietype].y - mazeCellWidth, px, py);
+            int distLeft = calculateDistance(pookie[pookietype].x - mazeCellWidth, pookie[pookietype].y, px, py);
+            int distRight = calculateDistance(pookie[pookietype].x + mazeCellWidth, pookie[pookietype].y, px, py);
+            int currentDist = calculateDistance(pookie[pookietype].x, pookie[pookietype].y, px, py);
 
             if (selected == 3)
             {
@@ -2917,7 +2917,7 @@ void iMouse(int button, int state, int mx, int my)
                 levelselect = false;
                 playingstart = true;
                 levelintro = 0;
-                pacinitialcord();
+                PacmanInitialCoordinate();
                 pookieinitialcoordinate();
                 foodCoordinateStore();
                 foodcount();
@@ -2928,7 +2928,7 @@ void iMouse(int button, int state, int mx, int my)
                 levelselect = false;
                 playingstart = true;
                 levelintro = 0;
-                pacinitialcord();
+                PacmanInitialCoordinate();
                 pookieinitialcoordinate();
                 foodCoordinateStore();
                 foodcount();
@@ -2940,7 +2940,7 @@ void iMouse(int button, int state, int mx, int my)
                 playingstart = true;
 
                 levelintro = 0;
-                pacinitialcord();
+                PacmanInitialCoordinate();
                 pookieinitialcoordinate();
                 foodCoordinateStore();
                 foodcount();
@@ -2952,7 +2952,7 @@ void iMouse(int button, int state, int mx, int my)
                 playingstart = true;
 
                 levelintro = 0;
-                pacinitialcord();
+                PacmanInitialCoordinate();
                 pookieinitialcoordinate();
                 foodCoordinateStore();
                 foodcount();
@@ -4137,7 +4137,7 @@ void iSpecialKeyPress(unsigned char key)
         }
     }
 }
-void pacinitialcord()
+void PacmanInitialCoordinate()
 {
     if (selected == 1 || selected == 2)
     {
@@ -4422,7 +4422,7 @@ void deathScene()
             pacdead = false;
 
             pacmanlife--;
-            pacinitialcord();
+            PacmanInitialCoordinate();
             pookieinitialcoordinate();
             blueGhost = false;
             pookie[0].blueOn = false;
