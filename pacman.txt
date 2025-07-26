@@ -3,9 +3,10 @@
 #include "iSound.h"
 #include <stdlib.h>
 #include <stdbool.h>
-#include <string.h> /// have to work With maze 4 and the sound
+#include <string.h>
 #include <math.h>
 #include <time.h>
+#include <stdio.h>
 
 void pookieinitialcoordinate();
 char *converter(int num, char *str);
@@ -118,7 +119,7 @@ int blueGhost;
 int diffSpeed = 2;
 int foodNum = 5;
 bool scatter = true;
-bool chase;
+bool chase = true;
 
 bool soundOn = true;
 bool startintro = true;
@@ -453,6 +454,23 @@ void drawMaze4()
         }
     }
 }
+// Function to replace underscores with spaces
+void replaceUnderscoreWithSpace()
+{
+    for (int i = 0; i < line; i++)
+    {
+        // Go through each character in the name
+        for (int j = 0; name[i][j] != '\0'; j++)
+        {
+            // If underscore found, replace with space
+            if (name[i][j] == '_')
+            {
+                name[i][j] = ' ';
+            }
+        }
+    }
+    // Now name[i] array has spaces instead of underscores
+}
 void drawFoodAndPowerPellet()
 {
     for (int i = 0; i < foodNum; i++)
@@ -479,7 +497,7 @@ void drawFoodAndPowerPellet()
             isPowerPellet = true;
         else if (selected == 3 && (i == 84 || i == 292 || i == 100 || i == 200))
             isPowerPellet = true;
-        else if (selected == 4 && (i == 15 || i == 50 || i == 87 || i == 135 || i == 172 || i == 244 || i == 327))
+        else if (selected == 4 && (i == 318 || i == 37 || i == 87 || i == 163 || i == 172 || i == 244 || i == 261 || i == 335 || i == 453 || i == 472))
             isPowerPellet = true;
 
         if (isPowerPellet)
@@ -548,8 +566,13 @@ void iDraw()
     {
         iShowImage(0, 0, highscoreimage[highscorec]);
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < line; i++)
         {
+            replaceUnderscoreWithSpace();
+            if (i > 4)
+            {
+                break;
+            }
             if (i == 0)
                 iSetColor(255, 215, 0);
             else if (i == 1)
@@ -3968,7 +3991,7 @@ void collisioncheck()
                         for (int i = 0; i < 6; i++)
                             pookie[i].blueOn = true;
                     }
-                    else if (selected == 4 && (i == 15 || i == 50 || i == 87 || i == 135 || i == 172 || i == 244 || i == 327))
+                    else if (selected == 4 && (i == 318 || i == 37 || i == 87 || i == 163 || i == 172 || i == 244 || i == 261 || i == 335 || i == 453 || i == 472))
                     {
 
                         blueScore = -1;
@@ -4247,7 +4270,7 @@ void collisioncheck()
                                 }
                                 else if (i == 3)
                                 {
-                                    pookie[3].cellX = 35; // Clyde
+                                    pookie[3].cellX = 30; // Clyde
                                     pookie[3].cellY = 19;
                                     pookie[3].x = 72 + (pookie[3].cellX) * mazeCellWidth;
                                     pookie[3].y = 48 + (20 - pookie[3].cellY) * mazeCellWidth;
@@ -4256,7 +4279,7 @@ void collisioncheck()
                                 }
                                 else if (i == 4)
                                 {
-                                    pookie[4].cellX = 20; // donkey
+                                    pookie[4].cellX = 25; // donkey
                                     pookie[4].cellY = 19;
                                     pookie[4].x = 72 + (pookie[4].cellX) * mazeCellWidth;
                                     pookie[4].y = 48 + (20 - pookie[4].cellY) * mazeCellWidth;
@@ -4265,7 +4288,7 @@ void collisioncheck()
                                 }
                                 else if (i == 5)
                                 {
-                                    pookie[5].cellX = 35; // rinky
+                                    pookie[5].cellX = 38; // rinky
                                     pookie[5].cellY = 19;
                                     pookie[5].x = 72 + (pookie[5].cellX) * mazeCellWidth;
                                     pookie[5].y = 48 + (20 - pookie[5].cellY) * mazeCellWidth;
@@ -4524,21 +4547,21 @@ void pookieinitialcoordinate()
         pookie[2].flagRight = true;
         pookie[2].speed = diffSpeed;
 
-        pookie[3].cellX = 35; // Clyde
+        pookie[3].cellX = 30; // Clyde
         pookie[3].cellY = 19;
         pookie[3].x = 72 + (pookie[3].cellX) * mazeCellWidth;
         pookie[3].y = 48 + (20 - pookie[3].cellY) * mazeCellWidth;
         pookie[3].flagRight = true;
         pookie[3].speed = diffSpeed;
 
-        pookie[4].cellX = 20; // donkey
+        pookie[4].cellX = 25; // donkey
         pookie[4].cellY = 19;
         pookie[4].x = 72 + (pookie[4].cellX) * mazeCellWidth;
         pookie[4].y = 48 + (20 - pookie[4].cellY) * mazeCellWidth;
         pookie[4].flagRight = true;
         pookie[4].speed = diffSpeed;
 
-        pookie[5].cellX = 35; // rinky
+        pookie[5].cellX = 38; // rinky
         pookie[5].cellY = 19;
         pookie[5].x = 72 + (pookie[5].cellX) * mazeCellWidth;
         pookie[5].y = 48 + (20 - pookie[5].cellY) * mazeCellWidth;
@@ -4572,6 +4595,8 @@ void scoreshow()
             mainmenu = true;
             times = 0;
             iStopSound(sound3);
+            if(soundOn)
+            iPauseSound(sound4);
             // selected = (selected + 1) % 4;
             //    PacmanInitialCoordinate();
             //  pookieinitialcoordinate();
@@ -4683,7 +4708,7 @@ void deathScene()
         }
     }
 }
-void RulesShow() // Because of the iSetTimer limitation ( Error: Maximum number of timers reached. ) thisfuction is operated in void levelShow() function
+void RulesShow() // Because of the iSetTimer limitation ( Error: Maximum number of timers reached. ) this function is operated in void levelShow() function
 {
     if (rules && !back)
     {

@@ -522,7 +522,7 @@ void foodcount()
     }
     else if (selected == 2)
     {
-        totalfood = 236;
+        totalfood = 241;
     }
     else if (selected == 3)
     {
@@ -3870,7 +3870,6 @@ void collisioncheck()
         }
         if (selected == 1 || selected == 2)
         {
-
             for (int i = 0; i <= foodNum; i++)
             {
                 if ((pac.x == foodXcor[i][0]) && (pac.y == foodYcor[i]) && foodXcor[i][1] != -1)
@@ -3946,7 +3945,6 @@ void collisioncheck()
 
                         if (randGen == 1 || randGen == 12)
                         {
-                            pacmanlife++;
                             pacmanlife++;
                             if (soundOn)
                                 iPlaySound("sound/Treasure.wav", false, 50);
