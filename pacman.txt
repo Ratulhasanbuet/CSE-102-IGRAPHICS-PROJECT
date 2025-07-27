@@ -94,6 +94,7 @@ int rulescene = 0;
 int mazeX;
 int mazeY;
 int line;
+int resumec = 0;
 
 int maze = 0;
 int intro = 0;
@@ -143,6 +144,7 @@ bool congrats;
 bool blast;
 bool rulesOption;
 bool back = false;
+bool resumeimage;
 
 int sound1;
 int sound2;
@@ -198,6 +200,7 @@ char slbg3[100][30] = {"slbg3/slbg3 (1).jpg", "slbg3/slbg3 (2).jpg", "slbg3/slbg
 char slbg4[100][30] = {"slbg4/slbg4 (1).jpg", "slbg4/slbg4 (2).jpg", "slbg4/slbg4 (3).jpg", "slbg4/slbg4 (4).jpg", "slbg4/slbg4 (5).jpg", "slbg4/slbg4 (6).jpg", "slbg4/slbg4 (7).jpg", "slbg4/slbg4 (8).jpg", "slbg4/slbg4 (9).jpg", "slbg4/slbg4 (10).jpg", "slbg4/slbg4 (11).jpg", "slbg4/slbg4 (12).jpg", "slbg4/slbg4 (13).jpg", "slbg4/slbg4 (14).jpg", "slbg4/slbg4 (15).jpg", "slbg4/slbg4 (16).jpg", "slbg4/slbg4 (17).jpg", "slbg4/slbg4 (18).jpg", "slbg4/slbg4 (19).jpg", "slbg4/slbg4 (20).jpg", "slbg4/slbg4 (21).jpg", "slbg4/slbg4 (22).jpg", "slbg4/slbg4 (23).jpg", "slbg4/slbg4 (24).jpg", "slbg4/slbg4 (25).jpg", "slbg4/slbg4 (26).jpg", "slbg4/slbg4 (27).jpg", "slbg4/slbg4 (28).jpg", "slbg4/slbg4 (29).jpg", "slbg4/slbg4 (30).jpg", "slbg4/slbg4 (31).jpg", "slbg4/slbg4 (32).jpg", "slbg4/slbg4 (33).jpg", "slbg4/slbg4 (34).jpg", "slbg4/slbg4 (35).jpg", "slbg4/slbg4 (36).jpg", "slbg4/slbg4 (37).jpg", "slbg4/slbg4 (38).jpg", "slbg4/slbg4 (39).jpg", "slbg4/slbg4 (40).jpg", "slbg4/slbg4 (41).jpg", "slbg4/slbg4 (42).jpg", "slbg4/slbg4 (43).jpg", "slbg4/slbg4 (44).jpg", "slbg4/slbg4 (45).jpg", "slbg4/slbg4 (46).jpg", "slbg4/slbg4 (47).jpg", "slbg4/slbg4 (48).jpg", "slbg4/slbg4 (49).jpg", "slbg4/slbg4 (50).jpg", "slbg4/slbg4 (51).jpg", "slbg4/slbg4 (52).jpg", "slbg4/slbg4 (53).jpg", "slbg4/slbg4 (54).jpg", "slbg4/slbg4 (55).jpg", "slbg4/slbg4 (56).jpg", "slbg4/slbg4 (57).jpg", "slbg4/slbg4 (58).jpg", "slbg4/slbg4 (59).jpg", "slbg4/slbg4 (60).jpg", "slbg4/slbg4 (61).jpg", "slbg4/slbg4 (62).jpg", "slbg4/slbg4 (63).jpg", "slbg4/slbg4 (64).jpg", "slbg4/slbg4 (65).jpg", "slbg4/slbg4 (66).jpg", "slbg4/slbg4 (67).jpg", "slbg4/slbg4 (68).jpg", "slbg4/slbg4 (69).jpg", "slbg4/slbg4 (70).jpg", "slbg4/slbg4 (71).jpg", "slbg4/slbg4 (72).jpg", "slbg4/slbg4 (73).jpg", "slbg4/slbg4 (74).jpg", "slbg4/slbg4 (75).jpg", "slbg4/slbg4 (76).jpg", "slbg4/slbg4 (77).jpg", "slbg4/slbg4 (78).jpg", "slbg4/slbg4 (79).jpg", "slbg4/slbg4 (80).jpg", "slbg4/slbg4 (81).jpg", "slbg4/slbg4 (82).jpg", "slbg4/slbg4 (83).jpg", "slbg4/slbg4 (84).jpg", "slbg4/slbg4 (85).jpg", "slbg4/slbg4 (86).jpg", "slbg4/slbg4 (87).jpg", "slbg4/slbg4 (88).jpg", "slbg4/slbg4 (89).jpg", "slbg4/slbg4 (90).jpg", "slbg4/slbg4 (91).jpg", "slbg4/slbg4 (92).jpg", "slbg4/slbg4 (93).jpg", "slbg4/slbg4 (94).jpg", "slbg4/slbg4 (95).jpg", "slbg4/slbg4 (96).jpg", "slbg4/slbg4 (97).jpg", "slbg4/slbg4 (98).jpg", "slbg4/slbg4 (99).jpg", "slbg4/slbg4 (100).jpg"};
 char slbg5[100][30] = {"slbg5/slbg5 (1).jpg", "slbg5/slbg5 (2).jpg", "slbg5/slbg5 (3).jpg", "slbg5/slbg5 (4).jpg", "slbg5/slbg5 (5).jpg", "slbg5/slbg5 (6).jpg", "slbg5/slbg5 (7).jpg", "slbg5/slbg5 (8).jpg", "slbg5/slbg5 (9).jpg", "slbg5/slbg5 (10).jpg", "slbg5/slbg5 (11).jpg", "slbg5/slbg5 (12).jpg", "slbg5/slbg5 (13).jpg", "slbg5/slbg5 (14).jpg", "slbg5/slbg5 (15).jpg", "slbg5/slbg5 (16).jpg", "slbg5/slbg5 (17).jpg", "slbg5/slbg5 (18).jpg", "slbg5/slbg5 (19).jpg", "slbg5/slbg5 (20).jpg", "slbg5/slbg5 (21).jpg", "slbg5/slbg5 (22).jpg", "slbg5/slbg5 (23).jpg", "slbg5/slbg5 (24).jpg", "slbg5/slbg5 (25).jpg", "slbg5/slbg5 (26).jpg", "slbg5/slbg5 (27).jpg", "slbg5/slbg5 (28).jpg", "slbg5/slbg5 (29).jpg", "slbg5/slbg5 (30).jpg", "slbg5/slbg5 (31).jpg", "slbg5/slbg5 (32).jpg", "slbg5/slbg5 (33).jpg", "slbg5/slbg5 (34).jpg", "slbg5/slbg5 (35).jpg", "slbg5/slbg5 (36).jpg", "slbg5/slbg5 (37).jpg", "slbg5/slbg5 (38).jpg", "slbg5/slbg5 (39).jpg", "slbg5/slbg5 (40).jpg", "slbg5/slbg5 (41).jpg", "slbg5/slbg5 (42).jpg", "slbg5/slbg5 (43).jpg", "slbg5/slbg5 (44).jpg", "slbg5/slbg5 (45).jpg", "slbg5/slbg5 (46).jpg", "slbg5/slbg5 (47).jpg", "slbg5/slbg5 (48).jpg", "slbg5/slbg5 (49).jpg", "slbg5/slbg5 (50).jpg", "slbg5/slbg5 (51).jpg", "slbg5/slbg5 (52).jpg", "slbg5/slbg5 (53).jpg", "slbg5/slbg5 (54).jpg", "slbg5/slbg5 (55).jpg", "slbg5/slbg5 (56).jpg", "slbg5/slbg5 (57).jpg", "slbg5/slbg5 (58).jpg", "slbg5/slbg5 (59).jpg", "slbg5/slbg5 (60).jpg", "slbg5/slbg5 (61).jpg", "slbg5/slbg5 (62).jpg", "slbg5/slbg5 (63).jpg", "slbg5/slbg5 (64).jpg", "slbg5/slbg5 (65).jpg", "slbg5/slbg5 (66).jpg", "slbg5/slbg5 (67).jpg", "slbg5/slbg5 (68).jpg", "slbg5/slbg5 (69).jpg", "slbg5/slbg5 (70).jpg", "slbg5/slbg5 (71).jpg", "slbg5/slbg5 (72).jpg", "slbg5/slbg5 (73).jpg", "slbg5/slbg5 (74).jpg", "slbg5/slbg5 (75).jpg", "slbg5/slbg5 (76).jpg", "slbg5/slbg5 (77).jpg", "slbg5/slbg5 (78).jpg", "slbg5/slbg5 (79).jpg", "slbg5/slbg5 (80).jpg", "slbg5/slbg5 (81).jpg", "slbg5/slbg5 (82).jpg", "slbg5/slbg5 (83).jpg", "slbg5/slbg5 (84).jpg", "slbg5/slbg5 (85).jpg", "slbg5/slbg5 (86).jpg", "slbg5/slbg5 (87).jpg", "slbg5/slbg5 (88).jpg", "slbg5/slbg5 (89).jpg", "slbg5/slbg5 (90).jpg", "slbg5/slbg5 (91).jpg", "slbg5/slbg5 (92).jpg", "slbg5/slbg5 (93).jpg", "slbg5/slbg5 (94).jpg", "slbg5/slbg5 (95).jpg", "slbg5/slbg5 (96).jpg", "slbg5/slbg5 (97).jpg", "slbg5/slbg5 (98).jpg", "slbg5/slbg5 (99).jpg", "slbg5/slbg5 (100).jpg"};
 char slbg6[100][30] = {"slbg6/slbg6 (1).jpg", "slbg6/slbg6 (2).jpg", "slbg6/slbg6 (3).jpg", "slbg6/slbg6 (4).jpg", "slbg6/slbg6 (5).jpg", "slbg6/slbg6 (6).jpg", "slbg6/slbg6 (7).jpg", "slbg6/slbg6 (8).jpg", "slbg6/slbg6 (9).jpg", "slbg6/slbg6 (10).jpg", "slbg6/slbg6 (11).jpg", "slbg6/slbg6 (12).jpg", "slbg6/slbg6 (13).jpg", "slbg6/slbg6 (14).jpg", "slbg6/slbg6 (15).jpg", "slbg6/slbg6 (16).jpg", "slbg6/slbg6 (17).jpg", "slbg6/slbg6 (18).jpg", "slbg6/slbg6 (19).jpg", "slbg6/slbg6 (20).jpg", "slbg6/slbg6 (21).jpg", "slbg6/slbg6 (22).jpg", "slbg6/slbg6 (23).jpg", "slbg6/slbg6 (24).jpg", "slbg6/slbg6 (25).jpg", "slbg6/slbg6 (26).jpg", "slbg6/slbg6 (27).jpg", "slbg6/slbg6 (28).jpg", "slbg6/slbg6 (29).jpg", "slbg6/slbg6 (30).jpg", "slbg6/slbg6 (31).jpg", "slbg6/slbg6 (32).jpg", "slbg6/slbg6 (33).jpg", "slbg6/slbg6 (34).jpg", "slbg6/slbg6 (35).jpg", "slbg6/slbg6 (36).jpg", "slbg6/slbg6 (37).jpg", "slbg6/slbg6 (38).jpg", "slbg6/slbg6 (39).jpg", "slbg6/slbg6 (40).jpg", "slbg6/slbg6 (41).jpg", "slbg6/slbg6 (42).jpg", "slbg6/slbg6 (43).jpg", "slbg6/slbg6 (44).jpg", "slbg6/slbg6 (45).jpg", "slbg6/slbg6 (46).jpg", "slbg6/slbg6 (47).jpg", "slbg6/slbg6 (48).jpg", "slbg6/slbg6 (49).jpg", "slbg6/slbg6 (50).jpg", "slbg6/slbg6 (51).jpg", "slbg6/slbg6 (52).jpg", "slbg6/slbg6 (53).jpg", "slbg6/slbg6 (54).jpg", "slbg6/slbg6 (55).jpg", "slbg6/slbg6 (56).jpg", "slbg6/slbg6 (57).jpg", "slbg6/slbg6 (58).jpg", "slbg6/slbg6 (59).jpg", "slbg6/slbg6 (60).jpg", "slbg6/slbg6 (61).jpg", "slbg6/slbg6 (62).jpg", "slbg6/slbg6 (63).jpg", "slbg6/slbg6 (64).jpg", "slbg6/slbg6 (65).jpg", "slbg6/slbg6 (66).jpg", "slbg6/slbg6 (67).jpg", "slbg6/slbg6 (68).jpg", "slbg6/slbg6 (69).jpg", "slbg6/slbg6 (70).jpg", "slbg6/slbg6 (71).jpg", "slbg6/slbg6 (72).jpg", "slbg6/slbg6 (73).jpg", "slbg6/slbg6 (74).jpg", "slbg6/slbg6 (75).jpg", "slbg6/slbg6 (76).jpg", "slbg6/slbg6 (77).jpg", "slbg6/slbg6 (78).jpg", "slbg6/slbg6 (79).jpg", "slbg6/slbg6 (80).jpg", "slbg6/slbg6 (81).jpg", "slbg6/slbg6 (82).jpg", "slbg6/slbg6 (83).jpg", "slbg6/slbg6 (84).jpg", "slbg6/slbg6 (85).jpg", "slbg6/slbg6 (86).jpg", "slbg6/slbg6 (87).jpg", "slbg6/slbg6 (88).jpg", "slbg6/slbg6 (89).jpg", "slbg6/slbg6 (90).jpg", "slbg6/slbg6 (91).jpg", "slbg6/slbg6 (92).jpg", "slbg6/slbg6 (93).jpg", "slbg6/slbg6 (94).jpg", "slbg6/slbg6 (95).jpg", "slbg6/slbg6 (96).jpg", "slbg6/slbg6 (97).jpg", "slbg6/slbg6 (98).jpg", "slbg6/slbg6 (99).jpg", "slbg6/slbg6 (100).jpg"};
+char resume[250][30] = {"b/b (1).jpg", "b/b (2).jpg", "b/b (3).jpg", "b/b (4).jpg", "b/b (5).jpg", "b/b (6).jpg", "b/b (7).jpg", "b/b (8).jpg", "b/b (9).jpg", "b/b (10).jpg", "b/b (11).jpg", "b/b (12).jpg", "b/b (13).jpg", "b/b (14).jpg", "b/b (15).jpg", "b/b (16).jpg", "b/b (17).jpg", "b/b (18).jpg", "b/b (19).jpg", "b/b (20).jpg", "b/b (21).jpg", "b/b (22).jpg", "b/b (23).jpg", "b/b (24).jpg", "b/b (25).jpg", "b/b (26).jpg", "b/b (27).jpg", "b/b (28).jpg", "b/b (29).jpg", "b/b (30).jpg", "b/b (31).jpg", "b/b (32).jpg", "b/b (33).jpg", "b/b (34).jpg", "b/b (35).jpg", "b/b (36).jpg", "b/b (37).jpg", "b/b (38).jpg", "b/b (39).jpg", "b/b (40).jpg", "b/b (41).jpg", "b/b (42).jpg", "b/b (43).jpg", "b/b (44).jpg", "b/b (45).jpg", "b/b (46).jpg", "b/b (47).jpg", "b/b (48).jpg", "b/b (49).jpg", "b/b (50).jpg", "b/b (51).jpg", "b/b (52).jpg", "b/b (53).jpg", "b/b (54).jpg", "b/b (55).jpg", "b/b (56).jpg", "b/b (57).jpg", "b/b (58).jpg", "b/b (59).jpg", "b/b (60).jpg", "b/b (61).jpg", "b/b (62).jpg", "b/b (63).jpg", "b/b (64).jpg", "b/b (65).jpg", "b/b (66).jpg", "b/b (67).jpg", "b/b (68).jpg", "b/b (69).jpg", "b/b (70).jpg", "b/b (71).jpg", "b/b (72).jpg", "b/b (73).jpg", "b/b (74).jpg", "b/b (75).jpg", "b/b (76).jpg", "b/b (77).jpg", "b/b (78).jpg", "b/b (79).jpg", "b/b (80).jpg", "b/b (81).jpg", "b/b (82).jpg", "b/b (83).jpg", "b/b (84).jpg", "b/b (85).jpg", "b/b (86).jpg", "b/b (87).jpg", "b/b (88).jpg", "b/b (89).jpg", "b/b (90).jpg", "b/b (91).jpg", "b/b (92).jpg", "b/b (93).jpg", "b/b (94).jpg", "b/b (95).jpg", "b/b (96).jpg", "b/b (97).jpg", "b/b (98).jpg", "b/b (99).jpg", "b/b (100).jpg", "b/b (101).jpg", "b/b (102).jpg", "b/b (103).jpg", "b/b (104).jpg", "b/b (105).jpg", "b/b (106).jpg", "b/b (107).jpg", "b/b (108).jpg", "b/b (109).jpg", "b/b (110).jpg", "b/b (111).jpg", "b/b (112).jpg", "b/b (113).jpg", "b/b (114).jpg", "b/b (115).jpg", "b/b (116).jpg", "b/b (117).jpg", "b/b (118).jpg", "b/b (119).jpg", "b/b (120).jpg", "b/b (121).jpg", "b/b (122).jpg", "b/b (123).jpg", "b/b (124).jpg", "b/b (125).jpg", "b/b (126).jpg", "b/b (127).jpg", "b/b (128).jpg", "b/b (129).jpg", "b/b (130).jpg", "b/b (131).jpg", "b/b (132).jpg", "b/b (133).jpg", "b/b (134).jpg", "b/b (135).jpg", "b/b (136).jpg", "b/b (137).jpg", "b/b (138).jpg", "b/b (139).jpg", "b/b (140).jpg", "b/b (141).jpg", "b/b (142).jpg", "b/b (143).jpg", "b/b (144).jpg", "b/b (145).jpg", "b/b (146).jpg", "b/b (147).jpg", "b/b (148).jpg", "b/b (149).jpg", "b/b (150).jpg", "b/b (151).jpg", "b/b (152).jpg", "b/b (153).jpg", "b/b (154).jpg", "b/b (155).jpg", "b/b (156).jpg", "b/b (157).jpg", "b/b (158).jpg", "b/b (159).jpg", "b/b (160).jpg", "b/b (161).jpg", "b/b (162).jpg", "b/b (163).jpg", "b/b (164).jpg", "b/b (165).jpg", "b/b (166).jpg", "b/b (167).jpg", "b/b (168).jpg", "b/b (169).jpg", "b/b (170).jpg", "b/b (171).jpg", "b/b (172).jpg", "b/b (173).jpg", "b/b (174).jpg", "b/b (175).jpg", "b/b (176).jpg", "b/b (177).jpg", "b/b (178).jpg", "b/b (179).jpg", "b/b (180).jpg", "b/b (181).jpg", "b/b (182).jpg", "b/b (183).jpg", "b/b (184).jpg", "b/b (185).jpg", "b/b (186).jpg", "b/b (187).jpg", "b/b (188).jpg", "b/b (189).jpg", "b/b (190).jpg", "b/b (191).jpg", "b/b (192).jpg", "b/b (193).jpg", "b/b (194).jpg", "b/b (195).jpg", "b/b (196).jpg", "b/b (197).jpg", "b/b (198).jpg", "b/b (199).jpg", "b/b (200).jpg", "b/b (201).jpg", "b/b (202).jpg", "b/b (203).jpg", "b/b (204).jpg", "b/b (205).jpg", "b/b (206).jpg", "b/b (207).jpg", "b/b (208).jpg", "b/b (209).jpg", "b/b (210).jpg", "b/b (211).jpg", "b/b (212).jpg", "b/b (213).jpg", "b/b (214).jpg", "b/b (215).jpg", "b/b (216).jpg", "b/b (217).jpg", "b/b (218).jpg", "b/b (219).jpg", "b/b (220).jpg", "b/b (221).jpg", "b/b (222).jpg", "b/b (223).jpg", "b/b (224).jpg", "b/b (225).jpg", "b/b (226).jpg", "b/b (227).jpg", "b/b (228).jpg", "b/b (229).jpg", "b/b (230).jpg", "b/b (231).jpg", "b/b (232).jpg", "b/b (233).jpg", "b/b (234).jpg", "b/b (235).jpg", "b/b (236).jpg", "b/b (237).jpg", "b/b (238).jpg", "b/b (239).jpg", "b/b (240).jpg", "b/b (241).jpg", "b/b (242).jpg", "b/b (243).jpg", "b/b (244).jpg", "b/b (245).jpg", "b/b (246).jpg", "b/b (247).jpg", "b/b (248).jpg", "b/b (249).jpg", "b/b (250).jpg"};
 
 char scoreshowimage[100][50] = {"congrats/congrats (1).jpg", "congrats/congrats (2).jpg", "congrats/congrats (3).jpg", "congrats/congrats (4).jpg", "congrats/congrats (5).jpg", "congrats/congrats (6).jpg", "congrats/congrats (7).jpg", "congrats/congrats (8).jpg", "congrats/congrats (9).jpg", "congrats/congrats (10).jpg", "congrats/congrats (11).jpg", "congrats/congrats (12).jpg", "congrats/congrats (13).jpg", "congrats/congrats (14).jpg", "congrats/congrats (15).jpg", "congrats/congrats (16).jpg", "congrats/congrats (17).jpg", "congrats/congrats (18).jpg", "congrats/congrats (20).jpg", "congrats/congrats (20).jpg", "congrats/congrats (21).jpg", "congrats/congrats (22).jpg", "congrats/congrats (23).jpg", "congrats/congrats (24).jpg", "congrats/congrats (25).jpg", "congrats/congrats (26).jpg", "congrats/congrats (27).jpg", "congrats/congrats (28).jpg", "congrats/congrats (29).jpg", "congrats/congrats (30).jpg", "congrats/congrats (31).jpg", "congrats/congrats (32).jpg", "congrats/congrats (33).jpg", "congrats/congrats (34).jpg", "congrats/congrats (35).jpg", "congrats/congrats (36).jpg", "congrats/congrats (37).jpg", "congrats/congrats (38).jpg", "congrats/congrats (39).jpg", "congrats/congrats (40).jpg", "congrats/congrats (41).jpg", "congrats/congrats (42).jpg", "congrats/congrats (43).jpg", "congrats/congrats (44).jpg", "congrats/congrats (45).jpg", "congrats/congrats (46).jpg", "congrats/congrats (47).jpg", "congrats/congrats (48).jpg", "congrats/congrats (49).jpg", "congrats/congrats (50).jpg", "congrats/congrats (51).jpg", "congrats/congrats (52).jpg", "congrats/congrats (53).jpg", "congrats/congrats (54).jpg", "congrats/congrats (55).jpg", "congrats/congrats (56).jpg", "congrats/congrats (57).jpg", "congrats/congrats (58).jpg", "congrats/congrats (59).jpg", "congrats/congrats (60).jpg", "congrats/congrats (61).jpg", "congrats/congrats (62).jpg", "congrats/congrats (63).jpg", "congrats/congrats (64).jpg", "congrats/congrats (65).jpg", "congrats/congrats (66).jpg", "congrats/congrats (67).jpg", "congrats/congrats (68).jpg", "congrats/congrats (69).jpg", "congrats/congrats (70).jpg", "congrats/congrats (71).jpg", "congrats/congrats (72).jpg", "congrats/congrats (73).jpg", "congrats/congrats (74).jpg", "congrats/congrats (75).jpg", "congrats/congrats (76).jpg", "congrats/congrats (77).jpg", "congrats/congrats (78).jpg", "congrats/congrats (79).jpg", "congrats/congrats (80).jpg", "congrats/congrats (81).jpg", "congrats/congrats (82).jpg", "congrats/congrats (83).jpg", "congrats/congrats (84).jpg", "congrats/congrats (85).jpg", "congrats/congrats (86).jpg", "congrats/congrats (87).jpg", "congrats/congrats (88).jpg", "congrats/congrats (89).jpg", "congrats/congrats (90).jpg", "congrats/congrats (91).jpg", "congrats/congrats (92).jpg", "congrats/congrats (93).jpg", "congrats/congrats (94).jpg", "congrats/congrats (95).jpg", "congrats/congrats (96).jpg", "congrats/congrats (97).jpg", "congrats/congrats (98).jpg", "congrats/congrats (99).jpg", "congrats/congrats (100).jpg"};
 char life[9][50] = {"life/love (3).png", "life/love (2).png", "life/love (1).png", "life/love10.png", "life/love12.png", "life/love1.png", "life/love6.png", "life/love8.png", "life/love14.png"};
@@ -522,7 +525,7 @@ void foodcount()
     }
     else if (selected == 2)
     {
-        totalfood = 236;
+        totalfood = 241;
     }
     else if (selected == 3)
     {
@@ -554,9 +557,13 @@ void iDraw()
     {
         iShowImage(0, 0, introimage[intro]);
     }
-    else if (mainmenu)
+    if (mainmenu)
     {
         iShowImage(0, 0, menuimage[menuc]);
+        if (resumeimage)
+        {
+            iShowImage(73, 485, resume[resumec]);
+        }
     }
     else if (difficulty)
     {
@@ -2831,6 +2838,14 @@ void iMouse(int button, int state, int mx, int my)
                 back = false;  //  Ensure forward animation starts
             }
         }
+        if (resumeimage)
+        {
+            if (mx >= 73 && my >= 485 && mx <= 323 && my <= 555)
+            {
+                playingstart = true;
+                iPauseAll();
+            }
+        }
         else if (specialthanks)
         {
             if (mx >= 1027 && my >= 42 && mx <= 1148 && my <= 94)
@@ -3110,6 +3125,8 @@ void iMouse(int button, int state, int mx, int my)
             {
                 pause = false;
                 mainmenu = true;
+                resumeimage = true;
+
                 Reset();
                 if (soundOn)
                     iResumeSound(sound4);
@@ -3541,6 +3558,7 @@ void iKeyPress(unsigned char key)
         {
             startintro = false;
             mainmenu = true;
+            resumeimage = true;
         }
     }
     else if (congrats)
@@ -3870,7 +3888,6 @@ void collisioncheck()
         }
         if (selected == 1 || selected == 2)
         {
-
             for (int i = 0; i <= foodNum; i++)
             {
                 if ((pac.x == foodXcor[i][0]) && (pac.y == foodYcor[i]) && foodXcor[i][1] != -1)
@@ -3946,7 +3963,6 @@ void collisioncheck()
 
                         if (randGen == 1 || randGen == 12)
                         {
-                            pacmanlife++;
                             pacmanlife++;
                             if (soundOn)
                                 iPlaySound("sound/Treasure.wav", false, 50);
@@ -4579,9 +4595,20 @@ void introchange()
             intro = 0;
             startintro = false;
             mainmenu = true;
+            resumeimage = true;
+        }
+    }
+    if (resumeimage)
+    {
+        resumec++;
+        if (resumec > 249)
+        {
+            resumeimage = false;
+            resumec = 0;
         }
     }
 }
+
 void scoreshow()
 {
     if (congrats)
@@ -4595,8 +4622,8 @@ void scoreshow()
             mainmenu = true;
             times = 0;
             iStopSound(sound3);
-            if(soundOn)
-            iPauseSound(sound4);
+            if (soundOn)
+                iPauseSound(sound4);
             // selected = (selected + 1) % 4;
             //    PacmanInitialCoordinate();
             //  pookieinitialcoordinate();
@@ -4629,6 +4656,7 @@ void background()
         }
     }
 }
+
 void levelShow()
 {
     if (levelselect)
