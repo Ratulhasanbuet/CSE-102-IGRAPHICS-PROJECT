@@ -580,6 +580,7 @@ void storeGameStat()
     {
         fprintf(input, "%d %d %d\n", foodXcor[i][0], foodYcor[i], foodXcor[i][1]); // includes fruit/pellet states
     }
+    fprintf(input, "%d\n", totalfood);
 
     fprintf(input, "%d %d\n", randGen, t);
     for (int i = 0; i < t; i++)
@@ -637,6 +638,7 @@ void loadGameStat()
     {
         fscanf(input, "%d %d %d", &foodXcor[i][0], &foodYcor[i], &foodXcor[i][1]);
     }
+    fscanf(input, "%d", &totalfood);
 
     fscanf(input, "%d %d", &randGen, &t);
     for (int i = 0; i < t; i++)
@@ -2856,13 +2858,36 @@ void iMouseMove(int mx, int my)
             quitc = 0;
     }
 }
+void resumeGameSession()
+{
+    loadGameStat();        // Loads full saved game state
+    foodCoordinateStore(); // Restores food and pellet positions
+
+    // Re-align map coordinates based on selected maze
+    if (selected == 1)
+        corrdinatestore1();
+    else if (selected == 2)
+        corrdinatestore2();
+    else if (selected == 3)
+        corrdinatestore3();
+    else if (selected == 4)
+        corrdinatestore4();
+
+    playingstart = true; // Enables gameplay mode
+    mainmenu = false;    // Exits menu screen
+    iResumeAll();        // Restarts timers for movement & events
+
+    // (Optional) Resume ambient sound
+    if (soundOn)
+        iResumeSound(sound4);
+}
 
 void Reset()
 {
     pookieinitialcoordinate();
     PacmanInitialCoordinate();
 }
-void iMouse(int button, int state, int mx, int my)
+void iMouseClick(int button, int state, int mx, int my)
 {
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
     {
@@ -2967,17 +2992,21 @@ void iMouse(int button, int state, int mx, int my)
                 resumec = 0;
                 resumeimage = false;
             }
-        }
-        if (resumeimage)
-        {
-            if (mx >= 73 && my >= 485 && mx <= 323 && my <= 555)
+            else if (resumeimage)
             {
-                playingstart = true;
-                mainmenu = false;
-                loadGameStat();
-                iResumeAll();
+                if (mx >= 73 && my >= 485 && mx <= 323 && my <= 555)
+                {
+                    resumeGameSession();
+                }
             }
         }
+        /*  if (resumeimage)
+          {
+              if (mx >= 73 && my >= 485 && mx <= 323 && my <= 555)
+              {
+                  resumeGameSession();
+              }
+          }*/
         else if (specialthanks)
         {
             if (mx >= 1032 && my >= 44 && mx <= 1150 && my <= 94)
@@ -5022,6 +5051,8 @@ int main(int argc, char *argv[])
     // iSetTimer(30, levelShow);
     //  iSetTimer(30, RulesShow);    Error: Maximum number of timers reached.
     iSetTimer(20, background);
-    iInitialize(1200, 675, "PACMAN");
+    iWindowedMode(1200, 675, "PACMAN");
+    iStartMainLoop();
+    printf("Exiting main loop...\n");
     return 0;
 }

@@ -556,7 +556,7 @@ void storeGameStat()
         return;
     }
     fprintf(input, "%s\n", playername);
-
+    fprintf(input, "%d\n", selected);
     fprintf(input, "%d %d %d %d\n", pac.x, pac.y, cellX, cellY);
     fprintf(input, "%d %d %d %d\n", pac.rightCount, pac.leftCount, pac.upCount, pac.downCount);
     fprintf(input, "%d %d %d %d\n", pac.rightInd, pac.leftInd, pac.upInd, pac.downInd);
@@ -598,6 +598,9 @@ void storeGameStat()
     fprintf(input, "%d %d\n", settingsc, difficultyc);
     fprintf(input, "%d %d\n", maze, mazeX);       // if needed
     fprintf(input, "%d %d\n", mazeY, mazeHeight); // if needed
+    fprintf(input, "%d\n", mazeselectorc);
+
+    fclose(input);
 }
 void loadGameStat()
 {
@@ -609,7 +612,7 @@ void loadGameStat()
     }
 
     fscanf(input, "%s", playername);
-
+    fscanf(input, "%d", &selected);
     fscanf(input, "%d %d %d %d", &pac.x, &pac.y, &cellX, &cellY);
     fscanf(input, "%d %d %d %d", &pac.rightCount, &pac.leftCount, &pac.upCount, &pac.downCount);
     fscanf(input, "%d %d %d %d", &pac.rightInd, &pac.leftInd, &pac.upInd, &pac.downInd);
@@ -653,6 +656,7 @@ void loadGameStat()
     fscanf(input, "%d %d", &settingsc, &difficultyc);
     fscanf(input, "%d %d", &maze, &mazeX);
     fscanf(input, "%d %d", &mazeY, &mazeHeight);
+    fscanf(input, "%d", &mazeselectorc);
 
     fclose(input);
 }
@@ -2968,10 +2972,10 @@ void iMouse(int button, int state, int mx, int my)
         {
             if (mx >= 73 && my >= 485 && mx <= 323 && my <= 555)
             {
+                loadGameStat();
+                foodCoordinateStore();
                 playingstart = true;
                 mainmenu = false;
-                loadGameStat();
-                iResumeAll();
             }
         }
         else if (specialthanks)
@@ -3206,7 +3210,6 @@ void iMouse(int button, int state, int mx, int my)
                 selected = 3;
                 levelselect = false;
                 playingstart = true;
-
                 levelintro = 0;
                 PacmanInitialCoordinate();
                 pookieinitialcoordinate();
@@ -3261,8 +3264,7 @@ void iMouse(int button, int state, int mx, int my)
                 pause = false;
                 mainmenu = true;
                 resumeimage = true;
-                storeGameStat();
-                Reset();
+                storeGameStat(); // ✅
                 iPauseAll();
                 if (soundOn)
                     iResumeSound(sound4);
