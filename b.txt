@@ -120,7 +120,7 @@ int blueGhost;
 int diffSpeed = 2;
 int foodNum = 5;
 bool scatter = true;
-bool chase = true;
+bool chase;
 
 bool soundOn = true;
 bool startintro = true;
@@ -546,6 +546,116 @@ char *converter(int num, char *str)
     sprintf(str, "%d", num);
     return str;
 }
+void storeGameStat()
+{
+
+    FILE *input = fopen("gamestat.txt", "w");
+    if (input == NULL)
+    {
+        printf("Error saving game state!\n");
+        return;
+    }
+    fprintf(input, "%s\n", playername);
+
+    fprintf(input, "%d %d %d %d\n", pac.x, pac.y, cellX, cellY);
+    fprintf(input, "%d %d %d %d\n", pac.rightCount, pac.leftCount, pac.upCount, pac.downCount);
+    fprintf(input, "%d %d %d %d\n", pac.rightInd, pac.leftInd, pac.upInd, pac.downInd);
+    fprintf(input, "%d %d\n", pac.right, pac.left); // movement timing
+    fprintf(input, "%d %d\n", pac.up, pac.down);
+    fprintf(input, "%d %d %d %d\n", pac.smoothRight, pac.smoothLeft, pac.smoothUp, pac.smoothDown);
+
+    for (int i = 0; i < 6; i++)
+    {
+        fprintf(input, "%d %d %d %d %d\n", pookie[i].x, pookie[i].y, pookie[i].cellX, pookie[i].cellY, pookie[i].speed);
+        fprintf(input, "%d %d %d %d\n", pookie[i].flagRight, pookie[i].flagLeft, pookie[i].flagUp, pookie[i].flagDown);
+        fprintf(input, "%d %d %d %d\n", pookie[i].rightInd, pookie[i].leftInd, pookie[i].upInd, pookie[i].downInd);
+        fprintf(input, "%d %d\n", pookie[i].blueOn, pookie[i].dist1); // optional
+    }
+    fprintf(input, "%d %d\n", deadscene, deadSceneCount);
+    fprintf(input, "%d\n", soundOn);
+    fprintf(input, "%d %d %d %d\n", mazeWidth, mazeHeight, mazeCellWidth, mazeCellHeight);
+
+    fprintf(input, "%d\n", foodNum);
+    for (int i = 0; i < foodNum; i++)
+    {
+        fprintf(input, "%d %d %d\n", foodXcor[i][0], foodYcor[i], foodXcor[i][1]); // includes fruit/pellet states
+    }
+
+    fprintf(input, "%d %d\n", randGen, t);
+    for (int i = 0; i < t; i++)
+    {
+        fprintf(input, "%d\n", fruitGen[i]);
+    }
+    fprintf(input, "%d %s\n", score, pacScore);
+    fprintf(input, "%d\n", pacmanlife);
+    fprintf(input, "%d %d %d\n", scatter, chase, blast);
+    fprintf(input, "%d\n", selected);
+    fprintf(input, "%d\n", diffSpeed);
+    fprintf(input, "%d %d\n", blueGhost, blueScore);
+    fprintf(input, "%d %d %d\n", bgimage, slbgimage, backgroundselectorc);
+    fprintf(input, "%d %d %d\n", resumec, intro, introchange);
+    fprintf(input, "%d %d\n", levelintro, exitintroimage);
+    fprintf(input, "%d %d\n", settingsc, difficultyc);
+    fprintf(input, "%d %d\n", maze, mazeX);       // if needed
+    fprintf(input, "%d %d\n", mazeY, mazeHeight); // if needed
+}
+void loadGameStat()
+{
+    FILE *input = fopen("gamestat.txt", "r");
+    if (input == NULL)
+    {
+        printf("Error loading game state!\n");
+        return;
+    }
+
+    fscanf(input, "%s", playername);
+
+    fscanf(input, "%d %d %d %d", &pac.x, &pac.y, &cellX, &cellY);
+    fscanf(input, "%d %d %d %d", &pac.rightCount, &pac.leftCount, &pac.upCount, &pac.downCount);
+    fscanf(input, "%d %d %d %d", &pac.rightInd, &pac.leftInd, &pac.upInd, &pac.downInd);
+    fscanf(input, "%d %d", &pac.right, &pac.left);
+    fscanf(input, "%d %d", &pac.up, &pac.down);
+    fscanf(input, "%d %d %d %d", &pac.smoothRight, &pac.smoothLeft, &pac.smoothUp, &pac.smoothDown);
+
+    for (int i = 0; i < 6; i++)
+    {
+        fscanf(input, "%d %d %d %d %d", &pookie[i].x, &pookie[i].y, &pookie[i].cellX, &pookie[i].cellY, &pookie[i].speed);
+        fscanf(input, "%d %d %d %d", &pookie[i].flagRight, &pookie[i].flagLeft, &pookie[i].flagUp, &pookie[i].flagDown);
+        fscanf(input, "%d %d %d %d", &pookie[i].rightInd, &pookie[i].leftInd, &pookie[i].upInd, &pookie[i].downInd);
+        fscanf(input, "%d %d", &pookie[i].blueOn, &pookie[i].dist1);
+    }
+
+    fscanf(input, "%d %d", &deadscene, &deadSceneCount);
+    fscanf(input, "%d", &soundOn);
+    fscanf(input, "%d %d %d %d", &mazeWidth, &mazeHeight, &mazeCellWidth, &mazeCellHeight);
+
+    fscanf(input, "%d", &foodNum);
+    for (int i = 0; i < foodNum; i++)
+    {
+        fscanf(input, "%d %d %d", &foodXcor[i][0], &foodYcor[i], &foodXcor[i][1]);
+    }
+
+    fscanf(input, "%d %d", &randGen, &t);
+    for (int i = 0; i < t; i++)
+    {
+        fscanf(input, "%d", &fruitGen[i]);
+    }
+
+    fscanf(input, "%d %s", &score, pacScore);
+    fscanf(input, "%d", &pacmanlife);
+    fscanf(input, "%d %d %d", &scatter, &chase, &blast);
+    fscanf(input, "%d", &selected);
+    fscanf(input, "%d", &diffSpeed);
+    fscanf(input, "%d %d", &blueGhost, &blueScore);
+    fscanf(input, "%d %d %d", &bgimage, &slbgimage, &backgroundselectorc);
+    fscanf(input, "%d %d %d", &resumec, &intro, &introchange);
+    fscanf(input, "%d %d", &levelintro, &exitintroimage);
+    fscanf(input, "%d %d", &settingsc, &difficultyc);
+    fscanf(input, "%d %d", &maze, &mazeX);
+    fscanf(input, "%d %d", &mazeY, &mazeHeight);
+
+    fclose(input);
+}
 
 /*
 function iDraw() is called again and again by the system.
@@ -560,11 +670,10 @@ void iDraw()
     else if (mainmenu)
     {
         iShowImage(0, 0, menuimage[menuc]);
-
-        if (resumeimage)
-        {
-            iShowImage(73, 485, resume[resumec]);
-        }
+    }
+    if (resumeimage)
+    {
+        iShowImage(73, 485, resume[resumec]);
     }
     else if (difficulty)
     {
@@ -686,6 +795,7 @@ void iDraw()
         {
             playingstart = false;
             congrats = true;
+            storeGameStat();
         }
 
         if (!blueGhost)
@@ -2860,12 +2970,13 @@ void iMouse(int button, int state, int mx, int my)
             {
                 playingstart = true;
                 mainmenu = false;
+                loadGameStat();
                 iResumeAll();
             }
         }
         else if (specialthanks)
         {
-            if (mx >= 1027 && my >= 42 && mx <= 1148 && my <= 94)
+            if (mx >= 1032 && my >= 44 && mx <= 1150 && my <= 94)
             {
                 mainmenu = true;
                 specialthanks = false;
@@ -2873,7 +2984,6 @@ void iMouse(int button, int state, int mx, int my)
                     iResumeSound(sound4);
                 resumeimage = true;
             }
-            resumeimage = true;
         }
         else if (highscore)
         {
@@ -3151,7 +3261,9 @@ void iMouse(int button, int state, int mx, int my)
                 pause = false;
                 mainmenu = true;
                 resumeimage = true;
+                storeGameStat();
                 Reset();
+                iPauseAll();
                 if (soundOn)
                     iResumeSound(sound4);
             }
@@ -3173,6 +3285,7 @@ void iMouse(int button, int state, int mx, int my)
             {
                 pause = true;
                 playingstart = false;
+                storeGameStat();
                 iPauseAll();
             }
         }
@@ -3593,6 +3706,7 @@ void iKeyPress(unsigned char key)
             mainmenu = true;
             times = 1;
             iStopSound(sound3);
+            resumeimage = true;
         }
     }
     else if (playgameintro)
@@ -3907,6 +4021,7 @@ void collisioncheck()
         {
             congrats = true;
             playingstart = false;
+            storeGameStat();
             DataAnalysis();
             times = 1;
         }
@@ -4633,6 +4748,7 @@ void scoreshow()
             congratsc = 0;
             congrats = false;
             playingstart = false;
+            storeGameStat();
             mainmenu = true;
             times = 0;
             iStopSound(sound3);
@@ -4665,6 +4781,7 @@ void resumesequence()
             congratsc = 0;
             congrats = false;
             playingstart = false;
+            storeGameStat();
             mainmenu = true;
             resumeimage = true;
             times = 0;
@@ -4824,34 +4941,34 @@ void RulesShow() // Because of the iSetTimer limitation ( Error: Maximum number 
 void DataAnalysis()
 {
 
-    FILE *fp;
+    FILE *input;
     char ch;
     line = 0;
     if (score != 0)
     {
         // Sub write
-        fp = fopen("Score.txt", "a");
-        fprintf(fp, "%s %d\n", playername, score);
-        fclose(fp);
+        input = fopen("Score.txt", "a");
+        fprintf(input, "%s %d\n", playername, score);
+        fclose(input);
     }
 
-    fp = fopen("Score.txt", "r");
-    while (fscanf(fp, "%c", &ch) == 1)
+    input = fopen("Score.txt", "r");
+    while (fscanf(input, "%c", &ch) == 1)
     {
         if (ch == '\n')
             line++;
     }
-    fclose(fp);
+    fclose(input);
     // Store data
-    fp = fopen("Score.txt", "r");
+    input = fopen("Score.txt", "r");
     name = (char **)malloc(sizeof(char *) * line);
     point = (int *)malloc(sizeof(int) * line);
     for (int i = 0; i < line; i++)
     {
         name[i] = (char *)malloc(sizeof(char) * 20);
-        fscanf(fp, " %s %d", name[i], &point[i]);
+        fscanf(input, " %s %d", name[i], &point[i]);
     }
-    fclose(fp);
+    fclose(input);
     // Sort data
     for (int i = 0; i < line; i++)
     {
@@ -4869,12 +4986,12 @@ void DataAnalysis()
         }
     }
     // Write Data
-    fp = fopen("highScore.txt", "w");
+    input = fopen("highScore.txt", "w");
     for (int i = 0; i < line; i++)
     {
-        fprintf(fp, "%s %d\n", name[i], point[i]);
+        fprintf(input, "%s %d\n", name[i], point[i]);
     }
-    fclose(fp);
+    fclose(input);
 }
 
 int main(int argc, char *argv[])
