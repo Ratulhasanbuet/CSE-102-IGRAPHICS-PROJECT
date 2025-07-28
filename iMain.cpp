@@ -155,6 +155,9 @@ int back = 0;
 int resumeimage;
 int load;
 int howmanytimes;
+int enterc;
+bool enter;
+int it = 0;
 
 int sound1;
 int sound2;
@@ -201,6 +204,7 @@ char quitimage[3][50] = {"exitimage/exitimage.png", "exitimage/exitimage1.png", 
 char difficultyimage[5][50] = {"difficultyimage/DIFFICULTY (1).png", "difficultyimage/DIFFICULTY (2).png", "difficultyimage/DIFFICULTY (3).png", "difficultyimage/DIFFICULTY (4).png"};
 char mazeimage[8][50] = {"mazeDesignImage/pixel.png", "mazeDesignImage/nebula.png", "mazeDesignImage/spectral.png", "mazeDesignImage/psi.png", "mazeDesignImage/crack.png", "mazeDesignImage/echo.png", "mazeDesignImage/phantom.png", "mazeDesignImage/spiral.png"};
 char playgameintroimage[2][50] = {"playgameintro/intro.png", "playgameintro/intro2.png"};
+char enterimage[151][30]{"enter/enter (1).jpg", "enter/enter (2).jpg", "enter/enter (3).jpg", "enter/enter (4).jpg", "enter/enter (5).jpg", "enter/enter (6).jpg", "enter/enter (7).jpg", "enter/enter (8).jpg", "enter/enter (9).jpg", "enter/enter (10).jpg", "enter/enter (11).jpg", "enter/enter (12).jpg", "enter/enter (13).jpg", "enter/enter (14).jpg", "enter/enter (15).jpg", "enter/enter (16).jpg", "enter/enter (17).jpg", "enter/enter (18).jpg", "enter/enter (19).jpg", "enter/enter (20).jpg", "enter/enter (21).jpg", "enter/enter (22).jpg", "enter/enter (23).jpg", "enter/enter (24).jpg", "enter/enter (25).jpg", "enter/enter (26).jpg", "enter/enter (27).jpg", "enter/enter (28).jpg", "enter/enter (29).jpg", "enter/enter (30).jpg", "enter/enter (31).jpg", "enter/enter (32).jpg", "enter/enter (33).jpg", "enter/enter (34).jpg", "enter/enter (35).jpg", "enter/enter (36).jpg", "enter/enter (37).jpg", "enter/enter (38).jpg", "enter/enter (39).jpg", "enter/enter (40).jpg", "enter/enter (41).jpg", "enter/enter (42).jpg", "enter/enter (43).jpg", "enter/enter (44).jpg", "enter/enter (45).jpg", "enter/enter (46).jpg", "enter/enter (47).jpg", "enter/enter (48).jpg", "enter/enter (49).jpg", "enter/enter (50).jpg", "enter/enter (51).jpg", "enter/enter (52).jpg", "enter/enter (53).jpg", "enter/enter (54).jpg", "enter/enter (55).jpg", "enter/enter (56).jpg", "enter/enter (57).jpg", "enter/enter (58).jpg", "enter/enter (59).jpg", "enter/enter (60).jpg", "enter/enter (61).jpg", "enter/enter (62).jpg", "enter/enter (63).jpg", "enter/enter (64).jpg", "enter/enter (65).jpg", "enter/enter (66).jpg", "enter/enter (67).jpg", "enter/enter (68).jpg", "enter/enter (69).jpg", "enter/enter (70).jpg", "enter/enter (71).jpg", "enter/enter (72).jpg", "enter/enter (73).jpg", "enter/enter (74).jpg", "enter/enter (75).jpg", "enter/enter (76).jpg", "enter/enter (77).jpg", "enter/enter (78).jpg", "enter/enter (79).jpg", "enter/enter (80).jpg", "enter/enter (81).jpg", "enter/enter (82).jpg", "enter/enter (83).jpg", "enter/enter (84).jpg", "enter/enter (85).jpg", "enter/enter (86).jpg", "enter/enter (87).jpg", "enter/enter (88).jpg", "enter/enter (89).jpg", "enter/enter (90).jpg", "enter/enter (91).jpg", "enter/enter (92).jpg", "enter/enter (93).jpg", "enter/enter (94).jpg", "enter/enter (95).jpg", "enter/enter (96).jpg", "enter/enter (97).jpg", "enter/enter (98).jpg", "enter/enter (99).jpg", "enter/enter (100).jpg", "enter/enter (101).jpg", "enter/enter (102).jpg", "enter/enter (103).jpg", "enter/enter (104).jpg", "enter/enter (105).jpg", "enter/enter (106).jpg", "enter/enter (107).jpg", "enter/enter (108).jpg", "enter/enter (109).jpg", "enter/enter (110).jpg", "enter/enter (111).jpg", "enter/enter (112).jpg", "enter/enter (113).jpg", "enter/enter (114).jpg", "enter/enter (115).jpg", "enter/enter (116).jpg", "enter/enter (117).jpg", "enter/enter (118).jpg", "enter/enter (119).jpg", "enter/enter (120).jpg", "enter/enter (121).jpg", "enter/enter (122).jpg", "enter/enter (123).jpg", "enter/enter (124).jpg", "enter/enter (125).jpg", "enter/enter (126).jpg", "enter/enter (127).jpg", "enter/enter (128).jpg", "enter/enter (129).jpg", "enter/enter (130).jpg", "enter/enter (131).jpg", "enter/enter (132).jpg", "enter/enter (133).jpg", "enter/enter (134).jpg", "enter/enter (135).jpg", "enter/enter (136).jpg", "enter/enter (137).jpg", "enter/enter (138).jpg", "enter/enter (139).jpg", "enter/enter (140).jpg", "enter/enter (141).jpg", "enter/enter (142).jpg", "enter/enter (143).jpg", "enter/enter (144).jpg", "enter/enter (145).jpg", "enter/enter (146).jpg", "enter/enter (147).jpg", "enter/enter (148).jpg", "enter/enter (149).jpg", "enter/enter (150).jpg", "enter/enter (151).png"};
 char exitimage[100][100] = {"thanksimage/thanks (1).jpg", "thanksimage/thanks (2).jpg", "thanksimage/thanks (3).jpg", "thanksimage/thanks (4).jpg", "thanksimage/thanks (5).jpg", "thanksimage/thanks (6).jpg", "thanksimage/thanks (7).jpg", "thanksimage/thanks (8).jpg", "thanksimage/thanks (9).jpg", "thanksimage/thanks (10).jpg", "thanksimage/thanks (11).jpg", "thanksimage/thanks (12).jpg", "thanksimage/thanks (13).jpg", "thanksimage/thanks (14).jpg", "thanksimage/thanks (15).jpg", "thanksimage/thanks (16).jpg", "thanksimage/thanks (17).jpg", "thanksimage/thanks (18).jpg", "thanksimage/thanks (20).jpg", "thanksimage/thanks (20).jpg", "thanksimage/thanks (21).jpg", "thanksimage/thanks (22).jpg", "thanksimage/thanks (23).jpg", "thanksimage/thanks (24).jpg", "thanksimage/thanks (25).jpg", "thanksimage/thanks (26).jpg", "thanksimage/thanks (27).jpg", "thanksimage/thanks (28).jpg", "thanksimage/thanks (29).jpg", "thanksimage/thanks (30).jpg", "thanksimage/thanks (31).jpg", "thanksimage/thanks (32).jpg", "thanksimage/thanks (33).jpg", "thanksimage/thanks (34).jpg", "thanksimage/thanks (35).jpg", "thanksimage/thanks (36).jpg", "thanksimage/thanks (37).jpg", "thanksimage/thanks (38).jpg", "thanksimage/thanks (39).jpg", "thanksimage/thanks (40).jpg", "thanksimage/thanks (41).jpg", "thanksimage/thanks (42).jpg", "thanksimage/thanks (43).jpg", "thanksimage/thanks (44).jpg", "thanksimage/thanks (45).jpg", "thanksimage/thanks (46).jpg", "thanksimage/thanks (47).jpg", "thanksimage/thanks (48).jpg", "thanksimage/thanks (49).jpg", "thanksimage/thanks (50).jpg", "thanksimage/thanks (51).jpg", "thanksimage/thanks (52).jpg", "thanksimage/thanks (53).jpg", "thanksimage/thanks (54).jpg", "thanksimage/thanks (55).jpg", "thanksimage/thanks (56).jpg", "thanksimage/thanks (57).jpg", "thanksimage/thanks (58).jpg", "thanksimage/thanks (59).jpg", "thanksimage/thanks (60).jpg", "thanksimage/thanks (61).jpg", "thanksimage/thanks (62).jpg", "thanksimage/thanks (63).jpg", "thanksimage/thanks (64).jpg", "thanksimage/thanks (65).jpg", "thanksimage/thanks (66).jpg", "thanksimage/thanks (67).jpg", "thanksimage/thanks (68).jpg", "thanksimage/thanks (69).jpg", "thanksimage/thanks (70).jpg", "thanksimage/thanks (71).jpg", "thanksimage/thanks (72).jpg", "thanksimage/thanks (73).jpg", "thanksimage/thanks (74).jpg", "thanksimage/thanks (75).jpg", "thanksimage/thanks (76).jpg", "thanksimage/thanks (77).jpg", "thanksimage/thanks (78).jpg", "thanksimage/thanks (79).jpg", "thanksimage/thanks (80).jpg", "thanksimage/thanks (81).jpg", "thanksimage/thanks (82).jpg", "thanksimage/thanks (83).jpg", "thanksimage/thanks (84).jpg", "thanksimage/thanks (85).jpg", "thanksimage/thanks (86).jpg", "thanksimage/thanks (87).jpg", "thanksimage/thanks (88).jpg", "thanksimage/thanks (89).jpg", "thanksimage/thanks (90).jpg", "thanksimage/thanks (91).jpg", "thanksimage/thanks (92).jpg", "thanksimage/thanks (93).jpg", "thanksimage/thanks (94).jpg", "thanksimage/thanks (95).jpg", "thanksimage/thanks (96).jpg", "thanksimage/thanks (97).jpg", "thanksimage/thanks (98).jpg", "thanksimage/thanks (99).jpg", "thanksimage/thanks (100).jpg"};
 char pauseimage[4][40] = {"pauseimage/pause (1).png", "pauseimage/pause (2).png", "pauseimage/pause (3).png", "pauseimage/pause (4).png"};
 char backgroundimage[7][50] = {"bg/bg.png", "bg/bg (1).png", "bg/bg (2).png", "bg/bg (3).png", "bg/bg (4).png", "bg/bg (5).png", "bg/bggg.png"};
@@ -749,8 +753,8 @@ void iDraw()
     }
     else if (playgameintro)
     {
-        iShowImage(0, 0, playgameintroimage[0]);
-        iSetColor(255, 255, 255);
+        iShowImage(0, 0, enterimage[enterc]);
+        iSetColor(0, 0, 0);
         iShowText(430, 282, namestr, "text.ttf", 40);
     }
     else if (settings)
@@ -2947,7 +2951,11 @@ void resumeGameSession()
     playingstart = 1; // Enables gameplay mode
     howmanytimes++;
     iResumeAll();
-    iPauseSound(sound4); // Restarts timers for movement & events/ Restarts timers for movement & events
+    iPauseSound(sound4);
+    if (soundOn)
+    {
+        iPlaySound("sound/Tada.wav", 0, 100);
+    } // Restarts timers for movement & events/ Restarts timers for movement & events
 }
 
 void Reset()
@@ -3843,6 +3851,8 @@ void iKeyPress(unsigned char key)
 
                 playgameintro = 0;
                 levelselect = 1;
+                iResumeTimer(7);
+                enterc = 0;
             }
             else if (key == 27) // ESC key
             {
@@ -4836,6 +4846,11 @@ void pookieinitialcoordinate()
 }
 void introchange()
 {
+    //  it++;
+    //  if (it % 400 == 0 && mainmenu)
+    //  {
+    //      resumeimage = 1;
+    //  }
     if (startintro)
     {
         intro++;
@@ -4975,6 +4990,15 @@ void exitSequence()
         {
             exitintroimage = 0;
             exit(0);
+        }
+    }
+    if (playgameintro)
+    {
+        enterc++;
+        if (enterc > 149)
+        {
+            enterc = 150;
+            iPauseTimer(7);
         }
     }
 }
@@ -5166,6 +5190,7 @@ int main(int argc, char *argv[])
     //  iSetTimer(30, RulesShow);    Error: Maximum number of timers reached.
     iSetTimer(20, background);
     //  iSetTimer(20, menuIntro);
+    // iSetTimer(20, enter);
     iSetTimer(30, loading);
     iWindowedMode(1200, 675, "PACMAN");
     iStartMainLoop();
