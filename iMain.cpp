@@ -101,6 +101,8 @@ int loadc = 0;
 int mazeX;
 int mazeY;
 int line;
+bool intro2;
+int menuintroc = 0;
 
 int maze = 0;
 int intro = 0;
@@ -188,6 +190,7 @@ ghost pookie[6];
 char introimage[115][50] = {"introimage/introimage (1).jpg", "introimage/introimage (2).jpg", "introimage/introimage (3).jpg", "introimage/introimage (4).jpg", "introimage/introimage (5).jpg", "introimage/introimage (6).jpg", "introimage/introimage (7).jpg", "introimage/introimage (8).jpg", "introimage/introimage (9).jpg", "introimage/introimage (10).jpg", "introimage/introimage (11).jpg", "introimage/introimage (12).jpg", "introimage/introimage (13).jpg", "introimage/introimage (14).jpg", "introimage/introimage (15).jpg", "introimage/introimage (16).jpg", "introimage/introimage (17).jpg", "introimage/introimage (18).jpg", "introimage/introimage (20).jpg", "introimage/introimage (20).jpg", "introimage/introimage (21).jpg", "introimage/introimage (22).jpg", "introimage/introimage (23).jpg", "introimage/introimage (24).jpg", "introimage/introimage (25).jpg", "introimage/introimage (26).jpg", "introimage/introimage (27).jpg", "introimage/introimage (28).jpg", "introimage/introimage (29).jpg", "introimage/introimage (30).jpg", "introimage/introimage (31).jpg", "introimage/introimage (32).jpg", "introimage/introimage (33).jpg", "introimage/introimage (34).jpg", "introimage/introimage (35).jpg", "introimage/introimage (36).jpg", "introimage/introimage (37).jpg", "introimage/introimage (38).jpg", "introimage/introimage (39).jpg", "introimage/introimage (40).jpg", "introimage/introimage (41).jpg", "introimage/introimage (42).jpg", "introimage/introimage (43).jpg", "introimage/introimage (44).jpg", "introimage/introimage (45).jpg", "introimage/introimage (46).jpg", "introimage/introimage (47).jpg", "introimage/introimage (48).jpg", "introimage/introimage (49).jpg", "introimage/introimage (50).jpg", "introimage/introimage (51).jpg", "introimage/introimage (52).jpg", "introimage/introimage (53).jpg", "introimage/introimage (54).jpg", "introimage/introimage (55).jpg", "introimage/introimage (56).jpg", "introimage/introimage (57).jpg", "introimage/introimage (58).jpg", "introimage/introimage (59).jpg", "introimage/introimage (60).jpg", "introimage/introimage (61).jpg", "introimage/introimage (62).jpg", "introimage/introimage (63).jpg", "introimage/introimage (64).jpg", "introimage/introimage (65).jpg", "introimage/introimage (66).jpg", "introimage/introimage (67).jpg", "introimage/introimage (68).jpg", "introimage/introimage (69).jpg", "introimage/introimage (70).jpg", "introimage/introimage (71).jpg", "introimage/introimage (72).jpg", "introimage/introimage (73).jpg", "introimage/introimage (74).jpg", "introimage/introimage (75).jpg", "introimage/introimage (76).jpg", "introimage/introimage (77).jpg", "introimage/introimage (78).jpg", "introimage/introimage (79).jpg", "introimage/introimage (80).jpg", "introimage/introimage (81).jpg", "introimage/introimage (82).jpg", "introimage/introimage (83).jpg", "introimage/introimage (84).jpg", "introimage/introimage (85).jpg", "introimage/introimage (86).jpg", "introimage/introimage (87).jpg", "introimage/introimage (88).jpg", "introimage/introimage (89).jpg", "introimage/introimage (90).jpg", "introimage/introimage (91).jpg", "introimage/introimage (92).jpg", "introimage/introimage (93).jpg", "introimage/introimage (94).jpg", "introimage/introimage (95).jpg", "introimage/introimage (96).jpg", "introimage/introimage (97).jpg", "introimage/introimage (98).jpg", "introimage/introimage (99).jpg", "introimage/introimage (100).jpg", "introimage/introimage (101).jpg", "introimage/introimage (102).jpg", "introimage/introimage (103).jpg", "introimage/introimage (104).jpg", "introimage/introimage (105).jpg", "introimage/introimage (106).jpg", "introimage/introimage (107).jpg", "introimage/introimage (108).jpg", "introimage/introimage (109).jpg", "introimage/introimage (110).jpg", "introimage/introimage (111).jpg", "introimage/introimage (112).jpg", "introimage/introimage (113).jpg", "introimage/introimage (114).jpg", "introimage/introimage (115).jpg"};
 char mazeselectorimage[8][60] = {"mazeSelectorImage/pixel.PNG", "mazeSelectorImage/nebula.PNG", "mazeSelectorImage/spectral.PNG", "mazeSelectorImage/psi.PNG", "mazeSelectorImage/crack.PNG", "mazeSelectorImage/echo.PNG", "mazeSelectorImage/phantom.PNG", "mazeSelectorImage/spiral.PNG"};
 char menuimage[9][50] = {"menu image/PACMAN.png", "menu image/pacman1.png", "menu image/pacman2.png", "menu image/pacman3.png", "menu image/pacman4.png", "menu image/pacman5.png", "menu image/pacman6.png", "menu image/pacman7.png", "menu image/pacman8.png"};
+char menuintro[90][40] = {"MIntro/menu (1).jpg", "MIntro/menu (2).jpg", "MIntro/menu (3).jpg", "MIntro/menu (4).jpg", "MIntro/menu (5).jpg", "MIntro/menu (6).jpg", "MIntro/menu (7).jpg", "MIntro/menu (8).jpg", "MIntro/menu (9).jpg", "MIntro/menu (10).jpg", "MIntro/menu (11).jpg", "MIntro/menu (12).jpg", "MIntro/menu (13).jpg", "MIntro/menu (14).jpg", "MIntro/menu (15).jpg", "MIntro/menu (16).jpg", "MIntro/menu (17).jpg", "MIntro/menu (18).jpg", "MIntro/menu (19).jpg", "MIntro/menu (20).jpg", "MIntro/menu (21).jpg", "MIntro/menu (22).jpg", "MIntro/menu (23).jpg", "MIntro/menu (24).jpg", "MIntro/menu (25).jpg", "MIntro/menu (26).jpg", "MIntro/menu (27).jpg", "MIntro/menu (28).jpg", "MIntro/menu (29).jpg", "MIntro/menu (30).jpg", "MIntro/menu (31).jpg", "MIntro/menu (32).jpg", "MIntro/menu (33).jpg", "MIntro/menu (34).jpg", "MIntro/menu (35).jpg", "MIntro/menu (36).jpg", "MIntro/menu (37).jpg", "MIntro/menu (38).jpg", "MIntro/menu (39).jpg", "MIntro/menu (40).jpg", "MIntro/menu (41).jpg", "MIntro/menu (42).jpg", "MIntro/menu (43).jpg", "MIntro/menu (44).jpg", "MIntro/menu (45).jpg", "MIntro/menu (46).jpg", "MIntro/menu (47).jpg", "MIntro/menu (48).jpg", "MIntro/menu (49).jpg", "MIntro/menu (50).jpg", "MIntro/menu (51).jpg", "MIntro/menu (52).jpg", "MIntro/menu (53).jpg", "MIntro/menu (54).jpg", "MIntro/menu (55).jpg", "MIntro/menu (56).jpg", "MIntro/menu (57).jpg", "MIntro/menu (58).jpg", "MIntro/menu (59).jpg", "MIntro/menu (60).jpg", "MIntro/menu (61).jpg", "MIntro/menu (62).jpg", "MIntro/menu (63).jpg", "MIntro/menu (64).jpg", "MIntro/menu (65).jpg", "MIntro/menu (66).jpg", "MIntro/menu (67).jpg", "MIntro/menu (68).jpg", "MIntro/menu (69).jpg", "MIntro/menu (70).jpg", "MIntro/menu (71).jpg", "MIntro/menu (72).jpg", "MIntro/menu (73).jpg", "MIntro/menu (74).jpg", "MIntro/menu (75).jpg", "MIntro/menu (76).jpg", "MIntro/menu (77).jpg", "MIntro/menu (78).jpg", "MIntro/menu (79).jpg", "MIntro/menu (80).jpg", "MIntro/menu (81).jpg", "MIntro/menu (82).jpg", "MIntro/menu (83).jpg", "MIntro/menu (84).jpg", "MIntro/menu (85).jpg", "MIntro/menu (86).jpg", "MIntro/menu (87).jpg", "MIntro/menu (88).jpg", "MIntro/menu (89).jpg", "MIntro/menu (90).jpg"};
 char settingsimage[8][50] = {"settingsimage/settings.png", "settingsimage/settings1.png", "settingsimage/settings2.png", "settingsimage/settings3.png", "settingsimage/settings4.png", "settingsimage/settings5.png", "settingsimage/settings6.png", "settingsimage/settings7.png"};
 char highscoreimage[2][50] = {"highscoreimage/highscore (2).png", "highscoreimage/highscore (1).png"};
 char creditimage[2][50] = {"creditsimage/CREDITS.png", "creditsimage/credits1.png"};
@@ -709,6 +712,10 @@ void iDraw()
     {
         iShowImage(0, 0, difficultyimage[difficultyc]);
         iShowText(45, 28, "BACK", "text.ttf", 50);
+    }
+    else if (intro2)
+    {
+        iShowImage(0, 0, menuintro[menuintroc]);
     }
     else if (highscore)
     {
@@ -1623,8 +1630,8 @@ void getGhostTarget(int pookietype, int *px, int *py)
 
     switch (pookietype)
     {
-
     case 1:
+        // Basic chase - leading target by 4 cells in direction
         if (pac.rightCount)
             *px += mazeCellWidth * 4;
         else if (pac.leftCount)
@@ -1636,18 +1643,48 @@ void getGhostTarget(int pookietype, int *px, int *py)
         break;
 
     case 2:
-        if (pac.rightCount)
-            *px -= mazeCellWidth * 3;
-        else if (pac.leftCount)
-            *px += mazeCellWidth * 3;
-        else if (pac.upCount)
-            *py -= mazeCellWidth * 3;
-        else if (pac.downCount)
-            *py += mazeCellWidth * 3;
+        // 🧠 Master Intelligent Ghost - strategic interception
+        {
+            int leadCellsX = 0, leadCellsY = 0;
+
+            // Strong prediction: 6 cells ahead in direction
+            if (pac.rightCount)
+                leadCellsX = 6;
+            else if (pac.leftCount)
+                leadCellsX = -6;
+            if (pac.upCount)
+                leadCellsY = 6;
+            else if (pac.downCount)
+                leadCellsY = -6;
+
+            // Smart cut-off based on maze center (diagonal intercept)
+            if (pac.x < mazeWidth / 2)
+                leadCellsX += 2; // Shift towards center from left side
+            else
+                leadCellsX -= 2; // Shift towards center from right side
+
+            if (pac.y < mazeHeight / 2)
+                leadCellsY += 2;
+            else
+                leadCellsY -= 2;
+
+            // Occasional advanced flank (25% chance)
+            if ((rand() % 100) < 25)
+            {
+                leadCellsX *= -1; // Switch sides for surprise intercept
+            }
+
+            // Small random adjustment so path isn’t predictable
+            int randOffsetX = (rand() % 3) - 1;
+            int randOffsetY = (rand() % 3) - 1;
+
+            *px = pac.x + mazeCellWidth * (leadCellsX + randOffsetX);
+            *py = pac.y + mazeCellWidth * (leadCellsY + randOffsetY);
+        }
         break;
 
     case 3:
-        // Predict intersection based on pac's direction and maze layout
+        // Predictive targeting based on direction
         *px += (pac.rightCount ? 2 : pac.leftCount ? -2
                                                    : 0) *
                mazeCellWidth;
@@ -1657,22 +1694,35 @@ void getGhostTarget(int pookietype, int *px, int *py)
         break;
 
     case 4:
-        *px += mazeCellWidth * (rand() % 5 - 2); // ±2 cells
-        *py += mazeCellWidth * (rand() % 5 - 2);
+        *px = pac.x;
+        *py = pac.y;
         break;
 
     case 5:
-        if (pac.x < mazeWidth / 2)
-            *px = pac.x + mazeCellWidth * 2;
-        else
-            *px = pac.x - mazeCellWidth * 2;
+        // Flanking ghost - biases around Pac horizontally
+        *px = pac.x + ((pac.x < mazeWidth / 2) ? mazeCellWidth * 2 : -mazeCellWidth * 2);
         *py = pac.y;
         break;
 
     case 0:
-        // Blast Mode: aggressively rush toward Pac with slight randomization
-        *px = pac.x + mazeCellWidth * (rand() % 3 - 1); // offset ±1 cell horizontally
-        *py = pac.y + mazeCellWidth * (rand() % 3 - 1); // offset ±1 cell vertically
+        // ⚡ Enhanced Blast Mode - aggressive interception with smart prediction
+        {
+            int lead = 5; // Aggressive lead
+            int leadCellsX = (pac.rightCount ? lead : (pac.leftCount ? -lead : 0));
+            int leadCellsY = (pac.upCount ? lead : (pac.downCount ? -lead : 0));
+
+            // Smart offset: add bias toward pac center for precision
+            int centerBiasX = (pac.x > mazeWidth / 2) ? -1 : 1;
+            int centerBiasY = (pac.y > mazeHeight / 2) ? -1 : 1;
+
+            // Slight randomness for unpredictability (but less than before)
+            int randOffsetX = (rand() % 3) - 1; // -1 to +1
+            int randOffsetY = (rand() % 3) - 1;
+
+            // Final predicted aggressive target
+            *px = pac.x + mazeCellWidth * (leadCellsX + centerBiasX + randOffsetX);
+            *py = pac.y + mazeCellWidth * (leadCellsY + centerBiasY + randOffsetY);
+        }
         break;
     }
 }
@@ -2889,8 +2939,8 @@ void iMouseMove(int mx, int my)
 void resumeGameSession()
 {
 
-    loadGameStat();        // Loads full saved game state
-    foodCoordinateStore(); // Re-align map coordinates based on selected maze
+    loadGameStat(); // Loads full saved game state
+                    // Re-align map coordinates based on selected maze
     resumeimage = 0;
     mainmenu = 0;     // Exits menu screen
     playingstart = 1; // Enables gameplay mode
@@ -3321,8 +3371,8 @@ void iMouseClick(int button, int state, int mx, int my)
             if (mx >= 26 && my >= 599 && mx <= 177 && my <= 644)
             {
                 pause = 1;
-                playingstart = 0;
                 storeGameStat();
+                playingstart = 0;
                 iPauseAll();
             }
         }
@@ -3731,8 +3781,7 @@ void iKeyPress(unsigned char key)
         if (key == 13)
         {
             startintro = 0;
-            mainmenu = 1;
-            resumeimage = 1;
+            intro2 = true;
         }
     }
     else if (congrats)
@@ -4770,6 +4819,15 @@ void introchange()
         {
             intro = 0;
             startintro = 0;
+            intro2 = true;
+        }
+    }
+    if (intro2)
+    {
+        menuintroc++;
+        if (menuintroc > 89)
+        {
+            intro2 = false;
             mainmenu = 1;
             resumeimage = 1;
         }
@@ -4867,6 +4925,19 @@ void resumesequence()
             rulescene = 0;
             if (soundOn)
                 iResumeSound(sound4);
+        }
+    }
+}
+void menuIntro()
+{
+    if (intro2)
+    {
+        menuintroc++;
+        if (menuintroc > 89)
+        {
+            intro2 = false;
+            mainmenu = 1;
+            resumeimage = 1;
         }
     }
 }
@@ -5070,8 +5141,8 @@ int main(int argc, char *argv[])
     // iSetTimer(30, levelShow);
     //  iSetTimer(30, RulesShow);    Error: Maximum number of timers reached.
     iSetTimer(20, background);
+    //  iSetTimer(20, menuIntro);
     iSetTimer(30, loading);
-
     iWindowedMode(1200, 675, "PACMAN");
     iStartMainLoop();
     storeGameStat();
