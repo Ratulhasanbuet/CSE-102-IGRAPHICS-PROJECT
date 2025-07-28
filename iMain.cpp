@@ -154,6 +154,7 @@ int rulesOption;
 int back = 0;
 int resumeimage;
 int load;
+int howmanytimes;
 
 int sound1;
 int sound2;
@@ -2944,6 +2945,7 @@ void resumeGameSession()
     resumeimage = 0;
     mainmenu = 0;     // Exits menu screen
     playingstart = 1; // Enables gameplay mode
+    howmanytimes++;
     iResumeAll();
     iPauseSound(sound4); // Restarts timers for movement & events/ Restarts timers for movement & events
 }
@@ -3057,6 +3059,15 @@ void iMouseClick(int button, int state, int mx, int my)
                 back = 0;      //  Ensure forward animation starts
                 resumec = 0;
                 resumeimage = 0;
+            }
+        }
+        else if (intro2)
+        {
+            if (mx >= 0 && my >= 0 && mx <= 1200 && my <= 675)
+            {
+                intro2 = false;
+                mainmenu = 1;
+                resumeimage = 1;
             }
         }
         if (resumeimage)
@@ -3261,6 +3272,7 @@ void iMouseClick(int button, int state, int mx, int my)
                 selected = 1;
                 levelselect = 0;
                 playingstart = 1;
+                howmanytimes++;
                 levelintro = 0;
                 PacmanInitialCoordinate();
                 pookieinitialcoordinate();
@@ -3279,6 +3291,7 @@ void iMouseClick(int button, int state, int mx, int my)
                 levelselect = 0;
                 playingstart = 1;
                 levelintro = 0;
+                howmanytimes++;
                 PacmanInitialCoordinate();
                 pookieinitialcoordinate();
                 foodCoordinateStore();
@@ -3295,6 +3308,7 @@ void iMouseClick(int button, int state, int mx, int my)
                 selected = 3;
                 levelselect = 0;
                 playingstart = 1;
+                howmanytimes++;
                 levelintro = 0;
                 PacmanInitialCoordinate();
                 pookieinitialcoordinate();
@@ -3312,6 +3326,7 @@ void iMouseClick(int button, int state, int mx, int my)
                 selected = 4;
                 levelselect = 0;
                 playingstart = 1;
+                howmanytimes++;
                 levelintro = 0;
                 PacmanInitialCoordinate();
                 pookieinitialcoordinate();
@@ -3782,6 +3797,15 @@ void iKeyPress(unsigned char key)
         {
             startintro = 0;
             intro2 = true;
+        }
+    }
+    else if (intro2)
+    {
+        if (key == 13)
+        {
+            intro2 = false;
+            mainmenu = 1;
+            resumeimage = 1;
         }
     }
     else if (congrats)
@@ -5145,7 +5169,10 @@ int main(int argc, char *argv[])
     iSetTimer(30, loading);
     iWindowedMode(1200, 675, "PACMAN");
     iStartMainLoop();
-    storeGameStat();
+    if (howmanytimes > 0)
+    {
+        storeGameStat();
+    }
     printf("Exiting main loop...\n");
     return 0;
 }
