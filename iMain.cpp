@@ -3880,6 +3880,11 @@ void iKeyPress(unsigned char key)
                 namestr[len] = '\0'; // Always null-terminate
             }
         }
+        else if (key == '\r')
+        {
+            enterc = 150;
+            iPauseTimer(7);
+        }
     }
     if (playingstart)
     {
