@@ -5074,6 +5074,7 @@ int main(int argc, char *argv[])
 
     iWindowedMode(1200, 675, "PACMAN");
     iStartMainLoop();
+    storeGameStat();
     printf("Exiting main loop...\n");
     return 0;
 }
