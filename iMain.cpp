@@ -3371,7 +3371,8 @@ void iMouseClick(int button, int state, int mx, int my)
             {
                 pause = 0;
                 mainmenu = 1;
-                resumeimage = 1;
+                resumeimage = 0; // Don’t show immediately
+                it = 0;          // Reset delay counter
                 storeGameStat(); // ✅
                 iPauseAll();
                 if (soundOn)
@@ -4851,11 +4852,7 @@ void pookieinitialcoordinate()
 }
 void introchange()
 {
-    //  it++;
-    //  if (it % 400 == 0 && mainmenu)
-    //  {
-    //      resumeimage = 1;
-    //  }
+
     if (startintro)
     {
         intro++;
@@ -4903,6 +4900,11 @@ void scoreshow()
 }
 void resumesequence()
 {
+    it++;
+    if (it % 400 == 0 && mainmenu)
+    {
+        resumeimage = 1;
+    }
     if (resumeimage)
     {
         resumec++;
@@ -5186,8 +5188,8 @@ int main(int argc, char *argv[])
     iSetTimer(1300, bluetimecheck);
     iSetTimer(30, pookiemovement);
     iSetTimer(30, pacmanmovement);
-    iSetTimer(20, introchange);
     iSetTimer(120, deathScene);
+    iSetTimer(20, introchange);
     // iSetTimer(20, scoreshow);
     int t = iSetTimer(30, resumesequence);
     iSetTimer(20, exitSequence);
