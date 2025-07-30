@@ -93,7 +93,7 @@ int selected;
 int levelintro = 0;
 int pausec = 0;
 int backgroundselectorc = 0;
-int bgimage = 6;
+int bgimage = 5;
 int slbgimage = 1;
 int rulescene = 0;
 int resumec = 0;
@@ -1790,11 +1790,11 @@ void pookiemovement()
                         break;
                     }
                 }
-                if (blast)
+                else if (blast)
                 {
                     getGhostTarget(pookietype, &px, &py);
                 }
-                if (chase)
+                else if (chase)
                 {
                     // Calculate distance for Clyde logic
                     int distToPac = calculateDistance(pookie[pookietype].x, pookie[pookietype].y, pac.x, pac.y);
