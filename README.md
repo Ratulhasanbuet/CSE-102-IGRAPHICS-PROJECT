@@ -79,14 +79,14 @@
 </ul>
 <h2>🧩 Maze Gallery</h2>
 <div class="image-section">
-    <img src="mazeDesignImage/pixel.png" alt="Pixel Maze">
-    <img src="mazeDesignImage/nebula.png" alt="Nebula Maze">
-    <img src="mazeDesignImage/spectral.png" alt="Spectral Maze">
-    <img src="mazeDesignImage/psi.png" alt="Psi Maze">
-    <img src="mazeDesignImage/crack.png" alt="Crack Maze">
-    <img src="mazeDesignImage/echo.png" alt="Echo Maze">
-    <img src="mazeDesignImage/phantom.png" alt="Phantom Maze">
-    <img src="mazeDesignImage/spiral.png" alt="Spiral Maze">
+    <img src="assets/mazeDesignImage/pixel.png" alt="Pixel Maze">
+    <img src="assets/mazeDesignImage/nebula.png" alt="Nebula Maze">
+    <img src="assets/mazeDesignImage/spectral.png" alt="Spectral Maze">
+    <img src="assets/mazeDesignImage/psi.png" alt="Psi Maze">
+    <img src="assets/mazeDesignImage/crack.png" alt="Crack Maze">
+    <img src="assets/mazeDesignImage/echo.png" alt="Echo Maze">
+    <img src="assets/mazeDesignImage/phantom.png" alt="Phantom Maze">
+    <img src="assets/mazeDesignImage/spiral.png" alt="Spiral Maze">
 </div>
 <hr>
 
@@ -142,7 +142,7 @@
 
 <table align="center" width="100%" cellspacing="10">
   <tr>
-    <td width="60"><img src="mazeDesignImage/psi.png" alt="Maze Icon"/></td>
+    <td width="60"><img src="assets/mazeDesignImage/psi.png" alt="Maze Icon"/></td>
     <td><strong>🎯 Eat all pellets</strong><br>Avoid ghosts and navigate through the maze to survive.</td>
   </tr>
   <tr>
@@ -338,24 +338,24 @@
 
 <table>
   <tr>
-    <td><img src="fruit/fruit (1).png" width="40"/></td>
-    <td><img src="fruit/fruit (2).png" width="40"/></td>
-    <td><img src="fruit/fruit (3).png" width="40"/></td>
-    <td><img src="fruit/fruit (4).png" width="40"/></td>
-    <td><img src="fruit/fruit (5).png" width="40"/></td>
-    <td><img src="fruit/fruit (6).png" width="40"/></td>
-    <td><img src="fruit/fruit (7).png" width="40"/></td>
-    <td><img src="fruit/fruit (8).png" width="40"/></td>
+    <td><img src="assets/fruit/fruit (1).png" width="40"/></td>
+    <td><img src="assets/fruit/fruit (2).png" width="40"/></td>
+    <td><img src="assets/fruit/fruit (3).png" width="40"/></td>
+    <td><img src="assets/fruit/fruit (4).png" width="40"/></td>
+    <td><img src="assets/fruit/fruit (5).png" width="40"/></td>
+    <td><img src="assets/fruit/fruit (6).png" width="40"/></td>
+    <td><img src="assets/fruit/fruit (7).png" width="40"/></td>
+    <td><img src="assets/fruit/fruit (8).png" width="40"/></td>
   </tr>
   <tr>
-    <td><img src="fruit/fruit (9).png" width="40"/></td>
-    <td><img src="fruit/fruit (10).png" width="40"/></td>
-    <td><img src="fruit/fruit (11).png" width="40"/></td>
-    <td><img src="fruit/fruit (12).png" width="40"/></td>
-    <td><img src="fruit/fruit (13).png" width="40"/></td>
-    <td><img src="fruit/fruit (14).png" width="40"/></td>
-    <td><img src="fruit/fruit (15).png" width="40"/></td>
-    <td><img src="fruit/fruit (16).png" width="40"/></td>
+    <td><img src="assets/fruit/fruit (9).png" width="40"/></td>
+    <td><img src="assets/fruit/fruit (10).png" width="40"/></td>
+    <td><img src="assets/fruit/fruit (11).png" width="40"/></td>
+    <td><img src="assets/fruit/fruit (12).png" width="40"/></td>
+    <td><img src="assets/fruit/fruit (13).png" width="40"/></td>
+    <td><img src="assets/fruit/fruit (14).png" width="40"/></td>
+    <td><img src="assets/fruit/fruit (15).png" width="40"/></td>
+    <td><img src="assets/fruit/fruit (16).png" width="40"/></td>
   </tr>
 </table>
 
@@ -569,49 +569,49 @@
     </thead>
     <tbody>
         <tr>
-            <td><img src="blinky/blinky (1).png" width="60"></td>
+            <td><img src="assets/blinky/blinky (1).png" width="60"></td>
             <td>Blinky</td>
             <td>Chaser</td>
             <td>Relentless pursuit of Pac-Man, direct pathfinding</td>
         </tr>
         <tr>
-            <td><img src="pinky/pinky (1).png" width="60"></td>
+            <td><img src="assets/pinky/pinky (1).png" width="60"></td>
             <td>Pinky</td>
             <td>Ambusher</td>
             <td>Predicts player’s future location to intercept</td>
         </tr>
         <tr>
-            <td><img src="inky/inky (1).png" width="60"></td>
+            <td><img src="assets/inky/inky (1).png" width="60"></td>
             <td>Inky</td>
             <td>Flanker</td>
             <td>Uses dual-point tracking for unpredictable behavior</td>
         </tr>
         <tr>
-            <td><img src="clyde/clyde (1).png" width="60"></td>
+            <td><img src="assets/clyde/clyde (1).png" width="60"></td>
             <td>Clyde</td>
             <td>Wanderer</td>
             <td>Random movement with passive targeting logic</td>
         </tr>
         <tr>
-            <td><img src="donky/donky1.png" width="60"></td>
+            <td><img src="assets/donky/donky1.png" width="60"></td>
             <td>Pookie</td>
             <td>Strategist</td>
             <td>Stylized wall-hugger with maze-aware turns</td>
         </tr>
         <tr>
-            <td><img src="frozen/frozen (1).png" width="60"></td>
+            <td><img src="assets/frozen/frozen (1).png" width="60"></td>
             <td>White-Eyed Specter</td>
             <td>Variant</td>
             <td>Edible Ghost .... Eat and make point expotentially</td>
         </tr>
          <tr>
-            <td><img src="frozen/frozen (3).png" width="60"></td>
+            <td><img src="assets/frozen/frozen (3).png" width="60"></td>
             <td>Red-Eyed Specter</td>
             <td>Variant</td>
             <td>Hurry Up.... Eat the Ghost and make point... Ghost will turn into real ghost in soon</td>
         </tr>
         <tr>
-            <td><img src="rinky/rinky1.png" width="60"></td>
+            <td><img src="assets/rinky/rinky1.png" width="60"></td>
             <td>Green Ghost</td>
             <td>Neutral/Boss</td>
             <td>Bonus role or frozen state, mysterious movement</td>
@@ -636,24 +636,24 @@
 <table>
   <tr>
     <td align="center">
-      <img src="bg/bg.png" width="160"><br><strong>🧪 Syntax Splash</strong><br><em>Teal overlays with scientific energy</em>
+      <img src="assets/bg/bg.png" width="160"><br><strong>🧪 Syntax Splash</strong><br><em>Teal overlays with scientific energy</em>
     </td>
     <td align="center">
-      <img src="bg/bg (1).png" width="160"><br><strong>🔌 Crimson Circuit</strong><br><em>Black-red theme for intensity</em>
+      <img src="assets/bg/bg (1).png" width="160"><br><strong>🔌 Crimson Circuit</strong><br><em>Black-red theme for intensity</em>
     </td>
     <td align="center">
-      <img src="bg/bg (2).png" width="160"><br><strong>🍃 Leafscape</strong><br><em>Soft, nature-inspired vibe</em>
+      <img src="assets/bg/bg (2).png" width="160"><br><strong>🍃 Leafscape</strong><br><em>Soft, nature-inspired vibe</em>
     </td>
   </tr>
   <tr>
     <td align="center">
-      <img src="bg/bg (3).png" width="160"><br><strong>🌫️ Hollow</strong><br><em>Mystical mist and shadow play</em>
+      <img src="assets/bg/bg (3).png" width="160"><br><strong>🌫️ Hollow</strong><br><em>Mystical mist and shadow play</em>
     </td>
     <td align="center">
-      <img src="bg/bg (4).png" width="160"><br><strong>🖥️ Code Nest</strong><br><em>Warm coding desk, student’s vibe</em>
+      <img src="assets/bg/bg (4).png" width="160"><br><strong>🖥️ Code Nest</strong><br><em>Warm coding desk, student’s vibe</em>
     </td>
      <td align="center">
-      <img src="bg/bg (5).png" width="160"><br><strong>🌊🌳🌦️⛰️🏞️ Nature</strong><br><em>Freshness</em>
+      <img src="assets/bg/bg (5).png" width="160"><br><strong>🌊🌳🌦️⛰️🏞️ Nature</strong><br><em>Freshness</em>
     </td>
   </tr>
 </table>
