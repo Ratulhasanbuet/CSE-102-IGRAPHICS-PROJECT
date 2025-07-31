@@ -3371,7 +3371,6 @@ void iMouseClick(int button, int state, int mx, int my)
             {
                 pause = 0;
                 mainmenu = 1;
-                resumeimage = 0; // Don’t show immediately
                 it = 0;          // Reset delay counter
                 storeGameStat(); // ✅
                 iPauseAll();

@@ -10,6 +10,7 @@
     <img src="https://img.icons8.com/ios-filled/50/ghost.png" alt="Ghost Icon" width="40">
     <img src="https://img.icons8.com/ios-filled/50/ghost.png" alt="Ghost Icon" width="40">
   </p>
+<p><a href="https://youtu.be/qRhydkVJqdk?si=ChCx6553Vcr5TsyU" target="_blank">YouTube Link</a></p>
 
 </div>
 
