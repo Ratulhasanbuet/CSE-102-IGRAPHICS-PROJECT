@@ -3923,7 +3923,7 @@ void iKeyPress(unsigned char key)
                 pac.smoothUp = 0;
             }
         }
-        if (key == 'c' || key == 'C')
+        if (key == 's' || key == 'S')
         {
             if (!(pac.y % mazeCellWidth) && !(pac.x % mazeCellWidth))
             {

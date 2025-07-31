@@ -226,18 +226,6 @@
     <td>Move Pac-Man (Up, Down, Left, Right)</td>
   </tr>
   <tr>
-    <td><strong>P</strong></td>
-    <td>Pause the game</td>
-  </tr>
-  <tr>
-    <td><strong>R</strong></td>
-    <td>Resume the game</td>
-  </tr>
-  <tr>
-    <td><strong>ESC</strong></td>
-    <td>Quit the game</td>
-  </tr>
-  <tr>
     <td><strong>Enter</strong></td>
     <td>Confirm selections in menu</td>
   </tr>
